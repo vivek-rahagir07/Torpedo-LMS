@@ -89,21 +89,58 @@ window.runSandboxCode = function() {
 
 /* Auth Modal & Role Switcher */
 let currentAuthRole = 'student'; // 'student' | 'employer'
-let currentAuthMode = 'login';   // 'login' | 'register'
+let currentAuthMode = 'login';   // 'login' | 'signup'
+
+window.switchLoginRole = function(role, btn) {
+  currentAuthRole = role;
+  document.querySelectorAll('.login-role-tab').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    const matching = document.querySelector(`.login-role-tab[data-role="${role}"]`);
+    if (matching) matching.classList.add('active');
+  }
+};
+
+window.openGetStarted = function(role = 'student', event = null) {
+  if (event) event.preventDefault();
+  const modal = document.getElementById('auth-modal');
+  if (modal) {
+    openAuthModal('signup', role);
+  } else {
+    showLoginPageCard('signup', null, role);
+  }
+};
 
 window.openAuthModal = function(mode = 'login', role = 'student') {
   const modal = document.getElementById('auth-modal');
-  if (!modal) return;
+  const compactCard = document.getElementById('compact-login-card');
+  const splitCard = document.getElementById('main-auth-card');
 
-  setAuthMode(mode, role);
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  currentAuthMode = mode;
+  currentAuthRole = role || 'student';
 
-  // Focus first visible input
-  setTimeout(() => {
-    const firstInput = modal.querySelector('input:not([type="hidden"])');
-    if (firstInput) firstInput.focus();
-  }, 100);
+  if (mode === 'login') {
+    if (compactCard) compactCard.style.display = 'block';
+    if (splitCard) splitCard.style.display = 'none';
+    switchLoginRole(role || 'student');
+  } else {
+    if (compactCard) compactCard.style.display = 'none';
+    if (splitCard) splitCard.style.display = 'grid';
+    setAuthRole(role || 'student');
+  }
+
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Focus input
+    setTimeout(() => {
+      const activeCard = mode === 'login' ? compactCard : splitCard;
+      const firstInput = activeCard ? activeCard.querySelector('input:not([type="hidden"])') : null;
+      if (firstInput) firstInput.focus();
+    }, 100);
+  }
 };
 
 window.closeAuthModal = function() {
@@ -111,6 +148,51 @@ window.closeAuthModal = function() {
   if (!modal) return;
   modal.classList.remove('active');
   document.body.style.overflow = '';
+};
+
+// Standalone login.html card switcher
+window.showLoginPageCard = function(mode = 'login', event = null, role = 'student') {
+  if (event) event.preventDefault();
+  const compactCard = document.getElementById('compact-login-card');
+  const splitCard = document.getElementById('main-auth-card');
+
+  currentAuthMode = mode;
+  currentAuthRole = role || 'student';
+
+  if (mode === 'login') {
+    if (compactCard) compactCard.style.display = 'block';
+    if (splitCard) splitCard.style.display = 'none';
+    switchLoginRole(role || 'student');
+  } else {
+    if (compactCard) compactCard.style.display = 'none';
+    if (splitCard) splitCard.style.display = 'grid';
+    setAuthRole(role || 'student');
+  }
+};
+
+window.handleLoginFormSubmit = function(event) {
+  if (event) event.preventDefault();
+  const emailInput = document.getElementById('login-email');
+  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : 'student@torpedo.edu';
+  const roleTitle = currentAuthRole === 'employer' ? 'EMPLOYER / STAFF' : 'STUDENT';
+
+  showToast(`Logging in as ${roleTitle}...`, 'info');
+
+  const cleanName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Student';
+  const userData = {
+    name: cleanName,
+    email: email,
+    role: currentAuthRole || 'student'
+  };
+  localStorage.setItem('torpedo_user', JSON.stringify(userData));
+
+  setTimeout(() => {
+    showToast(`Welcome back, ${userData.name}! Successfully logged in.`, 'success');
+    if (typeof closeAuthModal === 'function') closeAuthModal();
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 400);
+  }, 600);
 };
 
 // Close on backdrop click
@@ -130,6 +212,15 @@ document.addEventListener('DOMContentLoaded', () => {
       closeAuthModal();
     }
   });
+
+  // URL query check on standalone login.html
+  if (window.location.pathname.includes('login.html') || document.querySelector('.login-page-body')) {
+    if (window.location.search.includes('mode=signup') || window.location.search.includes('mode=register')) {
+      showLoginPageCard('signup');
+    } else {
+      showLoginPageCard('login');
+    }
+  }
 });
 
 window.setAuthRole = function(role, btn) {
@@ -149,46 +240,17 @@ window.switchAuthRole = function(role) {
 
 window.toggleAuthMode = function(e) {
   if (e) e.preventDefault();
-  const isSignUp = currentAuthMode === 'signup';
-  setAuthMode(isSignUp ? 'login' : 'signup');
+  const modal = document.getElementById('auth-modal');
+  if (modal) {
+    openAuthModal('login');
+  } else {
+    showLoginPageCard('login');
+  }
 };
 
 window.setAuthMode = function(mode = 'signup', role = 'student', event = null) {
   if (event) event.preventDefault();
-  currentAuthMode = mode;
-  if (role) setAuthRole(role);
-
-  const heading = document.getElementById('auth-panel-heading');
-  const sub = document.getElementById('auth-panel-sub');
-  const nameRow = document.getElementById('auth-name-row');
-  const passLabel = document.getElementById('auth-pass-label');
-  const forgotBtn = document.getElementById('auth-forgot-btn');
-  const termsRow = document.getElementById('auth-terms-row');
-  const submitBtn = document.getElementById('auth-action-submit-btn');
-  const promptText = document.getElementById('auth-toggle-prompt');
-  const toggleLink = document.getElementById('auth-toggle-link');
-
-  if (mode === 'signup' || mode === 'register') {
-    if (heading) heading.textContent = 'Create Your Account';
-    if (sub) sub.textContent = 'Join TORPEDO and unlock verified certificates, hands-on projects and fast-tracked opportunities.';
-    if (nameRow) nameRow.style.display = 'grid';
-    if (passLabel) passLabel.textContent = 'CREATE PASSWORD';
-    if (forgotBtn) forgotBtn.style.display = 'none';
-    if (termsRow) termsRow.style.display = 'flex';
-    if (submitBtn) submitBtn.innerHTML = '<span>CREATE ACCOUNT →</span>';
-    if (promptText) promptText.textContent = 'Already have an account?';
-    if (toggleLink) toggleLink.textContent = 'Log In';
-  } else {
-    if (heading) heading.textContent = 'Welcome Back';
-    if (sub) sub.textContent = 'Sign in to access your syllabus curriculum, Lifecode VM sandboxes, and placement ATS.';
-    if (nameRow) nameRow.style.display = 'none';
-    if (passLabel) passLabel.textContent = 'PASSWORD';
-    if (forgotBtn) forgotBtn.style.display = 'inline';
-    if (termsRow) termsRow.style.display = 'none';
-    if (submitBtn) submitBtn.innerHTML = '<span>SIGN IN →</span>';
-    if (promptText) promptText.textContent = "Don't have an account?";
-    if (toggleLink) toggleLink.textContent = 'Create Account';
-  }
+  openAuthModal(mode, role);
 };
 
 window.togglePasswordVisibility = function(inputId, btn) {

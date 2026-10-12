@@ -132,98 +132,102 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-window.switchAuthRole = function(role) {
+window.setAuthRole = function(role, btn) {
   currentAuthRole = role;
-  const studentBtn = document.getElementById('tab-student-btn');
-  const employerBtn = document.getElementById('tab-employer-btn');
-  const emailInput = document.getElementById('auth-email-input');
-  const emailLabel = document.querySelector('label[for="auth-email-input"]');
-  const orgLabel = document.getElementById('auth-org-label');
-  const orgInput = document.getElementById('auth-org-input');
-
-  if (studentBtn && employerBtn) {
-    if (role === 'student') {
-      studentBtn.classList.add('active');
-      employerBtn.classList.remove('active');
-      if (emailLabel) emailLabel.innerHTML = 'Email Address <span class="required-star">*</span>';
-      if (emailInput) emailInput.placeholder = 'john@example.com';
-      if (orgLabel) orgLabel.innerHTML = 'University / Institution <span class="required-star">*</span>';
-      if (orgInput) orgInput.placeholder = 'Delhi Technological University';
-    } else {
-      employerBtn.classList.add('active');
-      studentBtn.classList.remove('active');
-      if (emailLabel) emailLabel.innerHTML = 'Work Email Address <span class="required-star">*</span>';
-      if (emailInput) emailInput.placeholder = 'recruiter@company.com';
-      if (orgLabel) orgLabel.innerHTML = 'Company / Enterprise Name <span class="required-star">*</span>';
-      if (orgInput) orgInput.placeholder = 'Stripe / Google / Databricks';
-    }
+  document.querySelectorAll('.role-pill-btn').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    const matching = document.querySelector(`.role-pill-btn[data-role="${role}"]`);
+    if (matching) matching.classList.add('active');
   }
 };
 
-window.setAuthMode = function(mode = 'login', role = 'student', event = null) {
+window.switchAuthRole = function(role) {
+  setAuthRole(role);
+};
+
+window.toggleAuthMode = function(e) {
+  if (e) e.preventDefault();
+  const isSignUp = currentAuthMode === 'signup';
+  setAuthMode(isSignUp ? 'login' : 'signup');
+};
+
+window.setAuthMode = function(mode = 'signup', role = 'student', event = null) {
   if (event) event.preventDefault();
   currentAuthMode = mode;
-  switchAuthRole(role);
+  if (role) setAuthRole(role);
 
-  const extraFields = document.getElementById('auth-extra-fields');
-  const forgotLink = document.getElementById('auth-forgot-link');
-  const rememberRow = document.getElementById('auth-remember-row');
-  const submitBtn = document.getElementById('auth-submit-btn');
-  const footerContainer = document.getElementById('auth-footer-container');
+  const heading = document.getElementById('auth-panel-heading');
+  const sub = document.getElementById('auth-panel-sub');
+  const nameRow = document.getElementById('auth-name-row');
+  const passLabel = document.getElementById('auth-pass-label');
+  const forgotBtn = document.getElementById('auth-forgot-btn');
+  const termsRow = document.getElementById('auth-terms-row');
+  const submitBtn = document.getElementById('auth-action-submit-btn');
+  const promptText = document.getElementById('auth-toggle-prompt');
+  const toggleLink = document.getElementById('auth-toggle-link');
 
-  if (mode === 'register') {
-    if (extraFields) extraFields.style.display = 'block';
-    if (forgotLink) forgotLink.style.display = 'none';
-    if (rememberRow) rememberRow.style.display = 'none';
-    if (submitBtn) submitBtn.textContent = 'CREATE ACCOUNT';
-    if (footerContainer) {
-      footerContainer.innerHTML = `
-        <span>Already have an account? </span>
-        <a href="#login" onclick="setAuthMode('login', '${role}', event)">Login Here</a>
-      `;
-    }
+  if (mode === 'signup' || mode === 'register') {
+    if (heading) heading.textContent = 'Create Your Account';
+    if (sub) sub.textContent = 'Join TORPEDO and unlock verified certificates, hands-on projects and fast-tracked opportunities.';
+    if (nameRow) nameRow.style.display = 'grid';
+    if (passLabel) passLabel.textContent = 'CREATE PASSWORD';
+    if (forgotBtn) forgotBtn.style.display = 'none';
+    if (termsRow) termsRow.style.display = 'flex';
+    if (submitBtn) submitBtn.innerHTML = '<span>CREATE ACCOUNT →</span>';
+    if (promptText) promptText.textContent = 'Already have an account?';
+    if (toggleLink) toggleLink.textContent = 'Log In';
   } else {
-    if (extraFields) extraFields.style.display = 'none';
-    if (forgotLink) forgotLink.style.display = 'inline';
-    if (rememberRow) rememberRow.style.display = 'flex';
-    if (submitBtn) submitBtn.textContent = 'LOGIN';
-    if (footerContainer) {
-      footerContainer.innerHTML = `
-        <span>New to Torpedo? Register ( </span>
-        <a href="#register-student" onclick="setAuthMode('register', 'student', event)">Student</a>
-        <span> / </span>
-        <a href="#register-company" onclick="setAuthMode('register', 'employer', event)">Company</a>
-        <span> )</span>
-      `;
-    }
+    if (heading) heading.textContent = 'Welcome Back';
+    if (sub) sub.textContent = 'Sign in to access your syllabus curriculum, Lifecode VM sandboxes, and placement ATS.';
+    if (nameRow) nameRow.style.display = 'none';
+    if (passLabel) passLabel.textContent = 'PASSWORD';
+    if (forgotBtn) forgotBtn.style.display = 'inline';
+    if (termsRow) termsRow.style.display = 'none';
+    if (submitBtn) submitBtn.innerHTML = '<span>SIGN IN →</span>';
+    if (promptText) promptText.textContent = "Don't have an account?";
+    if (toggleLink) toggleLink.textContent = 'Create Account';
   }
 };
 
-window.togglePasswordVisibility = function(inputId, btnId) {
-  const input = document.getElementById(inputId);
-  const btn = document.getElementById(btnId);
-  if (!input || !btn) return;
+window.togglePasswordVisibility = function(inputId, btn) {
+  const input = typeof inputId === 'string' ? document.getElementById(inputId) : inputId;
+  const trigger = typeof btn === 'string' ? document.getElementById(btn) : btn;
+  if (!input) return;
 
   const isPassword = input.type === 'password';
   input.type = isPassword ? 'text' : 'password';
 
-  btn.innerHTML = isPassword
-    ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
-    : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  if (trigger) {
+    trigger.innerHTML = isPassword
+      ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+      : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  }
 };
 
 window.handleGoogleLogin = function() {
-  const roleTitle = currentAuthRole === 'student' ? 'Student' : 'Employer / Recruiter';
-  showToast(`Authenticating with Google OAuth 2.0 as ${roleTitle}...`, 'info');
+  const roleTitle = currentAuthRole ? currentAuthRole.toUpperCase() : 'STUDENT';
+  showToast(`Authenticating via Google OAuth as ${roleTitle}...`, 'info');
+  
+  localStorage.setItem('torpedo_user', JSON.stringify({
+    name: 'Harsh Vardhan',
+    email: 'harsh.vardhan@torpedo.edu',
+    role: currentAuthRole || 'student'
+  }));
+
   setTimeout(() => {
-    showToast(`Welcome back, Harsh Vardhan! Successfully logged in.`, 'success');
-    closeAuthModal();
-  }, 900);
+    showToast(`Welcome back, Harsh Vardhan! Successfully authenticated.`, 'success');
+    if (typeof closeAuthModal === 'function') closeAuthModal();
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 400);
+  }, 700);
 };
 
 window.handleForgotPassword = function(e) {
   if (e) e.preventDefault();
-  const emailInput = document.getElementById('auth-email-input');
+  const emailInput = document.getElementById('input-email') || document.getElementById('auth-email-input');
   const email = emailInput ? emailInput.value.trim() : '';
 
   if (!email) {
@@ -235,23 +239,46 @@ window.handleForgotPassword = function(e) {
   showToast(`Password reset link sent to ${email}. Please check your inbox.`, 'success');
 };
 
-window.handleAuthSubmit = function(e) {
+window.handleFormSubmit = function(e) {
   e.preventDefault();
-  const emailInput = document.getElementById('auth-email-input');
-  const passwordInput = document.getElementById('auth-password-input');
-  const email = emailInput ? emailInput.value.trim() : '';
-  const password = passwordInput ? passwordInput.value : '';
+  const fnameInput = document.getElementById('input-fname');
+  const lnameInput = document.getElementById('input-lname');
+  const emailInput = document.getElementById('input-email');
+  const passInput = document.getElementById('input-password');
 
-  if (!email || !password) {
-    showToast('Please fill out all required fields.', 'warning');
+  const fname = fnameInput ? fnameInput.value.trim() : '';
+  const lname = lnameInput ? lnameInput.value.trim() : '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const fullName = (fname || lname) ? `${fname} ${lname}`.trim() : 'John Doe';
+
+  if (!email || (passInput && !passInput.value)) {
+    showToast('Please provide your email address and password.', 'warning');
     return;
   }
 
-  const roleText = currentAuthRole === 'student' ? 'Student' : 'Employer & Staff';
-  const actionText = currentAuthMode === 'login' ? 'Logged in' : 'Registered';
+  localStorage.setItem('torpedo_user', JSON.stringify({
+    name: fullName,
+    email: email,
+    role: currentAuthRole || 'student'
+  }));
 
-  showToast(`${actionText} successfully as ${roleText}! Welcome to Torpedo.`, 'success');
-  closeAuthModal();
+  const submitBtn = document.getElementById('auth-action-submit-btn');
+  if (submitBtn) {
+    submitBtn.innerHTML = '<span>REDIRECTING...</span>';
+  }
+
+  const actionText = currentAuthMode === 'login' ? 'Signed in' : 'Account created';
+  showToast(`${actionText} successfully as ${currentAuthRole.toUpperCase()}! Redirecting to dashboard...`, 'success');
+
+  if (typeof closeAuthModal === 'function') closeAuthModal();
+
+  setTimeout(() => {
+    window.location.href = 'dashboard.html';
+  }, 600);
+};
+
+window.handleAuthSubmit = function(e) {
+  window.handleFormSubmit(e);
 };
 
 /* Toast Notification Utility */

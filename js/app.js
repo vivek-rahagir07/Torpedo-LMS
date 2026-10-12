@@ -3,6 +3,13 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const savedUser = JSON.parse(localStorage.getItem('torpedo_user'));
+    if (savedUser && (savedUser.name === 'Harsh Vardhan' || (savedUser.email && savedUser.email.includes('harsh')))) {
+      localStorage.removeItem('torpedo_user');
+    }
+  } catch (e) {}
+
   initScrollEffects();
   initLifecodeSandbox();
 });
@@ -78,7 +85,7 @@ window.runSandboxCode = function() {
 
     const timestamp = new Date().toLocaleTimeString();
     if (currentSandboxLang === 'javascript') {
-      output.textContent = `[${timestamp}] VM PROCESS EXIT 0 (12ms execution time)\n\nAnalyzing Torpedo Student Portfolio...\n{\n  student: 'Harsh Vardhan',\n  score: 91,\n  status: 'Verified Placement Ready 🚀',\n  badge: 'Blockchain Credential Issued'\n}\n\n✅ 4 unit tests passed | Sandbox memory: 18.2 MB`;
+      output.textContent = `[${timestamp}] VM PROCESS EXIT 0 (12ms execution time)\n\nAnalyzing Torpedo Student Portfolio...\n{\n  student: 'Alex Rivera',\n  score: 91,\n  status: 'Verified Placement Ready 🚀',\n  badge: 'Blockchain Credential Issued'\n}\n\n✅ 4 unit tests passed | Sandbox memory: 18.2 MB`;
     } else if (currentSandboxLang === 'python') {
       output.textContent = `[${timestamp}] Python 3.12.2 (18ms)\n\nExecuting ATS Placement scan for Priya Nair (Autonomous AI Track)...\n{\n  'candidate': 'Priya Nair',\n  'matched_partners': ['Stripe', 'Amazon', 'Databricks'],\n  'salary_range': '24 - 36 LPA',\n  'readiness': '100% Certified'\n}\n\n✅ Candidate pushed to 3 enterprise partner recruiters.`;
     } else {
@@ -272,14 +279,17 @@ window.handleGoogleLogin = function() {
   const roleTitle = currentAuthRole ? currentAuthRole.toUpperCase() : 'STUDENT';
   showToast(`Authenticating via Google OAuth as ${roleTitle}...`, 'info');
   
+  const defaultName = currentAuthRole === 'employer' ? 'Enterprise Partner' : 'Alex Rivera';
+  const defaultEmail = currentAuthRole === 'employer' ? 'partner@torpedo.io' : 'alex.rivera@torpedo.edu';
+
   localStorage.setItem('torpedo_user', JSON.stringify({
-    name: 'Harsh Vardhan',
-    email: 'harsh.vardhan@torpedo.edu',
+    name: defaultName,
+    email: defaultEmail,
     role: currentAuthRole || 'student'
   }));
 
   setTimeout(() => {
-    showToast(`Welcome back, Harsh Vardhan! Successfully authenticated.`, 'success');
+    showToast(`Welcome back, ${defaultName}! Successfully authenticated.`, 'success');
     if (typeof closeAuthModal === 'function') closeAuthModal();
     setTimeout(() => {
       window.location.href = 'dashboard.html';

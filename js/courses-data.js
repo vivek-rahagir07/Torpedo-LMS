@@ -150,15 +150,15 @@ function calculateSkillMastery(student) {
   };
 }
 
-const harsh = {
-  name: "Harsh Vardhan",
+const student = {
+  name: "Alex Rivera",
   completedModules: 94,
   sandboxCommits: 88,
   mockScore: 92
 };
 
 console.log("Analyzing Torpedo Student Portfolio...");
-console.log(calculateSkillMastery(harsh));`,
+console.log(calculateSkillMastery(student));`,
 
     python: `# Torpedo Lifecode VM - Python 3.12 Runtime
 class TorpedoPipeline:

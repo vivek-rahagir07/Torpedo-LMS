@@ -217,9 +217,9 @@
     <div class="container">
       <div class="dashboard-profile-bar">
         <div class="profile-info-group">
-          <div class="profile-avatar">HV</div>
+          <div class="profile-avatar">AR</div>
           <div>
-            <h1 class="profile-name">Harsh Vardhan</h1>
+            <h1 class="profile-name">Alex Rivera</h1>
             <div class="profile-meta">
               <span>🎓 Delhi Technological University (DTU)</span>
               <span>•</span>
@@ -401,7 +401,7 @@
             </div>
           </div>
           <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 16px; font-style: italic;">
-            “Harsh exhibits outstanding mastery of concurrency primitives and Lifecode containerized architecture.”
+            “The student exhibits outstanding mastery of concurrency primitives and Lifecode containerized architecture.”
           </p>
           <button class="btn btn-secondary" style="width: 100%; font-size: 0.88rem;" onclick="alert('Downloading Blockchain Verified Dean Credential PDF...');">
             🎖 View Blockchain Credential
@@ -415,7 +415,7 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-bottom" style="border: none; padding-top: 0;">
-        <div>© 2026 Torpedo Learning. Logged in as Harsh Vardhan.</div>
+        <div>© 2026 Torpedo Learning. Logged in as <span id="footer-user-name">Alex Rivera</span>.</div>
         <a href="index.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">Return to Homepage</a>
       </div>
     </div>
@@ -425,20 +425,32 @@
   <script src="js/courses-data.js"></script>
   <script src="js/app.js"></script>
   <script>
-    try {
-      const savedUser = JSON.parse(localStorage.getItem('torpedo_user'));
-      if (savedUser && savedUser.name) {
-        const nameEl = document.querySelector('.profile-name');
-        if (nameEl) nameEl.textContent = savedUser.name;
-        
-        const avatarEl = document.querySelector('.profile-avatar');
-        if (avatarEl) {
-          const parts = savedUser.name.split(' ');
-          const initials = parts.map(p => p[0]).join('').slice(0, 2).toUpperCase();
-          avatarEl.textContent = initials || 'ST';
+    (function() {
+      try {
+        const raw = localStorage.getItem('torpedo_user');
+        if (raw && (raw.toLowerCase().includes('harsh') || raw.includes('HV') || !raw.includes('name'))) {
+          localStorage.removeItem('torpedo_user');
         }
-      }
-    } catch (e) {}
+        const savedUser = JSON.parse(localStorage.getItem('torpedo_user'));
+        const nameEl = document.querySelector('.profile-name');
+        const avatarEl = document.querySelector('.profile-avatar');
+        const footerUserEl = document.getElementById('footer-user-name');
+
+        if (savedUser && savedUser.name && !savedUser.name.toLowerCase().includes('harsh')) {
+          if (nameEl) nameEl.textContent = savedUser.name;
+          if (avatarEl) {
+            const parts = savedUser.name.trim().split(/\s+/);
+            const initials = parts.map(p => p[0]).join('').slice(0, 2).toUpperCase();
+            avatarEl.textContent = initials || 'AR';
+          }
+          if (footerUserEl) footerUserEl.textContent = savedUser.name;
+        } else {
+          if (nameEl) nameEl.textContent = 'Alex Rivera';
+          if (avatarEl) avatarEl.textContent = 'AR';
+          if (footerUserEl) footerUserEl.textContent = 'Alex Rivera';
+        }
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>

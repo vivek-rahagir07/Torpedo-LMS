@@ -8,24 +8,22 @@
 .hero-seamless-section {
   background: linear-gradient(180deg, 
     #1d4ed8 0%, 
-    #2563eb 32%, 
-    #3b82f6 52%, 
-    #60a5fa 68%, 
-    #93c5fd 80%, 
-    #bfdbfe 88%, 
-    #dbeafe 93%, 
-    #eff6ff 97%, 
-    #ffffff 100%
+    #2563eb 45%, 
+    #3b82f6 72%, 
+    #60a5fa 86%, 
+    #93c5fd 94%, 
+    #dbeafe 98%, 
+    #eff6ff 100%
   );
   color: #ffffff;
-  padding: 64px 0 0 0;
+  padding: 64px 0 24px 0;
   position: relative;
   overflow: hidden;
 }
 
 @media (max-width: 992px) {
   .hero-seamless-section {
-    padding: 44px 0 0 0;
+    padding: 44px 0 16px 0;
   }
 }
 
@@ -143,8 +141,8 @@
   position: relative;
   z-index: 2;
   margin-bottom: 0;
-  -webkit-mask-image: linear-gradient(to bottom, black 86%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
   transition: transform var(--transition-smooth);
 }
 
@@ -204,7 +202,11 @@
    ========================================================================== */
 .why-choose-section {
   padding: 60px 0 76px 0;
-  background: #ffffff;
+  background: linear-gradient(180deg, 
+    #eff6ff 0%, 
+    #f8fafc 45%, 
+    #ffffff 80%
+  );
   position: relative;
 }
 
@@ -1478,7 +1480,7 @@
 .auth-card-brand-panel {
   background: radial-gradient(circle at 75% 35%, #1e40af 0%, #0d276b 45%, #07153d 80%, #030a1c 100%);
   color: #ffffff;
-  padding: 44px 44px 36px 44px;
+  padding: 38px 40px 30px 40px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1549,12 +1551,12 @@
 }
 
 .auth-card-headline {
-  font-size: 2.75rem;
+  font-size: 2.9rem;
   font-weight: 850;
   line-height: 1.1;
   letter-spacing: -0.025em;
   color: #ffffff;
-  margin: 24px 0 12px 0;
+  margin: 28px 0 16px 0;
   position: relative;
   z-index: 5;
 }
@@ -1565,75 +1567,34 @@
 }
 
 .auth-card-subcopy {
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.82);
-  max-width: 250px;
-  margin-bottom: 22px;
-  position: relative;
-  z-index: 5;
-}
-
-.auth-features-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  position: relative;
-  z-index: 5;
-  max-width: 245px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 230px;
   margin-bottom: 20px;
-}
-
-.auth-feature-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.auth-feature-icon-box {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #60a5fa;
-  flex-shrink: 0;
-  backdrop-filter: blur(8px);
-}
-
-.auth-feat-title {
-  font-weight: 750;
-  font-size: 0.86rem;
-  color: #ffffff;
-}
-
-.auth-feat-desc {
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.72);
-  margin-top: 2px;
+  position: relative;
+  z-index: 5;
 }
 
 .auth-brand-footer {
   position: relative;
   z-index: 5;
-  margin-top: 8px;
+  margin-top: auto;
+  margin-bottom: 8px;
 }
 
 .auth-footer-line {
-  width: 18px;
-  height: 2px;
+  width: 20px;
+  height: 2.5px;
   background: #38bdf8;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .auth-footer-tagline {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   letter-spacing: 0.16em;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
 }
 
@@ -1642,8 +1603,8 @@
   position: absolute;
   right: -15px;
   bottom: 0;
-  width: 365px;
-  height: 88%;
+  width: 400px;
+  height: 92%;
   pointer-events: none;
   z-index: 2;
   display: flex;
@@ -1656,16 +1617,16 @@
   height: 100%;
   object-fit: contain;
   object-position: bottom right;
-  transform: translateY(-8px) scale(0.96);
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.35));
+  transform: translateY(0) scale(0.97);
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.4));
 }
 
 .auth-handwritten-note {
   position: absolute;
-  top: 14%;
-  right: 50px;
+  top: 15%;
+  right: 48px;
   font-family: 'Caveat', cursive, sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.25;
   color: rgba(255, 255, 255, 0.95);
@@ -1678,7 +1639,7 @@
 .auth-handwritten-note svg {
   display: block;
   margin-top: 4px;
-  margin-left: 18px;
+  margin-left: 20px;
   width: 32px;
   height: 36px;
 }

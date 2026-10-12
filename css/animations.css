@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Torpedo LMS - Refined Micro-Animations (Tasteful & Non-Distracting)
+   ========================================================================== */
+
+@keyframes float-subtle-1 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes float-subtle-2 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.badge-purple {
+  animation: float-subtle-1 4.5s ease-in-out infinite;
+}
+
+.badge-teal {
+  animation: float-subtle-2 5s ease-in-out infinite 0.5s;
+}
+
+.badge-amber {
+  animation: float-subtle-1 5.5s ease-in-out infinite 1s;
+}
+
+.badge-rose {
+  animation: float-subtle-2 4s ease-in-out infinite 1.5s;
+}
+
+/* Partner Logo Marquee */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Reveal on scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

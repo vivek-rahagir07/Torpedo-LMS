@@ -336,17 +336,22 @@ window.handleFormSubmit = function(e) {
 
   const submitBtn = document.getElementById('auth-action-submit-btn');
   if (submitBtn) {
-    submitBtn.innerHTML = '<span>REDIRECTING...</span>';
+    submitBtn.innerHTML = '<span>OPENING PROFILE SETUP...</span>';
   }
 
-  const actionText = currentAuthMode === 'login' ? 'Signed in' : 'Account created';
-  showToast(`${actionText} successfully as ${currentAuthRole.toUpperCase()}! Redirecting to dashboard...`, 'success');
+  const isSignUp = currentAuthMode === 'signup';
+  const actionText = isSignUp ? 'Account created' : 'Signed in';
+  const destUrl = isSignUp 
+    ? `profile-setup.html?name=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(currentAuthRole || 'student')}`
+    : 'dashboard.html';
+
+  showToast(`${actionText} successfully! ${isSignUp ? 'Please complete your academic profile & document uploads...' : 'Redirecting to dashboard...'}`, 'success');
 
   if (typeof closeAuthModal === 'function') closeAuthModal();
 
   setTimeout(() => {
-    window.location.href = 'dashboard.html';
-  }, 600);
+    window.location.href = destUrl;
+  }, 500);
 };
 
 window.handleAuthSubmit = function(e) {

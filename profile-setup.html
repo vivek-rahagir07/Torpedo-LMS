@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Setup & Verification | Torpedo Learning</title>
+  <meta name="description" content="Complete your Torpedo designation profile for Students, Faculty Instructors, or Corporate Employers with document verification.">
+  <link rel="icon" type="image/png" href="assets/LOGO.png">
+  
+  <!-- Laravel CSRF Token Meta Tag -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="profile-setup-body">
+
+  <!-- Header -->
+  <header class="site-header" style="position: relative; background: #ffffff; border-bottom: 1px solid var(--border-subtle);">
+    <div class="container nav-container" style="max-width: 1080px;">
+      <a href="index.html" class="nav-brand" aria-label="Torpedo Learning Home">
+        <img src="assets/LOGO.png" alt="Torpedo Learning Logo" class="brand-logo-img">
+      </a>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span class="laravel-badge-pill" id="header-verification-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span id="header-role-status-text">Student Profile Verification</span>
+        </span>
+        <a href="dashboard.html" class="btn btn-secondary btn-pill-sm" style="font-size: 0.84rem;">Skip to Portal</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Wizard Container -->
+  <main class="profile-setup-container">
+    
+    <!-- Role Switcher Banner Card -->
+    <section class="onboarding-role-switcher-card" aria-label="Select Designation Profile">
+      <div class="onboarding-role-label-grp">
+        <div class="onboarding-role-icon" id="role-active-icon">🎓</div>
+        <div>
+          <div style="font-size: 0.82rem; font-weight: 750; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">Selected Designation</div>
+          <div style="font-size: 1.1rem; font-weight: 850; color: var(--text-title);" id="role-display-heading">Student &amp; Candidate Portal</div>
+        </div>
+      </div>
+
+      <!-- 3 Role Selector Pills -->
+      <div class="onboarding-role-pills" role="tablist">
+        <button type="button" class="role-switch-btn active" data-target-role="student" onclick="switchDesignationRole('student')">
+          <span>🎓</span>
+          <span>Student</span>
+        </button>
+        <button type="button" class="role-switch-btn" data-target-role="faculty" onclick="switchDesignationRole('faculty')">
+          <span>👨‍🏫</span>
+          <span>Faculty / Dean</span>
+        </button>
+        <button type="button" class="role-switch-btn" data-target-role="employer" onclick="switchDesignationRole('employer')">
+          <span>🏢</span>
+          <span>Employer / Recruiter</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Top Stepper Header Card -->
+    <section class="setup-stepper-card" aria-label="Profile Progress">
+      <div class="setup-stepper-header">
+        <div class="setup-stepper-title-grp">
+          <h1 id="stepper-main-title">Candidate Profile &amp; Document Verification</h1>
+          <p id="stepper-main-sub">Complete your portfolio to unlock direct recruiter loops, institutional credentials &amp; platform access.</p>
+        </div>
+        <div style="font-size: 0.85rem; font-weight: 750; color: var(--primary);">
+          Step <span id="current-step-num">1</span> of 3 · <span id="step-percentage">33% Completed</span>
+        </div>
+      </div>
+
+      <!-- Stepper Nodes & Track -->
+      <div class="stepper-progress-wrap">
+        <div class="stepper-progress-track">
+          <div class="stepper-progress-fill" id="stepper-progress-bar" style="width: 33.33%;"></div>
+        </div>
+        <div class="stepper-steps-grid">
+          
+          <!-- Node 1 -->
+          <button type="button" class="stepper-step-item active" id="stepper-node-1" onclick="navigateToStep(1)">
+            <div class="step-node-bubble" id="bubble-1">1</div>
+            <span class="step-node-title" id="step-1-nav-label">Identity &amp; Contact</span>
+            <span class="step-node-sub" id="step-1-nav-sub">Basic Information</span>
+          </button>
+
+          <!-- Node 2 -->
+          <button type="button" class="stepper-step-item" id="stepper-node-2" onclick="navigateToStep(2)">
+            <div class="step-node-bubble" id="bubble-2">2</div>
+            <span class="step-node-title" id="step-2-nav-label">Academic &amp; PDFs</span>
+            <span class="step-node-sub" id="step-2-nav-sub">Certificates</span>
+          </button>
+
+          <!-- Node 3 -->
+          <button type="button" class="stepper-step-item" id="stepper-node-3" onclick="navigateToStep(3)">
+            <div class="step-node-bubble" id="bubble-3">3</div>
+            <span class="step-node-title" id="step-3-nav-label">Career &amp; Placement</span>
+            <span class="step-node-sub" id="step-3-nav-sub">Final Submission</span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Wizard Form (Configured for Laravel Backend Submission) -->
+    <form 
+      id="profile-onboarding-form" 
+      action="/api/profile/setup" 
+      method="POST" 
+      enctype="multipart/form-data" 
+      onsubmit="handleProfileFormSubmit(event)" 
+      novalidate
+    >
+      <!-- Laravel Blade CSRF Token Directive Placeholder -->
+      <input type="hidden" name="_token" id="csrf-token-field" value="torpedo_laravel_csrf_session_token">
+      
+      <!-- Role / Intent Hidden Field -->
+      <input type="hidden" name="role" id="user-role-field" value="student">
+
+      <!-- ====================================================================
+           PROFILE 1: STUDENT / LEARNER FORM PANES
+           ==================================================================== -->
+      <div id="role-container-student" class="role-form-wrapper">
+
+        <!-- Student Step 1: Personal Details & Photo -->
+        <section class="setup-wizard-card wizard-section-pane active" id="student-pane-1">
+          <div class="wizard-section-heading">
+            <h2>1. Personal Information &amp; Contact Identity</h2>
+            <p>Enter your legal name, contact numbers, and profile photo for recruiter identity checks.</p>
+          </div>
+
+          <!-- Profile Photo Upload Block -->
+          <div class="photo-upload-block">
+            <div class="avatar-preview-wrap">
+              <div class="avatar-preview-circle" id="student-avatar-circle">
+                <span id="student-avatar-initials">AR</span>
+                <img id="student-avatar-img" src="" alt="Student Avatar" style="display: none;">
+              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem; color: var(--text-title); margin-bottom: 4px;">
+                Student Profile Photo <span class="req-star" style="color: #ef4444;">*</span>
+              </div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+                Upload a clear professional headshot. Format: JPG, PNG, or WebP (Max 5MB).
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <label class="avatar-upload-btn-label" for="student-avatar-input">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  <span>Upload Photo</span>
+                </label>
+                <input type="file" id="student-avatar-input" name="avatar" accept="image/jpeg,image/png,image/webp" style="display: none;" onchange="handlePhotoUpload(this, 'student')">
+                <button type="button" id="student-remove-photo-btn" class="file-remove-btn" style="display: none;" onclick="removePhoto('student')">Remove Photo</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Name Inputs -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-first-name">First Name <span class="req-star">*</span></label>
+              <input type="text" id="student-first-name" name="first_name" class="setup-input" placeholder="e.g. Alex" required>
+              <div class="invalid-feedback">Please enter first name.</div>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-last-name">Last Name <span class="req-star">*</span></label>
+              <input type="text" id="student-last-name" name="last_name" class="setup-input" placeholder="e.g. Rivera" required>
+              <div class="invalid-feedback">Please enter last name.</div>
+            </div>
+          </div>
+
+          <!-- Email & Phone Inputs -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-email">Email Address <span class="req-star">*</span></label>
+              <input type="email" id="student-email" name="email" class="setup-input" placeholder="alex.rivera@example.com" required>
+              <div class="invalid-feedback">Please enter valid email.</div>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-phone">Mobile / WhatsApp Number <span class="req-star">*</span></label>
+              <div style="display: flex; gap: 8px;">
+                <select name="phone_country_code" class="setup-select" style="max-width: 105px;">
+                  <option value="+91" selected>🇮🇳 +91</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+971">🇦🇪 +971</option>
+                </select>
+                <input type="tel" id="student-phone" name="phone" class="setup-input" placeholder="9876543210" pattern="[0-9]{10}" required>
+              </div>
+              <div class="invalid-feedback">Please enter 10-digit phone number.</div>
+            </div>
+          </div>
+
+          <!-- DOB & Gender -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-dob">Date of Birth <span class="req-star">*</span></label>
+              <input type="date" id="student-dob" name="dob" class="setup-input" required>
+              <div class="invalid-feedback">Please select date of birth.</div>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-gender">Gender <span class="req-star">*</span></label>
+              <select id="student-gender" name="gender" class="setup-select" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non_binary">Non-binary</option>
+                <option value="prefer_not_to_say">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Residential Address -->
+          <div class="setup-field-group">
+            <label class="setup-label" for="student-address">Current Residential Address <span class="req-star">*</span></label>
+            <input type="text" id="student-address" name="address" class="setup-input" placeholder="Flat No, Street, Landmark" required>
+            <div class="invalid-feedback">Please enter address.</div>
+          </div>
+
+          <div class="setup-form-grid-3">
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-city">City <span class="req-star">*</span></label>
+              <input type="text" id="student-city" name="city" class="setup-input" placeholder="New Delhi" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-state">State <span class="req-star">*</span></label>
+              <input type="text" id="student-state" name="state" class="setup-input" placeholder="Delhi NCR" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-pincode">PIN Code <span class="req-star">*</span></label>
+              <input type="text" id="student-pincode" name="pincode" class="setup-input" placeholder="110042" required>
+            </div>
+          </div>
+
+          <!-- Socials -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-linkedin">LinkedIn Profile URL</label>
+              <input type="url" id="student-linkedin" name="linkedin_url" class="setup-input" placeholder="https://linkedin.com/in/username">
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="student-github">GitHub / Portfolio URL</label>
+              <input type="url" id="student-github" name="github_url" class="setup-input" placeholder="https://github.com/username">
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <div></div>
+            <button type="button" class="wizard-btn-next" onclick="validateAndAdvanceStep(1)">
+              <span>Continue to Academic History →</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Student Step 2: Academic History & PDF Uploads (10th, 12th, Grad, Postgrad) -->
+        <section class="setup-wizard-card wizard-section-pane" id="student-pane-2">
+          <div class="wizard-section-heading">
+            <h2>2. Academic Qualifications &amp; Certificate Uploads</h2>
+            <p>Upload authentic marksheets and degrees in PDF format (Max 10MB each) for employer ATS verification.</p>
+          </div>
+
+          <!-- 10th Standard -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title">
+                <span class="edu-icon-badge tenth">🏫</span>
+                <span>10th Standard / Secondary School</span>
+              </div>
+              <span class="edu-mandatory-tag">Mandatory</span>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="tenth-school">School Name <span class="req-star">*</span></label>
+                <input type="text" id="tenth-school" name="tenth_school" class="setup-input" placeholder="St. Xavier's High School" required>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="tenth-board">Board <span class="req-star">*</span></label>
+                <select id="tenth-board" name="tenth_board" class="setup-select" required>
+                  <option value="" disabled selected>Select Board</option>
+                  <option value="CBSE">CBSE</option>
+                  <option value="ICSE">ICSE</option>
+                  <option value="State Board">State Board</option>
+                  <option value="IB/Other">IB / Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="tenth-year">Year of Passing <span class="req-star">*</span></label>
+                <select id="tenth-year" name="tenth_year" class="setup-select" required>
+                  <option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option>
+                </select>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="tenth-percentage">Percentage / CGPA <span class="req-star">*</span></label>
+                <input type="text" id="tenth-percentage" name="tenth_percentage" class="setup-input" placeholder="e.g. 91.4%" required>
+              </div>
+            </div>
+            <!-- Dropzone -->
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">10th Marksheet / Passing Certificate (PDF) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-tenth').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">📄</div>
+                  <div class="file-dropzone-text">
+                    <div class="file-dropzone-prompt">Upload 10th Certificate PDF</div>
+                    <div class="file-dropzone-hint">Format: .pdf, .jpg, .png (Max 10MB)</div>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="file-tenth" name="tenth_certificate" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-tenth')">
+              <div class="file-uploaded-badge" id="badge-tenth">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">10th_marksheet.pdf</span><span class="file-uploaded-size">(1.8 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-tenth', 'badge-tenth')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12th Standard / Diploma -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title">
+                <span class="edu-icon-badge twelfth">🎓</span>
+                <span>12th Standard / Higher Secondary / Polytechnic</span>
+              </div>
+              <span class="edu-mandatory-tag">Mandatory</span>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="twelfth-college">College / Junior College <span class="req-star">*</span></label>
+                <input type="text" id="twelfth-college" name="twelfth_college" class="setup-input" placeholder="Delhi Public School" required>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="twelfth-stream">Stream <span class="req-star">*</span></label>
+                <select id="twelfth-stream" name="twelfth_stream" class="setup-select" required>
+                  <option value="Science (PCM)">Science (PCM)</option>
+                  <option value="Science (PCB)">Science (PCB)</option>
+                  <option value="Commerce">Commerce</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Polytechnic Diploma">Polytechnic Diploma</option>
+                </select>
+              </div>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="twelfth-year">Year of Passing <span class="req-star">*</span></label>
+                <select id="twelfth-year" name="twelfth_year" class="setup-select" required>
+                  <option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option>
+                </select>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="twelfth-percentage">Percentage / CGPA <span class="req-star">*</span></label>
+                <input type="text" id="twelfth-percentage" name="twelfth_percentage" class="setup-input" placeholder="e.g. 89.2%" required>
+              </div>
+            </div>
+            <!-- Dropzone -->
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">12th / Diploma Certificate (PDF) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-twelfth').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">📄</div>
+                  <div class="file-dropzone-text">
+                    <div class="file-dropzone-prompt">Upload 12th Certificate PDF</div>
+                    <div class="file-dropzone-hint">Format: .pdf, .jpg, .png (Max 10MB)</div>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="file-twelfth" name="twelfth_certificate" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-twelfth')">
+              <div class="file-uploaded-badge" id="badge-twelfth">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">12th_marksheet.pdf</span><span class="file-uploaded-size">(2.1 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-twelfth', 'badge-twelfth')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Graduation Degree -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title">
+                <span class="edu-icon-badge grad">🏛</span>
+                <span>Graduation (Undergraduate Degree)</span>
+              </div>
+              <span class="edu-mandatory-tag">Mandatory</span>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="grad-degree">Degree <span class="req-star">*</span></label>
+                <select id="grad-degree" name="grad_degree" class="setup-select" required>
+                  <option value="B.Tech" selected>B.Tech</option>
+                  <option value="B.E.">B.E.</option>
+                  <option value="BCA">BCA</option>
+                  <option value="B.Sc CS/IT">B.Sc CS/IT</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="grad-college">University / Institute <span class="req-star">*</span></label>
+                <input type="text" id="grad-college" name="grad_college" class="setup-input" placeholder="Delhi Technological University (DTU)" required>
+              </div>
+            </div>
+            <div class="setup-form-grid-3">
+              <div class="setup-field-group">
+                <label class="setup-label" for="grad-branch">Branch / Major <span class="req-star">*</span></label>
+                <input type="text" id="grad-branch" name="grad_branch" class="setup-input" placeholder="Computer Science & Eng" required>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="grad-year">Passing Year <span class="req-star">*</span></label>
+                <select id="grad-year" name="grad_year" class="setup-select" required>
+                  <option value="2027">2027 (Pursuing)</option>
+                  <option value="2026" selected>2026 (Final Year)</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="grad-cgpa">CGPA / % <span class="req-star">*</span></label>
+                <input type="text" id="grad-cgpa" name="grad_cgpa" class="setup-input" placeholder="8.85 / 10" required>
+              </div>
+            </div>
+            <!-- Dropzone -->
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Graduation Degree / Marksheet PDF <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-grad').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">📄</div>
+                  <div class="file-dropzone-text">
+                    <div class="file-dropzone-prompt">Upload Graduation Degree / Marksheet PDF</div>
+                    <div class="file-dropzone-hint">Format: .pdf (Max 10MB)</div>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="file-grad" name="grad_certificate" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-grad')">
+              <div class="file-uploaded-badge" id="badge-grad">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">degree_certificate.pdf</span><span class="file-uploaded-size">(3.4 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-grad', 'badge-grad')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post-Graduation Toggle (Optional) -->
+          <label class="postgrad-toggle-bar" for="student-has-pg">
+            <input type="checkbox" id="student-has-pg" name="has_postgrad" class="postgrad-checkbox-custom" onchange="togglePostgradSection(this.checked)">
+            <div>
+              <div style="font-weight: 800; font-size: 0.96rem; color: var(--text-title);">I have completed or am pursuing Post-Graduation (Masters / M.Tech / MCA)</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Check this box to submit postgraduate marks and certificates for senior roles.</div>
+            </div>
+          </label>
+
+          <div class="edu-card-panel" id="postgrad-card-panel" style="display: none;">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title"><span class="edu-icon-badge postgrad">📜</span><span>Post-Graduation / Masters Degree</span></div>
+              <span class="edu-optional-tag">Optional</span>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="pg-degree">Masters Degree</label>
+                <input type="text" id="pg-degree" name="postgrad_degree" class="setup-input" placeholder="M.Tech in Computer Science">
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="pg-college">University</label>
+                <input type="text" id="pg-college" name="postgrad_college" class="setup-input" placeholder="IIT Delhi">
+              </div>
+            </div>
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Post-Graduation Certificate (PDF)</label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-pg').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">📄</div>
+                  <div class="file-dropzone-text">
+                    <div class="file-dropzone-prompt">Upload Post-Graduation Certificate PDF</div>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="file-pg" name="postgrad_certificate" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-pg')">
+              <div class="file-uploaded-badge" id="badge-pg">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">postgrad_cert.pdf</span><span class="file-uploaded-size">(2.5 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-pg', 'badge-pg')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <button type="button" class="wizard-btn-back" onclick="navigateToStep(1)"><span>← Back</span></button>
+            <button type="button" class="wizard-btn-next" onclick="validateAndAdvanceStep(2)"><span>Continue to Career Track &amp; Resume →</span></button>
+          </div>
+        </section>
+
+        <!-- Student Step 3: Track, Resume & Verification Declaration -->
+        <section class="setup-wizard-card wizard-section-pane" id="student-pane-3">
+          <div class="wizard-section-heading">
+            <h2>3. Placement Preferences, Resume &amp; Final Declaration</h2>
+            <p>Select your engineering track and upload your ATS-tailored resume.</p>
+          </div>
+
+          <!-- Track Selection -->
+          <div style="font-weight: 800; font-size: 0.98rem; color: var(--text-title); margin-bottom: 12px;">Specialization Track <span class="req-star" style="color: #ef4444;">*</span></div>
+          <div class="track-selection-grid">
+            <div class="track-radio-card selected" onclick="selectTrack(this, 'Full-Stack Distributed Systems & Microservices')">
+              <div class="track-card-header"><span class="track-card-title">Full-Stack &amp; Distributed Systems</span><span>✓</span></div>
+              <p class="track-card-desc">React, Node.js, Go, gRPC, Redis, Kafka, and containerized microservices.</p>
+            </div>
+            <div class="track-radio-card" onclick="selectTrack(this, 'Autonomous AI Agents & LLM Systems')">
+              <div class="track-card-header"><span class="track-card-title">Autonomous AI &amp; LLM Systems</span><span>✓</span></div>
+              <p class="track-card-desc">LangChain, Multi-Agent MCP frameworks, fine-tuning, embeddings, and vector DBs.</p>
+            </div>
+            <div class="track-radio-card" onclick="selectTrack(this, 'Cloud Infrastructure & DevOps')">
+              <div class="track-card-header"><span class="track-card-title">Cloud Infrastructure &amp; DevOps</span><span>✓</span></div>
+              <p class="track-card-desc">AWS, Kubernetes, Terraform, Docker, and high-availability SRE pipelines.</p>
+            </div>
+            <div class="track-radio-card" onclick="selectTrack(this, 'Algorithmic Finance & Quantitative Systems')">
+              <div class="track-card-header"><span class="track-card-title">Algorithmic Finance &amp; Quant</span><span>✓</span></div>
+              <p class="track-card-desc">Low-latency C++, mathematical optimization, trading mechanics, and risk models.</p>
+            </div>
+          </div>
+          <input type="hidden" name="track" id="student-selected-track" value="Full-Stack Distributed Systems & Microservices">
+
+          <!-- Resume & ID Proof Card -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title"><span class="edu-icon-badge resume">📄</span><span>Resume &amp; Identity Documents</span></div>
+              <span class="edu-mandatory-tag">Required for ATS</span>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label">ATS Candidate Resume / CV (PDF Format) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-resume').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">📄</div>
+                  <div class="file-dropzone-text">
+                    <div class="file-dropzone-prompt">Upload ATS-Tailored Resume (PDF)</div>
+                    <div class="file-dropzone-hint">Format: .pdf only (Max 10MB)</div>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="file-resume" name="resume_pdf" accept=".pdf" style="display: none;" onchange="handleDocFile(this, 'badge-resume')">
+              <div class="file-uploaded-badge" id="badge-resume">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">candidate_resume.pdf</span><span class="file-uploaded-size">(1.2 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-resume', 'badge-resume')">Remove</button>
+              </div>
+            </div>
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Government ID Proof (Aadhaar / Passport / Voter ID) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-id').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">🪪</div>
+                  <div class="file-dropzone-text"><div class="file-dropzone-prompt">Upload Government ID Proof (PDF / Image)</div></div>
+                </div>
+              </div>
+              <input type="file" id="file-id" name="id_proof_pdf" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-id')">
+              <div class="file-uploaded-badge" id="badge-id">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">govt_id_proof.pdf</span><span class="file-uploaded-size">(1.5 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-id', 'badge-id')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Declaration -->
+          <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 24px;">
+            <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer;">
+              <input type="checkbox" name="declaration_agreed" class="postgrad-checkbox-custom" style="margin-top: 3px;" required checked>
+              <div style="font-size: 0.85rem; color: #1e3a8a; line-height: 1.5;">
+                I certify that all educational marks, percentages, and uploaded certificate PDFs (10th, 12th, Degree, Resume) are true and authentic.
+              </div>
+            </label>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <button type="button" class="wizard-btn-back" onclick="navigateToStep(2)"><span>← Back</span></button>
+            <button type="submit" class="wizard-btn-next" style="background: #059669; border-color: #059669;">
+              <span>Submit Student Profile &amp; Open Portal ✓</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ====================================================================
+           PROFILE 2: FACULTY / INSTRUCTOR / DEAN FORM PANES
+           ==================================================================== -->
+      <div id="role-container-faculty" class="role-form-wrapper" style="display: none;">
+
+        <!-- Faculty Step 1: Personal, Designation & University -->
+        <section class="setup-wizard-card wizard-section-pane active" id="faculty-pane-1">
+          <div class="wizard-section-heading">
+            <h2>1. Faculty Identity, Designation &amp; Academic Background</h2>
+            <p>Provide your institutional affiliation, designation, and academic contact details.</p>
+          </div>
+
+          <!-- Faculty Photo -->
+          <div class="photo-upload-block">
+            <div class="avatar-preview-wrap">
+              <div class="avatar-preview-circle" id="faculty-avatar-circle" style="background: linear-gradient(135deg, #7c3aed, #4c1d95);">
+                <span id="faculty-avatar-initials">DR</span>
+                <img id="faculty-avatar-img" src="" alt="Faculty Avatar" style="display: none;">
+              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem; color: var(--text-title); margin-bottom: 4px;">
+                Faculty Official Headshot <span class="req-star" style="color: #ef4444;">*</span>
+              </div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+                Upload a formal academic headshot. Format: JPG, PNG (Max 5MB).
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <label class="avatar-upload-btn-label" for="faculty-avatar-input">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  <span>Upload Faculty Photo</span>
+                </label>
+                <input type="file" id="faculty-avatar-input" name="avatar" accept="image/jpeg,image/png,image/webp" style="display: none;" onchange="handlePhotoUpload(this, 'faculty')">
+                <button type="button" id="faculty-remove-photo-btn" class="file-remove-btn" style="display: none;" onclick="removePhoto('faculty')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Salutation, First Name, Last Name -->
+          <div class="setup-form-grid-3">
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-title">Title / Salutation <span class="req-star">*</span></label>
+              <select id="faculty-title" name="salutation" class="setup-select" required>
+                <option value="Prof. Dr." selected>Prof. Dr.</option>
+                <option value="Dr.">Dr.</option>
+                <option value="Prof.">Prof.</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Ms.">Ms.</option>
+              </select>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-first-name">First Name <span class="req-star">*</span></label>
+              <input type="text" id="faculty-first-name" name="first_name" class="setup-input" placeholder="Vikram" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-last-name">Last Name <span class="req-star">*</span></label>
+              <input type="text" id="faculty-last-name" name="last_name" class="setup-input" placeholder="Malhotra" required>
+            </div>
+          </div>
+
+          <!-- Designation & Institution -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-designation">Academic Designation <span class="req-star">*</span></label>
+              <select id="faculty-designation" name="designation" class="setup-select" required>
+                <option value="Professor & Chair" selected>Professor &amp; Chair</option>
+                <option value="Associate Professor">Associate Professor</option>
+                <option value="Assistant Professor">Assistant Professor</option>
+                <option value="Dean of Faculty">Academic Dean</option>
+                <option value="Lead Research Scientist">Lead Research Scientist / Fellow</option>
+                <option value="Adjunct Industry Specialist">Adjunct Industry Specialist</option>
+              </select>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-institution">University / Institution <span class="req-star">*</span></label>
+              <input type="text" id="faculty-institution" name="institution" class="setup-input" placeholder="e.g. IIT Delhi / DTU / BITS Pilani" required>
+            </div>
+          </div>
+
+          <!-- Department & Teaching Experience -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-department">Department / Division <span class="req-star">*</span></label>
+              <input type="text" id="faculty-department" name="department" class="setup-input" placeholder="e.g. Department of Computer Science & Engineering" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-experience">Total Experience (Years) <span class="req-star">*</span></label>
+              <select id="faculty-experience" name="experience_years" class="setup-select" required>
+                <option value="15+">15+ Years</option>
+                <option value="10-15" selected>10 - 15 Years</option>
+                <option value="5-10">5 - 10 Years</option>
+                <option value="2-5">2 - 5 Years</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Email & Phone -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-email">Official Institutional Email <span class="req-star">*</span></label>
+              <input type="email" id="faculty-email" name="email" class="setup-input" placeholder="v.malhotra@iitd.ac.in" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-phone">Phone / WhatsApp Number <span class="req-star">*</span></label>
+              <input type="tel" id="faculty-phone" name="phone" class="setup-input" placeholder="+91 9811223344" required>
+            </div>
+          </div>
+
+          <!-- Research Links -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-scholar">Google Scholar / ORCID Profile URL</label>
+              <input type="url" id="faculty-scholar" name="scholar_url" class="setup-input" placeholder="https://scholar.google.com/citations?user=...">
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-linkedin">LinkedIn / Institutional Profile</label>
+              <input type="url" id="faculty-linkedin" name="linkedin_url" class="setup-input" placeholder="https://linkedin.com/in/prof-malhotra">
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <div></div>
+            <button type="button" class="wizard-btn-next" onclick="validateAndAdvanceStep(1)">
+              <span>Continue to Degrees &amp; Credentials →</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Faculty Step 2: Degrees (Ph.D., Masters, Bachelors) & Appointment Letter PDF -->
+        <section class="setup-wizard-card wizard-section-pane" id="faculty-pane-2">
+          <div class="wizard-section-heading">
+            <h2>2. Academic Degrees &amp; Institutional Verification Documents</h2>
+            <p>Upload your highest qualification degrees and appointment credentials in PDF format.</p>
+          </div>
+
+          <!-- Ph.D. / Doctorate -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title"><span class="edu-icon-badge grad">🔬</span><span>Doctorate (Ph.D. / D.Sc.)</span></div>
+              <span class="edu-mandatory-tag">Required for Faculty</span>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="phd-thesis">Doctoral Thesis / Specialization <span class="req-star">*</span></label>
+                <input type="text" id="phd-thesis" name="phd_specialization" class="setup-input" placeholder="e.g. Distributed Consensus & Fault-Tolerant Raft Protocols" required>
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="phd-university">Awarding University <span class="req-star">*</span></label>
+                <input type="text" id="phd-university" name="phd_university" class="setup-input" placeholder="e.g. IISc Bangalore / Stanford University" required>
+              </div>
+            </div>
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Ph.D. Degree / Doctoral Defense Certificate (PDF) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-phd').click()">
+                <div class="file-dropzone-inner"><div class="file-dropzone-icon">📄</div><div class="file-dropzone-text"><div class="file-dropzone-prompt">Upload Ph.D. Certificate PDF</div></div></div>
+              </div>
+              <input type="file" id="file-phd" name="phd_certificate" accept=".pdf" style="display: none;" onchange="handleDocFile(this, 'badge-phd')">
+              <div class="file-uploaded-badge" id="badge-phd">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">phd_degree.pdf</span><span class="file-uploaded-size">(3.1 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-phd', 'badge-phd')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Masters & Bachelors -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title"><span class="edu-icon-badge postgrad">📜</span><span>Masters &amp; Undergraduate Degrees</span></div>
+            </div>
+            <div class="setup-form-grid-2">
+              <div class="setup-field-group">
+                <label class="setup-label" for="faculty-masters">Masters Degree (M.Tech / M.S. / MCA)</label>
+                <input type="text" id="faculty-masters" name="masters_degree" class="setup-input" placeholder="M.Tech in Computer Science">
+              </div>
+              <div class="setup-field-group">
+                <label class="setup-label" for="faculty-bachelors">Bachelors Degree (B.Tech / B.E.)</label>
+                <input type="text" id="faculty-bachelors" name="bachelors_degree" class="setup-input" placeholder="B.Tech in Computer Engineering">
+              </div>
+            </div>
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Consolidated Degrees Certificate (PDF)</label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-faculty-degrees').click()">
+                <div class="file-dropzone-inner"><div class="file-dropzone-icon">📄</div><div class="file-dropzone-text"><div class="file-dropzone-prompt">Upload Masters/Bachelors Degree PDF</div></div></div>
+              </div>
+              <input type="file" id="file-faculty-degrees" name="masters_certificate" accept=".pdf" style="display: none;" onchange="handleDocFile(this, 'badge-faculty-degrees')">
+              <div class="file-uploaded-badge" id="badge-faculty-degrees">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">masters_degree.pdf</span><span class="file-uploaded-size">(2.4 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-faculty-degrees', 'badge-faculty-degrees')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appointment Letter & Academic CV -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title"><span class="edu-icon-badge resume">🏛</span><span>Institutional Credentials &amp; Curriculum Vitae</span></div>
+              <span class="edu-mandatory-tag">Required</span>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label">University Appointment Letter / Faculty ID Proof (PDF) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-appointment').click()">
+                <div class="file-dropzone-inner"><div class="file-dropzone-icon">🪪</div><div class="file-dropzone-text"><div class="file-dropzone-prompt">Upload Institutional Appointment Letter (PDF)</div></div></div>
+              </div>
+              <input type="file" id="file-appointment" name="appointment_letter_pdf" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-appointment')">
+              <div class="file-uploaded-badge" id="badge-appointment">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">faculty_appointment_letter.pdf</span><span class="file-uploaded-size">(1.7 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-appointment', 'badge-appointment')">Remove</button>
+              </div>
+            </div>
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Complete Academic CV / Research Bibliography (PDF) <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-faculty-cv').click()">
+                <div class="file-dropzone-inner"><div class="file-dropzone-icon">📑</div><div class="file-dropzone-text"><div class="file-dropzone-prompt">Upload Complete Academic CV (PDF)</div></div></div>
+              </div>
+              <input type="file" id="file-faculty-cv" name="faculty_cv_pdf" accept=".pdf" style="display: none;" onchange="handleDocFile(this, 'badge-faculty-cv')">
+              <div class="file-uploaded-badge" id="badge-faculty-cv">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">prof_malhotra_academic_cv.pdf</span><span class="file-uploaded-size">(3.8 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-faculty-cv', 'badge-faculty-cv')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <button type="button" class="wizard-btn-back" onclick="navigateToStep(1)"><span>← Back</span></button>
+            <button type="button" class="wizard-btn-next" onclick="validateAndAdvanceStep(2)"><span>Continue to Curriculum &amp; Specializations →</span></button>
+          </div>
+        </section>
+
+        <!-- Faculty Step 3: Teaching Specialization & Bio -->
+        <section class="setup-wizard-card wizard-section-pane" id="faculty-pane-3">
+          <div class="wizard-section-heading">
+            <h2>3. Course Tracks, Mentorship Scope &amp; Faculty Bio</h2>
+            <p>Select the engineering curriculum tracks you wish to instruct, review, or mentor.</p>
+          </div>
+
+          <div class="setup-field-group">
+            <label class="setup-label">Core Teaching &amp; Research Domains <span class="req-star">*</span></label>
+            <div class="chip-select-grid" id="faculty-domains-grid">
+              <label class="chip-pill active"><input type="checkbox" name="teaching_domains[]" value="Distributed Systems" checked><span>Distributed Systems &amp; Concurrency</span></label>
+              <label class="chip-pill active"><input type="checkbox" name="teaching_domains[]" value="Autonomous AI & LLMs" checked><span>Autonomous AI &amp; LLM Systems</span></label>
+              <label class="chip-pill"><input type="checkbox" name="teaching_domains[]" value="Operating Systems"><span>Operating Systems &amp; Kernels</span></label>
+              <label class="chip-pill"><input type="checkbox" name="teaching_domains[]" value="Database Architecture"><span>Database Engine Architecture</span></label>
+              <label class="chip-pill"><input type="checkbox" name="teaching_domains[]" value="Cloud Infrastructure"><span>Cloud Infrastructure &amp; Kubernetes</span></label>
+              <label class="chip-pill"><input type="checkbox" name="teaching_domains[]" value="Algorithmic Complexity"><span>Algorithmic Optimization &amp; Quant</span></label>
+            </div>
+          </div>
+
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-engagement">Engagement Preference <span class="req-star">*</span></label>
+              <select id="faculty-engagement" name="engagement_type" class="setup-select" required>
+                <option value="lead_instructor" selected>Lead Track Instructor (Full Syllabus)</option>
+                <option value="guest_mentor">Visiting Masterclass Guest Speaker</option>
+                <option value="council_reviewer">Academic Dean Council Reviewer</option>
+                <option value="sandbox_author">Lifecode VM Sandbox Author</option>
+              </select>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="faculty-lecture-url">Sample Lecture / Talk Video URL</label>
+              <input type="url" id="faculty-lecture-url" name="sample_video_url" class="setup-input" placeholder="https://youtube.com/watch?v=... or Drive link">
+            </div>
+          </div>
+
+          <div class="setup-field-group">
+            <label class="setup-label" for="faculty-bio">Instructor Biography &amp; Scholarly Summary <span class="req-star">*</span></label>
+            <textarea id="faculty-bio" name="bio" class="setup-textarea" rows="4" placeholder="Detail your academic background, research papers published, and vision for Torpedo scholars..." required>Author of 24+ peer-reviewed papers on distributed transaction scheduling and consensus algorithms. Actively guiding university cohorts in low-latency systems and containerized architectures.</textarea>
+          </div>
+
+          <!-- Declaration -->
+          <div style="background: #fbf5ff; border: 1.5px solid #e9d5ff; border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 24px;">
+            <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer;">
+              <input type="checkbox" name="faculty_code_agreed" class="postgrad-checkbox-custom" style="margin-top: 3px;" required checked>
+              <div style="font-size: 0.85rem; color: #581c87; line-height: 1.5;">
+                I affirm that all doctoral and academic credentials provided are genuine and issued by accredited universities. I agree to uphold academic rigor for Torpedo Learning course certifications.
+              </div>
+            </label>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <button type="button" class="wizard-btn-back" onclick="navigateToStep(2)"><span>← Back</span></button>
+            <button type="submit" class="wizard-btn-next" style="background: #7c3aed; border-color: #7c3aed;">
+              <span>Submit Faculty Profile &amp; Open Portal ✓</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ====================================================================
+           PROFILE 3: EMPLOYER / CORPORATE RECRUITER FORM PANES
+           ==================================================================== -->
+      <div id="role-container-employer" class="role-form-wrapper" style="display: none;">
+
+        <!-- Employer Step 1: Company Info & Recruiter Designation -->
+        <section class="setup-wizard-card wizard-section-pane active" id="employer-pane-1">
+          <div class="wizard-section-heading">
+            <h2>1. Organization Profile &amp; Recruiter Designation</h2>
+            <p>Enter your enterprise company details and talent acquisition designation.</p>
+          </div>
+
+          <!-- Company Logo Upload -->
+          <div class="photo-upload-block">
+            <div class="avatar-preview-wrap">
+              <div class="avatar-preview-circle" id="employer-avatar-circle" style="background: linear-gradient(135deg, #059669, #047857); border-radius: 18px;">
+                <span id="employer-avatar-initials">🏢</span>
+                <img id="employer-avatar-img" src="" alt="Company Logo" style="display: none;">
+              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem; color: var(--text-title); margin-bottom: 4px;">
+                Company Brand Logo / Emblem <span class="req-star" style="color: #ef4444;">*</span>
+              </div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+                Upload official company square icon or logo (Max 5MB).
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <label class="avatar-upload-btn-label" for="employer-avatar-input">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  <span>Upload Logo</span>
+                </label>
+                <input type="file" id="employer-avatar-input" name="avatar" accept="image/jpeg,image/png,image/webp,image/svg+xml" style="display: none;" onchange="handlePhotoUpload(this, 'employer')">
+                <button type="button" id="employer-remove-photo-btn" class="file-remove-btn" style="display: none;" onclick="removePhoto('employer')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company Name & Website -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="company-name">Company Legal Name <span class="req-star">*</span></label>
+              <input type="text" id="company-name" name="company_name" class="setup-input" placeholder="e.g. Stripe / Databricks / TechCorp" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="company-website">Official Website URL <span class="req-star">*</span></label>
+              <input type="url" id="company-website" name="company_website" class="setup-input" placeholder="https://company.com" required>
+            </div>
+          </div>
+
+          <!-- Recruiter Name & Designation -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="recruiter-name">Recruiter Full Name <span class="req-star">*</span></label>
+              <input type="text" id="recruiter-name" name="recruiter_name" class="setup-input" placeholder="e.g. Sarah Jenkins" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="recruiter-designation">Recruiter Designation <span class="req-star">*</span></label>
+              <select id="recruiter-designation" name="recruiter_designation" class="setup-select" required>
+                <option value="Head of Talent Acquisition" selected>Head of Talent Acquisition</option>
+                <option value="Senior Technical Recruiter">Senior Technical Recruiter</option>
+                <option value="Director of Engineering">Director of Engineering / Hiring Manager</option>
+                <option value="VP of People">VP of People / HR Director</option>
+                <option value="Founder & CTO">Founder &amp; CTO</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Work Email & Phone -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="employer-email">Corporate Work Email <span class="req-star">*</span></label>
+              <input type="email" id="employer-email" name="email" class="setup-input" placeholder="s.jenkins@stripe.com" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="employer-phone">Direct Contact / WhatsApp <span class="req-star">*</span></label>
+              <input type="tel" id="employer-phone" name="phone" class="setup-input" placeholder="+91 9876543210" required>
+            </div>
+          </div>
+
+          <!-- Location & LinkedIn -->
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="company-hq">Headquarters Location <span class="req-star">*</span></label>
+              <input type="text" id="company-hq" name="hq_location" class="setup-input" placeholder="e.g. Bengaluru, India / San Francisco, CA" required>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="recruiter-linkedin">Recruiter LinkedIn Profile URL</label>
+              <input type="url" id="recruiter-linkedin" name="linkedin_url" class="setup-input" placeholder="https://linkedin.com/in/recruiter-profile">
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <div></div>
+            <button type="button" class="wizard-btn-next" onclick="validateAndAdvanceStep(1)">
+              <span>Continue to Corporate Verification →</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Employer Step 2: Industry, Company Size & Incorporation Certificate PDF -->
+        <section class="setup-wizard-card wizard-section-pane" id="employer-pane-2">
+          <div class="wizard-section-heading">
+            <h2>2. Corporate Identity &amp; Verification Documents</h2>
+            <p>Upload your Certificate of Incorporation or GST registration to obtain verified hiring partner status.</p>
+          </div>
+
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="company-industry">Industry Sector <span class="req-star">*</span></label>
+              <select id="company-industry" name="industry" class="setup-select" required>
+                <option value="FinTech & Banking" selected>FinTech &amp; High-Frequency Trading</option>
+                <option value="Artificial Intelligence & LLMs">Artificial Intelligence &amp; Autonomous Agents</option>
+                <option value="Enterprise SaaS">Enterprise Cloud &amp; SaaS</option>
+                <option value="E-Commerce & Logistics">E-Commerce &amp; Quick-Commerce</option>
+                <option value="Cybersecurity">Cybersecurity &amp; Infra</option>
+                <option value="Consulting & Tech Services">Global Tech Consulting</option>
+              </select>
+            </div>
+
+            <div class="setup-field-group">
+              <label class="setup-label" for="company-size">Company Headcount <span class="req-star">*</span></label>
+              <select id="company-size" name="company_size" class="setup-select" required>
+                <option value="1000+ Enterprise" selected>1,000+ (Enterprise)</option>
+                <option value="250-1000 Growth">250 - 1,000 (Mid-Market)</option>
+                <option value="50-250 Scaleup">50 - 250 (Series A/B Scaleup)</option>
+                <option value="1-50 Seed">1 - 50 (Seed / Early Stage)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="setup-field-group">
+            <label class="setup-label" for="company-cin">Corporate Identification Number (CIN) / GST Registration No <span class="req-star">*</span></label>
+            <input type="text" id="company-cin" name="cin_gst_number" class="setup-input" placeholder="e.g. U72200DL2024PTC123456 or GSTIN" required>
+          </div>
+
+          <!-- Certificate of Incorporation / Work ID Dropzone -->
+          <div class="edu-card-panel">
+            <div class="edu-card-panel-header">
+              <div class="edu-level-title"><span class="edu-icon-badge resume">🏢</span><span>Corporate Verification Certificate (PDF / Image)</span></div>
+              <span class="edu-mandatory-tag">Required for ATS Access</span>
+            </div>
+            <div class="setup-field-group" style="margin-bottom: 0;">
+              <label class="setup-label">Certificate of Incorporation / GST Registration / Corporate Work ID <span class="req-star">*</span></label>
+              <div class="file-upload-dropzone" onclick="document.getElementById('file-incorporation').click()">
+                <div class="file-dropzone-inner">
+                  <div class="file-dropzone-icon">📄</div>
+                  <div class="file-dropzone-text">
+                    <div class="file-dropzone-prompt">Upload Corporate Certificate PDF</div>
+                    <div class="file-dropzone-hint">Format: .pdf, .jpg, .png (Max 10MB)</div>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="file-incorporation" name="incorporation_cert_pdf" accept=".pdf,image/*" style="display: none;" onchange="handleDocFile(this, 'badge-incorporation')">
+              <div class="file-uploaded-badge" id="badge-incorporation">
+                <div class="file-uploaded-info"><span class="file-pdf-icon-tag">PDF</span><span class="file-uploaded-name">company_incorporation_cert.pdf</span><span class="file-uploaded-size">(2.2 MB)</span></div>
+                <button type="button" class="file-remove-btn" onclick="removeDocFile('file-incorporation', 'badge-incorporation')">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <button type="button" class="wizard-btn-back" onclick="navigateToStep(1)"><span>← Back</span></button>
+            <button type="button" class="wizard-btn-next" onclick="validateAndAdvanceStep(2)"><span>Continue to Hiring Requirements →</span></button>
+          </div>
+        </section>
+
+        <!-- Employer Step 3: Hiring Requirements & Placement Partnership -->
+        <section class="setup-wizard-card wizard-section-pane" id="employer-pane-3">
+          <div class="wizard-section-heading">
+            <h2>3. Talent Acquisition Requisitions &amp; Hiring Pipeline</h2>
+            <p>Define the engineering roles, hiring volumes, and salary benchmarks for Torpedo candidate matching.</p>
+          </div>
+
+          <div class="setup-field-group">
+            <label class="setup-label">Target Engineering Roles Looking to Hire <span class="req-star">*</span></label>
+            <div class="chip-select-grid" id="employer-roles-grid">
+              <label class="chip-pill active"><input type="checkbox" name="hiring_roles[]" value="Backend SDE" checked><span>Backend SDE (Go / Node.js)</span></label>
+              <label class="chip-pill active"><input type="checkbox" name="hiring_roles[]" value="Full-Stack Engineer" checked><span>Full-Stack Engineer (React / Next.js)</span></label>
+              <label class="chip-pill active"><input type="checkbox" name="hiring_roles[]" value="Autonomous AI Engineer" checked><span>Autonomous AI &amp; LLM Engineer</span></label>
+              <label class="chip-pill"><input type="checkbox" name="hiring_roles[]" value="DevOps & SRE"><span>DevOps &amp; SRE (Kubernetes)</span></label>
+              <label class="chip-pill"><input type="checkbox" name="hiring_roles[]" value="Quant Software Engineer"><span>Quant Low-Latency Engineer (C++)</span></label>
+              <label class="chip-pill"><input type="checkbox" name="hiring_roles[]" value="Data Platform Engineer"><span>Data Platform Engineer</span></label>
+            </div>
+          </div>
+
+          <div class="setup-form-grid-2">
+            <div class="setup-field-group">
+              <label class="setup-label" for="hiring-volume">Expected Annual Hiring Volume <span class="req-star">*</span></label>
+              <select id="hiring-volume" name="hiring_volume" class="setup-select" required>
+                <option value="1-10 hires">1 - 10 Immediate Hires</option>
+                <option value="10-30 hires" selected>10 - 30 Annual Hires</option>
+                <option value="50+ campus hires">50+ Campus Batch Hires</option>
+              </select>
+            </div>
+            <div class="setup-field-group">
+              <label class="setup-label" for="salary-package">Annual CTC Benchmark Bracket <span class="req-star">*</span></label>
+              <select id="salary-package" name="ctc_bracket" class="setup-select" required>
+                <option value="₹18 - 30 LPA" selected>₹18 - 30 LPA</option>
+                <option value="₹12 - 18 LPA">₹12 - 18 LPA</option>
+                <option value="₹30 - 50+ LPA">₹30 - 50+ LPA</option>
+                <option value="$100k+ Global Remote">$100,000+ USD (Global Remote)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="setup-field-group">
+            <label class="setup-label" for="required-tech-stack">Primary Tech Stack &amp; Skills Required <span class="req-star">*</span></label>
+            <input type="text" id="required-tech-stack" name="required_tech_stack" class="setup-input" placeholder="e.g. Go, Python, React, PostgreSQL, Docker, Kafka, AWS" value="Go, Python, React, PostgreSQL, gRPC, Docker" required>
+          </div>
+
+          <div class="setup-field-group">
+            <label class="setup-label" for="hiring-mode">Preferred Partnership Pipeline <span class="req-star">*</span></label>
+            <select id="hiring-mode" name="partnership_mode" class="setup-select" required>
+              <option value="direct_ats" selected>Direct ATS Candidate Shortlisting (Pre-screened &amp; Ranked)</option>
+              <option value="custom_hackathon">Custom Lifecode VM Sandbox Challenge / Hackathon</option>
+              <option value="campus_drive">Exclusive Virtual Campus Placement Day</option>
+            </select>
+          </div>
+
+          <!-- Declaration -->
+          <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 24px;">
+            <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer;">
+              <input type="checkbox" name="employer_terms_agreed" class="postgrad-checkbox-custom" style="margin-top: 3px;" required checked>
+              <div style="font-size: 0.85rem; color: #14532d; line-height: 1.5;">
+                I affirm that I am an authorized talent partner for the company listed, and agree to Torpedo Learning’s fair recruiter placement charter.
+              </div>
+            </label>
+          </div>
+
+          <!-- Navigation -->
+          <div class="wizard-footer-actions">
+            <button type="button" class="wizard-btn-back" onclick="navigateToStep(2)"><span>← Back</span></button>
+            <button type="submit" class="wizard-btn-next" style="background: #059669; border-color: #059669;">
+              <span>Submit Employer Profile &amp; Access ATS ✓</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+    </form>
+  </main>
+
+  <!-- Uploading & Encrypting Modal Overlay -->
+  <div class="setup-upload-modal" id="setup-upload-modal" role="dialog" aria-modal="true" aria-labelledby="modal-status-title">
+    <div class="setup-upload-card">
+      <div class="upload-spinner-ring" id="modal-spinner-ring"></div>
+      <h3 id="modal-status-title" style="font-size: 1.25rem; font-weight: 850; color: var(--text-title); margin-bottom: 8px;">
+        Submitting Candidate Credentials
+      </h3>
+      <p id="modal-status-desc" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
+        Encrypting certificate PDFs &amp; generating your Torpedo ATS placement portfolio...
+      </p>
+      <div style="background: #f1f5f9; border-radius: 999px; height: 6px; overflow: hidden; margin-bottom: 12px;">
+        <div id="modal-progress-bar" style="background: #059669; height: 100%; width: 20%; transition: width 0.4s ease;"></div>
+      </div>
+      <div style="font-size: 0.76rem; color: #64748b; font-family: var(--font-mono);">
+        LOCK ID: TORPEDO-SHA256-AES-GCM
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/courses-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    /* ========================================================================
+       Multi-Role Profile Setup Engine (Student, Faculty, Employer)
+       ======================================================================== */
+    let currentRole = 'student'; // 'student' | 'faculty' | 'employer'
+    let currentStep = 1;
+    let candidateAvatarBase64 = '';
+    const uploadedDocs = {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Determine active role from URL or existing user session
+      const urlParams = new URLSearchParams(window.location.search);
+      let sessionUser = null;
+      try { sessionUser = JSON.parse(localStorage.getItem('torpedo_user')) || {}; } catch (e) {}
+
+      let roleParam = urlParams.get('role') || sessionUser.role || 'student';
+      if (roleParam === 'instructor') roleParam = 'faculty';
+      if (roleParam === 'company') roleParam = 'employer';
+
+      switchDesignationRole(roleParam);
+
+      // 2. Pre-fill name and email if available
+      const nameParam = urlParams.get('name') || sessionUser.name || '';
+      const emailParam = urlParams.get('email') || sessionUser.email || '';
+      
+      if (nameParam) {
+        const parts = nameParam.trim().split(/\s+/);
+        const f = parts[0] || '';
+        const l = parts.slice(1).join(' ') || '';
+
+        // Fill in student fields
+        const sf = document.getElementById('student-first-name');
+        const sl = document.getElementById('student-last-name');
+        if (sf && !sf.value) sf.value = f;
+        if (sl && !sl.value) sl.value = l;
+
+        // Fill in faculty fields
+        const ff = document.getElementById('faculty-first-name');
+        const fl = document.getElementById('faculty-last-name');
+        if (ff && !ff.value) ff.value = f;
+        if (fl && !fl.value) fl.value = l;
+
+        // Fill in recruiter field
+        const rn = document.getElementById('recruiter-name');
+        if (rn && !rn.value) rn.value = nameParam;
+      }
+
+      if (emailParam) {
+        const se = document.getElementById('student-email');
+        const fe = document.getElementById('faculty-email');
+        const ee = document.getElementById('employer-email');
+        if (se && !se.value) se.value = emailParam;
+        if (fe && !fe.value) fe.value = emailParam;
+        if (ee && !ee.value) ee.value = emailParam;
+      }
+
+      // Initialize chip selectors
+      document.querySelectorAll('.chip-pill').forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          const cb = pill.querySelector('input[type="checkbox"]');
+          if (cb && e.target !== cb) {
+            cb.checked = !cb.checked;
+          }
+          pill.classList.toggle('active', cb ? cb.checked : true);
+        });
+      });
+    });
+
+    // Switch between 3 designation roles
+    function switchDesignationRole(role) {
+      if (role === 'instructor') role = 'faculty';
+      if (role === 'company') role = 'employer';
+      currentRole = role;
+
+      // Update role hidden field
+      const roleField = document.getElementById('user-role-field');
+      if (roleField) roleField.value = role;
+
+      // Update pills
+      document.querySelectorAll('.role-switch-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-target-role') === role);
+      });
+
+      // Update Top Status Header & Icon
+      const iconEl = document.getElementById('role-active-icon');
+      const headingEl = document.getElementById('role-display-heading');
+      const pillTextEl = document.getElementById('header-role-status-text');
+
+      const titleEl = document.getElementById('stepper-main-title');
+      const subEl = document.getElementById('stepper-main-sub');
+
+      const s1Label = document.getElementById('step-1-nav-label');
+      const s2Label = document.getElementById('step-2-nav-label');
+      const s3Label = document.getElementById('step-3-nav-label');
+
+      if (role === 'faculty') {
+        if (iconEl) iconEl.textContent = '👨‍🏫';
+        if (headingEl) headingEl.textContent = 'Faculty & Dean Academic Portal';
+        if (pillTextEl) pillTextEl.textContent = 'Faculty Credentials Verification';
+        if (titleEl) titleEl.textContent = 'Faculty & Academic Dean Profile Setup';
+        if (subEl) subEl.textContent = 'Submit your academic appointments, doctoral degrees & research specializations.';
+        if (s1Label) s1Label.textContent = 'Academic Identity';
+        if (s2Label) s2Label.textContent = 'Degrees & Credentials';
+        if (s3Label) s3Label.textContent = 'Teaching Curriculum';
+      } else if (role === 'employer') {
+        if (iconEl) iconEl.textContent = '🏢';
+        if (headingEl) headingEl.textContent = 'Corporate Recruiter & Hiring Portal';
+        if (pillTextEl) pillTextEl.textContent = 'Enterprise Partner Verification';
+        if (titleEl) titleEl.textContent = 'Corporate Employer & Hiring Partner Setup';
+        if (subEl) subEl.textContent = 'Register your enterprise entity, verification documents & engineering requisitions.';
+        if (s1Label) s1Label.textContent = 'Organization Profile';
+        if (s2Label) s2Label.textContent = 'Corporate Verification';
+        if (s3Label) s3Label.textContent = 'Hiring Requisitions';
+      } else {
+        if (iconEl) iconEl.textContent = '🎓';
+        if (headingEl) headingEl.textContent = 'Student & Candidate Portal';
+        if (pillTextEl) pillTextEl.textContent = 'Student Profile Verification';
+        if (titleEl) titleEl.textContent = 'Candidate Profile & Document Verification';
+        if (subEl) subEl.textContent = 'Complete your academic portfolio to unlock direct enterprise recruiter loops.';
+        if (s1Label) s1Label.textContent = 'Identity & Contact';
+        if (s2Label) s2Label.textContent = 'Academic & PDFs';
+        if (s3Label) s3Label.textContent = 'Career & Placement';
+      }
+
+      // Hide all role wrappers, show current
+      document.getElementById('role-container-student').style.display = role === 'student' ? 'block' : 'none';
+      document.getElementById('role-container-faculty').style.display = role === 'faculty' ? 'block' : 'none';
+      document.getElementById('role-container-employer').style.display = role === 'employer' ? 'block' : 'none';
+
+      // Reset to Step 1
+      navigateToStep(1);
+    }
+
+    // Step Navigation
+    function navigateToStep(step) {
+      currentStep = step;
+      const activeRoleWrapper = document.getElementById(`role-container-${currentRole}`);
+      if (!activeRoleWrapper) return;
+
+      activeRoleWrapper.querySelectorAll('.wizard-section-pane').forEach((p, idx) => {
+        p.classList.toggle('active', idx + 1 === step);
+      });
+
+      // Progress bar fill
+      const progressMap = { 1: '33.33%', 2: '66.66%', 3: '100%' };
+      const bar = document.getElementById('stepper-progress-bar');
+      if (bar) bar.style.width = progressMap[step] || '33.33%';
+
+      const numEl = document.getElementById('current-step-num');
+      const percEl = document.getElementById('step-percentage');
+      if (numEl) numEl.textContent = step;
+      if (percEl) percEl.textContent = step === 1 ? '33% Completed' : step === 2 ? '66% Completed' : 'Final Step';
+
+      for (let i = 1; i <= 3; i++) {
+        const node = document.getElementById(`stepper-node-${i}`);
+        if (node) {
+          node.classList.remove('active', 'completed');
+          if (i === step) node.classList.add('active');
+          else if (i < step) node.classList.add('completed');
+        }
+      }
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    function validateAndAdvanceStep(step) {
+      const activePane = document.getElementById(`${currentRole}-pane-${step}`);
+      if (!activePane) {
+        navigateToStep(step + 1);
+        return;
+      }
+
+      let valid = true;
+      const inputs = activePane.querySelectorAll('input[required], select[required], textarea[required]');
+
+      inputs.forEach(input => {
+        if (!input.value || !input.checkValidity()) {
+          input.classList.add('is-invalid');
+          valid = false;
+        } else {
+          input.classList.remove('is-invalid');
+        }
+      });
+
+      if (!valid) {
+        showToast('Please fill all required fields correctly to continue.', 'warning');
+        const first = activePane.querySelector('.is-invalid');
+        if (first) first.focus();
+        return;
+      }
+
+      navigateToStep(step + 1);
+    }
+
+    // Photo Upload Handler
+    function handlePhotoUpload(input, role) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('Image size exceeds 5MB limit.', 'warning');
+        input.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        candidateAvatarBase64 = e.target.result;
+        const img = document.getElementById(`${role}-avatar-img`);
+        const txt = document.getElementById(`${role}-avatar-initials`);
+        const removeBtn = document.getElementById(`${role}-remove-photo-btn`);
+        if (img) {
+          img.src = candidateAvatarBase64;
+          img.style.display = 'block';
+        }
+        if (txt) txt.style.display = 'none';
+        if (removeBtn) removeBtn.style.display = 'inline-block';
+        showToast('Photo uploaded successfully!', 'success');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removePhoto(role) {
+      const input = document.getElementById(`${role}-avatar-input`);
+      if (input) input.value = '';
+      candidateAvatarBase64 = '';
+      const img = document.getElementById(`${role}-avatar-img`);
+      const txt = document.getElementById(`${role}-avatar-initials`);
+      const removeBtn = document.getElementById(`${role}-remove-photo-btn`);
+      if (img) img.style.display = 'none';
+      if (txt) txt.style.display = 'block';
+      if (removeBtn) removeBtn.style.display = 'none';
+    }
+
+    // Document File Upload Badge
+    function handleDocFile(input, badgeId) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('File exceeds 10MB limit.', 'warning');
+        input.value = '';
+        return;
+      }
+
+      const badge = document.getElementById(badgeId);
+      if (badge) {
+        const nameEl = badge.querySelector('.file-uploaded-name');
+        const sizeEl = badge.querySelector('.file-uploaded-size');
+        const tagEl = badge.querySelector('.file-pdf-icon-tag');
+        
+        const sizeFormatted = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
+        if (nameEl) nameEl.textContent = file.name;
+        if (sizeEl) sizeEl.textContent = `(${sizeFormatted})`;
+        if (tagEl) tagEl.textContent = file.name.split('.').pop().toUpperCase();
+        
+        badge.style.display = 'flex';
+      }
+
+      uploadedDocs[badgeId] = {
+        name: file.name,
+        size: (file.size / (1024 * 1024)).toFixed(1) + ' MB'
+      };
+
+      showToast(`Attached: ${file.name}`, 'info');
+    }
+
+    function removeDocFile(inputId, badgeId) {
+      const input = document.getElementById(inputId);
+      if (input) input.value = '';
+      const badge = document.getElementById(badgeId);
+      if (badge) badge.style.display = 'none';
+      delete uploadedDocs[badgeId];
+    }
+
+    function togglePostgradSection(checked) {
+      const panel = document.getElementById('postgrad-card-panel');
+      if (panel) panel.style.display = checked ? 'block' : 'none';
+    }
+
+    function selectTrack(card, trackName) {
+      document.querySelectorAll('.track-radio-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const input = document.getElementById('student-selected-track');
+      if (input) input.value = trackName;
+    }
+
+    // Form Submission & Dashboard Integration
+    window.handleProfileFormSubmit = function(e) {
+      e.preventDefault();
+
+      const modal = document.getElementById('setup-upload-modal');
+      const modalTitle = document.getElementById('modal-status-title');
+      const modalDesc = document.getElementById('modal-status-desc');
+      const modalBar = document.getElementById('modal-progress-bar');
+
+      let userName = 'Alex Rivera';
+      let userEmail = 'alex.rivera@torpedo.edu';
+      let userMeta = '';
+      let userCollege = 'Delhi Technological University (DTU)';
+      let profilePayload = { role: currentRole, avatarBase64: candidateAvatarBase64 };
+
+      if (currentRole === 'faculty') {
+        const sal = document.getElementById('faculty-title')?.value || 'Prof. Dr.';
+        const f = document.getElementById('faculty-first-name')?.value || 'Vikram';
+        const l = document.getElementById('faculty-last-name')?.value || 'Malhotra';
+        userName = `${sal} ${f} ${l}`.trim();
+        userEmail = document.getElementById('faculty-email')?.value || 'v.malhotra@iitd.ac.in';
+        userCollege = document.getElementById('faculty-institution')?.value || 'IIT Delhi';
+        const desig = document.getElementById('faculty-designation')?.value || 'Professor & Chair';
+        userMeta = `${desig} • ${userCollege}`;
+        profilePayload = {
+          ...profilePayload,
+          fullName: userName,
+          email: userEmail,
+          college: userCollege,
+          designation: desig,
+          department: document.getElementById('faculty-department')?.value || '',
+          thesis: document.getElementById('phd-thesis')?.value || 'Distributed Systems & Concurrency'
+        };
+      } else if (currentRole === 'employer') {
+        const comp = document.getElementById('company-name')?.value || 'Stripe India';
+        const rec = document.getElementById('recruiter-name')?.value || 'Sarah Jenkins';
+        const desig = document.getElementById('recruiter-designation')?.value || 'Head of Talent Acquisition';
+        userName = `${rec} (${comp})`;
+        userEmail = document.getElementById('employer-email')?.value || 's.jenkins@stripe.com';
+        userCollege = comp;
+        userMeta = `${desig} • ${comp}`;
+        profilePayload = {
+          ...profilePayload,
+          fullName: userName,
+          company: comp,
+          recruiter: rec,
+          designation: desig,
+          email: userEmail,
+          industry: document.getElementById('company-industry')?.value || 'FinTech',
+          hiringVolume: document.getElementById('hiring-volume')?.value || '10-30 Annual Hires'
+        };
+      } else {
+        // Student
+        const f = document.getElementById('student-first-name')?.value || 'Alex';
+        const l = document.getElementById('student-last-name')?.value || 'Rivera';
+        userName = `${f} ${l}`.trim();
+        userEmail = document.getElementById('student-email')?.value || 'alex.rivera@torpedo.edu';
+        userCollege = document.getElementById('grad-college')?.value || 'Delhi Technological University (DTU)';
+        const track = document.getElementById('student-selected-track')?.value || 'Full-Stack Distributed Systems & Microservices';
+        userMeta = `${track} • Cohort '26`;
+        profilePayload = {
+          ...profilePayload,
+          fullName: userName,
+          email: userEmail,
+          gradCollege: userCollege,
+          track: track,
+          tenthPercentage: document.getElementById('tenth-percentage')?.value || '91.4%',
+          twelfthPercentage: document.getElementById('twelfth-percentage')?.value || '89.2%',
+          gradCgpa: document.getElementById('grad-cgpa')?.value || '8.85 CGPA'
+        };
+      }
+
+      // Persist in localStorage
+      localStorage.setItem('torpedo_user_profile', JSON.stringify(profilePayload));
+      localStorage.setItem('torpedo_user', JSON.stringify({
+        name: userName,
+        email: userEmail,
+        role: currentRole,
+        college: userCollege,
+        meta: userMeta,
+        avatarBase64: candidateAvatarBase64
+      }));
+
+      // Show animated upload modal
+      if (modal) modal.classList.add('active');
+      if (modalTitle) modalTitle.textContent = `Verifying ${currentRole.toUpperCase()} Credentials...`;
+      if (modalDesc) modalDesc.textContent = 'Encrypting verified PDF certificates & creating secure ledger hash...';
+
+      setTimeout(() => {
+        if (modalBar) modalBar.style.width = '80%';
+        if (modalDesc) modalDesc.textContent = 'Connecting profile to Torpedo monolithic learning engine...';
+      }, 600);
+
+      setTimeout(() => {
+        if (modalBar) modalBar.style.width = '100%';
+        if (modalTitle) modalTitle.textContent = 'Profile & Certificates Verified! ✅';
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 500);
+      }, 1300);
+    };
+  </script>
+</body>
+</html>

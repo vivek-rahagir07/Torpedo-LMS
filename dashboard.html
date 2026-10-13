@@ -199,13 +199,13 @@
         <ul class="nav-menu">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="courses.html" class="nav-link">Courses</a></li>
-          <li><a href="dashboard.html" class="nav-link" style="color: var(--primary); font-weight: 700;">Student Portal</a></li>
+          <li><a href="dashboard.html" class="nav-link" id="nav-portal-link" style="color: var(--primary); font-weight: 700;">Student Portal</a></li>
         </ul>
       </nav>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <span style="font-size: 0.88rem; font-weight: 700; color: #15803d; background: #dcfce7; padding: 4px 12px; border-radius: var(--radius-pill);">
-          ● Recruiter Verified
+        <span id="dash-verification-pill" style="font-size: 0.88rem; font-weight: 700; color: #15803d; background: #dcfce7; padding: 4px 12px; border-radius: var(--radius-pill);">
+          ● Candidate Verified
         </span>
         <button class="btn btn-secondary btn-pill-sm" onclick="window.location.href='login.html'">Log Out</button>
       </div>
@@ -215,46 +215,57 @@
   <!-- Profile & Fast Stats Bar -->
   <section class="dashboard-hero">
     <div class="container">
+      
+      <!-- Role View Switcher Toolbar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 0.8rem; font-weight: 750; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Viewing Designation:</span>
+          <div class="onboarding-role-pills" style="margin: 0;" role="tablist">
+            <button type="button" class="role-switch-btn active" id="view-role-student" onclick="switchDashboardRole('student')" style="padding: 6px 14px; font-size: 0.82rem;">
+              <span>🎓</span> <span>Student</span>
+            </button>
+            <button type="button" class="role-switch-btn" id="view-role-faculty" onclick="switchDashboardRole('faculty')" style="padding: 6px 14px; font-size: 0.82rem;">
+              <span>👨‍🏫</span> <span>Faculty / Dean</span>
+            </button>
+            <button type="button" class="role-switch-btn" id="view-role-employer" onclick="switchDashboardRole('employer')" style="padding: 6px 14px; font-size: 0.82rem;">
+              <span>🏢</span> <span>Employer / Recruiter</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="font-size: 0.82rem; color: #64748b; font-weight: 600;">
+          💡 Seamless role preview synchronized with <span style="font-family: var(--font-mono); color: var(--primary);">profile-setup.html</span>
+        </div>
+      </div>
+
       <div class="dashboard-profile-bar">
         <div class="profile-info-group">
-          <div class="profile-avatar">AR</div>
+          <div class="profile-avatar" id="dash-avatar-circle">AR</div>
           <div>
-            <h1 class="profile-name">Alex Rivera</h1>
-            <div class="profile-meta">
-              <span>🎓 Delhi Technological University (DTU)</span>
+            <h1 class="profile-name" id="dash-profile-name">Alex Rivera</h1>
+            <div class="profile-meta" id="dash-profile-meta">
+              <span id="dash-college-meta">🎓 Delhi Technological University (DTU)</span>
               <span>•</span>
-              <span style="color: var(--primary); font-weight: 700;">Full-Stack & Autonomous AI Track</span>
+              <span style="color: var(--primary); font-weight: 700;" id="dash-track-meta">Full-Stack & Autonomous AI Track</span>
               <span>•</span>
-              <span>Cohort '26</span>
+              <span id="dash-cohort-meta">Cohort '26</span>
             </div>
           </div>
         </div>
 
-        <div>
-          <a href="index.html#lifecode-sandbox" class="btn btn-primary btn-pill-sm">
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;" id="dash-hero-actions">
+          <a href="profile-setup.html?role=student" id="dash-edit-profile-btn" class="btn btn-secondary btn-pill-sm" style="font-size: 0.84rem;">
+            ✏️ Academic Profile &amp; PDFs
+          </a>
+          <a href="index.html#lifecode-sandbox" id="dash-primary-action-btn" class="btn btn-primary btn-pill-sm">
             ⚡ Open Lifecode VM
           </a>
         </div>
       </div>
 
-      <!-- 4 Quick Stats -->
-      <div class="stats-metric-grid">
-        <div class="metric-card">
-          <div class="metric-label">Enrolled Tracks</div>
-          <div class="metric-val">3 <span style="font-size: 0.9rem; color: #10b981; font-weight: 600;">Active</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Sandbox Labs Solved</div>
-          <div class="metric-val">18 / 24</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">ATS Placement Score</div>
-          <div class="metric-val" style="color: var(--primary);">94.8 <span style="font-size: 0.85rem; color: #10b981;">Top 2%</span></div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Partner Shortlists</div>
-          <div class="metric-val" style="color: #7c3aed;">3 <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Interviews</span></div>
-        </div>
+      <!-- 4 Quick Stats (Dynamic per Role) -->
+      <div class="stats-metric-grid" id="dash-stats-grid">
+        <!-- Rendered dynamically via JS -->
       </div>
     </div>
   </section>
@@ -263,151 +274,16 @@
   <main class="container">
     <div class="dashboard-split-layout">
       
-      <!-- Left Column: Enrolled Courses & Lab Submissions -->
-      <div>
-        <div class="section-card-panel">
-          <div class="panel-header">
-            <h2 class="panel-title">My Enrolled Courses & Curriculum</h2>
-            <a href="courses.html" style="font-size: 0.88rem; color: var(--primary); font-weight: 700; text-decoration: none;">Browse Catalog →</a>
-          </div>
-
-          <!-- Course Progress 1 -->
-          <div class="course-progress-item">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-              <div>
-                <span class="badge badge-hot" style="margin-bottom: 6px;">Week 11 of 16</span>
-                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Full-Stack Distributed Systems & Microservices</h3>
-                <div style="font-size: 0.84rem; color: var(--text-muted);">Instructor: Dr. Vikram Malhotra</div>
-              </div>
-              <div style="font-size: 1.1rem; font-weight: 850; color: var(--primary);">68%</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width: 68%;"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
-              <span style="font-size: 0.84rem; color: #64748b;">Next: gRPC High-Throughput Buffers</span>
-              <a href="index.html#lifecode-sandbox" class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;">Continue Module ▶</a>
-            </div>
-          </div>
-
-          <!-- Course Progress 2 -->
-          <div class="course-progress-item">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-              <div>
-                <span class="badge badge-bestseller" style="margin-bottom: 6px;">Week 7 of 14</span>
-                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Autonomous AI Agents & LLM Systems</h3>
-                <div style="font-size: 0.84rem; color: var(--text-muted);">Instructor: Prof. R. Sengupta (IIT Delhi)</div>
-              </div>
-              <div style="font-size: 1.1rem; font-weight: 850; color: var(--primary);">52%</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width: 52%;"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
-              <span style="font-size: 0.84rem; color: #64748b;">Next: Multi-Agent Loops with MCP Tools</span>
-              <a href="index.html#lifecode-sandbox" class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;">Continue Module ▶</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Recent VM Sandbox Submissions -->
-        <div class="section-card-panel">
-          <div class="panel-header">
-            <h2 class="panel-title">Lifecode VM Sandbox Submissions</h2>
-            <span style="font-size: 0.85rem; color: #10b981; font-weight: 700;">● Cloud Runner Healthy</span>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
-              <div>
-                <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-title);">raft_consensus_heartbeat.rs</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Passed 12/12 unit tests • 14ms latency</div>
-              </div>
-              <span style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px;">PASSED</span>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
-              <div>
-                <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-title);">semantic_cache_redis.py</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Passed 8/8 benchmark tests • Memory: 14MB</div>
-              </div>
-              <span style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px;">PASSED</span>
-            </div>
-          </div>
-        </div>
+      <!-- Left Column (Dynamic Content per Role) -->
+      <div id="dash-left-column">
+        <!-- Injected dynamically via JS -->
       </div>
 
-      <!-- Right Column: ATS Recruiter Matches & Dean Endorsement -->
-      <div>
-        <!-- Recruiter Match Card -->
-        <div class="section-card-panel" style="border-top: 4px solid var(--primary);">
-          <div class="recruiter-badge-box">
-            <div style="font-size: 0.82rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">
-              🚀 Direct ATS Placement Active
-            </div>
-            <div style="font-size: 1.05rem; font-weight: 850; color: var(--text-title); margin-bottom: 6px;">
-              Candidate Profile Pushed To 3 Partners
-            </div>
-            <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
-              Your 94.8% code pass score unlocked direct recruiter review with verified compensation benchmark of ₹24 - 36 LPA.
-            </div>
-          </div>
-
-          <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-title); margin-bottom: 12px;">Active Partner Inquiries:</div>
-
-          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.2rem;">💳</span>
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Stripe India</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted);">Backend Infra Engineer</div>
-                </div>
-              </div>
-              <span style="font-size: 0.8rem; color: #2563eb; font-weight: 700;">Interview Sent</span>
-            </div>
-
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.2rem;">📦</span>
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Amazon Web Services</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted);">Systems Development Engineer</div>
-                </div>
-              </div>
-              <span style="font-size: 0.8rem; color: #2563eb; font-weight: 700;">Screening Review</span>
-            </div>
-
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.2rem;">⚡</span>
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Databricks</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted);">Distributed AI Infra</div>
-                </div>
-              </div>
-              <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">Assessment Cleared</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Academic Dean Certificate Card -->
-        <div class="section-card-panel">
-          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-            <img src="assets/Beenu taneja.png" alt="Dean Beenu Taneja" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);">
-            <div>
-              <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-title);">Dean Beenu Taneja</div>
-              <div style="font-size: 0.76rem; color: var(--primary); font-weight: 700; text-transform: uppercase;">Council Endorsement</div>
-            </div>
-          </div>
-          <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 16px; font-style: italic;">
-            “The student exhibits outstanding mastery of concurrency primitives and Lifecode containerized architecture.”
-          </p>
-          <button class="btn btn-secondary" style="width: 100%; font-size: 0.88rem;" onclick="alert('Downloading Blockchain Verified Dean Credential PDF...');">
-            🎖 View Blockchain Credential
-          </button>
-        </div>
+      <!-- Right Column (Dynamic Sidebar per Role) -->
+      <div id="dash-right-column">
+        <!-- Injected dynamically via JS -->
       </div>
+
     </div>
   </main>
 
@@ -425,32 +301,755 @@
   <script src="js/courses-data.js"></script>
   <script src="js/app.js"></script>
   <script>
-    (function() {
-      try {
-        const raw = localStorage.getItem('torpedo_user');
-        if (raw && (raw.toLowerCase().includes('harsh') || raw.includes('HV') || !raw.includes('name'))) {
-          localStorage.removeItem('torpedo_user');
-        }
-        const savedUser = JSON.parse(localStorage.getItem('torpedo_user'));
-        const nameEl = document.querySelector('.profile-name');
-        const avatarEl = document.querySelector('.profile-avatar');
-        const footerUserEl = document.getElementById('footer-user-name');
+    /* ========================================================================
+       Multi-Designation Dashboard Engine (Student, Faculty, Employer)
+       ======================================================================== */
+    let currentDashRole = 'student';
 
-        if (savedUser && savedUser.name && !savedUser.name.toLowerCase().includes('harsh')) {
-          if (nameEl) nameEl.textContent = savedUser.name;
-          if (avatarEl) {
-            const parts = savedUser.name.trim().split(/\s+/);
-            const initials = parts.map(p => p[0]).join('').slice(0, 2).toUpperCase();
-            avatarEl.textContent = initials || 'AR';
-          }
-          if (footerUserEl) footerUserEl.textContent = savedUser.name;
+    const defaultRoleData = {
+      student: {
+        name: 'Alex Rivera',
+        avatarText: 'AR',
+        avatarBg: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
+        metaPrimary: '🎓 Delhi Technological University (DTU)',
+        metaSecondary: 'Full-Stack Distributed Systems & Microservices',
+        metaTertiary: "Cohort '26",
+        pillText: '● Candidate Verified (ATS Active)',
+        pillStyle: 'color: #15803d; background: #dcfce7;',
+        editBtnText: '✏️ Academic Profile & PDFs',
+        editBtnHref: 'profile-setup.html?role=student',
+        primaryBtnText: '⚡ Open Lifecode VM',
+        primaryBtnHref: 'index.html#lifecode-sandbox',
+        portalTitle: 'Student Portal',
+        metrics: [
+          { label: 'Enrolled Tracks', val: '3', sub: 'Active' },
+          { label: 'Sandbox Labs Solved', val: '18 / 24', sub: 'Passed' },
+          { label: 'ATS Placement Score', val: '94.8', sub: 'Top 2%' },
+          { label: 'Partner Shortlists', val: '3', sub: 'Interviews' }
+        ]
+      },
+      faculty: {
+        name: 'Prof. Dr. Vikram Malhotra',
+        avatarText: 'VM',
+        avatarBg: 'linear-gradient(135deg, #7c3aed, #4c1d95)',
+        metaPrimary: '👨‍🏫 Professor & Chair • IIT Delhi',
+        metaSecondary: 'Department of Computer Science & Engineering',
+        metaTertiary: '12+ Years Experience',
+        pillText: '● Faculty Verified (Dean Council)',
+        pillStyle: 'color: #6b21a8; background: #f3e8ff;',
+        editBtnText: '✏️ Faculty Credentials & PDFs',
+        editBtnHref: 'profile-setup.html?role=faculty',
+        primaryBtnText: '📚 Course Syllabus & Sandboxes',
+        primaryBtnHref: 'courses.html',
+        portalTitle: 'Faculty Portal',
+        metrics: [
+          { label: 'Active Tracks Led', val: '2', sub: 'Cohorts' },
+          { label: 'Scholars Mentored', val: '142', sub: 'Active' },
+          { label: 'Doctoral Publications', val: '24+', sub: 'IEEE/ACM' },
+          { label: 'Course Quality Rating', val: '4.95 ★', sub: 'Top Tier' }
+        ]
+      },
+      employer: {
+        name: 'Sarah Jenkins',
+        avatarText: '🏢',
+        avatarBg: 'linear-gradient(135deg, #059669, #047857)',
+        metaPrimary: '🏢 Head of Talent Acquisition • Stripe India',
+        metaSecondary: 'FinTech & High-Frequency Systems',
+        metaTertiary: 'Bengaluru HQ',
+        pillText: '● Enterprise Partner Verified',
+        pillStyle: 'color: #047857; background: #d1fae5;',
+        editBtnText: '✏️ Corporate Profile & CIN',
+        editBtnHref: 'profile-setup.html?role=employer',
+        primaryBtnText: '🎯 Candidate ATS Pool',
+        primaryBtnHref: 'index.html#features',
+        portalTitle: 'Recruiter Portal',
+        metrics: [
+          { label: 'Pre-screened Candidates', val: '38', sub: 'Pipeline' },
+          { label: 'Interviews Scheduled', val: '12', sub: 'This Week' },
+          { label: 'Open Requisitions', val: '5', sub: 'Active' },
+          { label: 'Average ATS Fit Match', val: '94.6%', sub: 'Verified' }
+        ]
+      }
+    };
+
+    function switchDashboardRole(role) {
+      if (role === 'instructor') role = 'faculty';
+      if (role === 'company') role = 'employer';
+      currentDashRole = role;
+
+      // Update switcher buttons
+      ['student', 'faculty', 'employer'].forEach(r => {
+        const btn = document.getElementById(`view-role-${r}`);
+        if (btn) btn.classList.toggle('active', r === role);
+      });
+
+      // Retrieve any persisted user/profile
+      let savedUser = null;
+      let profile = null;
+      try { savedUser = JSON.parse(localStorage.getItem('torpedo_user')) || {}; } catch (e) {}
+      try { profile = JSON.parse(localStorage.getItem('torpedo_user_profile')) || {}; } catch (e) {}
+
+      const isCurrentSaved = (savedUser.role === role) || (profile.role === role);
+      const conf = defaultRoleData[role];
+
+      // 1. Update Profile Header & Avatar
+      const nameEl = document.getElementById('dash-profile-name');
+      const footerUserEl = document.getElementById('footer-user-name');
+      const avatarEl = document.getElementById('dash-avatar-circle');
+      const metaEl = document.getElementById('dash-profile-meta');
+      const pillEl = document.getElementById('dash-verification-pill');
+      const navPortalLink = document.getElementById('nav-portal-link');
+
+      const activeName = (isCurrentSaved && (profile.fullName || savedUser.name)) || conf.name;
+      const activePhoto = (isCurrentSaved && (profile.avatarBase64 || savedUser.avatarBase64)) || '';
+
+      if (nameEl) nameEl.textContent = activeName;
+      if (footerUserEl) footerUserEl.textContent = activeName;
+      if (navPortalLink) navPortalLink.textContent = conf.portalTitle;
+
+      if (pillEl) {
+        pillEl.textContent = conf.pillText;
+        pillEl.setAttribute('style', `font-size: 0.88rem; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-pill); ${conf.pillStyle}`);
+      }
+
+      if (avatarEl) {
+        avatarEl.style.background = conf.avatarBg;
+        if (activePhoto) {
+          avatarEl.innerHTML = `<img src="${activePhoto}" alt="${activeName}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
         } else {
-          if (nameEl) nameEl.textContent = 'Alex Rivera';
-          if (avatarEl) avatarEl.textContent = 'AR';
-          if (footerUserEl) footerUserEl.textContent = 'Alex Rivera';
+          avatarEl.textContent = conf.avatarText;
         }
-      } catch (e) {}
-    })();
+      }
+
+      // Meta info
+      if (role === 'faculty') {
+        const desig = (isCurrentSaved && profile.designation) || 'Professor & Chair';
+        const inst = (isCurrentSaved && profile.college) || 'IIT Delhi';
+        const dept = (isCurrentSaved && profile.department) || 'Department of Computer Science & Engineering';
+        metaEl.innerHTML = `
+          <span>👨‍🏫 ${desig} • ${inst}</span>
+          <span>•</span>
+          <span style="color: #7c3aed; font-weight: 700;">${dept}</span>
+          <span>•</span>
+          <span>Doctoral Advisor</span>
+        `;
+      } else if (role === 'employer') {
+        const comp = (isCurrentSaved && profile.company) || 'Stripe India';
+        const desig = (isCurrentSaved && profile.designation) || 'Head of Talent Acquisition';
+        const ind = (isCurrentSaved && profile.industry) || 'FinTech & High-Frequency Systems';
+        metaEl.innerHTML = `
+          <span>🏢 ${desig} • ${comp}</span>
+          <span>•</span>
+          <span style="color: #059669; font-weight: 700;">${ind}</span>
+          <span>•</span>
+          <span>Authorized Recruiter</span>
+        `;
+      } else {
+        const col = (isCurrentSaved && (profile.gradCollege || savedUser.college)) || 'Delhi Technological University (DTU)';
+        const trk = (isCurrentSaved && (profile.track || savedUser.track)) || 'Full-Stack Distributed Systems & Microservices';
+        metaEl.innerHTML = `
+          <span>🎓 ${col}</span>
+          <span>•</span>
+          <span style="color: var(--primary); font-weight: 700;">${trk}</span>
+          <span>•</span>
+          <span>Cohort '26</span>
+        `;
+      }
+
+      // Actions
+      const editBtn = document.getElementById('dash-edit-profile-btn');
+      const primaryBtn = document.getElementById('dash-primary-action-btn');
+      if (editBtn) {
+        editBtn.textContent = conf.editBtnText;
+        editBtn.href = conf.editBtnHref;
+      }
+      if (primaryBtn) {
+        primaryBtn.textContent = conf.primaryBtnText;
+        primaryBtn.href = conf.primaryBtnHref;
+      }
+
+      // 2. Render Metrics
+      const statsGrid = document.getElementById('dash-stats-grid');
+      if (statsGrid) {
+        statsGrid.innerHTML = conf.metrics.map(m => `
+          <div class="metric-card">
+            <div class="metric-label">${m.label}</div>
+            <div class="metric-val">${m.val} <span style="font-size: 0.88rem; color: #10b981; font-weight: 600;">${m.sub}</span></div>
+          </div>
+        `).join('');
+      }
+
+      // 3. Render Columns
+      renderRoleColumns(role, isCurrentSaved ? profile : null);
+    }
+
+    function renderRoleColumns(role, profile) {
+      const leftCol = document.getElementById('dash-left-column');
+      const rightCol = document.getElementById('dash-right-column');
+      if (!leftCol || !rightCol) return;
+
+      if (role === 'faculty') {
+        // FACULTY LEFT COLUMN
+        leftCol.innerHTML = `
+          <!-- Faculty Track 1 -->
+          <div class="section-card-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Assigned Engineering Curriculum & Tracks</h2>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+                  Active course syllabus units and doctoral lab sandbox assignments.
+                </div>
+              </div>
+              <a href="courses.html" style="font-size: 0.88rem; color: #7c3aed; font-weight: 700; text-decoration: none;">Curriculum Hub →</a>
+            </div>
+
+            <!-- Course item 1 -->
+            <div class="course-progress-item">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div>
+                  <span class="badge badge-hot" style="background: #f3e8ff; color: #7e22ce; margin-bottom: 6px;">Lead Instructor • 180 Scholars Enrolled</span>
+                  <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Full-Stack Distributed Systems & Microservices</h3>
+                  <div style="font-size: 0.84rem; color: var(--text-muted);">Current Unit: Module 4 (Consensus, Paxos & Raft Engine in Rust)</div>
+                </div>
+                <span style="background: #dcfce7; color: #15803d; font-weight: 800; font-size: 0.82rem; padding: 4px 10px; border-radius: 6px;">LIVE COHORT</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 78%; background: linear-gradient(90deg, #7c3aed, #a855f7);"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                <span style="font-size: 0.84rem; color: #64748b;">Upcoming Live Lecture: Tomorrow 6:00 PM IST</span>
+                <button class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;" onclick="alert('Opening Instructor Lab Grading Sandbox...');">Review 24 Submissions ▶</button>
+              </div>
+            </div>
+
+            <!-- Course item 2 -->
+            <div class="course-progress-item">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div>
+                  <span class="badge badge-bestseller" style="margin-bottom: 6px;">Co-Author • 145 Scholars Enrolled</span>
+                  <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Autonomous AI Agents & LLM Systems</h3>
+                  <div style="font-size: 0.84rem; color: var(--text-muted);">Current Unit: Multi-Agent Loops with MCP & Tool-Calling</div>
+                </div>
+                <span style="background: #dcfce7; color: #15803d; font-weight: 800; font-size: 0.82rem; padding: 4px 10px; border-radius: 6px;">ACTIVE</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 62%; background: linear-gradient(90deg, #7c3aed, #a855f7);"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                <span style="font-size: 0.84rem; color: #64748b;">Next Lab Defense: Saturday 11:00 AM IST</span>
+                <button class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;" onclick="alert('Launching Socratic Q&A Console...');">Enter Faculty Room ▶</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Faculty Verified Credentials Panel -->
+          <div class="section-card-panel" style="border-top: 4px solid #7c3aed;">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Verified Institutional Credentials &amp; PDFs</h2>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+                  Doctoral degrees and university appointments encrypted on Torpedo Academic Ledger.
+                </div>
+              </div>
+              <a href="profile-setup.html?role=faculty" class="btn btn-secondary btn-pill-sm" style="font-size: 0.8rem; padding: 5px 12px;">
+                ✏️ Update Documents
+              </a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Ph.D. Doc -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #f3e8ff; color: #7c3aed; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🔬</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">Ph.D. Doctoral Degree &amp; Defense Certificate</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.phd && profile.documents.phd.name) || 'phd_degree.pdf'}</span> • Specialization: ${(profile && profile.thesis) || 'Distributed Consensus'}
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ DOCTORATE VERIFIED</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing Ph.D. Degree PDF (Verified)...')">View PDF</button>
+                </div>
+              </div>
+
+              <!-- Appointment Letter -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #eff6ff; color: #1d4ed8; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🏛</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">University Appointment Letter / Faculty ID Proof</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.appointment && profile.documents.appointment.name) || 'faculty_appointment_letter.pdf'}</span> • ${(profile && profile.college) || 'IIT Delhi'} (CSE)
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ INSTITUTIONAL AUTH</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing Appointment Letter PDF...')">View PDF</button>
+                </div>
+              </div>
+
+              <!-- Academic CV -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #ecfeff; color: #0e7490; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">📑</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">Complete Academic CV &amp; Research Bibliography</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.cv && profile.documents.cv.name) || 'prof_malhotra_academic_cv.pdf'}</span> • 24 Peer-Reviewed Publications
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #eff6ff; color: #1d4ed8; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">ACTIVE BIBLIOGRAPHY</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Downloading Academic CV PDF...')">Download</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // FACULTY RIGHT COLUMN
+        rightCol.innerHTML = `
+          <!-- Dean Accreditation Card -->
+          <div class="section-card-panel" style="border-top: 4px solid #7c3aed;">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+              <img src="assets/Beenu taneja.png" alt="Dean Beenu Taneja" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2.5px solid #7c3aed;">
+              <div>
+                <div style="font-weight: 850; font-size: 1rem; color: var(--text-title);">Dean Beenu Taneja</div>
+                <div style="font-size: 0.78rem; color: #7c3aed; font-weight: 750; text-transform: uppercase;">Dean Academic Council</div>
+              </div>
+            </div>
+            <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+              <div style="font-size: 0.8rem; font-weight: 750; color: #581c87; margin-bottom: 4px;">COUNCIL ENDORSEMENT STATUS</div>
+              <div style="font-size: 0.88rem; color: #6b21a8; line-height: 1.5;">
+                “Approved as Lead Track Instructor. Granted Lifecode compiler privileges for student grading &amp; container sandboxes.”
+              </div>
+            </div>
+            <div style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 16px;">
+              <div>• ORCID: <span style="font-family: var(--font-mono); color: var(--text-title);">0000-0002-1825-0097</span></div>
+              <div>• Google Scholar Citations: <strong style="color: var(--text-title);">1,840+</strong></div>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%; font-size: 0.88rem;" onclick="alert('Viewing Institutional Accreditation Docket...');">
+              📜 View Institutional Charter
+            </button>
+          </div>
+
+          <!-- Sandbox privileges card -->
+          <div class="section-card-panel">
+            <h3 style="font-size: 1rem; font-weight: 800; color: var(--text-title); margin-bottom: 10px;">Lifecode Sandbox Authoring</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+              Deploy customized micro-service architecture puzzles for your cohort to solve in Linux containers.
+            </p>
+            <a href="index.html#lifecode-sandbox" class="btn btn-primary" style="width: 100%; font-size: 0.88rem; text-align: center; text-decoration: none;">
+              ⚡ Launch Instructor VM Sandbox
+            </a>
+          </div>
+        `;
+
+      } else if (role === 'employer') {
+        // EMPLOYER LEFT COLUMN
+        leftCol.innerHTML = `
+          <!-- Requisitions Panel -->
+          <div class="section-card-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Active Engineering Requisitions &amp; Pipeline</h2>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+                  Open hiring positions mapped to Torpedo candidate scorecards.
+                </div>
+              </div>
+              <a href="profile-setup.html?role=employer" style="font-size: 0.88rem; color: #059669; font-weight: 700; text-decoration: none;">+ Add Requisition</a>
+            </div>
+
+            <!-- Req 1 -->
+            <div class="course-progress-item">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div>
+                  <span class="badge badge-hot" style="background: #ecfdf5; color: #047857; margin-bottom: 6px;">₹18 - 30 LPA • 14 Candidates Screened</span>
+                  <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Backend Software Engineer (Go / Microservices)</h3>
+                  <div style="font-size: 0.84rem; color: var(--text-muted);">Required: Go, gRPC, Distributed Consensus, PostgreSQL, Docker</div>
+                </div>
+                <span style="background: #dcfce7; color: #15803d; font-weight: 800; font-size: 0.82rem; padding: 4px 10px; border-radius: 6px;">ACTIVE HIRING</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 85%; background: linear-gradient(90deg, #059669, #10b981);"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                <span style="font-size: 0.84rem; color: #64748b;">Top Match: Alex Rivera (98.4% ATS Score)</span>
+                <button class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;" onclick="alert('Opening Pre-Screened Candidate Dossiers...');">View 14 Candidates ▶</button>
+              </div>
+            </div>
+
+            <!-- Req 2 -->
+            <div class="course-progress-item">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div>
+                  <span class="badge badge-bestseller" style="background: #ecfdf5; color: #047857; margin-bottom: 6px;">₹24 - 36 LPA • 9 Candidates Screened</span>
+                  <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Autonomous AI &amp; LLM Systems Engineer</h3>
+                  <div style="font-size: 0.84rem; color: var(--text-muted);">Required: Python, PyTorch, Multi-Agent MCP, Semantic Cache, Vector DB</div>
+                </div>
+                <span style="background: #dcfce7; color: #15803d; font-weight: 800; font-size: 0.82rem; padding: 4px 10px; border-radius: 6px;">INTERVIEW LOOP</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 60%; background: linear-gradient(90deg, #059669, #10b981);"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                <span style="font-size: 0.84rem; color: #64748b;">4 Candidates in Final Behavioral Loop</span>
+                <button class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;" onclick="alert('Viewing Interview Schedules...');">Schedule Slots ▶</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Corporate Verification Documents Panel -->
+          <div class="section-card-panel" style="border-top: 4px solid #059669;">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Corporate Verification &amp; Legal Credentials</h2>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+                  Enterprise entity records and placement agreement for direct ATS shortlisting.
+                </div>
+              </div>
+              <a href="profile-setup.html?role=employer" class="btn btn-secondary btn-pill-sm" style="font-size: 0.8rem; padding: 5px 12px;">
+                ✏️ Update Details
+              </a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Incorporation Certificate -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #ecfdf5; color: #059669; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🏢</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">Certificate of Incorporation / GST Registration (PDF)</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.incorporation && profile.documents.incorporation.name) || 'company_incorporation_cert.pdf'}</span> • CIN: ${(profile && profile.cinGst) || 'U72200DL2024PTC123456'}
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ ENTITY VERIFIED</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing Corporate Incorporation Certificate PDF...')">View PDF</button>
+                </div>
+              </div>
+
+              <!-- Recruiter Authorization -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #eff6ff; color: #1d4ed8; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🪪</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">Talent Partner Placement Charter &amp; SLA</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      Authorized Recruiter: ${(profile && profile.recruiter) || 'Sarah Jenkins'} (${(profile && profile.designation) || 'Head of TA'})
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ SLA ACTIVE</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing Placement SLA Agreement...')">View Charter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // EMPLOYER RIGHT COLUMN
+        rightCol.innerHTML = `
+          <!-- Enterprise Placement SLA -->
+          <div class="section-card-panel" style="border-top: 4px solid #059669;">
+            <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 1px solid #a7f3d0; border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+              <div style="font-size: 0.8rem; font-weight: 800; color: #065f46; text-transform: uppercase; margin-bottom: 6px;">
+                ⚡ Fast-Track Placement SLA
+              </div>
+              <div style="font-size: 1.05rem; font-weight: 850; color: #064e3b; margin-bottom: 6px;">
+                Pre-Vetted Candidate Dossiers
+              </div>
+              <div style="font-size: 0.84rem; color: #047857; line-height: 1.5;">
+                Every candidate shortlisted includes verified 10th, 12th, and B.Tech transcripts, plus verifiable Lifecode sandbox test logs.
+              </div>
+            </div>
+
+            <div style="font-size: 0.88rem; font-weight: 750; color: var(--text-title); margin-bottom: 12px;">Top Sandbox Candidates:</div>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 32px; height: 32px; border-radius: 50%; background: #1d4ed8; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800;">AR</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.9rem;">Alex Rivera</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">98.4% Raft / Distributed VM Score</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.8rem; color: #059669; font-weight: 800;">Top 1%</span>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 32px; height: 32px; border-radius: 50%; background: #7c3aed; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800;">PS</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.9rem;">Priya Sharma</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">96.2% Autonomous AI Agent Score</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.8rem; color: #059669; font-weight: 800;">Top 2%</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; font-size: 0.88rem;" onclick="alert('Exporting Bulk Candidate Dossiers...');">
+              📥 Download Verified Candidate Dossiers
+            </button>
+          </div>
+        `;
+
+      } else {
+        // STUDENT (DEFAULT VIEW)
+        leftCol.innerHTML = `
+          <!-- Enrolled Courses -->
+          <div class="section-card-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">My Enrolled Courses &amp; Curriculum</h2>
+              <a href="courses.html" style="font-size: 0.88rem; color: var(--primary); font-weight: 700; text-decoration: none;">Browse Catalog →</a>
+            </div>
+
+            <!-- Course Progress 1 -->
+            <div class="course-progress-item">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div>
+                  <span class="badge badge-hot" style="margin-bottom: 6px;">Week 11 of 16</span>
+                  <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Full-Stack Distributed Systems &amp; Microservices</h3>
+                  <div style="font-size: 0.84rem; color: var(--text-muted);">Instructor: Dr. Vikram Malhotra</div>
+                </div>
+                <div style="font-size: 1.1rem; font-weight: 850; color: var(--primary);">68%</div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 68%;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                <span style="font-size: 0.84rem; color: #64748b;">Next: gRPC High-Throughput Buffers</span>
+                <a href="index.html#lifecode-sandbox" class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;">Continue Module ▶</a>
+              </div>
+            </div>
+
+            <!-- Course Progress 2 -->
+            <div class="course-progress-item">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div>
+                  <span class="badge badge-bestseller" style="margin-bottom: 6px;">Week 7 of 14</span>
+                  <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-title);">Autonomous AI Agents &amp; LLM Systems</h3>
+                  <div style="font-size: 0.84rem; color: var(--text-muted);">Instructor: Prof. R. Sengupta (IIT Delhi)</div>
+                </div>
+                <div style="font-size: 1.1rem; font-weight: 850; color: var(--primary);">52%</div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 52%;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                <span style="font-size: 0.84rem; color: #64748b;">Next: Multi-Agent Loops with MCP Tools</span>
+                <a href="index.html#lifecode-sandbox" class="btn btn-secondary btn-pill-sm" style="font-size: 0.82rem; padding: 6px 14px;">Continue Module ▶</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lifecode VM Submissions -->
+          <div class="section-card-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Lifecode VM Sandbox Submissions</h2>
+              <span style="font-size: 0.85rem; color: #10b981; font-weight: 700;">● Cloud Runner Healthy</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div>
+                  <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-title);">raft_consensus_heartbeat.rs</div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Passed 12/12 unit tests • 14ms latency</div>
+                </div>
+                <span style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px;">PASSED</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div>
+                  <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-title);">semantic_cache_redis.py</div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Passed 8/8 benchmark tests • Memory: 14MB</div>
+                </div>
+                <span style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px;">PASSED</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Verified Academic Records & Uploaded Certificates Card -->
+          <div class="section-card-panel" id="academic-certificates-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Verified Academic Records &amp; Certificates</h2>
+                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+                  Institutional marksheets and degrees verified for direct employer recruiter access.
+                </div>
+              </div>
+              <a href="profile-setup.html?role=student" class="btn btn-secondary btn-pill-sm" style="font-size: 0.8rem; padding: 5px 12px;">
+                ✏️ Update Documents
+              </a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- 10th -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #eff6ff; color: #1d4ed8; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🏫</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">10th Standard Secondary Marksheet</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.tenth && profile.documents.tenth.name) || 'tenth_marksheet.pdf'}</span> • ${(profile && profile.tenthPercentage) || '91.4%'} (${(profile && profile.tenthBoard) || 'CBSE'})
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ VERIFIED</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing 10th Certificate PDF...')">View PDF</button>
+                </div>
+              </div>
+
+              <!-- 12th -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #f0fdf4; color: #15803d; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🎓</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">12th Standard Higher Secondary Certificate</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.twelfth && profile.documents.twelfth.name) || '12th_marksheet.pdf'}</span> • ${(profile && profile.twelfthPercentage) || '89.2%'} (${(profile && profile.twelfthStream) || 'Science'})
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ VERIFIED</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing 12th Certificate PDF...')">View PDF</button>
+                </div>
+              </div>
+
+              <!-- Grad -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #faf5ff; color: #7e22ce; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🏛</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">Undergraduate Degree / Consolidated Marksheet</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.grad && profile.documents.grad.name) || 'degree_certificate.pdf'}</span> • ${(profile && profile.gradCgpa) || '8.85 CGPA'} (${(profile && profile.gradCollege) || 'DTU CSE'})
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #dcfce7; color: #15803d; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">✓ VERIFIED</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Viewing Graduation Degree PDF...')">View PDF</button>
+                </div>
+              </div>
+
+              <!-- Resume -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="background: #ecfeff; color: #0e7490; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">📄</div>
+                  <div>
+                    <div style="font-weight: 750; font-size: 0.92rem; color: var(--text-title);">Candidate ATS Resume (PDF)</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">
+                      <span>${(profile && profile.documents && profile.documents.resume && profile.documents.resume.name) || 'alex_rivera_resume.pdf'}</span> • Active Placement Document
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="background: #eff6ff; color: #1d4ed8; font-weight: 750; font-size: 0.75rem; padding: 3px 8px; border-radius: 999px;">ACTIVE ATS</span>
+                  <button type="button" class="btn btn-secondary btn-pill-sm" style="font-size: 0.76rem; padding: 4px 10px;" onclick="alert('Downloading ATS Resume PDF...')">Download</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // STUDENT RIGHT COLUMN
+        rightCol.innerHTML = `
+          <!-- Recruiter Match Card -->
+          <div class="section-card-panel" style="border-top: 4px solid var(--primary);">
+            <div class="recruiter-badge-box">
+              <div style="font-size: 0.82rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">
+                🚀 Direct ATS Placement Active
+              </div>
+              <div style="font-size: 1.05rem; font-weight: 850; color: var(--text-title); margin-bottom: 6px;">
+                Candidate Profile Pushed To 3 Partners
+              </div>
+              <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+                Your 94.8% code pass score unlocked direct recruiter review with verified compensation benchmark of ₹24 - 36 LPA.
+              </div>
+            </div>
+
+            <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-title); margin-bottom: 12px;">Active Partner Inquiries:</div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.2rem;">💳</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Stripe India</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">Backend Infra Engineer</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.8rem; color: #2563eb; font-weight: 700;">Interview Sent</span>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.2rem;">📦</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Amazon Web Services</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">Systems Development Engineer</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.8rem; color: #2563eb; font-weight: 700;">Screening Review</span>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.2rem;">⚡</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Databricks</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">Distributed AI Infra</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">Assessment Cleared</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic Dean Certificate Card -->
+          <div class="section-card-panel">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+              <img src="assets/Beenu taneja.png" onerror="this.src='assets/LOGO.png'" alt="Dean Beenu Taneja" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);">
+              <div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-title);">Dean Beenu Taneja</div>
+                <div style="font-size: 0.76rem; color: var(--primary); font-weight: 700; text-transform: uppercase;">Council Endorsement</div>
+              </div>
+            </div>
+            <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 16px; font-style: italic;">
+              “The student exhibits outstanding mastery of concurrency primitives and Lifecode containerized architecture.”
+            </p>
+            <button class="btn btn-secondary" style="width: 100%; font-size: 0.88rem;" onclick="alert('Downloading Blockchain Verified Dean Credential PDF...');">
+              🎖 View Blockchain Credential
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Auto-detect on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let sessionUser = null;
+      try { sessionUser = JSON.parse(localStorage.getItem('torpedo_user')) || {}; } catch (e) {}
+
+      let role = urlParams.get('role') || sessionUser.role || 'student';
+      if (role === 'instructor') role = 'faculty';
+      if (role === 'company') role = 'employer';
+
+      switchDashboardRole(role);
+    });
   </script>
 </body>
 </html>

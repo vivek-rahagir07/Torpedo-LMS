@@ -299,6 +299,7 @@
 
   <!-- Scripts -->
   <script src="js/courses-data.js"></script>
+  <script src="js/api-client.js"></script>
   <script src="js/app.js"></script>
   <script>
     /* ========================================================================
@@ -481,6 +482,25 @@
 
       // 3. Render Columns
       renderRoleColumns(role, isCurrentSaved ? profile : null);
+
+      // 4. Progressive API Sync with PHP Backend
+      if (window.TorpedoAPI && typeof TorpedoAPI.getDashboardStats === 'function') {
+        const userEmail = (profile && profile.email) || (savedUser && savedUser.email) || '';
+        TorpedoAPI.getDashboardStats(role, userEmail).then(backendData => {
+          if (backendData && backendData.success && backendData.metrics) {
+            if (statsGrid) {
+              statsGrid.innerHTML = backendData.metrics.map(m => `
+                <div class="metric-card">
+                  <div class="metric-label">${m.label}</div>
+                  <div class="metric-val">${m.val} <span style="font-size: 0.88rem; color: #10b981; font-weight: 600;">${m.sub}</span></div>
+                </div>
+              `).join('');
+            }
+          }
+        }).catch(err => {
+          // Graceful fallback to static/local state
+        });
+      }
     }
 
     function renderRoleColumns(role, profile) {

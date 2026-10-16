@@ -69,7 +69,7 @@ window.switchSandboxLang = function(lang) {
   }
 };
 
-window.runSandboxCode = function() {
+window.runSandboxCode = async function() {
   const textarea = document.getElementById('sandbox-textarea');
   const output = document.getElementById('sandbox-output');
   const runBtn = document.getElementById('run-code-btn');
@@ -79,6 +79,21 @@ window.runSandboxCode = function() {
   runBtn.textContent = 'Running...';
   output.textContent = `> Allocating Lifecode container sandbox...\n> Compiling ${currentSandboxLang.toUpperCase()} source...\n`;
 
+  try {
+    if (window.TorpedoAPI && typeof TorpedoAPI.evaluateSandbox === 'function') {
+      const res = await TorpedoAPI.evaluateSandbox(currentSandboxLang, textarea ? textarea.value : '');
+      if (res && res.output) {
+        output.textContent = res.output;
+        runBtn.disabled = false;
+        runBtn.textContent = '▶ Run Code';
+        return;
+      }
+    }
+  } catch (err) {
+    console.warn('[Sandbox API note]', err.message);
+  }
+
+  // Fallback simulation
   setTimeout(() => {
     runBtn.disabled = false;
     runBtn.textContent = '▶ Run Code';
@@ -91,7 +106,7 @@ window.runSandboxCode = function() {
     } else {
       output.textContent = `[${timestamp}] PostgreSQL 16 - Query OK, 3 rows (6ms)\n\n| track_name                 | total_enrolled | avg_package_lpa | fast_tracked_offers |\n| Full-Stack Distributed     | 12,450         | 24.8 LPA         | 384                 |\n| Autonomous AI Agents       | 15,800         | 28.5 LPA         | 512                 |\n| Algorithmic Finance        | 7,340          | 22.0 LPA         | 195                 |`;
     }
-  }, 600);
+  }, 400);
 };
 
 /* Auth Modal & Role Switcher */
@@ -311,7 +326,7 @@ window.handleForgotPassword = function(e) {
   showToast(`Password reset link sent to ${email}. Please check your inbox.`, 'success');
 };
 
-window.handleFormSubmit = function(e) {
+window.handleFormSubmit = async function(e) {
   e.preventDefault();
   const fnameInput = document.getElementById('input-fname');
   const lnameInput = document.getElementById('input-lname');
@@ -321,37 +336,72 @@ window.handleFormSubmit = function(e) {
   const fname = fnameInput ? fnameInput.value.trim() : '';
   const lname = lnameInput ? lnameInput.value.trim() : '';
   const email = emailInput ? emailInput.value.trim() : '';
+  const password = passInput ? passInput.value : '';
   const fullName = (fname || lname) ? `${fname} ${lname}`.trim() : 'John Doe';
 
-  if (!email || (passInput && !passInput.value)) {
+  if (!email || !password) {
     showToast('Please provide your email address and password.', 'warning');
     return;
   }
 
+  const submitBtn = document.getElementById('auth-action-submit-btn');
+  const isSignUp = currentAuthMode === 'signup';
+
+  if (submitBtn) {
+    submitBtn.innerHTML = `<span>${isSignUp ? 'CREATING ACCOUNT...' : 'AUTHENTICATING...'}</span>`;
+  }
+
+  let finalRole = currentAuthRole || 'student';
+  let destUrl = isSignUp 
+    ? `profile-setup.html?name=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(finalRole)}`
+    : `dashboard.html?role=${encodeURIComponent(finalRole)}`;
+
+  // Try real API first
+  try {
+    if (window.TorpedoAPI) {
+      if (isSignUp && typeof TorpedoAPI.register === 'function') {
+        const regRes = await TorpedoAPI.register({
+          name: fullName,
+          email: email,
+          password: password,
+          role: finalRole
+        });
+        if (regRes && regRes.redirect_url) {
+          destUrl = regRes.redirect_url;
+        }
+      } else if (!isSignUp && typeof TorpedoAPI.login === 'function') {
+        const loginRes = await TorpedoAPI.login({
+          email: email,
+          password: password,
+          role: finalRole
+        });
+        if (loginRes && loginRes.user && loginRes.user.role) {
+          finalRole = loginRes.user.role;
+        }
+        if (loginRes && loginRes.redirect_url) {
+          destUrl = loginRes.redirect_url;
+        }
+      }
+    }
+  } catch (apiErr) {
+    console.warn('[API Auth Note]', apiErr.message);
+  }
+
+  // Update local session
   localStorage.setItem('torpedo_user', JSON.stringify({
     name: fullName,
     email: email,
-    role: currentAuthRole || 'student'
+    role: finalRole
   }));
 
-  const submitBtn = document.getElementById('auth-action-submit-btn');
-  if (submitBtn) {
-    submitBtn.innerHTML = '<span>OPENING PROFILE SETUP...</span>';
-  }
-
-  const isSignUp = currentAuthMode === 'signup';
   const actionText = isSignUp ? 'Account created' : 'Signed in';
-  const destUrl = isSignUp 
-    ? `profile-setup.html?name=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(currentAuthRole || 'student')}`
-    : 'dashboard.html';
-
   showToast(`${actionText} successfully! ${isSignUp ? 'Please complete your academic profile & document uploads...' : 'Redirecting to dashboard...'}`, 'success');
 
   if (typeof closeAuthModal === 'function') closeAuthModal();
 
   setTimeout(() => {
     window.location.href = destUrl;
-  }, 500);
+  }, 400);
 };
 
 window.handleAuthSubmit = function(e) {

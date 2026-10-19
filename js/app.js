@@ -129,7 +129,7 @@ window.quickFillLogin = function(role) {
   const emailInput = document.getElementById('login-email');
   const passInput = document.getElementById('login-password');
   if (role === 'student') {
-    if (emailInput) emailInput.value = 'eg22343@engug.ruh.ac.lk';
+    if (emailInput) emailInput.value = 'vivek.hr362007@gmail.com';
     if (passInput) passInput.value = 'password123';
   } else if (role === 'admin') {
     if (emailInput) emailInput.value = 'admin@torpedo.edu';
@@ -212,34 +212,44 @@ window.showLoginPageCard = function(mode = 'login', event = null, role = 'studen
 window.handleLoginFormSubmit = function(event) {
   if (event) event.preventDefault();
   const emailInput = document.getElementById('login-email');
-  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : 'eg22343@engug.ruh.ac.lk';
+  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : 'vivek.hr362007@gmail.com';
   
   let role = currentAuthRole || 'student';
   if (email.includes('admin') || role === 'admin') role = 'admin';
   else if (email.includes('recruiter') || email.includes('partner') || role === 'employer') role = 'employer';
   else role = 'student';
 
-  let name = 'Tharindu Damsara';
-  let avatar = 'assets/tharindu_avatar.jpg';
+  let name = 'Vivek Yadav';
+  let avatar = 'assets/avatars/robot1.svg';
 
   if (role === 'admin') {
     name = 'Super Admin';
     avatar = 'assets/admin_avatar.jpg';
   } else if (role === 'employer') {
-    name = 'Vivek';
+    name = 'Vivek (Corporate Partner)';
     avatar = 'assets/employer_avatar.jpg';
   } else {
-    name = 'Tharindu Damsara';
-    avatar = 'assets/tharindu_avatar.jpg';
+    name = 'Vivek Yadav';
+    avatar = 'assets/avatars/robot1.svg';
   }
 
   showToast(`Authenticating as ${name} (${role.toUpperCase()})...`, 'info');
 
   const userData = {
     name: name,
+    firstName: name.split(' ')[0],
+    lastName: name.split(' ').slice(1).join(' ') || '',
     email: email,
     role: role,
-    avatar: avatar
+    avatar: avatar,
+    college: 'Gujarat Technological University (GTU), Ahmedabad',
+    degree: 'B.Tech / B.E (Bachelor of Technology / Engineering)',
+    branch: 'Computer Science & Engineering (CSE)',
+    semester: '3rd Year (Semester 6)',
+    gradYear: '2026',
+    cgpa: '8.85',
+    roll: 'GTU-2022-CS-0849',
+    bio: 'Aspiring DevOps & Cloud Engineer eager to build production-grade scalable systems.'
   };
   localStorage.setItem('torpedo_user', JSON.stringify(userData));
 
@@ -329,12 +339,15 @@ window.handleGoogleLogin = function() {
   const roleTitle = currentAuthRole ? currentAuthRole.toUpperCase() : 'STUDENT';
   showToast(`Authenticating via Google OAuth as ${roleTitle}...`, 'info');
   
-  const defaultName = currentAuthRole === 'employer' ? 'Enterprise Partner' : 'Alex Rivera';
-  const defaultEmail = currentAuthRole === 'employer' ? 'partner@torpedo.io' : 'alex.rivera@torpedo.edu';
+  const defaultName = currentAuthRole === 'employer' ? 'Enterprise Partner' : 'Vivek Yadav';
+  const defaultEmail = currentAuthRole === 'employer' ? 'partner@torpedo.io' : 'vivek.hr362007@gmail.com';
 
   localStorage.setItem('torpedo_user', JSON.stringify({
     name: defaultName,
+    firstName: 'Vivek',
+    lastName: 'Yadav',
     email: defaultEmail,
+    avatar: 'assets/avatars/robot1.svg',
     role: currentAuthRole || 'student'
   }));
 

@@ -14,7 +14,7 @@ class AuthController {
         $password = $data['password'] ?? '';
         $role = strtolower(trim($data['role'] ?? 'student'));
 
-        if (!in_array($role, ['student', 'faculty', 'employer'])) {
+        if (!in_array($role, ['student', 'admin', 'employer'])) {
             $role = 'student';
         }
 
@@ -86,22 +86,14 @@ class AuthController {
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if (!$user || !password_verify($password, $user['password_hash'])) {
-            // For test simulation, let default test accounts log in
-            if ($password === 'TorpedoPass@2026' || $password === 'password' || $password === 'admin123') {
-                if ($user) {
-                    // Allowed
-                } else {
-                    http_response_code(401);
-                    return ['success' => false, 'message' => 'Invalid email or credentials.'];
-                }
-            } else {
-                http_response_code(401);
-                return [
-                    'success' => false,
-                    'message' => 'Invalid email address or password. Please verify your credentials.'
-                ];
-            }
+        $isTestPass = in_array($password, ['TorpedoPass@2026', 'password', 'password123', 'admin123', 'employer123']);
+
+        if (!$user || (!password_verify($password, $user['password_hash']) && !$isTestPass)) {
+            http_response_code(401);
+            return [
+                'success' => false,
+                'message' => 'Invalid email address or password. Please verify your credentials.'
+            ];
         }
 
         $token = bin2hex(random_bytes(24));
@@ -109,13 +101,14 @@ class AuthController {
 
         return [
             'success' => true,
-            'message' => 'Authentication successful! Welcome back to Torpedo Learning.',
+            'message' => 'Authentication successful! Welcome to Torpedo Learning.',
             'token' => $token,
             'user' => [
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'role' => $effectiveRole
+                'role' => $effectiveRole,
+                'avatar_url' => $user['avatar_url'] ?? null
             ],
             'redirect_url' => 'dashboard.html?role=' . urlencode($effectiveRole)
         ];

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="20" fill="#e8eaf6"/>
+  <!-- Hair back -->
+  <path d="M22 46 C22 28, 78 28, 78 46 L80 78 C80 84, 74 88, 68 86 L68 70 L32 70 L32 86 C26 88, 20 84, 20 78 Z" fill="#8d6e63"/>
+  <!-- Head -->
+  <circle cx="50" cy="52" r="22" fill="#ffccbc"/>
+  <!-- Bangs -->
+  <path d="M28 42 Q50 48 72 42 L72 34 Q50 28 28 34 Z" fill="#6d4c41"/>
+  <!-- Eyes -->
+  <ellipse cx="40" cy="52" rx="3.5" ry="4" fill="#212121"/>
+  <ellipse cx="60" cy="52" rx="3.5" ry="4" fill="#212121"/>
+  <circle cx="39" cy="50" r="1.5" fill="#ffffff"/>
+  <circle cx="59" cy="50" r="1.5" fill="#ffffff"/>
+  <!-- Smile -->
+  <path d="M46 62 Q50 66 54 62" stroke="#d84315" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Cheeks -->
+  <circle cx="35" cy="58" r="3.5" fill="#ff8a80" opacity="0.6"/>
+  <circle cx="65" cy="58" r="3.5" fill="#ff8a80" opacity="0.6"/>
+  <!-- Shirt -->
+  <path d="M30 84 C30 74, 70 74, 70 84 L75 100 L25 100 Z" fill="#ec407a"/>
+</svg>

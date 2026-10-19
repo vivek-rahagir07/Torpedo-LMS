@@ -124,6 +124,23 @@ window.switchLoginRole = function(role, btn) {
   }
 };
 
+window.quickFillLogin = function(role) {
+  window.switchLoginRole(role);
+  const emailInput = document.getElementById('login-email');
+  const passInput = document.getElementById('login-password');
+  if (role === 'student') {
+    if (emailInput) emailInput.value = 'eg22343@engug.ruh.ac.lk';
+    if (passInput) passInput.value = 'password123';
+  } else if (role === 'admin') {
+    if (emailInput) emailInput.value = 'admin@torpedo.edu';
+    if (passInput) passInput.value = 'admin123';
+  } else if (role === 'employer') {
+    if (emailInput) emailInput.value = 'recruiter@torpedo.com';
+    if (passInput) passInput.value = 'employer123';
+  }
+  showToast(`Autofilled credentials for ${role.toUpperCase()} persona. Click LOGIN to proceed.`, 'info');
+};
+
 window.openGetStarted = function(role = 'student', event = null) {
   if (event) event.preventDefault();
   const modal = document.getElementById('auth-modal');
@@ -195,26 +212,44 @@ window.showLoginPageCard = function(mode = 'login', event = null, role = 'studen
 window.handleLoginFormSubmit = function(event) {
   if (event) event.preventDefault();
   const emailInput = document.getElementById('login-email');
-  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : 'student@torpedo.edu';
-  const roleTitle = currentAuthRole === 'employer' ? 'EMPLOYER / STAFF' : 'STUDENT';
+  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : 'eg22343@engug.ruh.ac.lk';
+  
+  let role = currentAuthRole || 'student';
+  if (email.includes('admin') || role === 'admin') role = 'admin';
+  else if (email.includes('recruiter') || email.includes('partner') || role === 'employer') role = 'employer';
+  else role = 'student';
 
-  showToast(`Logging in as ${roleTitle}...`, 'info');
+  let name = 'Tharindu Damsara';
+  let avatar = 'assets/tharindu_avatar.jpg';
 
-  const cleanName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Student';
+  if (role === 'admin') {
+    name = 'Super Admin';
+    avatar = 'assets/admin_avatar.jpg';
+  } else if (role === 'employer') {
+    name = 'Vivek';
+    avatar = 'assets/employer_avatar.jpg';
+  } else {
+    name = 'Tharindu Damsara';
+    avatar = 'assets/tharindu_avatar.jpg';
+  }
+
+  showToast(`Authenticating as ${name} (${role.toUpperCase()})...`, 'info');
+
   const userData = {
-    name: cleanName,
+    name: name,
     email: email,
-    role: currentAuthRole || 'student'
+    role: role,
+    avatar: avatar
   };
   localStorage.setItem('torpedo_user', JSON.stringify(userData));
 
   setTimeout(() => {
-    showToast(`Welcome back, ${userData.name}! Successfully logged in.`, 'success');
+    showToast(`Welcome back, ${userData.name}! Successfully authenticated.`, 'success');
     if (typeof closeAuthModal === 'function') closeAuthModal();
     setTimeout(() => {
-      window.location.href = 'dashboard.html';
-    }, 400);
-  }, 600);
+      window.location.href = `dashboard.html?role=${encodeURIComponent(role)}`;
+    }, 350);
+  }, 500);
 };
 
 // Close on backdrop click

@@ -262,28 +262,34 @@ class ProfileController {
     public static function getProfile(string $email, string $role): array {
         $pdo = Database::getConnection();
 
-        if ($role === 'faculty') {
-            $stmt = $pdo->prepare("SELECT * FROM faculty_profiles WHERE email = ?");
-            $stmt->execute([$email]);
-            $res = $stmt->fetch();
-            if ($res) {
-                $res['teaching_domains'] = json_decode($res['teaching_domains'] ?? '[]', true);
-                return ['success' => true, 'profile' => $res];
+        if ($role === 'admin') {
+            // Super Admin can inspect any student profile, or default to all candidate profiles
+            if (!empty($email) && $email !== 'admin@torpedo.edu') {
+                $stmt = $pdo->prepare("SELECT * FROM candidate_profiles WHERE email = ?");
+                $stmt->execute([$email]);
+                $res = $stmt->fetch();
+                if ($res) return ['success' => true, 'profile' => $res, 'scope' => 'super_admin_full_access'];
             }
+            $stmt = $pdo->query("SELECT * FROM candidate_profiles ORDER BY id ASC");
+            $all = $stmt->fetchAll();
+            return ['success' => true, 'students' => $all, 'scope' => 'super_admin_full_access'];
         } elseif ($role === 'employer') {
+            $targetEmail = $email ?: 'recruiter@torpedo.com';
             $stmt = $pdo->prepare("SELECT * FROM employer_profiles WHERE email = ?");
-            $stmt->execute([$email]);
+            $stmt->execute([$targetEmail]);
             $res = $stmt->fetch();
             if ($res) {
                 $res['hiring_roles'] = json_decode($res['hiring_roles'] ?? '[]', true);
                 return ['success' => true, 'profile' => $res];
             }
         } else {
+            // Student: strictly access only own profile
+            $targetEmail = $email ?: 'eg22343@engug.ruh.ac.lk';
             $stmt = $pdo->prepare("SELECT * FROM candidate_profiles WHERE email = ?");
-            $stmt->execute([$email]);
+            $stmt->execute([$targetEmail]);
             $res = $stmt->fetch();
             if ($res) {
-                return ['success' => true, 'profile' => $res];
+                return ['success' => true, 'profile' => $res, 'scope' => 'student_own_profile_only'];
             }
         }
 

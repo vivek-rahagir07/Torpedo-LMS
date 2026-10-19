@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="20" fill="#fce4ec"/>
+  <!-- Hair back -->
+  <circle cx="50" cy="46" r="30" fill="#6d4c41"/>
+  <!-- Head -->
+  <circle cx="50" cy="52" r="22" fill="#ffccbc"/>
+  <!-- Hair top & spikes -->
+  <path d="M26 44 C26 26, 74 26, 74 44 C72 32, 60 28, 50 28 C40 28, 28 32, 26 44 Z" fill="#5d4037"/>
+  <polygon points="34,36 38,24 44,34" fill="#5d4037"/>
+  <polygon points="44,32 50,20 56,32" fill="#5d4037"/>
+  <polygon points="56,32 64,22 68,36" fill="#5d4037"/>
+  <!-- Eyes -->
+  <circle cx="42" cy="52" r="3.5" fill="#212121"/>
+  <circle cx="58" cy="52" r="3.5" fill="#212121"/>
+  <circle cx="41" cy="51" r="1.2" fill="#ffffff"/>
+  <circle cx="57" cy="51" r="1.2" fill="#ffffff"/>
+  <!-- Eyebrows -->
+  <path d="M38 46 Q42 43 46 45" stroke="#3e2723" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M54 45 Q58 43 62 46" stroke="#3e2723" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Blush -->
+  <circle cx="36" cy="57" r="4" fill="#ffab91" opacity="0.6"/>
+  <circle cx="64" cy="57" r="4" fill="#ffab91" opacity="0.6"/>
+  <!-- Smile -->
+  <path d="M46 62 Q50 67 54 62" stroke="#d84315" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Shirt -->
+  <path d="M30 84 C30 74, 70 74, 70 84 L75 100 L25 100 Z" fill="#3b82f6"/>
+</svg>

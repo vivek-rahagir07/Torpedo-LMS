@@ -3090,4 +3090,886 @@
   display: none;
 }
 
+/* ==========================================================================
+   EduNext Side Navigation Bar & Dashboard Layout (Exact Reference Spec)
+   ========================================================================== */
+
+/* Dark Mode Theme Tokens */
+[data-theme="dark"] {
+  --bg-page: #0b0f19;
+  --bg-surface: #111827;
+  --bg-subtle: #1f2937;
+  --bg-muted: #374151;
+  --border-subtle: #1f2937;
+  --border-card: #283548;
+  --border-hover: #3b82f6;
+  --text-title: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+}
+
+[data-theme="dark"] .dashboard-hero,
+[data-theme="dark"] .site-header,
+[data-theme="dark"] .section-card-panel,
+[data-theme="dark"] .metric-card,
+[data-theme="dark"] .edunext-sidebar {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+}
+
+[data-theme="dark"] .course-progress-item,
+[data-theme="dark"] .course-card-subtle {
+  background-color: #1a2234 !important;
+  border-color: #243048 !important;
+}
+
+/* Layout Container */
+.edunext-dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--text-body);
+}
+
+/* Sidebar Styles */
+.edunext-sidebar {
+  width: 275px;
+  min-width: 275px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 120;
+  transition: all var(--transition-normal);
+}
+
+@media (max-width: 900px) {
+  .edunext-sidebar {
+    position: fixed;
+    left: -285px;
+    top: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+  .edunext-sidebar.mobile-open {
+    left: 0;
+  }
+}
+
+.edunext-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 22px 18px 22px;
+  text-decoration: none;
+}
+
+.edunext-brand-title {
+  font-family: var(--font-sans);
+  font-size: 1.55rem;
+  font-weight: 850;
+  color: var(--text-title);
+  letter-spacing: -0.03em;
+}
+
+.edunext-nav-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 14px 16px 14px;
+}
+
+/* Custom subtle scrollbar */
+.edunext-nav-scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+.edunext-nav-scroll-area::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+.edunext-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.edunext-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 12px;
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+[data-theme="dark"] .edunext-nav-link {
+  color: #94a3b8;
+}
+
+.edunext-nav-link:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-title);
+}
+
+.edunext-nav-link.active-item {
+  background-color: #f1f5f9;
+  color: var(--text-title);
+}
+
+[data-theme="dark"] .edunext-nav-link.active-item {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+.edunext-nav-link-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.edunext-nav-link-left svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 2;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.edunext-accordion-chevron {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.edunext-nav-link.expanded .edunext-accordion-chevron {
+  transform: rotate(180deg);
+}
+
+/* Nested Courses Submenu */
+.edunext-submenu {
+  border-left: 1.5px solid #e2e8f0;
+  margin-left: 21px;
+  padding-left: 10px;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+[data-theme="dark"] .edunext-submenu {
+  border-left-color: #26334d;
+}
+
+.edunext-submenu-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 550;
+  transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .edunext-submenu-link {
+  color: #94a3b8;
+}
+
+.edunext-submenu-link:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-title);
+}
+
+.edunext-submenu-link.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  font-weight: 750;
+}
+
+[data-theme="dark"] .edunext-submenu-link.active {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: #60a5fa;
+}
+
+.edunext-dot-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #94a3b8;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.edunext-submenu-link.active .edunext-dot-indicator {
+  background: #2563eb;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.45);
+}
+
+/* Blue Pill Badges */
+.edunext-pill-badge {
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+}
+
+/* Sidebar Footer */
+.edunext-sidebar-footer {
+  padding: 14px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-surface);
+}
+
+/* Light / Dark Mode Toggle Pill */
+.theme-switch-pill {
+  background-color: #f1f5f9;
+  padding: 4px;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+[data-theme="dark"] .theme-switch-pill {
+  background-color: #1e293b;
+}
+
+.theme-switch-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+[data-theme="dark"] .theme-switch-btn {
+  color: #94a3b8;
+}
+
+.theme-switch-btn.active {
+  background-color: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-weight: 750;
+}
+
+[data-theme="dark"] .theme-switch-btn.active {
+  background-color: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* User Profile Card */
+.profile-footer-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.profile-footer-card:hover {
+  background-color: var(--bg-subtle);
+}
+
+.profile-footer-avatar-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: #facc15;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-footer-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-footer-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.profile-footer-name {
+  font-size: 0.88rem;
+  font-weight: 750;
+  color: var(--text-title);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-footer-email {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-footer-chevron {
+  width: 14px;
+  height: 14px;
+  color: #94a3b8;
+  stroke-width: 2.2;
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+/* Main Content Area */
+.edunext-main-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.edunext-topbar {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 90;
+}
+
+.topbar-search-input-wrap {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+}
+
+.topbar-search-input {
+  width: 100%;
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 9px 18px 9px 40px;
+  font-size: 0.88rem;
+  color: var(--text-title);
+  outline: none;
+  transition: all 0.18s ease;
+}
+
+.topbar-search-input:focus {
+  border-color: #2563eb;
+  background-color: var(--bg-surface);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.topbar-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #94a3b8;
+}
+
+.dossier-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.2s ease;
+}
+
+.dossier-card:hover {
+  border-color: #2563eb;
+  box-shadow: var(--shadow-card);
+}
+
+/* ==========================================================================
+   Torpedo Student Portal & OTP Verification (Exact Reference Spec)
+   ========================================================================== */
+
+/* OTP Verification 6-Digit Screen (Image 2) */
+.otp-container-card {
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.otp-title {
+  font-size: 2rem;
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin: 0 0 8px 0;
+}
+
+.otp-sub {
+  font-size: 0.92rem;
+  color: #64748b;
+  margin: 0 0 28px 0;
+  line-height: 1.45;
+}
+
+.otp-boxes-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.otp-box-input {
+  width: 48px;
+  height: 54px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.18s ease;
+}
+
+.otp-box-input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.otp-resend-text {
+  font-size: 0.86rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.otp-resend-text a {
+  color: #2563eb;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.otp-submit-btn {
+  width: 100%;
+  background: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);
+  margin-bottom: 18px;
+}
+
+.otp-submit-btn:hover {
+  background: #1e40af;
+  box-shadow: 0 6px 18px rgba(29, 78, 216, 0.35);
+}
+
+/* Torpedo Student Portal (Image 5) */
+.student-portal-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.student-portal-sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 14px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+@media (max-width: 900px) {
+  .student-portal-sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: left 0.25s ease;
+  }
+  .student-portal-sidebar.mobile-open {
+    left: 0;
+  }
+}
+
+.student-sidebar-top-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 18px 10px;
+  text-decoration: none;
+}
+
+.student-brand-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.student-nav-menu-scroll {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.student-nav-group-title {
+  font-size: 0.68rem;
+  font-weight: 850;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 16px 12px 6px 12px;
+}
+
+.student-nav-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 650;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.student-nav-item-btn svg {
+  width: 18px;
+  height: 18px;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.student-nav-item-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.student-nav-item-btn.active {
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 750;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+}
+
+.student-sidebar-footer-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 10px 4px 10px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.student-footer-avatar-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #facc15;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.student-footer-avatar-btn:hover {
+  border-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.student-footer-avatar-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Student Main Workspace */
+.student-portal-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.student-top-navbar {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 90;
+}
+
+.student-search-pill-wrap {
+  position: relative;
+  max-width: 540px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.student-search-pill-input {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 9px 48px 9px 18px;
+  font-size: 0.88rem;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.18s ease;
+}
+
+.student-search-pill-input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.student-search-pill-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.student-search-pill-btn:hover {
+  background: #1e40af;
+}
+
+/* 5 Metrics Row */
+.student-5-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 1100px) {
+  .student-5-metrics-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .student-5-metrics-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.student-metric-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.student-metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.student-metric-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.student-metric-num {
+  font-size: 1.8rem;
+  font-weight: 850;
+  color: #0f172a;
+  margin: 6px 0 2px 0;
+}
+
+.student-metric-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* Competitions Card */
+.student-competition-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.18s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.student-competition-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+/* Circular Score Gauge */
+.circular-gauge-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+/* Weekly Practice Hours Bar Chart */
+.weekly-barchart-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  height: 90px;
+  padding: 12px 10px 4px 10px;
+  background: #f8fafc;
+  border-radius: 12px;
+  margin: 14px 0;
+}
+
+.weekly-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.weekly-bar-fill {
+  width: 100%;
+  max-width: 28px;
+  background: #cbd5e1;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.weekly-bar-fill.active-day {
+  background: #10b981;
+}
+
+.weekly-bar-day {
+  font-size: 0.72rem;
+  font-weight: 750;
+  color: #64748b;
+}
+
+/* Interactive To-Do List */
+.todo-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 8px;
+  transition: all 0.15s ease;
+}
+
+.todo-item-row.completed-task {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.todo-check-input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2563eb;
+}
+
+
+
 

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="20" fill="#ede7f6"/>
+  <!-- Hair back -->
+  <circle cx="50" cy="46" r="30" fill="#7e57c2"/>
+  <!-- Head -->
+  <circle cx="50" cy="52" r="22" fill="#ffe0b2"/>
+  <!-- Hair top stylish spikes -->
+  <path d="M26 44 C26 24, 74 24, 74 44 C70 30, 58 26, 50 26 C42 26, 30 30, 26 44 Z" fill="#5e35b1"/>
+  <polygon points="32,38 35,22 42,34" fill="#5e35b1"/>
+  <polygon points="42,30 48,16 54,30" fill="#5e35b1"/>
+  <polygon points="54,30 62,18 68,34" fill="#5e35b1"/>
+  <!-- Glasses -->
+  <rect x="34" y="46" width="14" height="10" rx="3" fill="none" stroke="#311b92" stroke-width="2"/>
+  <rect x="52" y="46" width="14" height="10" rx="3" fill="none" stroke="#311b92" stroke-width="2"/>
+  <line x1="48" y1="50" x2="52" y2="50" stroke="#311b92" stroke-width="2"/>
+  <!-- Eyes inside glasses -->
+  <circle cx="41" cy="51" r="2.5" fill="#212121"/>
+  <circle cx="59" cy="51" r="2.5" fill="#212121"/>
+  <!-- Smirk -->
+  <path d="M47 62 Q52 64 56 61" stroke="#bf360c" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Shirt -->
+  <path d="M30 84 C30 74, 70 74, 70 84 L75 100 L25 100 Z" fill="#5c6bc0"/>
+</svg>

@@ -7,11 +7,11 @@
   <meta name="description" content="Torpedo Learning Student Portal: Coursework, Sandboxes, Hackathons, AI Competency, and Placement Records.">
   <link rel="icon" type="image/png" href="assets/LOGO.png">
 
-  <!-- Typography -->
+  <!-- Typography: Inter for sharp, punchy, professional developer UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/portal-layout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/portal-layout.css?v=20261020_sharp">
 </head>
 <body>
 
@@ -77,30 +77,30 @@
         <div class="sidebar-menu-scroll">
           
           <!-- Home (Active Item) -->
-          <button type="button" class="sidebar-nav-link active" onclick="switchPortalTab('home', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <button type="button" class="sidebar-nav-link active" id="nav-btn-home" onclick="switchPortalTab('home', this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Home</span>
           </button>
 
           <!-- Courses -->
-          <button type="button" class="sidebar-nav-link" onclick="switchPortalTab('courses', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <button type="button" class="sidebar-nav-link" id="nav-btn-courses" onclick="switchPortalTab('courses', this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             <span>Courses</span>
-            <span class="nav-badge-pill" style="background: #eff6ff; color: #2563eb;">12+</span>
+            <span class="nav-micro-badge">6</span>
           </button>
 
           <!-- Library Catalog -->
-          <button type="button" class="sidebar-nav-link" onclick="switchPortalTab('library', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <button type="button" class="sidebar-nav-link" id="nav-btn-library" onclick="switchPortalTab('library', this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             <span>Library Catalog</span>
-            <span class="nav-badge-pill" style="background: #ecfdf5; color: #059669;">Free</span>
+            <span class="nav-micro-badge free">Free</span>
           </button>
 
           <!-- Certifications -->
-          <button type="button" class="sidebar-nav-link" onclick="switchPortalTab('certifications', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <button type="button" class="sidebar-nav-link" id="nav-btn-certifications" onclick="switchPortalTab('certifications', this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
             <span>Certifications</span>
-            <span class="nav-badge-pill" style="background: #fffbeb; color: #b45309;">4</span>
+            <span class="nav-micro-badge">4</span>
           </button>
 
           <!-- Divider -->
@@ -108,47 +108,48 @@
 
           <!-- Join Workspace -->
           <button type="button" class="sidebar-nav-link" onclick="openJoinWorkspaceModal()" title="Enter student code to join institution workspace">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span>Join Workspace</span>
-            <span class="nav-badge-pill" style="background: #dbeafe; color: #1d4ed8; font-weight: 850;">JOIN</span>
+            <span class="nav-micro-badge join">JOIN</span>
           </button>
 
           <!-- Tutorials -->
           <button type="button" class="sidebar-nav-link" onclick="openCoursePlayerModal('Cloud DevOps & Microservices Architecture')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
             <span>Tutorials</span>
           </button>
 
           <!-- Best Practices (Lifecode) -->
           <button type="button" class="sidebar-nav-link" onclick="openLifecodeSandbox('Best Practices Code Review')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/></svg>
             <span>Best Practices</span>
           </button>
 
           <!-- Bookmarks -->
           <button type="button" class="sidebar-nav-link" onclick="showToast('Bookmarks: 8 Saved Modules & Lessons', 'info')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
             <span>Bookmarks</span>
           </button>
 
           <!-- Community -->
           <button type="button" class="sidebar-nav-link" onclick="openCohortChatModal()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             <span>Community</span>
           </button>
 
         </div>
 
-        <!-- Student Profile Card Bottom -->
+        <!-- Student Profile Card Bottom (Linear/GitHub Enterprise Monogram) -->
         <div class="sidebar-bottom-profile" onclick="openProfileDossierModal()" title="View Student Academic Dossier">
-          <div class="profile-squircle-avatar">
-            <img src="assets/avatars/robot1.svg" alt="Student Avatar" id="rail-avatar-img">
+          <div class="profile-monogram-box">
+            <span>VY</span>
+            <span class="avatar-live-indicator" title="Connected"></span>
           </div>
           <div class="profile-info-wrap">
             <div class="profile-name" id="sidebar-student-name">Vivek Yadav</div>
-            <div class="profile-role" id="sidebar-student-role">GTU CSE • 8.85 CGPA</div>
+            <div class="profile-role" id="sidebar-student-role">GTU CSE • Batch '26</div>
           </div>
-          <span class="profile-chevron">⚙️</span>
+          <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </div>
       </aside>
 
@@ -160,9 +161,15 @@
              ================================================================ -->
         <div id="tab-view-home" class="portal-tab-content active">
           <!-- Top Greeting Bar -->
-          <div>
-            <h1 class="welcome-greeting-title" id="hero-greeting-text">Welcome back, Vivek 👋</h1>
-            <p class="welcome-greeting-sub">Here's what's happening with your learning progress today.</p>
+          <div class="welcome-greeting-row">
+            <div>
+              <h1 class="welcome-greeting-title" id="hero-greeting-text">Welcome back, Vivek</h1>
+              <p class="welcome-greeting-sub">Overview of your academic progress, micro-credentials, and active dev tracks.</p>
+            </div>
+            <div class="welcome-status-pill">
+              <span class="status-live-dot"></span>
+              <span>L2 Polygon Network Synced</span>
+            </div>
           </div>
 
           <!-- 2-Column Master Layout (Matching media_1792416346297.png) -->
@@ -173,73 +180,65 @@
                ================================================================ -->
           <div class="main-content-flow">
 
-            <!-- 1. METRICS ROW (Exact Match to media_1792416346297.png) -->
+            <!-- 1. METRICS ROW (Sharp, Punchy Linear-Style KPI Cards) -->
             <div class="metrics-row-grid">
               
-              <!-- Card 1: Active Enrolled Courses (Teal) -->
-              <div class="exact-metric-card active-metric" onclick="window.location.href='courses.html'">
+              <!-- Card 1: Active Enrolled Courses -->
+              <div class="exact-metric-card" onclick="switchPortalTab('courses')">
                 <div class="metric-card-top-flex">
-                  <div class="metric-squircle-icon teal-gradient">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                  </div>
-                  <div class="metric-text-group">
-                    <div class="metric-number-bold">3</div>
-                    <div class="metric-caption-text">Enrolled Course</div>
+                  <span class="metric-caption-text">Enrolled Courses</span>
+                  <div class="metric-icon-box">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                   </div>
                 </div>
+                <div class="metric-number-bold">3</div>
                 <div class="metric-card-bottom-flex">
-                  <span class="metric-view-link">View details</span>
+                  <span class="metric-view-link">View active tracks</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
                 </div>
               </div>
 
-              <!-- Card 2: Lessons Completed (Purple) -->
+              <!-- Card 2: Lessons Completed -->
               <div class="exact-metric-card" onclick="openCoursePlayerModal('Cloud DevOps & Microservices Architecture')">
                 <div class="metric-card-top-flex">
-                  <div class="metric-squircle-icon purple-gradient">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-                  </div>
-                  <div class="metric-text-group">
-                    <div class="metric-number-bold" id="stat-completed-tracks">56</div>
-                    <div class="metric-caption-text">Lesson</div>
+                  <span class="metric-caption-text">Completed Lessons</span>
+                  <div class="metric-icon-box">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
                   </div>
                 </div>
+                <div class="metric-number-bold" id="stat-completed-tracks">56</div>
                 <div class="metric-card-bottom-flex">
-                  <span class="metric-view-link">View details</span>
+                  <span class="metric-view-link">Resume current lesson</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
                 </div>
               </div>
 
-              <!-- Card 3: Certificates (Orange) -->
-              <div class="exact-metric-card" onclick="openCertificatesModal()">
+              <!-- Card 3: Certificates -->
+              <div class="exact-metric-card" onclick="switchPortalTab('certifications')">
                 <div class="metric-card-top-flex">
-                  <div class="metric-squircle-icon orange-gradient">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-                  </div>
-                  <div class="metric-text-group">
-                    <div class="metric-number-bold">17</div>
-                    <div class="metric-caption-text">Certificates</div>
+                  <span class="metric-caption-text">Earned Badges</span>
+                  <div class="metric-icon-box">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
                   </div>
                 </div>
+                <div class="metric-number-bold">17</div>
                 <div class="metric-card-bottom-flex">
-                  <span class="metric-view-link">View details</span>
+                  <span class="metric-view-link">Polygon L2 Verified</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
                 </div>
               </div>
 
-              <!-- Card 4: Practice Hours (Blue) -->
+              <!-- Card 4: Torpedo Score -->
               <div class="exact-metric-card" onclick="openProfileDossierModal()">
                 <div class="metric-card-top-flex">
-                  <div class="metric-squircle-icon blue-gradient">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  </div>
-                  <div class="metric-text-group">
-                    <div class="metric-number-bold">450</div>
-                    <div class="metric-caption-text">Torpedo Points</div>
+                  <span class="metric-caption-text">Torpedo Score</span>
+                  <div class="metric-icon-box">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   </div>
                 </div>
+                <div class="metric-number-bold">450 <span class="metric-unit-tag">TRP</span></div>
                 <div class="metric-card-bottom-flex">
-                  <span class="metric-view-link">View details</span>
+                  <span class="metric-view-link">Top 5% Cohort</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
                 </div>
               </div>
@@ -282,10 +281,13 @@
                     <span class="progress-pct-text">30%</span>
                   </div>
                   <div class="course-status-badge-col">
-                    <span class="status-capsule-pill in-progress">⏳ In Progress</span>
+                    <span class="status-chip in-progress">
+                      <span class="status-chip-dot amber"></span>
+                      <span>In Progress</span>
+                    </span>
                   </div>
                   <div class="course-chevron-action-col">
-                    <span class="chevron-arrow-link">&gt;</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
                   </div>
                 </div>
 
@@ -293,7 +295,7 @@
                 <div class="course-table-row" onclick="openCoursePlayerModal('Autonomous AI Agent Architecture with LangGraph')">
                   <div class="course-identity-col">
                     <div class="course-app-squircle purple">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M10 17h4"/></svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M10 17h4"/></svg>
                     </div>
                     <div class="course-title-block">
                       <div class="course-name-bold">Autonomous AI Agent Architecture (LangGraph)</div>
@@ -307,10 +309,13 @@
                     <span class="progress-pct-text">70%</span>
                   </div>
                   <div class="course-status-badge-col">
-                    <span class="status-capsule-pill in-progress">⏳ In Progress</span>
+                    <span class="status-chip in-progress">
+                      <span class="status-chip-dot amber"></span>
+                      <span>In Progress</span>
+                    </span>
                   </div>
                   <div class="course-chevron-action-col">
-                    <span class="chevron-arrow-link">&gt;</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
                   </div>
                 </div>
 
@@ -318,7 +323,7 @@
                 <div class="course-table-row" onclick="openCoursePlayerModal('Full-Stack Distributed Systems (Go & React)')">
                   <div class="course-identity-col">
                     <div class="course-app-squircle dark">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
                     </div>
                     <div class="course-title-block">
                       <div class="course-name-bold">Distributed Systems &amp; High-Throughput Architecture</div>
@@ -332,52 +337,79 @@
                     <span class="progress-pct-text">100%</span>
                   </div>
                   <div class="course-status-badge-col">
-                    <span class="status-capsule-pill completed">✓ Completed</span>
+                    <span class="status-chip completed">
+                      <span class="status-chip-dot green"></span>
+                      <span>Completed</span>
+                    </span>
                   </div>
                   <div class="course-chevron-action-col">
-                    <span class="chevron-arrow-link">&gt;</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
                   </div>
                 </div>
 
               </div>
             </div>
 
-            <!-- 3. RECOMMENDED FOR YOU (Exact Match to media_1792416346297.png) -->
+            <!-- 3. RECOMMENDED FOR YOU (Sharp Linear-Style Feature Cards) -->
             <div class="recommended-section-group">
-              <h2 class="section-title-h2">Recommended for you</h2>
+              <div class="section-title-flex" style="margin-bottom: 8px;">
+                <h2 class="section-title-h2">Recommended for you</h2>
+                <span style="font-size: 0.7rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Personalized Tracks</span>
+              </div>
 
               <div class="recommended-cards-3grid">
                 
-                <!-- Tile 1: Teal Grid (Design Workshop Facilitation / Hackathon) -->
+                <!-- Tile 1: Hackathon -->
                 <div class="recommended-tile-card" onclick="registerHackathon('Global Web-Dev Hackathon')">
-                  <div class="tile-banner-header teal-grid">
-                    <div class="banner-center-icon-squircle">🏆</div>
+                  <div class="tile-header-row">
+                    <span class="tile-badge hackathon">HACKATHON • 48H</span>
+                    <div class="tile-icon-micro">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5"/><path d="M14 14.66V17c0 .55.45 1 1 1h1.5"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+                    </div>
                   </div>
                   <div class="tile-body-content">
                     <h3 class="tile-title-text">Design Workshop Facilitation</h3>
-                    <p class="tile-sub-caption">Master your skills in design workshop facilitation and team sprints.</p>
+                    <p class="tile-sub-caption">Master design sprints, event-driven prototypes, and collaborative team velocity.</p>
+                    <div class="tile-action-link">
+                      <span>Register Track</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Tile 2: Amber Grid (Animation for Beginner / Internships) -->
+                <!-- Tile 2: Internship -->
                 <div class="recommended-tile-card" onclick="openInternshipApplyModal('Razorpay', 'Cloud Infrastructure Intern', '₹45,000 / month', '94%')">
-                  <div class="tile-banner-header amber-grid">
-                    <div class="banner-center-icon-squircle">💼</div>
+                  <div class="tile-header-row">
+                    <span class="tile-badge career">CAREER • RAZORPAY</span>
+                    <div class="tile-icon-micro">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
                   </div>
                   <div class="tile-body-content">
-                    <h3 class="tile-title-text">Animation for Beginner</h3>
-                    <p class="tile-sub-caption">Procreate Dreams has transformed my ability to build fluid micro-interactions.</p>
+                    <h3 class="tile-title-text">Cloud Infrastructure Intern</h3>
+                    <p class="tile-sub-caption">₹45,000 / month stipend • 94% profile match for distributed systems skills.</p>
+                    <div class="tile-action-link">
+                      <span>Apply with Dossier</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Tile 3: Blue Grid (Common Design Systems) -->
+                <!-- Tile 3: Sandbox Lab -->
                 <div class="recommended-tile-card" onclick="openLifecodeSandbox('Distributed Systems Lab')">
-                  <div class="tile-banner-header blue-grid">
-                    <div class="banner-center-icon-squircle">⚡</div>
+                  <div class="tile-header-row">
+                    <span class="tile-badge sandbox">SANDBOX LAB • LIVE</span>
+                    <div class="tile-icon-micro">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
                   </div>
                   <div class="tile-body-content">
-                    <h3 class="tile-title-text">Common Design Systems</h3>
-                    <p class="tile-sub-caption">Master your skills in building enterprise tokens, layouts, and component libraries.</p>
+                    <h3 class="tile-title-text">Distributed Systems Sandbox</h3>
+                    <p class="tile-sub-caption">In-browser Kafka broker cluster, consensus simulation, and live profiling tools.</p>
+                    <div class="tile-action-link">
+                      <span>Launch Sandbox</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
                   </div>
                 </div>
 
@@ -391,42 +423,45 @@
                ================================================================ -->
           <div class="side-widgets-flow">
 
-            <!-- 1. PRACTICE HOURS / WEEKLY ACTIVITY (Exact Match to media_1792416346297.png) -->
+            <!-- 1. PRACTICE HOURS / WEEKLY ACTIVITY -->
             <div class="side-clean-card">
-              <div style="font-size: 0.68rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">Progress</div>
+              <div class="side-widget-header-flex">
+                <span class="side-widget-label">WEEKLY VELOCITY</span>
+                <span class="badge-micro-metric">TOP 5%</span>
+              </div>
               
-              <div>
-                <div class="hours-spent-big">30</div>
-                <div class="hours-spent-sub">Hours spend</div>
+              <div class="activity-stat-flex">
+                <span class="hours-spent-big">30.5</span>
+                <span class="hours-spent-unit">hrs active this week</span>
               </div>
 
               <!-- Bar Chart from Reference Screenshot -->
               <div class="reference-bar-chart">
-                <div class="ref-bar-col">
+                <div class="ref-bar-col" title="Sun: 1.5 hrs">
                   <div class="ref-bar-rect light-bar" style="height: 12px;"></div>
-                  <span class="ref-day-label">Sun 15</span>
+                  <span class="ref-day-label">Sun</span>
                 </div>
-                <div class="ref-bar-col">
-                  <div class="ref-bar-rect light-bar" style="height: 20px;"></div>
+                <div class="ref-bar-col" title="Mon: 3.2 hrs">
+                  <div class="ref-bar-rect light-bar" style="height: 22px;"></div>
                   <span class="ref-day-label">Mon</span>
                 </div>
-                <div class="ref-bar-col">
+                <div class="ref-bar-col" title="Tue: 5.0 hrs">
                   <div class="ref-bar-rect" style="height: 38px;"></div>
                   <span class="ref-day-label">Tue</span>
                 </div>
-                <div class="ref-bar-col">
-                  <div class="ref-bar-rect" style="height: 55px;"></div>
-                  <span class="ref-day-label" style="color: #0f766e; font-weight: 850;">Wed</span>
+                <div class="ref-bar-col" title="Wed: 7.8 hrs (Peak)">
+                  <div class="ref-bar-rect active-day" style="height: 52px;"></div>
+                  <span class="ref-day-label active">Wed</span>
                 </div>
-                <div class="ref-bar-col">
-                  <div class="ref-bar-rect light-bar" style="height: 25px;"></div>
+                <div class="ref-bar-col" title="Thu: 4.1 hrs">
+                  <div class="ref-bar-rect light-bar" style="height: 28px;"></div>
                   <span class="ref-day-label">Thu</span>
                 </div>
-                <div class="ref-bar-col">
+                <div class="ref-bar-col" title="Fri: 2.8 hrs">
                   <div class="ref-bar-rect light-bar" style="height: 18px;"></div>
                   <span class="ref-day-label">Fri</span>
                 </div>
-                <div class="ref-bar-col">
+                <div class="ref-bar-col" title="Sat: 1.2 hrs">
                   <div class="ref-bar-rect light-bar" style="height: 10px;"></div>
                   <span class="ref-day-label">Sat</span>
                 </div>
@@ -435,64 +470,73 @@
 
             <!-- 2. DAILY CHALLENGE -->
             <div class="side-clean-card">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 0.65rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">DAILY CHALLENGE</span>
-                <span style="font-size: 0.6rem; font-weight: 800; color: #059669; background: #ecfdf5; padding: 2px 6px; border-radius: 99px;">EASY</span>
+              <div class="side-widget-header-flex">
+                <span class="side-widget-label">DAILY ALGORITHM</span>
+                <span class="badge-micro-easy">EASY • +50 TRP</span>
               </div>
 
               <div>
-                <div style="font-family: var(--font-display); font-size: 0.88rem; font-weight: 800; color: var(--text-dark);">Two Sum (#01 Algorithm)</div>
-                <p style="font-size: 0.7rem; color: var(--text-muted); margin: 3px 0 6px 0;">Find indices that sum to target using O(n) hashmap lookup.</p>
+                <div class="challenge-title-text">Two Sum (#01 Hash Map)</div>
+                <p class="challenge-sub-text">Find indices that sum to target using O(n) hash table lookup.</p>
               </div>
 
-              <!-- Code Snippet -->
-              <div class="challenge-code-box">
-                <div><span style="color:#f472b6;font-weight:700;">def</span> <span style="color:#38bdf8;">two_sum</span>(nums, target):</div>
-                <div style="padding-left: 12px; color: #e2e8f0;">lookup = {}</div>
-                <div style="padding-left: 12px; color: #64748b; font-style: italic;"># O(n) hashmap lookup</div>
+              <!-- Code Snippet Box with Terminal Dots -->
+              <div class="challenge-terminal-box">
+                <div class="terminal-dots-row">
+                  <span class="term-dot red"></span>
+                  <span class="term-dot yellow"></span>
+                  <span class="term-dot green"></span>
+                  <span class="term-file-name">two_sum.py</span>
+                </div>
+                <div class="terminal-code-body">
+                  <div><span style="color:#f472b6;font-weight:600;">def</span> <span style="color:#38bdf8;">two_sum</span>(nums, target):</div>
+                  <div style="padding-left: 12px; color: #e2e8f0;">lookup = {}</div>
+                  <div style="padding-left: 12px; color: #64748b; font-style: italic;"># O(n) hashmap lookup</div>
+                </div>
               </div>
 
-              <button type="button" class="btn-solve-primary-orange" onclick="openLifecodeSandbox('Two Sum (#01 Algorithm)')">
-                &lt;/&gt; Solve Code (+50 TRP)
+              <button type="button" class="btn-solve-sharp" onclick="openLifecodeSandbox('Two Sum (#01 Algorithm)')">
+                <span>&lt;/&gt; Solve in Lifecode IDE</span>
+                <span class="btn-reward-tag">+50 TRP</span>
               </button>
             </div>
 
             <!-- 3. TASK CHECKLIST (Interactive To-Do List) -->
             <div class="side-clean-card">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 0.65rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">TASK CHECKLIST</span>
-                <span style="font-size: 0.6rem; font-weight: 800; color: #2563eb; background: #eff6ff; padding: 1.5px 6px; border-radius: 99px;" id="todo-badge-count">3 Pending</span>
+              <div class="side-widget-header-flex">
+                <span class="side-widget-label">ACTIVE SPRINT TASKS</span>
+                <span class="badge-micro-pending" id="todo-badge-count">3 PENDING</span>
               </div>
 
               <div class="todo-input-wrap">
-                <input type="text" class="todo-text-input" placeholder="Add study task..." id="new-todo-input" onkeydown="if(event.key==='Enter') addNewTodoTask()">
+                <input type="text" class="todo-text-input" placeholder="Add study or sprint task..." id="new-todo-input" onkeydown="if(event.key==='Enter') addNewTodoTask()">
                 <button type="button" class="btn-add-todo-sm" onclick="addNewTodoTask()" title="Add Task">+</button>
               </div>
 
               <div class="todo-items-flow" id="todo-container">
                 <div class="todo-task-item" id="todo-row-1">
-                  <input type="checkbox" onchange="toggleTodoStatus(1, this)" style="accent-color: var(--primary-blue); cursor: pointer; margin-top: 3px;">
-                  <div>
+                  <input type="checkbox" onchange="toggleTodoStatus(1, this)" class="todo-custom-check">
+                  <div class="todo-item-info">
                     <div class="task-title-text">Submit React State Management Capstone</div>
-                    <div class="task-time-meta">📅 Today, 11:59 PM</div>
+                    <div class="task-time-meta">Today, 11:59 PM</div>
                   </div>
                   <button type="button" class="btn-delete-task" onclick="deleteTodoTask(1)">✕</button>
                 </div>
 
                 <div class="todo-task-item" id="todo-row-2">
-                  <input type="checkbox" onchange="toggleTodoStatus(2, this)" style="accent-color: var(--primary-blue); cursor: pointer; margin-top: 3px;">
-                  <div>
+                  <input type="checkbox" onchange="toggleTodoStatus(2, this)" class="todo-custom-check">
+                  <div class="todo-item-info">
                     <div class="task-title-text">Complete gRPC Protocol Buffers lab</div>
-                    <div class="task-time-meta">📅 Tomorrow, 4:00 PM</div>
+                    <div class="task-time-meta">Tomorrow, 4:00 PM</div>
                   </div>
                   <button type="button" class="btn-delete-task" onclick="deleteTodoTask(2)">✕</button>
                 </div>
 
                 <div class="todo-task-item" id="todo-row-3">
-                  <input type="checkbox" onchange="toggleTodoStatus(3, this)" style="accent-color: var(--primary-blue); cursor: pointer; margin-top: 3px;">
-                  <div>
+                  <input type="checkbox" onchange="toggleTodoStatus(3, this)" class="todo-custom-check">
+                  <div class="todo-item-info">
                     <div class="task-title-text">Review Razorpay Cloud Intern ATS</div>
-                    <div class="task-time-meta">📅 In 2 Days</div>
+                    <div class="task-time-meta">In 2 Days</div>
                   </div>
                   <button type="button" class="btn-delete-task" onclick="deleteTodoTask(3)">✕</button>
                 </div>
@@ -561,7 +605,7 @@
                 <p class="course-card-desc-text">Production Kubernetes cluster orchestration, gRPC protocol buffers, Istio service meshes, and GitOps CI/CD pipelines.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
-                    <img src="assets/avatars/boy1.svg" class="instructor-avatar-mini" alt="Instructor">
+                    <span class="instructor-monogram">VM</span>
                     <span class="instructor-name-label">Dr. Vikram Malhotra</span>
                   </div>
                   <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Cloud DevOps & Microservices Architecture')">
@@ -584,7 +628,7 @@
                 <p class="course-card-desc-text">Multi-agent supervisory workflows, planning loops, recursive reflection, model context protocol (MCP) servers, and LangGraph.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
-                    <img src="assets/avatars/robot2.svg" class="instructor-avatar-mini" alt="Instructor">
+                    <span class="instructor-monogram purple">RS</span>
                     <span class="instructor-name-label">Prof. R. Sengupta</span>
                   </div>
                   <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Autonomous AI Agent Architecture with LangGraph')">
@@ -607,7 +651,7 @@
                 <p class="course-card-desc-text">Event-driven Kafka message streaming, distributed consensus (Raft/Paxos), sharded storage, and concurrent Go routines.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
-                    <img src="assets/avatars/boy2.svg" class="instructor-avatar-mini" alt="Instructor">
+                    <span class="instructor-monogram teal">VM</span>
                     <span class="instructor-name-label">Dr. Vikram Malhotra</span>
                   </div>
                   <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Full-Stack Distributed Systems (Go & React)')">
@@ -630,7 +674,7 @@
                 <p class="course-card-desc-text">React 19 Server Actions, Compiler &amp; Fiber reconciler, enterprise design system tokens, and Core Web Vitals optimization.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
-                    <img src="assets/avatars/girl1.svg" class="instructor-avatar-mini" alt="Instructor">
+                    <span class="instructor-monogram blue">AS</span>
                     <span class="instructor-name-label">Ananya Sharma</span>
                   </div>
                   <button type="button" class="btn-card-launch-course" onclick="showToast('Enrolled in React 19 Internals! Added to your dashboard.', 'success')">
@@ -653,7 +697,7 @@
                 <p class="course-card-desc-text">Zero-cost abstractions, borrow checker memory guarantees, async Tokio runtimes, and lock-free ring buffers.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
-                    <img src="assets/avatars/boy1.svg" class="instructor-avatar-mini" alt="Instructor">
+                    <span class="instructor-monogram orange">AR</span>
                     <span class="instructor-name-label">Alex Rivera</span>
                   </div>
                   <button type="button" class="btn-card-launch-course" onclick="showToast('Enrolled in Rust Systems Programming! Added to your dashboard.', 'success')">
@@ -676,7 +720,7 @@
                 <p class="course-card-desc-text">IAM policies, OIDC OAuth2 tokens, KMS key management, and cryptographic transport layers across hybrid clouds.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
-                    <img src="assets/avatars/girl2.svg" class="instructor-avatar-mini" alt="Instructor">
+                    <span class="instructor-monogram emerald">SJ</span>
                     <span class="instructor-name-label">Sarah Jenkins</span>
                   </div>
                   <button type="button" class="btn-card-launch-course" onclick="showToast('Enrolled in Zero-Trust Security! Added to your dashboard.', 'success')">
@@ -695,16 +739,16 @@
         <div id="tab-view-library" class="portal-tab-content">
           <div class="library-hero-card">
             <div>
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                <span style="font-size: 1.4rem;">📖</span>
-                <h1 class="library-hero-title">Torpedo Library Catalog</h1>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <h1 class="library-hero-title">Technical Library &amp; Monographs</h1>
               </div>
-              <p class="library-hero-sub">Access syllabus-aligned research papers, technical monographs, and interactive e-books with digital borrow access.</p>
+              <p class="library-hero-sub">Syllabus-aligned research publications, distributed systems whitepapers, and interactive engineering manuals.</p>
             </div>
-            <div style="background: rgba(255,255,255,0.18); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3); border-radius: 12px; padding: 12px 18px; text-align: right;">
-              <div style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85;">LIBRARY RESOURCES</div>
-              <div style="font-size: 1.4rem; font-weight: 850; line-height: 1.1;">4 <span style="font-size: 0.8rem; font-weight: 700;">Publications</span></div>
-              <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 700; margin-top: 2px;">• 100% Free For Students</div>
+            <div class="library-stats-tile">
+              <div class="library-stats-label">DIGITAL REPOSITORY</div>
+              <div class="library-stats-val">4 <span class="library-stats-unit">Publications</span></div>
+              <div class="library-stats-free">• 100% Student Access</div>
             </div>
           </div>
 
@@ -712,8 +756,8 @@
           <div class="filter-strip-card">
             <div class="filter-controls-group">
               <div class="filter-search-box">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="library-search-input" placeholder="Search by title, author, keyword or ISBN..." oninput="handleLibraryFilter()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="library-search-input" placeholder="Search title, author, keyword or ISBN..." oninput="handleLibraryFilter()">
               </div>
               <select class="filter-select" id="library-category-select" onchange="handleLibraryFilter()">
                 <option value="all">All Discipline Categories</option>
@@ -728,8 +772,9 @@
               </select>
             </div>
             <div>
-              <span style="font-size: 0.74rem; font-weight: 750; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; padding: 4px 10px; border-radius: 99px;">
-                🔖 My Personal Bookshelf: 0 Saved Items
+              <span class="bookshelf-counter-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <span>Personal Bookshelf: 0 Saved</span>
               </span>
             </div>
           </div>
@@ -748,9 +793,13 @@
                 <h3 class="book-title-h3">MegaLiving</h3>
                 <p class="book-desc-text">MegaLiving: 30 Days to a Perfect Life by Robin Sharma is a self-development book that teaches how to improve your life through daily mental discipline, focus, and purposeful architecture.</p>
                 <div class="book-actions-bottom">
-                  <div class="book-rating-meta">★ 4.8 (2 Reviews)</div>
+                  <div class="book-rating-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>4.8 (2 Reviews)</span>
+                  </div>
                   <button type="button" class="btn-borrow-book" onclick="downloadLibraryBook('MegaLiving')">
-                    📥 Download PDF (Free)
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download PDF</span>
                   </button>
                 </div>
               </div>
@@ -767,9 +816,13 @@
                 <h3 class="book-title-h3">Freedom From The Known</h3>
                 <p class="book-desc-text">Freedom from the Known is a profound distillation of Jiddu Krishnamurti's core philosophy, focusing on how individuals can achieve total inner freedom, clarity of thought, and clear system perception.</p>
                 <div class="book-actions-bottom">
-                  <div class="book-rating-meta">★ 5.0 (42 Reviews)</div>
+                  <div class="book-rating-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>5.0 (42 Reviews)</span>
+                  </div>
                   <button type="button" class="btn-borrow-book" onclick="downloadLibraryBook('Freedom From The Known')">
-                    🔓 Unlock &amp; Download PDF
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+                    <span>Unlock PDF</span>
                   </button>
                 </div>
               </div>
@@ -786,9 +839,13 @@
                 <h3 class="book-title-h3">Designing Data-Intensive Applications</h3>
                 <p class="book-desc-text">The definitive guide to distributed data systems, transactions, replication, partitioning, batch processing, and event streams at scale.</p>
                 <div class="book-actions-bottom">
-                  <div class="book-rating-meta">★ 4.95 (148 Reviews)</div>
+                  <div class="book-rating-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>4.95 (148 Reviews)</span>
+                  </div>
                   <button type="button" class="btn-borrow-book" onclick="downloadLibraryBook('Designing Data-Intensive Applications')">
-                    📥 Download PDF (Free)
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download PDF</span>
                   </button>
                 </div>
               </div>
@@ -805,9 +862,13 @@
                 <h3 class="book-title-h3">Site Reliability Engineering</h3>
                 <p class="book-desc-text">How Google runs production systems with SLOs, error budgets, blameless postmortems, and distributed incident automation.</p>
                 <div class="book-actions-bottom">
-                  <div class="book-rating-meta">★ 4.9 (92 Reviews)</div>
+                  <div class="book-rating-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>4.9 (92 Reviews)</span>
+                  </div>
                   <button type="button" class="btn-borrow-book" onclick="downloadLibraryBook('Site Reliability Engineering')">
-                    📥 Download PDF (Free)
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download PDF</span>
                   </button>
                 </div>
               </div>
@@ -822,15 +883,21 @@
         <div id="tab-view-certifications" class="portal-tab-content">
           <div class="view-header-bar">
             <div>
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                <span style="font-size: 1.4rem;">🎖</span>
-                <h1 class="view-header-title">Certifications &amp; Credentials</h1>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                <h1 class="view-header-title">Certifications &amp; Cryptographic Credentials</h1>
               </div>
-              <p class="view-header-sub">Verify external achievements, unlock milestone badges, and export verified credentials directly to LinkedIn with cryptographic authenticity.</p>
+              <p class="view-header-sub">Verify external achievements, audit milestone badges, and export verified credentials directly to LinkedIn with Polygon L2 authenticity.</p>
             </div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <span style="font-size: 0.7rem; font-weight: 750; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 99px;">🔒 Blockchain Verified Registry</span>
-              <span style="font-size: 0.7rem; font-weight: 750; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; padding: 4px 10px; border-radius: 99px;">✨ 100% Shareable Public Links</span>
+              <span class="cert-header-tag green">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Polygon L2 Verified Registry</span>
+              </span>
+              <span class="cert-header-tag blue">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                <span>Shareable Public Verification</span>
+              </span>
             </div>
           </div>
 
@@ -841,38 +908,48 @@
                 <div class="cert-stat-num">0</div>
                 <div class="cert-stat-label">TORPEDO PLATFORM • Auto-Earned</div>
               </div>
-              <div class="cert-stat-icon-sq" style="background: #eff6ff; color: #2563eb;">🎗</div>
+              <div class="cert-stat-icon-sq blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
             </div>
             <div class="cert-stat-card">
               <div>
                 <div class="cert-stat-num" id="stat-verified-certs">0</div>
                 <div class="cert-stat-label">EXTERNAL VERIFIED • AWS, Google</div>
               </div>
-              <div class="cert-stat-icon-sq" style="background: #ecfdf5; color: #059669;">✓</div>
+              <div class="cert-stat-icon-sq green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
             </div>
             <div class="cert-stat-card">
               <div>
                 <div class="cert-stat-num" id="stat-pending-certs">0</div>
                 <div class="cert-stat-label">UNDER REVIEW • Audit Queue</div>
               </div>
-              <div class="cert-stat-icon-sq" style="background: #fffbeb; color: #d97706;">⏳</div>
+              <div class="cert-stat-icon-sq amber">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
             </div>
             <div class="cert-stat-card">
               <div>
                 <div class="cert-stat-num">4</div>
                 <div class="cert-stat-label">SKILLS BADGES • Micro-Credentials</div>
               </div>
-              <div class="cert-stat-icon-sq" style="background: #faf5ff; color: #9333ea;">✨</div>
+              <div class="cert-stat-icon-sq purple">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
             </div>
           </div>
 
           <!-- Sub-tabs bar -->
           <div class="cert-subtabs-bar">
             <button type="button" class="cert-subtab-btn active" id="btn-cert-subtab-badges" onclick="switchCertSubtab('badges')">
-              🎖 Certificates &amp; Badges (4)
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              <span>Certificates &amp; Badges (4)</span>
             </button>
             <button type="button" class="cert-subtab-btn" id="btn-cert-subtab-verify" onclick="switchCertSubtab('verify')">
-              🛡 Verify External Credential
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Verify External Credential</span>
             </button>
           </div>
 
@@ -883,14 +960,19 @@
               <!-- Badge 1 -->
               <div class="cert-item-card">
                 <div class="cert-card-top">
-                  <div class="cert-card-icon-badge">☁️</div>
-                  <span class="cert-verified-pill">✓ VERIFIED BADGE</span>
+                  <div class="cert-card-icon-badge blue">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                  </div>
+                  <span class="cert-verified-pill">
+                    <span class="cert-pill-dot green"></span>
+                    <span>VERIFIED BADGE</span>
+                  </span>
                 </div>
                 <h3 class="cert-card-title">Cloud DevOps &amp; Kubernetes Practitioner</h3>
                 <div class="cert-card-org">Issued by Torpedo Learning • Dean Vikram Malhotra</div>
                 <div class="cert-card-hash-meta">HASH: 0x8f3c7...92d1 (Polygon L2)</div>
                 <button type="button" class="btn-share-linkedin" onclick="showToast('Credential synced to your LinkedIn profile!', 'success')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                   <span>Export to LinkedIn</span>
                 </button>
               </div>
@@ -898,14 +980,19 @@
               <!-- Badge 2 -->
               <div class="cert-item-card">
                 <div class="cert-card-top">
-                  <div class="cert-card-icon-badge" style="background: #faf5ff; color: #9333ea; border-color: #e9d5ff;">🤖</div>
-                  <span class="cert-verified-pill" style="background: #faf5ff; color: #9333ea; border-color: #e9d5ff;">✓ VERIFIED BADGE</span>
+                  <div class="cert-card-icon-badge purple">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="8" width="16" height="12" rx="2"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M10 17h4"/></svg>
+                  </div>
+                  <span class="cert-verified-pill">
+                    <span class="cert-pill-dot green"></span>
+                    <span>VERIFIED BADGE</span>
+                  </span>
                 </div>
                 <h3 class="cert-card-title">Autonomous AI Agent Engineering</h3>
                 <div class="cert-card-org">Issued by Torpedo Learning • AI Research IIT Delhi</div>
                 <div class="cert-card-hash-meta">HASH: 0x4a1e9...87c3 (Polygon L2)</div>
                 <button type="button" class="btn-share-linkedin" onclick="showToast('Credential synced to your LinkedIn profile!', 'success')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                   <span>Export to LinkedIn</span>
                 </button>
               </div>
@@ -913,14 +1000,19 @@
               <!-- Badge 3 -->
               <div class="cert-item-card">
                 <div class="cert-card-top">
-                  <div class="cert-card-icon-badge" style="background: #fff7ed; color: #ea580c; border-color: #fed7aa;">⚡</div>
-                  <span class="cert-verified-pill" style="background: #fff7ed; color: #ea580c; border-color: #fed7aa;">✓ VERIFIED BADGE</span>
+                  <div class="cert-card-icon-badge amber">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  </div>
+                  <span class="cert-verified-pill">
+                    <span class="cert-pill-dot green"></span>
+                    <span>VERIFIED BADGE</span>
+                  </span>
                 </div>
                 <h3 class="cert-card-title">Distributed Systems &amp; Concurrency</h3>
                 <div class="cert-card-org">Issued by Torpedo Learning • Systems Guild</div>
                 <div class="cert-card-hash-meta">HASH: 0x7c21b...44a9 (Polygon L2)</div>
                 <button type="button" class="btn-share-linkedin" onclick="showToast('Credential synced to your LinkedIn profile!', 'success')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                   <span>Export to LinkedIn</span>
                 </button>
               </div>
@@ -928,14 +1020,19 @@
               <!-- Badge 4 -->
               <div class="cert-item-card">
                 <div class="cert-card-top">
-                  <div class="cert-card-icon-badge" style="background: #eff6ff; color: #2563eb; border-color: #bfdbfe;">🏆</div>
-                  <span class="cert-verified-pill" style="background: #eff6ff; color: #2563eb; border-color: #bfdbfe;">✓ TOP 5% COHORT</span>
+                  <div class="cert-card-icon-badge green">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5"/><path d="M14 14.66V17c0 .55.45 1 1 1h1.5"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+                  </div>
+                  <span class="cert-verified-pill">
+                    <span class="cert-pill-dot green"></span>
+                    <span>TOP 5% COHORT</span>
+                  </span>
                 </div>
                 <h3 class="cert-card-title">Algorithmic Excellence &amp; Problem Solving</h3>
                 <div class="cert-card-org">Issued by Torpedo Learning • Verified Placement Dossier</div>
                 <div class="cert-card-hash-meta">HASH: 0x9b54f...11e2 (Polygon L2)</div>
                 <button type="button" class="btn-share-linkedin" onclick="showToast('Credential synced to your LinkedIn profile!', 'success')">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                   <span>Export to LinkedIn</span>
                 </button>
               </div>
@@ -950,8 +1047,8 @@
               <!-- Form Box -->
               <div class="form-box-card">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                  <span style="font-size: 1.2rem; color: #2563eb;">🛡</span>
-                  <h3 style="margin: 0; font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: #0f172a;">Verify External Certificate</h3>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <h3 style="margin: 0; font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: #09090b;">Verify External Certificate</h3>
                 </div>
                 <p style="margin: 0 0 20px 0; font-size: 0.8rem; color: #64748b;">
                   Certificates earned through Torpedo courses are added automatically. Use this form to verify certificates from external platforms (Coursera, AWS, Google, University, etc.).
@@ -1330,7 +1427,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       const fName = currentStudent.firstName || 'Vivek';
       
       const greetingEl = document.getElementById('hero-greeting-text');
-      if (greetingEl) greetingEl.textContent = `Welcome back, ${fName} 👋`;
+      if (greetingEl) greetingEl.textContent = `Welcome back, ${fName}`;
 
       const sidebarName = document.getElementById('sidebar-student-name');
       if (sidebarName) sidebarName.textContent = currentStudent.name || 'Vivek Yadav';

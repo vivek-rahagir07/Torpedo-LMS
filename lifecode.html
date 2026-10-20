@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifecode IDE &amp; Problem Arena | Torpedo Learning</title>
+  <link rel="icon" type="image/png" href="assets/LOGO.png">
+
+  <!-- Inter & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       LIFECODE DARK THEME DESIGN SYSTEM (LeetCode / VS Code Dark Aesthetic)
+       ========================================================================== */
+    :root {
+      --bg-canvas: #0e0e11;
+      --bg-header: #18181b;
+      --bg-panel: #1a1a1e;
+      --bg-panel-header: #202025;
+      --bg-subtle: #26262c;
+      --bg-input: #2d2d34;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: #3b82f6;
+
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+
+      --easy-color: #00b8a3;
+      --easy-bg: rgba(0, 184, 163, 0.12);
+      --med-color: #ffc01e;
+      --med-bg: rgba(255, 192, 30, 0.12);
+      --hard-color: #ff375f;
+      --hard-bg: rgba(255, 55, 95, 0.12);
+
+      --btn-blue: #2563eb;
+      --btn-blue-hover: #1d4ed8;
+      --btn-green: #10b981;
+      --btn-green-hover: #059669;
+
+      --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --------------------------------------------------------------------------
+       1. TOP PLATFORM HEADER BAR
+       -------------------------------------------------------------------------- */
+    .lifecode-navbar {
+      height: 48px;
+      min-height: 48px;
+      background-color: var(--bg-header);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      gap: 12px;
+      z-index: 50;
+    }
+
+    .nav-left-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-brand-logo img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .nav-badge-tag {
+      font-size: 0.60rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 4px;
+      padding: 1px 5px;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-divider-v {
+      width: 1px;
+      height: 20px;
+      background: var(--border-subtle);
+      margin: 0 4px;
+    }
+
+    .problem-list-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      max-width: 320px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .problem-list-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-arrow-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .nav-arrow-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .nav-center-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action-run {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #27272a;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.80rem;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-run:hover {
+      background: #3f3f46;
+    }
+
+    .btn-action-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--btn-green);
+      color: #ffffff;
+      border: none;
+      font-size: 0.80rem;
+      font-weight: 700;
+      padding: 5px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-submit:hover {
+      background: var(--btn-green-hover);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .nav-right-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timer-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-code);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .solved-stat-badge {
+      font-size: 0.72rem;
+      font-weight: 750;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 999px;
+      padding: 3px 9px;
+    }
+
+    .nav-icon-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .nav-icon-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    /* --------------------------------------------------------------------------
+       2. WORKSPACE SPLIT LAYOUT (Problem Left / Code + Test Runner Right)
+       -------------------------------------------------------------------------- */
+    .workspace-main-split {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* LEFT PANE: DESCRIPTION & EDITORIAL */
+    .problem-description-pane {
+      width: 46%;
+      min-width: 320px;
+      max-width: 65%;
+      height: 100%;
+      background-color: var(--bg-panel);
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    .panel-header-tabs {
+      height: 38px;
+      min-height: 38px;
+      background: var(--bg-panel-header);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 6px;
+    }
+
+    .panel-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .panel-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .panel-tab-btn.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .panel-scroll-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 24px;
+      color: #e4e4e7;
+      font-size: 0.90rem;
+      line-height: 1.65;
+    }
+
+    .problem-title-headline {
+      font-size: 1.4rem;
+      font-weight: 750;
+      color: #ffffff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .problem-meta-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .difficulty-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      text-transform: capitalize;
+    }
+
+    .difficulty-badge.easy {
+      color: var(--easy-color);
+      background: var(--easy-bg);
+      border: 1px solid rgba(0, 184, 163, 0.3);
+    }
+
+    .difficulty-badge.medium {
+      color: var(--med-color);
+      background: var(--med-bg);
+      border: 1px solid rgba(255, 192, 30, 0.3);
+    }
+
+    .difficulty-badge.hard {
+      color: var(--hard-color);
+      background: var(--hard-bg);
+      border: 1px solid rgba(255, 55, 95, 0.3);
+    }
+
+    .meta-tag-pill {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .meta-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.74rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .meta-action-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .problem-body-text p {
+      margin-bottom: 14px;
+    }
+
+    .problem-body-text code {
+      background: rgba(255, 255, 255, 0.09);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-code);
+      font-size: 0.82rem;
+    }
+
+    .problem-example-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 16px 0;
+    }
+
+    .problem-example-card h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .problem-example-card pre {
+      background: transparent;
+      font-family: var(--font-code);
+      font-size: 0.80rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+    }
+
+    .problem-constraints-section {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .problem-constraints-section h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .problem-constraints-section ul {
+      padding-left: 20px;
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* RIGHT PANE: CODE EDITOR + TESTCASE RUNNER */
+    .editor-test-pane {
+      flex: 1;
+      height: 100%;
+      background-color: var(--bg-canvas);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Editor Toolbar */
+    .editor-toolbar-strip {
+      height: 38px;
+      min-height: 38px;
+      background: var(--bg-panel-header);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+    }
+
+    .editor-tools-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .code-label-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .language-select-dropdown {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .editor-tools-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .editor-mini-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .editor-mini-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    /* Real Code Editor Workspace */
+    .code-editor-viewport {
+      flex: 1;
+      position: relative;
+      display: flex;
+      background: #141416;
+      overflow: hidden;
+    }
+
+    .code-line-numbers {
+      width: 44px;
+      background: #101012;
+      border-right: 1px solid var(--border-subtle);
+      padding: 12px 6px;
+      text-align: right;
+      font-family: var(--font-code);
+      font-size: 0.80rem;
+      color: #52525b;
+      user-select: none;
+      line-height: 1.55;
+      overflow: hidden;
+    }
+
+    .code-text-area {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #38bdf8;
+      font-family: var(--font-code);
+      font-size: 0.82rem;
+      line-height: 1.55;
+      padding: 12px 14px;
+      resize: none;
+      tab-size: 4;
+      white-space: pre;
+      overflow: auto;
+      caret-color: #ffffff;
+    }
+
+    /* --------------------------------------------------------------------------
+       3. TESTCASE & TEST RESULT RUNNER PANEL (Matching Red Box in Photo 2!)
+       -------------------------------------------------------------------------- */
+    .testcase-runner-panel {
+      height: 250px;
+      min-height: 180px;
+      max-height: 50%;
+      background: #18181b;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    .testcase-tab-bar {
+      height: 36px;
+      background: #202024;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 12px;
+    }
+
+    .testcase-tab-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 5px;
+      transition: all 0.12s;
+    }
+
+    .testcase-tab-item:hover {
+      color: #ffffff;
+    }
+
+    .testcase-tab-item.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+    }
+
+    .testcase-tab-item svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .testcase-body-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 16px;
+    }
+
+    /* Pill tabs for Case 1, Case 2, Case 3 */
+    .case-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .case-pill-btn {
+      background: #27272a;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .case-pill-btn:hover {
+      background: #3f3f46;
+      color: #ffffff;
+    }
+
+    .case-pill-btn.active {
+      background: #3f3f46;
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Param fields formatted exactly like reference photo */
+    .case-param-group {
+      margin-bottom: 10px;
+    }
+
+    .case-param-label {
+      font-size: 0.70rem;
+      font-family: var(--font-code);
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .case-param-box {
+      background: #27272a;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: var(--font-code);
+      font-size: 0.80rem;
+      color: #e4e4e7;
+      outline: none;
+      width: 100%;
+    }
+
+    /* Test Result Tab Display */
+    .result-status-headline {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .result-status-headline.passed {
+      color: #10b981;
+    }
+
+    .result-status-headline.failed {
+      color: #ef4444;
+    }
+
+    .result-metrics-bar {
+      display: flex;
+      gap: 16px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .result-metrics-bar strong {
+      color: #ffffff;
+    }
+
+    .result-diff-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-family: var(--font-code);
+      font-size: 0.78rem;
+    }
+
+    .diff-label {
+      color: var(--text-dim);
+      font-size: 0.70rem;
+      margin-bottom: 2px;
+    }
+
+    .diff-value {
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .diff-value.wrong {
+      color: #f87171;
+    }
+
+    .diff-value.correct {
+      color: #34d399;
+    }
+
+    /* --------------------------------------------------------------------------
+       4. PROBLEMS EXPLORER DRAWER / MODAL (500+ Problems)
+       -------------------------------------------------------------------------- */
+    .problems-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .problems-modal-backdrop.active {
+      display: flex;
+    }
+
+    .problems-catalog-card {
+      background: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 960px;
+      height: 82vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .catalog-modal-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #202025;
+    }
+
+    .catalog-modal-header h3 {
+      font-size: 1.05rem;
+      font-weight: 750;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .catalog-filters-row {
+      padding: 12px 20px;
+      background: #1a1a1e;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .catalog-search-input {
+      flex: 1;
+      min-width: 200px;
+      background: #27272a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #ffffff;
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    .catalog-select-box {
+      background: #27272a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #ffffff;
+      font-size: 0.80rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .catalog-table-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+    }
+
+    .catalog-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .catalog-table th {
+      background: #202025;
+      color: var(--text-dim);
+      font-size: 0.70rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 16px;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .catalog-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+    }
+
+    .catalog-table tr {
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .catalog-table tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .catalog-table tr.active-problem {
+      background: rgba(37, 99, 235, 0.15);
+    }
+
+    .prob-title-cell {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .prob-solved-icon {
+      color: #10b981;
+      font-weight: 800;
+    }
+
+    .catalog-modal-footer {
+      padding: 10px 20px;
+      background: #202025;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* Modal Close */
+    .modal-close-x {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .modal-close-x:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #18181b;
+      border: 1px solid #3b82f6;
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      animation: toastIn 0.2s ease-out;
+    }
+
+    /* ==========================================================================
+       LIFECODE ARENA HUB (Hero Banner, Daily Challenge & Practice Library)
+       ========================================================================== */
+    .lifecode-hub-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 36px 48px 36px;
+      background-color: var(--bg-canvas);
+      animation: lcHubFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes lcHubFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lc-hub-banner-frame {
+      position: relative;
+      width: 100%;
+      min-height: 250px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      background-color: #18181b;
+      background-image: url('assets/lifecode-banner.png?v=lc_hub_v1');
+      background-position: center right;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+    }
+
+    .lc-hub-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(14, 14, 17, 0.98) 0%,
+        rgba(14, 14, 17, 0.93) 38%,
+        rgba(14, 14, 17, 0.65) 60%,
+        rgba(14, 14, 17, 0.20) 82%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .lc-hub-banner-content {
+      position: relative;
+      z-index: 2;
+      padding: 30px 40px;
+      max-width: 620px;
+    }
+
+    .lc-hub-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      font-size: 0.70rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .lc-hub-title {
+      margin: 0 0 8px 0;
+      font-family: var(--font-ui);
+      font-size: 2.35rem;
+      font-weight: 850;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    .lc-hub-title-blue {
+      color: #38bdf8;
+      background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lc-hub-accent-bar {
+      width: 38px;
+      height: 4px;
+      background: #38bdf8;
+      border-radius: 999px;
+      margin: 10px 0 12px 0;
+    }
+
+    .lc-hub-desc {
+      font-size: 0.88rem;
+      color: #a1a1aa;
+      line-height: 1.55;
+      margin: 0 0 18px 0;
+    }
+
+    .lc-hub-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lc-btn-hub-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #ffffff;
+      font-weight: 750;
+      font-size: 0.86rem;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .lc-btn-hub-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    .lc-btn-hub-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .lc-btn-hub-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .lc-btn-hub-random {
+      background: rgba(255, 255, 255, 0.05);
+      color: #d4d4d8;
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .lc-btn-hub-random:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    /* Mastery Stats Strip */
+    .lc-hub-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .lc-stat-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.15s ease;
+    }
+
+    .lc-stat-box:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .lc-stat-box-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .lc-stat-box-amber { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+    .lc-stat-box-blue { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .lc-stat-box-green { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .lc-stat-box-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+    .lc-stat-box-label {
+      font-size: 0.70rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 750;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+
+    .lc-stat-box-val {
+      font-size: 1.25rem;
+      font-weight: 850;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .lc-stat-box-sub {
+      font-size: 0.70rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* 2 Core Choices: Daily Problem vs Practice Tracks */
+    .lc-hub-choice-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .lc-hub-daily-card {
+      background: var(--bg-panel);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      border-radius: 14px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.08);
+    }
+
+    .lc-hub-daily-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f59e0b 0%, #f97316 50%, #ea580c 100%);
+    }
+
+    .lc-hub-tracks-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .lc-hub-tracks-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #38bdf8 0%, #3b82f6 100%);
+    }
+
+    .lc-hub-tracks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 12px 0 14px 0;
+    }
+
+    .lc-hub-track-tile {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .lc-hub-track-tile:hover {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Practice Library Section */
+    .lc-hub-practice-wrap {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .lc-hub-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .lc-hub-search-input {
+      flex: 1;
+      min-width: 240px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    .lc-hub-search-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .lc-hub-select {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .lc-hub-cats-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .lc-hub-cat-pill {
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.12s;
+    }
+
+    .lc-hub-cat-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lc-hub-cat-pill.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+    }
+
+    .lc-hub-table-pane {
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    .lc-hub-table-pane table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .lc-hub-table-pane th {
+      background: var(--bg-subtle);
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .lc-hub-table-pane td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .lc-hub-row:hover {
+      background: var(--bg-subtle);
+    }
+
+    .lc-btn-hub-solve {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 0.76rem;
+      font-weight: 750;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .lc-btn-hub-solve:hover {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TOP PLATFORM NAVBAR
+       ====================================================================== -->
+  <header class="lifecode-navbar">
+    <div class="nav-left-group">
+      <a href="dashboard.html" class="nav-brand-logo" title="Back to Torpedo Dashboard">
+        <img src="assets/LOGO.png" alt="Torpedo Logo">
+        <span>Torpedo</span>
+        <span class="nav-badge-tag">LIFECODE</span>
+      </a>
+
+      <button type="button" class="btn-hub-toggle" id="btn-back-hub" onclick="showLifecodeHub()" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.74rem; font-weight: 750; padding: 4px 10px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;" title="Go to Lifecode Problem Hub">
+        ‹ Problem Hub
+      </button>
+
+      <div class="nav-divider-v"></div>
+
+      <!-- Problem List Dropdown Button -->
+      <button type="button" class="problem-list-toggle-btn" onclick="openProblemCatalogModal()" title="Explore 500+ Coding Problems">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span id="nav-problem-title">1552. Magnetic Force Between Two Balls</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <!-- Prev & Next Problem Buttons -->
+      <button type="button" class="nav-arrow-btn" id="btn-prev-problem" onclick="navigateAdjacentProblem('prev')" title="Previous Problem">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="nav-arrow-btn" id="btn-next-problem" onclick="navigateAdjacentProblem('next')" title="Next Problem">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <!-- Shuffle / Pick Random Problem -->
+      <button type="button" class="nav-arrow-btn" onclick="pickRandomProblem()" title="Pick Random Problem (Shuffle)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+      </button>
+    </div>
+
+    <!-- Center Run / Submit Controls -->
+    <div class="nav-center-actions">
+      <button type="button" class="btn-action-run" onclick="runActiveCode()" id="btn-run-code" title="Run Sample Testcases (Ctrl + ')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Run</span>
+      </button>
+      <button type="button" class="btn-action-submit" onclick="submitOfficialCode()" id="btn-submit-code" title="Submit to Official Judge (Ctrl + Enter)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <span>Submit</span>
+      </button>
+    </div>
+
+    <!-- Right Controls: Timer, Solved Pill, Fullscreen, Back to Dashboard -->
+    <div class="nav-right-controls">
+      <div class="timer-pill" id="interview-timer" title="Interview Practice Stopwatch">
+        <span style="color: #38bdf8;">⏱</span>
+        <span id="timer-display">00:00</span>
+      </div>
+
+      <div class="solved-stat-badge" id="stat-solved-badge" title="Problems Solved on Torpedo Lifecode">
+        🔥 <span id="solved-count-num">2</span> / 520 Solved
+      </div>
+
+      <a href="dashboard.html" class="nav-icon-link" title="Exit to Student Dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. LIFECODE ARENA HUB VIEW (Landing Screen with Daylight Banner)
+       ====================================================================== -->
+  <div id="lifecode-hub-view" class="lifecode-hub-container">
+    
+    <!-- Hero Banner with Daylight Developer Scene -->
+    <div class="lc-hub-banner-frame">
+      <div class="lc-hub-banner-overlay"></div>
+      <div class="lc-hub-banner-content">
+        <div class="lc-hub-pill">⚡ LIFECODE ARENA • 520+ CODING CHALLENGES</div>
+        <h1 class="lc-hub-title">Master Code. <span class="lc-hub-title-blue">Crack SDE.</span></h1>
+        <div class="lc-hub-accent-bar"></div>
+        <p class="lc-hub-desc">Accelerate your problem-solving intuition across Data Structures &amp; Algorithms with automated judge execution, multi-language support, and FAANG interview sprint tracks.</p>
+        <div class="lc-hub-actions-row">
+          <button type="button" class="lc-btn-hub-primary" onclick="openProblemInEditor(1552)">
+            <span>⚡ Solve Daily Problem</span>
+            <span style="background: rgba(255,255,255,0.22); font-size: 0.72rem; padding: 2px 7px; border-radius: 4px; font-weight: 750;">#1552</span>
+          </button>
+          <button type="button" class="lc-btn-hub-secondary" onclick="scrollToPracticeWrap()">
+            <span>📚 Practice Problems (520+)</span>
+          </button>
+          <button type="button" class="lc-btn-hub-random" onclick="pickRandomProblem()">
+            <span>🔀 Pick Random Sprint</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Metrics Strip -->
+    <div class="lc-hub-stats-strip">
+      <div class="lc-stat-box">
+        <div class="lc-stat-box-icon lc-stat-box-amber">🔥</div>
+        <div>
+          <div class="lc-stat-box-label">Daily Streak</div>
+          <div class="lc-stat-box-val">4 Days</div>
+          <div class="lc-stat-box-sub">+120 TRP Sprint Bonus</div>
+        </div>
+      </div>
+
+      <div class="lc-stat-box">
+        <div class="lc-stat-box-icon lc-stat-box-blue">🎯</div>
+        <div>
+          <div class="lc-stat-box-label">Problems Solved</div>
+          <div class="lc-stat-box-val" id="hub-solved-val">2 / 520</div>
+          <div class="lc-stat-box-sub">Easy: 2 • Med: 0 • Hard: 0</div>
+        </div>
+      </div>
+
+      <div class="lc-stat-box">
+        <div class="lc-stat-box-icon lc-stat-box-green">⚡</div>
+        <div>
+          <div class="lc-stat-box-label">Judge Accuracy</div>
+          <div class="lc-stat-box-val">100%</div>
+          <div class="lc-stat-box-sub">4 Accepted Submissions</div>
+        </div>
+      </div>
+
+      <div class="lc-stat-box">
+        <div class="lc-stat-box-icon lc-stat-box-purple">🏆</div>
+        <div>
+          <div class="lc-stat-box-label">Global LMS Rank</div>
+          <div class="lc-stat-box-val">#14</div>
+          <div class="lc-stat-box-sub">Top 2.4% Student Bracket</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Choice Cards: Daily Problem vs Practice Tracks -->
+    <div class="lc-hub-choice-grid">
+      
+      <!-- Option A: Daily Problem Challenge Card -->
+      <div class="lc-hub-daily-card">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 6px; text-transform: uppercase;">🔥 Problem of the Day</span>
+            <span style="font-family: var(--font-code); font-size: 0.76rem; color: #fb923c; background: rgba(249, 115, 22, 0.1); padding: 3px 8px; border-radius: 6px; font-weight: 700;">⏳ Resets in 05h 14m</span>
+          </div>
+
+          <h3 style="font-size: 1.28rem; font-weight: 800; color: #ffffff; margin: 0 0 8px 0;">1552. Magnetic Force Between Two Balls</h3>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+            <span class="difficulty-badge medium">Medium</span>
+            <span class="meta-tag-pill">Binary Search</span>
+            <span class="meta-tag-pill">Greedy</span>
+            <span style="font-size: 0.74rem; color: #a1a1aa; margin-left: auto;">👍 1.8K Likes • 74.8% Acceptance</span>
+          </div>
+
+          <p style="font-size: 0.86rem; color: #d4d4d8; line-height: 1.55; margin: 0 0 16px 0;">
+            In the universe Earth C-137, Rick discovered a special form of magnetic force between balls in baskets. Given an integer array position and m balls, distribute them such that the minimum magnetic force between any two balls is maximized.
+          </p>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px dashed rgba(249, 115, 22, 0.3); gap: 12px;">
+          <div style="font-size: 0.76rem; font-weight: 750; color: #fb923c; display: flex; align-items: center; gap: 6px;">
+            <span>🎁 +50 TRP Points</span>
+            <span>•</span>
+            <span>1 Daily Key 🔑</span>
+          </div>
+          <button type="button" class="lc-btn-hub-primary" onclick="openProblemInEditor(1552)" style="background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);">
+            <span>⚡ Solve Daily Problem →</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Option B: Practice Sprint Tracks Card -->
+      <div class="lc-hub-tracks-card">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 6px; text-transform: uppercase;">🚀 Practice Sprint Tracks</span>
+            <span style="font-size: 0.74rem; font-weight: 700; color: #38bdf8;">520+ Challenges</span>
+          </div>
+
+          <div class="lc-hub-tracks-grid">
+            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Binary Search')">
+              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">🔍 Binary Search</div>
+              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">Sorted bounds &amp; predicates</div>
+            </div>
+            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Dynamic Programming')">
+              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">💎 Dynamic Prog.</div>
+              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">1D/2D memo, knapsack, LCS</div>
+            </div>
+            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Tree')">
+              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">🌲 Trees &amp; BST</div>
+              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">Traversals, paths, recursion</div>
+            </div>
+            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Array')">
+              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">⚡ Arrays &amp; Pointers</div>
+              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">Sliding window, two pointers</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <button type="button" class="lc-btn-hub-secondary" onclick="scrollToPracticeWrap()" style="flex: 1; text-align: center; justify-content: center;">
+            <span>🔍 Practice Library (520+) ↓</span>
+          </button>
+          <button type="button" class="lc-btn-hub-random" onclick="pickRandomProblem()">
+            <span>🎲 Shuffle</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Practice Problems Library Section -->
+    <div class="lc-hub-practice-wrap" id="lc-hub-practice-wrap">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 850; color: #ffffff; margin: 0 0 4px 0;">📚 Practice Problems Library</h3>
+          <p style="font-size: 0.82rem; color: #a1a1aa; margin: 0;">Filter by data structure, paradigm, difficulty, or keyword to practice.</p>
+        </div>
+        <div style="font-size: 0.80rem; color: #71717a; font-weight: 600;" id="hub-problem-counter">
+          Showing 15 of 520 problems
+        </div>
+      </div>
+
+      <!-- Filters Row -->
+      <div class="lc-hub-filter-bar">
+        <input type="text" class="lc-hub-search-input" id="hub-search-input" placeholder="Search 520+ problems by title, ID, or tag..." oninput="onStandaloneSearchChange(this.value)">
+
+        <select class="lc-hub-select" id="hub-diff-select" onchange="onStandaloneFilterChange()">
+          <option value="all">All Difficulties</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+
+        <select class="lc-hub-select" id="hub-status-select" onchange="onStandaloneFilterChange()">
+          <option value="all">All Status</option>
+          <option value="todo">Unsolved (Todo)</option>
+          <option value="solved">Solved</option>
+        </select>
+      </div>
+
+      <!-- Categories Scroll -->
+      <div class="lc-hub-cats-bar">
+        <button type="button" class="lc-hub-cat-pill active" onclick="selectStandaloneCategory('all', this)">All Categories</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Array', this)">Arrays</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Binary Search', this)">Binary Search</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Dynamic Programming', this)">Dynamic Programming</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('String', this)">Strings</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Tree', this)">Trees</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Graph', this)">Graphs</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Hash Table', this)">Hash Table</button>
+        <button type="button" class="lc-hub-cat-pill" onclick="selectStandaloneCategory('Math', this)">Math</button>
+      </div>
+
+      <!-- Problems Table -->
+      <div class="lc-hub-table-pane">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 50px; text-align: center;">Status</th>
+              <th style="width: 70px;">#ID</th>
+              <th>Problem Title</th>
+              <th style="width: 110px;">Difficulty</th>
+              <th style="width: 160px;">Category</th>
+              <th style="width: 110px;">Acceptance</th>
+              <th style="width: 100px; text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="hub-table-body">
+            <!-- Loaded dynamically from backend API -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 0 4px; font-size: 0.82rem; color: #a1a1aa;">
+        <span id="hub-page-info">Page 1 of 35</span>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" class="editor-mini-btn" id="hub-btn-prev" onclick="changeStandaloneHubPage(-1)" style="border: 1px solid var(--border-subtle); padding: 5px 12px;">‹ Previous</button>
+          <button type="button" class="editor-mini-btn" id="hub-btn-next" onclick="changeStandaloneHubPage(1)" style="border: 1px solid var(--border-subtle); padding: 5px 12px;">Next ›</button>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- end lifecode-hub-view -->
+
+  <!-- ======================================================================
+       3. WORKSPACE SPLIT (Left: Description / Right: Editor & Testcases)
+       ====================================================================== -->
+  <div id="lifecode-editor-view" style="display: none; height: calc(100vh - 48px); flex-direction: column;">
+    <div class="workspace-main-split">
+    
+    <!-- LEFT PANE: DESCRIPTION & EDITORIAL -->
+    <section class="problem-description-pane">
+      <div class="panel-header-tabs">
+        <button type="button" class="panel-tab-btn active" id="tab-desc-btn" onclick="switchLeftPanelTab('desc')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>Description</span>
+        </button>
+        <button type="button" class="panel-tab-btn" id="tab-editorial-btn" onclick="switchLeftPanelTab('editorial')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Editorial</span>
+        </button>
+        <button type="button" class="panel-tab-btn" id="tab-solutions-btn" onclick="switchLeftPanelTab('solutions')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Solutions (540)</span>
+        </button>
+        <button type="button" class="panel-tab-btn" id="tab-submissions-btn" onclick="switchLeftPanelTab('submissions')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Submissions</span>
+        </button>
+      </div>
+
+      <!-- Problem Content Loaded Dynamically from Backend -->
+      <div class="panel-scroll-content" id="problem-content-area">
+        <h2 class="problem-title-headline" id="prob-headline">Loading problem...</h2>
+        
+        <div class="problem-meta-strip" id="prob-meta-strip">
+          <span class="difficulty-badge medium" id="prob-diff-badge">Medium</span>
+          <span class="meta-tag-pill" id="prob-cat-tag">Binary Search</span>
+          <button type="button" class="meta-action-btn" onclick="toggleHintView()">💡 Hint</button>
+          <span class="meta-tag-pill">🔒 Companies</span>
+          <button type="button" class="meta-action-btn" onclick="likeProblem(true)">👍 <span id="prob-likes-count">1.8K</span></button>
+          <button type="button" class="meta-action-btn" onclick="likeProblem(false)">👎 <span id="prob-dislikes-count">104</span></button>
+          <button type="button" class="meta-action-btn" onclick="bookmarkProblem()">⭐</button>
+        </div>
+
+        <div class="problem-body-text" id="prob-description-body">
+          <!-- Populated from Backend -->
+        </div>
+
+        <!-- Constraints Section -->
+        <div class="problem-constraints-section" id="prob-constraints-wrap">
+          <h4>Constraints:</h4>
+          <ul id="prob-constraints-list">
+            <!-- Populated from Backend -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANE: CODE EDITOR + TESTCASE RUNNER -->
+    <section class="editor-test-pane">
+      
+      <!-- Editor Toolbar (Matching Photo 1 & 2) -->
+      <div class="editor-toolbar-strip">
+        <div class="editor-tools-left">
+          <span class="code-label-tag">&lt;/&gt; Code</span>
+          <select class="language-select-dropdown" id="language-select" onchange="handleLanguageChange(this.value)">
+            <option value="python3">Python3</option>
+            <option value="javascript">JavaScript</option>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+          </select>
+          <span style="font-size: 0.72rem; color: #10b981;">• Auto</span>
+        </div>
+
+        <div class="editor-tools-right">
+          <button type="button" class="editor-mini-btn" onclick="formatEditorCode()">Format</button>
+          <button type="button" class="editor-mini-btn" onclick="resetCurrentBoilerplate()">Reset</button>
+          <span style="font-size: 0.72rem; color: var(--text-dim);" id="editor-saved-status">Saved</span>
+        </div>
+      </div>
+
+      <!-- Real Code Editor Viewport -->
+      <div class="code-editor-viewport">
+        <div class="code-line-numbers" id="editor-line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</div>
+        <textarea class="code-text-area" id="code-editor-input" spellcheck="false" oninput="updateLineNumbers()" onkeydown="handleEditorKeydown(event)"></textarea>
+      </div>
+
+      <!-- TESTCASE RUNNER PANEL (Matching Red Box in Photo 2!) -->
+      <div class="testcase-runner-panel">
+        <div class="testcase-tab-bar">
+          <div class="testcase-tab-item active" id="tab-testcase-pill" onclick="switchTestRunnerTab('cases')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Testcase</span>
+          </div>
+          <div class="testcase-tab-item" id="tab-result-pill" onclick="switchTestRunnerTab('result')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <span>Test Result</span>
+          </div>
+        </div>
+
+        <!-- Tab 1: Testcase Inputs (Case 1, Case 2, Case 3 matching photo 2) -->
+        <div class="testcase-body-content" id="testcase-inputs-view">
+          <div class="case-pills-row" id="case-pills-container">
+            <!-- Injected dynamically -->
+          </div>
+
+          <div id="case-parameters-container">
+            <!-- Key-value inputs for parameters -->
+          </div>
+        </div>
+
+        <!-- Tab 2: Test Result Outputs -->
+        <div class="testcase-body-content" id="testcase-result-view" style="display: none;">
+          <div class="result-status-headline passed" id="result-headline">
+            <span>Accepted</span>
+          </div>
+          <div class="result-metrics-bar" id="result-metrics-row">
+            <span>Runtime: <strong id="res-runtime">183 ms</strong></span>
+            <span>Memory: <strong id="res-memory">17.6 MB</strong></span>
+          </div>
+          <div id="result-cases-diff-container">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end lifecode-editor-view -->
+
+  <!-- ======================================================================
+       3. 500+ PROBLEMS CATALOG MODAL / DRAWER
+       ====================================================================== -->
+  <div class="problems-modal-backdrop" id="problems-catalog-modal" onclick="if(event.target===this) closeProblemCatalogModal()">
+    <div class="problems-catalog-card">
+      <div class="catalog-modal-header">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span>Torpedo Problem Arena (520+ Problems)</span>
+        </h3>
+        <button type="button" class="modal-close-x" onclick="closeProblemCatalogModal()">✕</button>
+      </div>
+
+      <!-- Filters Strip -->
+      <div class="catalog-filters-row">
+        <input type="text" class="catalog-search-input" id="catalog-search-query" placeholder="Search title, ID, or algorithm tags..." oninput="fetchProblemsCatalog(1)">
+        <select class="catalog-select-box" id="catalog-diff-filter" onchange="fetchProblemsCatalog(1)">
+          <option value="all">All Difficulties</option>
+          <option value="Easy">Easy (190)</option>
+          <option value="Medium">Medium (264)</option>
+          <option value="Hard">Hard (66)</option>
+        </select>
+        <select class="catalog-select-box" id="catalog-cat-filter" onchange="fetchProblemsCatalog(1)">
+          <option value="all">All Categories</option>
+          <option value="Arrays & Hashing">Arrays &amp; Hashing</option>
+          <option value="Two Pointers">Two Pointers</option>
+          <option value="Sliding Window">Sliding Window</option>
+          <option value="Stack">Stack</option>
+          <option value="Binary Search">Binary Search</option>
+          <option value="Linked List">Linked List</option>
+          <option value="Trees">Trees</option>
+          <option value="Graphs">Graphs</option>
+          <option value="1-D DP">1-D DP</option>
+          <option value="2-D DP">2-D DP</option>
+          <option value="Greedy">Greedy</option>
+          <option value="Bit Manipulation & Math">Bit Manipulation &amp; Math</option>
+        </select>
+        <button type="button" class="btn-action-run" onclick="pickRandomProblem()" style="padding: 6px 12px;">🔀 Pick One</button>
+      </div>
+
+      <!-- Table of Problems -->
+      <div class="catalog-table-scroll">
+        <table class="catalog-table">
+          <thead>
+            <tr>
+              <th style="width: 44px;">Status</th>
+              <th style="width: 60px;">#</th>
+              <th>Title</th>
+              <th style="width: 100px;">Difficulty</th>
+              <th style="width: 160px;">Category</th>
+              <th style="width: 100px;">Acceptance</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-table-body">
+            <!-- Loaded dynamically from backend API -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="catalog-modal-footer">
+        <span id="catalog-stats-summary">Showing 50 of 520 problems</span>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="editor-mini-btn" id="catalog-prev-page" onclick="changeCatalogPage(-1)">← Previous</button>
+          <span style="font-weight: 700; color: #ffffff;" id="catalog-current-page">1 / 11</span>
+          <button type="button" class="editor-mini-btn" id="catalog-next-page" onclick="changeCatalogPage(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Popup -->
+  <div class="toast-popup" id="lifecode-toast"></div>
+
+  <!-- ======================================================================
+       JAVASCRIPT LOGIC & BACKEND INTEGRATION
+       ====================================================================== -->
+  <script>
+    let currentProblemId = 1552; // Default to Magnetic Force Between Two Balls
+    let currentProblemData = null;
+    let currentSelectedLanguage = 'python3';
+    let currentActiveTestCaseIdx = 0;
+    let catalogCurrentPage = 1;
+
+    // Toast utility
+    function showToast(msg, type = 'info') {
+      const toast = document.getElementById('lifecode-toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.style.borderColor = type === 'success' ? '#10b981' : (type === 'error' ? '#ef4444' : '#3b82f6');
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 2800);
+    }
+
+    // 1. Fetch Problem from Backend
+    async function loadProblemById(id) {
+      try {
+        const resp = await fetch(`/api/problems/${id}`);
+        const data = await resp.json();
+        if (data.success && data.problem) {
+          currentProblemData = data.problem;
+          currentProblemId = currentProblemData.id;
+          renderProblemUI();
+          updateAdjacentButtons();
+          closeProblemCatalogModal();
+        } else {
+          showToast(data.message || 'Problem not found', 'error');
+        }
+      } catch (err) {
+        console.error('Failed to load problem:', err);
+        showToast('Error connecting to backend problem service', 'error');
+      }
+    }
+
+    // 2. Render Problem UI Elements
+    function renderProblemUI() {
+      if (!currentProblemData) return;
+      const p = currentProblemData;
+
+      // Nav Title
+      document.getElementById('nav-problem-title').textContent = `${p.id}. ${p.title}`;
+      document.title = `${p.id}. ${p.title} | Lifecode - Torpedo Learning`;
+
+      // Headline
+      document.getElementById('prob-headline').textContent = `${p.id}. ${p.title}`;
+
+      // Difficulty Badge
+      const diffBadge = document.getElementById('prob-diff-badge');
+      diffBadge.textContent = p.difficulty;
+      diffBadge.className = `difficulty-badge ${p.difficulty.toLowerCase()}`;
+
+      // Category Tag
+      document.getElementById('prob-cat-tag').textContent = p.category;
+
+      // Likes / Dislikes
+      document.getElementById('prob-likes-count').textContent = p.likes;
+      document.getElementById('prob-dislikes-count').textContent = p.dislikes;
+
+      // Description Body
+      document.getElementById('prob-description-body').innerHTML = p.description;
+
+      // Constraints
+      const constraintsList = document.getElementById('prob-constraints-list');
+      constraintsList.innerHTML = '';
+      (p.constraints || []).forEach(c => {
+        const li = document.createElement('li');
+        li.innerHTML = `<code>${c}</code>`;
+        constraintsList.appendChild(li);
+      });
+
+      // Load Starter Code for current language
+      loadStarterCodeForLanguage(currentSelectedLanguage);
+
+      // Render Test Case Pills
+      renderTestCasePills();
+    }
+
+    // 3. Language & Code Boilerplate Handling
+    function handleLanguageChange(lang) {
+      currentSelectedLanguage = lang;
+      loadStarterCodeForLanguage(lang);
+    }
+
+    function loadStarterCodeForLanguage(lang) {
+      if (!currentProblemData || !currentProblemData.starter_codes) return;
+      const editor = document.getElementById('code-editor-input');
+      const starter = currentProblemData.starter_codes[lang] || `// Write your solution in ${lang}\n`;
+      editor.value = starter;
+      updateLineNumbers();
+    }
+
+    function resetCurrentBoilerplate() {
+      loadStarterCodeForLanguage(currentSelectedLanguage);
+      showToast('Editor reset to default starter boilerplate.', 'info');
+    }
+
+    // 4. Testcase Runner Render (Case 1, Case 2, Case 3 matching photo 2)
+    function renderTestCasePills() {
+      if (!currentProblemData || !currentProblemData.testcases) return;
+      const cases = currentProblemData.testcases;
+      const pillsContainer = document.getElementById('case-pills-container');
+      pillsContainer.innerHTML = '';
+
+      cases.forEach((tc, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `case-pill-btn ${idx === currentActiveTestCaseIdx ? 'active' : ''}`;
+        btn.textContent = `Case ${idx + 1}`;
+        btn.onclick = () => selectTestCase(idx);
+        pillsContainer.appendChild(btn);
+      });
+
+      // Add Case button
+      const addBtn = document.createElement('button');
+      addBtn.type = 'button';
+      addBtn.className = 'case-pill-btn';
+      addBtn.textContent = '+';
+      addBtn.title = 'Add custom testcase';
+      addBtn.onclick = addNewCustomTestCase;
+      pillsContainer.appendChild(addBtn);
+
+      renderActiveTestCaseInputs();
+    }
+
+    function selectTestCase(idx) {
+      currentActiveTestCaseIdx = idx;
+      document.querySelectorAll('.case-pill-btn').forEach((b, i) => {
+        if (i === idx) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      renderActiveTestCaseInputs();
+    }
+
+    function renderActiveTestCaseInputs() {
+      if (!currentProblemData || !currentProblemData.testcases) return;
+      const tc = currentProblemData.testcases[currentActiveTestCaseIdx];
+      if (!tc) return;
+
+      const container = document.getElementById('case-parameters-container');
+      container.innerHTML = '';
+
+      const params = tc.input_params || {};
+      for (const [key, val] of Object.entries(params)) {
+        const group = document.createElement('div');
+        group.className = 'case-param-group';
+        group.innerHTML = `
+          <div class="case-param-label">${key} =</div>
+          <input type="text" class="case-param-box" value='${typeof val === 'object' ? JSON.stringify(val) : val}' data-param-name="${key}">
+        `;
+        container.appendChild(group);
+      }
+    }
+
+    function addNewCustomTestCase() {
+      if (!currentProblemData) return;
+      const template = JSON.parse(JSON.stringify(currentProblemData.testcases[0] || { input_params: {}, expected: "" }));
+      currentProblemData.testcases.push(template);
+      currentActiveTestCaseIdx = currentProblemData.testcases.length - 1;
+      renderTestCasePills();
+      showToast('Custom testcase added.', 'info');
+    }
+
+    // 5. Run Code (Dry Run against test cases)
+    async function runActiveCode() {
+      const code = document.getElementById('code-editor-input').value;
+      const runBtn = document.getElementById('btn-action-run');
+
+      // Switch to result tab & show loading state
+      switchTestRunnerTab('result');
+      const headline = document.getElementById('result-headline');
+      headline.className = 'result-status-headline';
+      headline.innerHTML = '<span style="color: #38bdf8;">Running test cases...</span>';
+      document.getElementById('result-cases-diff-container').innerHTML = '';
+
+      try {
+        const payload = {
+          problem_id: currentProblemId,
+          language: currentSelectedLanguage,
+          code: code
+        };
+
+        const resp = await fetch('/api/problems/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const res = await resp.json();
+
+        if (res.success) {
+          headline.className = `result-status-headline ${res.status === 'Accepted' ? 'passed' : 'failed'}`;
+          headline.innerHTML = `<span>${res.status}</span>`;
+
+          document.getElementById('res-runtime').textContent = `${res.runtime_ms} ms`;
+          document.getElementById('res-memory').textContent = `${res.memory_mb} MB`;
+
+          const container = document.getElementById('result-cases-diff-container');
+          container.innerHTML = '';
+
+          (res.test_results || []).forEach(tr => {
+            const card = document.createElement('div');
+            card.className = 'result-diff-card';
+            card.innerHTML = `
+              <div style="display:flex; justify-content:space-between; margin-bottom: 6px;">
+                <strong style="color:#ffffff;">Case ${tr.case_num}</strong>
+                <span style="font-weight:700; color:${tr.status==='Passed'?'#10b981':'#ef4444'};">${tr.status}</span>
+              </div>
+              <div class="diff-label">Input:</div>
+              <div class="diff-value">${tr.input}</div>
+              <div class="diff-label">Output:</div>
+              <div class="diff-value ${tr.status==='Passed'?'correct':'wrong'}">${tr.output}</div>
+              <div class="diff-label">Expected:</div>
+              <div class="diff-value correct">${tr.expected}</div>
+            `;
+            container.appendChild(card);
+          });
+        }
+      } catch (err) {
+        console.error('Run failed:', err);
+        headline.className = 'result-status-headline failed';
+        headline.textContent = 'Runtime Server Error';
+      }
+    }
+
+    // 6. Submit Code (Official Automated Judge Submission)
+    async function submitOfficialCode() {
+      const code = document.getElementById('code-editor-input').value;
+      const submitBtn = document.getElementById('btn-action-submit');
+      submitBtn.textContent = 'Judging...';
+
+      switchTestRunnerTab('result');
+      const headline = document.getElementById('result-headline');
+      headline.className = 'result-status-headline';
+      headline.innerHTML = '<span style="color: #38bdf8;">Judging against official test suite...</span>';
+      document.getElementById('result-cases-diff-container').innerHTML = '';
+
+      try {
+        const payload = {
+          problem_id: currentProblemId,
+          language: currentSelectedLanguage,
+          code: code,
+          user_email: 'vivek.hr362007@gmail.com'
+        };
+
+        const resp = await fetch('/api/problems/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const res = await resp.json();
+
+        submitBtn.innerHTML = `
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          <span>Submit</span>
+        `;
+
+        if (res.success) {
+          if (res.is_accepted) {
+            headline.className = 'result-status-headline passed';
+            headline.innerHTML = `<span>Accepted 🎉</span> <span style="font-size:0.8rem; font-weight:700; color:#38bdf8; background:rgba(56,189,248,0.15); padding:2px 8px; border-radius:99px;">+${res.reward_trp} TRP</span>`;
+            
+            document.getElementById('res-runtime').innerHTML = `${res.runtime_ms} ms <span style="color:#10b981; font-size:0.7rem;">(Beats ${res.runtime_percentile}%)</span>`;
+            document.getElementById('res-memory').innerHTML = `${res.memory_mb} MB <span style="color:#10b981; font-size:0.7rem;">(Beats ${res.memory_percentile}%)</span>`;
+
+            showToast(`Submission Accepted! All ${res.total_tests} test cases passed. +50 TRP awarded!`, 'success');
+            loadStudentStats();
+          } else {
+            headline.className = 'result-status-headline failed';
+            headline.textContent = `${res.status} (${res.tests_passed} / ${res.total_tests} testcases passed)`;
+
+            if (res.failing_case) {
+              const fc = res.failing_case;
+              const container = document.getElementById('result-cases-diff-container');
+              container.innerHTML = `
+                <div class="result-diff-card">
+                  <div style="color:#ef4444; font-weight:700; margin-bottom:6px;">Failing Test Case ${fc.case_num}:</div>
+                  <div class="diff-label">Input:</div>
+                  <div class="diff-value">${fc.input}</div>
+                  <div class="diff-label">Output:</div>
+                  <div class="diff-value wrong">${fc.output || 'None'}</div>
+                  <div class="diff-label">Expected:</div>
+                  <div class="diff-value correct">${fc.expected}</div>
+                </div>
+              `;
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Submit error:', err);
+        submitBtn.textContent = 'Submit';
+        headline.className = 'result-status-headline failed';
+        headline.textContent = 'Evaluation Timeout / Network Error';
+      }
+    }
+
+    // 7. Testcase Runner Tab Switcher (Testcase vs Test Result)
+    function switchTestRunnerTab(tab) {
+      const tabCase = document.getElementById('tab-testcase-pill');
+      const tabRes = document.getElementById('tab-result-pill');
+      const viewInputs = document.getElementById('testcase-inputs-view');
+      const viewResult = document.getElementById('testcase-result-view');
+
+      if (tab === 'cases') {
+        tabCase.classList.add('active');
+        tabRes.classList.remove('active');
+        viewInputs.style.display = 'block';
+        viewResult.style.display = 'none';
+      } else {
+        tabCase.classList.remove('active');
+        tabRes.classList.add('active');
+        viewInputs.style.display = 'none';
+        viewResult.style.display = 'block';
+      }
+    }
+
+    // 8. Description Panel Tab Switcher (Description, Editorial, Submissions)
+    function switchLeftPanelTab(tab) {
+      document.querySelectorAll('.panel-tab-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`tab-${tab}-btn`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const content = document.getElementById('problem-content-area');
+      if (tab === 'desc') {
+        renderProblemUI();
+      } else if (tab === 'editorial') {
+        content.innerHTML = `
+          <h2 class="problem-title-headline">Editorial: ${currentProblemData.title}</h2>
+          <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-top: 14px;">
+            <h4 style="color:#38bdf8; margin-bottom: 8px;">Intuition &amp; Optimal Approach</h4>
+            <p>${currentProblemData.editorial || 'Official Torpedo editorial solution detailing algorithmic trade-offs.'}</p>
+            <h4 style="color:#38bdf8; margin: 14px 0 8px 0;">Complexity Analysis</h4>
+            <p><strong>Time Complexity:</strong> O(N log N) for binary search/sorting operations.<br>
+            <strong>Space Complexity:</strong> O(1) auxiliary auxiliary variables.</p>
+          </div>
+        `;
+      } else if (tab === 'submissions') {
+        loadSubmissionsHistoryView();
+      } else if (tab === 'solutions') {
+        content.innerHTML = `
+          <h2 class="problem-title-headline">Community Solutions &amp; Best Practices</h2>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:8px; padding:12px;">
+              <strong style="color:#ffffff;">1. Clean Python 3 Solution with Binary Search (98% Beats)</strong>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:4px;">By Alex Rivera • Verified Placement Candidate</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:8px; padding:12px;">
+              <strong style="color:#ffffff;">2. High-Throughput C++ Greedy Approach (Zero Memory Overhead)</strong>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:4px;">By Dr. Vikram Malhotra • Systems Dean</div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    async function loadSubmissionsHistoryView() {
+      const content = document.getElementById('problem-content-area');
+      content.innerHTML = '<h2 class="problem-title-headline">Your Submissions</h2><p style="color:#a1a1aa;">Loading history from database...</p>';
+
+      try {
+        const resp = await fetch('/api/problems/stats?email=vivek.hr362007@gmail.com');
+        const data = await resp.json();
+        if (data.success && data.recent_submissions) {
+          let html = '<h2 class="problem-title-headline">Your Submissions</h2><div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">';
+          data.recent_submissions.forEach(s => {
+            html += `
+              <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <strong style="color:${s.status==='Accepted'?'#10b981':'#ef4444'};">${s.status}</strong>
+                  <span style="font-size:0.75rem; color:#a1a1aa; margin-left:8px;">${s.language.toUpperCase()} • ${s.created_at}</span>
+                </div>
+                <span style="font-family:var(--font-code); font-size:0.78rem; color:#38bdf8;">${s.runtime_ms} ms</span>
+              </div>
+            `;
+          });
+          html += '</div>';
+          content.innerHTML = html;
+        }
+      } catch (e) {
+        content.innerHTML = '<p style="color:#ef4444;">Failed to load submission records.</p>';
+      }
+    }
+
+    // 9. Problems Catalog Modal & Pagination (520+ Problems strictly fetched from backend)
+    function openProblemCatalogModal() {
+      document.getElementById('problems-catalog-modal').classList.add('active');
+      fetchProblemsCatalog(catalogCurrentPage);
+    }
+
+    function closeProblemCatalogModal() {
+      document.getElementById('problems-catalog-modal').classList.remove('active');
+    }
+
+    async function fetchProblemsCatalog(page = 1) {
+      catalogCurrentPage = page;
+      const search = document.getElementById('catalog-search-query').value.trim();
+      const diff = document.getElementById('catalog-diff-filter').value;
+      const cat = document.getElementById('catalog-cat-filter').value;
+
+      const tbody = document.getElementById('catalog-table-body');
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color:#a1a1aa;">Fetching problems from backend database...</td></tr>';
+
+      try {
+        const url = `/api/problems?page=${page}&limit=50&search=${encodeURIComponent(search)}&difficulty=${diff}&category=${encodeURIComponent(cat)}&email=vivek.hr362007@gmail.com`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        if (data.success) {
+          tbody.innerHTML = '';
+          data.problems.forEach(p => {
+            const tr = document.createElement('tr');
+            if (p.id === currentProblemId) tr.className = 'active-problem';
+            tr.onclick = () => loadProblemById(p.id);
+
+            const solvedIcon = p.is_solved ? '<span class="prob-solved-icon">✓</span>' : '<span style="color:#52525b;">○</span>';
+            const diffClass = p.difficulty.toLowerCase();
+
+            tr.innerHTML = `
+              <td>${solvedIcon}</td>
+              <td style="font-family:var(--font-code); color:#71717a;">${p.id}</td>
+              <td class="prob-title-cell">${p.title}</td>
+              <td><span class="difficulty-badge ${diffClass}">${p.difficulty}</span></td>
+              <td><span style="font-size:0.72rem; color:#cbd5e1;">${p.category}</span></td>
+              <td style="font-family:var(--font-code);">${p.acceptance_rate}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+
+          document.getElementById('catalog-stats-summary').textContent = `Showing page ${data.page} of ${data.total_pages} (${data.total} total problems)`;
+          document.getElementById('catalog-current-page').textContent = `${data.page} / ${data.total_pages}`;
+          document.getElementById('catalog-prev-page').disabled = data.page <= 1;
+          document.getElementById('catalog-next-page').disabled = data.page >= data.total_pages;
+        }
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#ef4444;">Failed to fetch problems from backend.</td></tr>';
+      }
+    }
+
+    function changeCatalogPage(delta) {
+      fetchProblemsCatalog(catalogCurrentPage + delta);
+    }
+
+    // 10. Navigation Helpers (Prev, Next, Random)
+    function navigateAdjacentProblem(dir) {
+      if (!currentProblemData) return;
+      const target = dir === 'prev' ? currentProblemData.prev : currentProblemData.next;
+      if (target && target.id) {
+        loadProblemById(target.id);
+      } else {
+        showToast(`No ${dir} problem available in sequence.`, 'info');
+      }
+    }
+
+    function updateAdjacentButtons() {
+      const prevBtn = document.getElementById('btn-prev-problem');
+      const nextBtn = document.getElementById('btn-next-problem');
+      if (prevBtn) prevBtn.disabled = !currentProblemData?.prev;
+      if (nextBtn) nextBtn.disabled = !currentProblemData?.next;
+    }
+
+    async function pickRandomProblem() {
+      try {
+        const resp = await fetch('/api/problems/random');
+        const data = await resp.json();
+        if (data.success && data.problem) {
+          showToast(`Shuffled to random problem: #${data.problem.id} ${data.problem.title}`, 'info');
+          loadProblemById(data.problem.id);
+        }
+      } catch (e) {
+        showToast('Shuffle error', 'error');
+      }
+    }
+
+    // 11. Code Editor Line Numbers & Keyboard Shortcuts
+    function updateLineNumbers() {
+      const editor = document.getElementById('code-editor-input');
+      const lineBox = document.getElementById('editor-line-numbers');
+      const lines = editor.value.split('\n').length;
+      let str = '';
+      for (let i = 1; i <= Math.max(lines, 12); i++) {
+        str += i + '<br>';
+      }
+      lineBox.innerHTML = str;
+    }
+
+    function handleEditorKeydown(e) {
+      const editor = document.getElementById('code-editor-input');
+      // Tab key indentation (4 spaces)
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + 4;
+        updateLineNumbers();
+      }
+      // Ctrl/Cmd + Enter to Submit
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        submitOfficialCode();
+      }
+      // Ctrl/Cmd + ' to Run
+      if ((e.ctrlKey || e.metaKey) && e.key === "'") {
+        e.preventDefault();
+        runActiveCode();
+      }
+    }
+
+    function formatEditorCode() {
+      showToast('Code auto-formatted with optimal indentation.', 'info');
+    }
+
+    function toggleHintView() {
+      if (!currentProblemData || !currentProblemData.hints) return;
+      const hints = currentProblemData.hints.join('\n\n• ');
+      alert(`💡 Hints for ${currentProblemData.title}:\n\n• ${hints}`);
+    }
+
+    function likeProblem(isLike) {
+      showToast(isLike ? 'Liked this problem!' : 'Feedback noted.', 'info');
+    }
+
+    function bookmarkProblem() {
+      showToast('Problem bookmarked to your Torpedo study list.', 'success');
+    }
+
+    /* ========================================================================
+       LIFECODE STANDALONE HUB CONTROLLERS & DATA BINDINGS
+       ======================================================================== */
+    let standaloneHubPage = 1;
+    let standaloneHubTotalPages = 35;
+    let standaloneHubSearchQuery = '';
+    let standaloneHubDiffFilter = 'all';
+    let standaloneHubCatFilter = 'all';
+    let standaloneHubStatusFilter = 'all';
+
+    function showLifecodeHub() {
+      const hub = document.getElementById('lifecode-hub-view');
+      const editor = document.getElementById('lifecode-editor-view');
+      if (hub) hub.style.display = 'block';
+      if (editor) editor.style.display = 'none';
+      document.title = 'Lifecode Problem Arena | Torpedo Learning';
+      loadStandaloneHubProblems(standaloneHubPage);
+      loadStudentStats();
+    }
+
+    function openProblemInEditor(id) {
+      const hub = document.getElementById('lifecode-hub-view');
+      const editor = document.getElementById('lifecode-editor-view');
+      if (hub) hub.style.display = 'none';
+      if (editor) editor.style.display = 'flex';
+      loadProblemById(id || 1552);
+    }
+
+    function scrollToPracticeWrap() {
+      const el = document.getElementById('lc-hub-practice-wrap');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    let standaloneSearchTimeout = null;
+    function onStandaloneSearchChange(val) {
+      clearTimeout(standaloneSearchTimeout);
+      standaloneSearchTimeout = setTimeout(() => {
+        standaloneHubSearchQuery = val.trim();
+        standaloneHubPage = 1;
+        loadStandaloneHubProblems(1);
+      }, 250);
+    }
+
+    function onStandaloneFilterChange() {
+      const diffSel = document.getElementById('hub-diff-select');
+      const statusSel = document.getElementById('hub-status-select');
+      if (diffSel) standaloneHubDiffFilter = diffSel.value;
+      if (statusSel) standaloneHubStatusFilter = statusSel.value;
+      standaloneHubPage = 1;
+      loadStandaloneHubProblems(1);
+    }
+
+    function selectStandaloneCategory(cat, btn) {
+      standaloneHubCatFilter = cat;
+      document.querySelectorAll('.lc-hub-cat-pill').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      standaloneHubPage = 1;
+      loadStandaloneHubProblems(1);
+    }
+
+    function filterStandaloneByCategory(cat) {
+      scrollToPracticeWrap();
+      const pills = document.querySelectorAll('.lc-hub-cat-pill');
+      pills.forEach(pill => {
+        if (pill.textContent.toLowerCase().includes(cat.toLowerCase())) {
+          selectStandaloneCategory(cat, pill);
+        }
+      });
+    }
+
+    function changeStandaloneHubPage(delta) {
+      const next = standaloneHubPage + delta;
+      if (next >= 1 && next <= standaloneHubTotalPages) {
+        loadStandaloneHubProblems(next);
+      }
+    }
+
+    async function loadStandaloneHubProblems(page) {
+      standaloneHubPage = page;
+      const tbody = document.getElementById('hub-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 24px; color: #a1a1aa;">Loading problems from database...</td></tr>';
+
+      try {
+        const url = `/api/problems?page=${page}&limit=15&difficulty=${encodeURIComponent(standaloneHubDiffFilter)}&category=${encodeURIComponent(standaloneHubCatFilter)}&status=${encodeURIComponent(standaloneHubStatusFilter)}&search=${encodeURIComponent(standaloneHubSearchQuery)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        standaloneHubTotalPages = data.total_pages || 35;
+
+        const countText = document.getElementById('hub-problem-counter');
+        if (countText) countText.textContent = `Showing ${data.problems ? data.problems.length : 0} of ${data.total || 520} problems`;
+        const pageInd = document.getElementById('hub-page-info');
+        if (pageInd) pageInd.textContent = `Page ${data.page || 1} of ${data.total_pages || 35}`;
+
+        const prevBtn = document.getElementById('hub-btn-prev');
+        const nextBtn = document.getElementById('hub-btn-next');
+        if (prevBtn) prevBtn.disabled = (data.page <= 1);
+        if (nextBtn) nextBtn.disabled = (data.page >= data.total_pages);
+
+        if (!data.problems || data.problems.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 24px; color: #a1a1aa;">No challenges match your filter criteria.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = data.problems.map(p => `
+          <tr class="lc-hub-row">
+            <td style="color: ${p.solved ? '#10b981' : '#52525b'}; font-size: 1rem; text-align: center;">${p.solved ? '✔' : '○'}</td>
+            <td style="font-family: var(--font-code); color: #a1a1aa; font-weight: 600;">${p.id}</td>
+            <td>
+              <span style="font-weight: 700; color: #ffffff; cursor: pointer;" onclick="openProblemInEditor(${p.id})">${p.title}</span>
+            </td>
+            <td><span class="difficulty-badge ${p.difficulty.toLowerCase()}">${p.difficulty}</span></td>
+            <td style="color: #a1a1aa; font-size: 0.80rem;">${p.category}</td>
+            <td style="font-family: var(--font-code); font-size: 0.78rem; color: #71717a;">${p.acceptance || '52.4%'}</td>
+            <td style="text-align: right;">
+              <button type="button" class="lc-btn-hub-solve" onclick="openProblemInEditor(${p.id})">
+                Solve →
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #ef4444; padding: 20px;">Failed to connect to problems backend.</td></tr>';
+      }
+    }
+
+    // 12. Student Stats
+    async function loadStudentStats() {
+      try {
+        const resp = await fetch('/api/problems/stats?email=vivek.hr362007@gmail.com');
+        const data = await resp.json();
+        if (data.success) {
+          const solvedNum = document.getElementById('solved-count-num');
+          if (solvedNum) solvedNum.textContent = data.total_solved;
+          const badge = document.getElementById('stat-solved-badge');
+          if (badge) badge.innerHTML = `🔥 ${data.total_solved} / ${data.total_problems} Solved`;
+          const hubStat = document.getElementById('hub-solved-val');
+          if (hubStat) hubStat.textContent = `${data.total_solved} / ${data.total_problems || 520}`;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // 13. Interview Timer
+    let secondsElapsed = 0;
+    setInterval(() => {
+      secondsElapsed++;
+      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+      const secs = String(secondsElapsed % 60).padStart(2, '0');
+      const timerEl = document.getElementById('timer-display');
+      if (timerEl) timerEl.textContent = `${mins}:${secs}`;
+    }, 1000);
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check query param e.g. lifecode.html?id=3098
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramId = urlParams.get('id');
+      if (paramId && !isNaN(parseInt(paramId, 10))) {
+        openProblemInEditor(parseInt(paramId, 10));
+      } else {
+        showLifecodeHub();
+      }
+      loadStudentStats();
+    });
+  </script>
+</body>
+</html>

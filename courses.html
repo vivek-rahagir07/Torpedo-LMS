@@ -20,10 +20,112 @@
   <style>
     /* Catalog Specific Light Theme Styles */
     .catalog-hero {
-      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
-      padding: 60px 0 36px 0;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      padding: 32px 0 24px 0;
       border-bottom: 1px solid var(--border-subtle);
-      text-align: center;
+    }
+
+    .course-hero-banner-frame {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      background-color: #f8fafc;
+      background-image: url('assets/courses-banner.png?v=courses_banner_1');
+      background-position: center right;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
+      display: flex;
+      align-items: center;
+      text-align: left;
+    }
+
+    .course-hero-banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 255, 255, 0.90) 36%,
+        rgba(255, 255, 255, 0.55) 58%,
+        rgba(255, 255, 255, 0.12) 78%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .course-hero-banner-content {
+      position: relative;
+      z-index: 2;
+      padding: 28px 38px;
+      max-width: 580px;
+    }
+
+    .course-hero-title {
+      margin: 0 0 8px 0;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 2.85rem;
+      font-weight: 850;
+      line-height: 1;
+      letter-spacing: -0.035em;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .course-hero-title-dark {
+      color: #0b1329;
+    }
+
+    .course-hero-title-blue {
+      color: #2563eb;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .course-hero-accent-bar {
+      width: 38px;
+      height: 4.5px;
+      background: #2563eb;
+      border-radius: 999px;
+      margin: 10px 0 14px 0;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+    }
+
+    .course-hero-sub-lead {
+      margin: 0 0 5px 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0b1329;
+      letter-spacing: -0.015em;
+    }
+
+    .course-hero-sub-desc {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.48;
+      color: #334155;
+      max-width: 380px;
+      font-weight: 450;
+    }
+
+    @media (max-width: 860px) {
+      .course-hero-banner-frame {
+        height: auto;
+        min-height: 220px;
+        background-position: 80% center;
+      }
+      .course-hero-banner-content {
+        padding: 20px 18px;
+      }
     }
 
     .catalog-title {
@@ -280,11 +382,17 @@
   <!-- Catalog Hero Section -->
   <section class="catalog-hero">
     <div class="container">
-      <span class="section-badge">ACADEMIC & ENTERPRISE CURRICULUM</span>
-      <h1 class="catalog-title">Explore Verified Courses & Placement Tracks</h1>
-      <p class="catalog-subtitle">
-        Monolithic syllabus depth with browser Lifecode VM sandboxes, verified dean credentials, and enterprise recruitment pipelines.
-      </p>
+      <div class="course-hero-banner-frame">
+        <div class="course-hero-banner-overlay"></div>
+        <div class="course-hero-banner-content">
+          <h1 class="course-hero-title">
+            <span class="course-hero-title-dark">Cour</span><span class="course-hero-title-blue">ses</span>
+          </h1>
+          <div class="course-hero-accent-bar"></div>
+          <div class="course-hero-sub-lead">Skill up. Explore. Grow.</div>
+          <p class="course-hero-sub-desc">Curated courses to help you learn, build and achieve your goals.</p>
+        </div>
+      </div>
 
       <!-- Category Filter Pills -->
       <div class="filter-pills-wrap" id="category-pills">

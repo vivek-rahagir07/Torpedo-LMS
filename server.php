@@ -41,7 +41,8 @@ $routes = [
     '/login' => 'login.html',
     '/dashboard' => 'dashboard.html',
     '/profile-setup' => 'profile-setup.html',
-    '/courses' => 'courses.html'
+    '/courses' => 'courses.html',
+    '/lifecode' => 'lifecode.html'
 ];
 
 if (isset($routes[$uri])) {

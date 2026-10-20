@@ -19,6 +19,7 @@ require_once __DIR__ . '/controllers/ProfileController.php';
 require_once __DIR__ . '/controllers/CoursesController.php';
 require_once __DIR__ . '/controllers/DashboardController.php';
 require_once __DIR__ . '/controllers/SandboxController.php';
+require_once __DIR__ . '/controllers/ProblemsController.php';
 
 // Ensure DB is initialized
 Database::getConnection();
@@ -40,7 +41,59 @@ header('Content-Type: application/json; charset=utf-8');
 try {
     $response = null;
 
-    switch ($path) {
+    // Handle dynamic /api/problems/{id}
+    if (preg_match('#^problems/([0-9]+)$#', $path, $matches)) {
+        if ($method === 'GET') {
+            $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+            $response = ProblemsController::getById((int)$matches[1], $userEmail);
+        }
+    } else {
+        switch ($path) {
+            // --- LIFECODE PROBLEMS & JUDGE ENGINE ---
+            case 'problems':
+                if ($method === 'GET') {
+                    if (isset($requestData['id']) || isset($requestData['slug'])) {
+                        $idOrSlug = $requestData['id'] ?? $requestData['slug'];
+                        $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                        $response = ProblemsController::getById($idOrSlug, $userEmail);
+                    } else {
+                        $response = ProblemsController::getAll($requestData);
+                    }
+                }
+                break;
+
+            case 'problems/get':
+                if ($method === 'GET') {
+                    $idOrSlug = $requestData['id'] ?? $requestData['slug'] ?? 1552;
+                    $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                    $response = ProblemsController::getById($idOrSlug, $userEmail);
+                }
+                break;
+
+            case 'problems/random':
+                if ($method === 'GET') {
+                    $response = ProblemsController::getRandom();
+                }
+                break;
+
+            case 'problems/stats':
+                if ($method === 'GET') {
+                    $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                    $response = ProblemsController::getStats($userEmail);
+                }
+                break;
+
+            case 'problems/run':
+                if ($method === 'POST') {
+                    $response = ProblemsController::runCode($requestData);
+                }
+                break;
+
+            case 'problems/submit':
+                if ($method === 'POST') {
+                    $response = ProblemsController::submitCode($requestData);
+                }
+                break;
         // --- AUTHENTICATION ---
         case 'auth/register':
             if ($method === 'POST') {
@@ -113,6 +166,7 @@ try {
                 'message' => "API endpoint '/api/{$path}' not found."
             ];
             break;
+        }
     }
 
     if ($response !== null) {

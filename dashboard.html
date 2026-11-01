@@ -211,14 +211,29 @@
             <!-- Section: CAREERS -->
             <div class="sidebar-group-header">CAREERS</div>
 
-            <!-- Jobs & Internships (Briefcase matching Reference) -->
-            <button type="button" class="sidebar-nav-link" id="nav-btn-jobs" onclick="showToast('Placement Portal: 14 Active Company Openings & Roles', 'info')">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="14" x="2" y="7" rx="2"/>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-              </svg>
-              <span>Jobs &amp; Internships</span>
-            </button>
+            <!-- Jobs & Internships with Simple Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-jobs">
+              <div class="sidebar-nav-link-row">
+                <button type="button" class="sidebar-nav-link" id="nav-btn-jobs" onclick="handleParentNavClick('jobs', this)" title="Jobs & Internships Placement Portal (48+ Active Hiring Drives)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="7" rx="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                  <span>Jobs &amp; Internships</span>
+                </button>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('jobs', event)" title="Toggle Jobs sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-jobs">
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('jobs'); setJobCategoryTab('all');">
+                  <span>Hiring Drives</span>
+                </a>
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('jobs'); openApplicationsModal();">
+                  <span>My Applications</span>
+                </a>
+              </div>
+            </div>
 
             <!-- Hackathons (Trophy Cup matching Reference) -->
             <button type="button" class="sidebar-nav-link" id="nav-btn-hackathons" onclick="showToast('Hackathons: Next National Polygon Hackathon in 4 days', 'info')">
@@ -2351,6 +2366,162 @@
           </div>
 
         </div> <!-- end tab-view-quizzes -->
+
+        <!-- ================================================================
+             TAB 7: JOBS & INTERNSHIPS PLACEMENT PORTAL (48+ Active Hiring Drives)
+             Embedded natively within Torpedo LMS Portal
+             ================================================================ -->
+        <div id="tab-view-jobs" class="portal-tab-content">
+          <div class="jobs-content-wrap">
+
+            <!-- 1. Hero Banner Frame -->
+            <section class="jobs-hero-frame">
+              <div class="jobs-hero-overlay"></div>
+              <div class="jobs-hero-content">
+                <div class="jobs-hero-pill">
+                  <span>⚡ VERIFIED RECRUITER GATEWAY • 48+ SDE OPENINGS</span>
+                </div>
+                <h1 class="jobs-hero-title">
+                  Land Your Dream SDE Role. <br>
+                  <span class="jobs-hero-title-highlight">Fast-Track Campus Placement.</span>
+                </h1>
+                <p class="jobs-hero-desc">
+                  High Torpedo TRP scores and verified Lifecode DSA rankings directly qualify you for 1-click Fast-Track interviews with Google, Microsoft, Razorpay, CRED, and top engineering teams.
+                </p>
+                <div class="jobs-hero-actions">
+                  <button type="button" class="btn-hero-primary" onclick="document.getElementById('portal-jobs-openings-section').scrollIntoView({behavior:'smooth'})">
+                    <span>Explore 48+ Openings ↓</span>
+                  </button>
+                  <button type="button" class="btn-hero-secondary" onclick="openApplicationsModal()">
+                    <span>💼 Track My Applications (<span id="portal-hero-apps-count">2</span>)</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2. Live Placement Metrics Strip -->
+            <section class="jobs-stats-grid">
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-blue">💼</div>
+                <div>
+                  <div class="stat-val-num">48+</div>
+                  <div class="stat-label-text">Active Hiring Drives</div>
+                </div>
+              </div>
+
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-green">💰</div>
+                <div>
+                  <div class="stat-val-num">₹18.4 LPA</div>
+                  <div class="stat-label-text">Average SDE-1 CTC (Peak: ₹44 LPA)</div>
+                </div>
+              </div>
+
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-amber">⚡</div>
+                <div>
+                  <div class="stat-val-num">1-Click Apply</div>
+                  <div class="stat-label-text">Fast-Track with Torpedo TRP Dossier</div>
+                </div>
+              </div>
+
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-purple">🏆</div>
+                <div>
+                  <div class="stat-val-num">94% Shortlist</div>
+                  <div class="stat-label-text">For Candidates with &gt;500 TRP Score</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. Compact Student Placement Readiness Strip -->
+            <section class="student-readiness-strip">
+              <div class="readiness-left-profile">
+                <div class="readiness-avatar">VY</div>
+                <div>
+                  <div class="readiness-title">Vivek Yadav • Verified Candidate</div>
+                  <div class="readiness-sub">GTU CSE · 2026 Batch · Top 2.4% LMS Bracket</div>
+                </div>
+              </div>
+
+              <div class="readiness-pills">
+                <span class="readiness-tag gold">⚡ Gold Tier Fast-Track Eligible</span>
+                <span class="readiness-tag">🎯 640 TRP Points</span>
+                <span class="readiness-tag">💻 14/520 Solved DSA</span>
+                <button type="button" class="btn-view-dossier-sm" onclick="openStudentDossierModal()">
+                  <span>Preview Dossier Resume →</span>
+                </button>
+              </div>
+            </section>
+
+            <!-- 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns -->
+            <section class="jobs-toolbar-card" id="portal-jobs-openings-section">
+              <div class="toolbar-search-row">
+                <div class="search-input-wrap">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="job-search-input" class="job-search-input" placeholder="Search by role title, company (Google, Razorpay), skill (React, Java, Go), or city..." oninput="onJobSearchInput(this.value)">
+                </div>
+
+                <!-- Compact Dropdown: Experience / Batch -->
+                <select class="select-dropdown-box" id="filter-experience-select" onchange="applyJobFilters()">
+                  <option value="all">All Batches</option>
+                  <option value="Freshers">Freshers / 2026 Batch</option>
+                  <option value="0 - 1">0 - 1 Years Experience</option>
+                  <option value="0 - 2">0 - 2 Years Experience</option>
+                </select>
+
+                <!-- Compact Dropdown: Work Mode -->
+                <select class="select-dropdown-box" id="filter-workmode-select" onchange="applyJobFilters()">
+                  <option value="all">All Work Modes</option>
+                  <option value="Remote">Remote / WFH</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="On-site">On-site</option>
+                </select>
+
+                <!-- Compact Dropdown: Tech Stack Filter (Prevents bulky sidebar) -->
+                <select class="select-dropdown-box" id="filter-tech-select" onchange="applyJobFilters()">
+                  <option value="all">All Tech Stacks</option>
+                  <option value="Java">Java</option>
+                  <option value="Python">Python</option>
+                  <option value="React">React / Frontend</option>
+                  <option value="Go">Go / Golang</option>
+                  <option value="C++">C++</option>
+                  <option value="Distributed Systems">Distributed Systems</option>
+                  <option value="Databases & SQL">SQL / Databases</option>
+                </select>
+
+                <!-- Compact Dropdown: Sort -->
+                <select class="select-dropdown-box" id="sort-jobs-select" onchange="applyJobFilters()">
+                  <option value="match">Best Match (TRP Fit)</option>
+                  <option value="compensation">Highest CTC / Stipend</option>
+                  <option value="recent">Latest Posted</option>
+                  <option value="deadline">Expiring Soonest</option>
+                </select>
+              </div>
+
+              <div class="toolbar-tabs-row">
+                <div class="filter-tabs-pills">
+                  <button type="button" class="filter-pill-btn active" onclick="setJobCategoryTab('all', this)">All Opportunities (16)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setJobCategoryTab('Full-Time', this)">Full-Time SDE (9)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setJobCategoryTab('Internship', this)">Summer &amp; 6M Internships (7)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setJobCategoryTab('Remote', this)">Remote / WFH (4)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setJobCategoryTab('fasttrack', this)">⚡ Fast-Track (&gt;500 TRP)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setJobCategoryTab('saved', this)">⭐ Saved Roles</button>
+                </div>
+
+                <div class="counter-summary-text" id="jobs-counter-text">
+                  Showing 16 of 48 active openings
+                </div>
+              </div>
+            </section>
+
+            <!-- 5. Job Cards Grid -->
+            <section class="jobs-listings-grid" id="jobs-container">
+              <!-- Injected dynamically from js/jobs-data.js -->
+            </section>
+
+          </div>
+        </div> <!-- end tab-view-jobs -->
       </main>
     </div>
   </div>
@@ -2397,7 +2568,7 @@
         <div style="display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 1.1rem;">💻</span>
           <h3 style="margin: 0; font-family: var(--font-display); font-size: 1.05rem; color: #fff;" id="sandbox-modal-title">Torpedo Lifecode Sandbox</h3>
-          <a href="lifecode.html" style="margin-left: 14px; background: #2563eb; color: #fff; font-size: 0.74rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">⚡ Launch Full DSA Arena (500+ Problems) ↗</a>
+          <button type="button" onclick="closeLifecodeSandbox(); switchPortalTab('lifecode', document.getElementById('nav-btn-lifecode'));" style="margin-left: 14px; background: #2563eb; color: #fff; font-size: 0.74rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">⚡ Launch Full DSA Arena (500+ Problems) ↗</button>
         </div>
         <button type="button" class="dossier-modal-close" style="background: #1f2937; color: #94a3b8;" onclick="closeLifecodeSandbox()">✕</button>
       </div>
@@ -3093,9 +3264,157 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     </div>
   </div>
 
+  <!-- ======================================================================
+       JOBS & INTERNSHIPS MODAL DIALOGS
+       ====================================================================== -->
+
+  <!-- Job Details Modal -->
+  <dialog id="job-details-dialog" aria-labelledby="jd-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="jd-dialog-title">Job &amp; Internship Details</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeJobDetailsModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body" id="jd-dialog-body">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeJobDetailsModal()">Close</button>
+      <button type="button" class="btn-apply-fasttrack" id="btn-dialog-apply" onclick="openApplyFromDetails()">
+        <span>Apply with Torpedo Dossier →</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Fast-Track 1-Click Apply Modal -->
+  <dialog id="job-apply-dialog" aria-labelledby="apply-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="apply-dialog-title">1-Click Fast-Track Application</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeApplyModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body">
+      <div id="apply-role-summary-box" style="background:#f8fafc; border:1px solid var(--border-card); border-radius:10px; padding:14px; margin-bottom:16px;">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Applicant Profile</label>
+        <div style="background:#ffffff; border:1px solid var(--border-card); border-radius:8px; padding:10px 14px; font-size:0.84rem;">
+          <div><strong>Vivek Yadav</strong> (GTU CSE, 2026 Batch)</div>
+          <div style="color:#64748b; font-size:0.78rem; margin-top:2px;">vivek.hr362007@gmail.com • +91 98765 43210</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Verified Torpedo LMS Credentials</label>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:8px; text-align:center;">
+            <div style="font-size:0.68rem; color:#1e40af; font-weight:750;">TRP SCORE</div>
+            <div style="font-family:var(--font-mono, monospace); font-size:1.1rem; font-weight:800; color:#1d4ed8;">640</div>
+          </div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:8px; text-align:center;">
+            <div style="font-size:0.68rem; color:#166534; font-weight:750;">DSA SOLVED</div>
+            <div style="font-family:var(--font-mono, monospace); font-size:1.1rem; font-weight:800; color:#15803d;">14 / 520</div>
+          </div>
+          <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:8px; padding:8px; text-align:center;">
+            <div style="font-size:0.68rem; color:#6b21a8; font-weight:750;">CODE RANK</div>
+            <div style="font-family:var(--font-mono, monospace); font-size:1.1rem; font-weight:800; color:#7e22ce;">Top 2.4%</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label for="apply-notes-textarea" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Note to Hiring Team (Optional)</label>
+        <textarea id="apply-notes-textarea" rows="3" style="width:100%; border:1px solid var(--border-card); border-radius:8px; padding:10px; font-family:inherit; font-size:0.82rem; outline:none;" placeholder="Highlight any specific projects, GitHub repos, or coding contest ranks..."></textarea>
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:10px 14px; font-size:0.76rem; color:#15803d; display:flex; align-items:center; gap:8px;">
+        <span>🔒</span>
+        <span>Your verified Torpedo coding badge and academic dossier will be submitted directly to the verified recruiter's ATS.</span>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeApplyModal()">Cancel</button>
+      <button type="button" class="btn-apply-fasttrack" onclick="submitJobApplication()">
+        <span>Confirm &amp; Submit Application →</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- My Applications Modal -->
+  <dialog id="my-apps-dialog" aria-labelledby="apps-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="apps-dialog-title">My Tracked Applications</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeApplicationsModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body" id="my-apps-list-body">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeApplicationsModal()">Close</button>
+    </div>
+  </dialog>
+
+  <!-- Student Dossier Preview Modal -->
+  <dialog id="dossier-preview-dialog" aria-labelledby="dossier-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="dossier-dialog-title">Student Placement Dossier</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeStudentDossierModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body">
+      <div style="border-bottom:1px solid var(--border-card); padding-bottom:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+          <h2 style="font-family:var(--font-display, 'Outfit', sans-serif); font-size:1.35rem; color:#0f172a;">Vivek Yadav</h2>
+          <div style="color:#64748b; font-size:0.84rem; margin-top:2px;">B.Tech Computer Science &amp; Engineering • Gujarat Technological University</div>
+          <div style="font-family:var(--font-mono, monospace); color:#0f2ac7; font-size:0.76rem; margin-top:4px;">Roll: 22002170310065 • CPI: 8.85 / 10</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="background:#eff6ff; color:#1d4ed8; font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:6px; border:1px solid #bfdbfe;">VERIFIED CANDIDATE</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <h4 style="font-size:0.88rem; font-weight:750; color:#0f172a; margin-bottom:8px;">Verified Algorithmic Competencies</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Dynamic Programming (Advanced)</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Binary Search &amp; Predicates</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Graph Traversal (BFS/DFS)</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Relational Databases &amp; SQL</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">React.js &amp; Frontend Systems</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <h4 style="font-size:0.88rem; font-weight:750; color:#0f172a; margin-bottom:8px;">Torpedo LMS Certifications</h4>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:8px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="font-size:0.84rem; color:#0f172a;">Full Stack Web &amp; API Systems</strong>
+              <div style="font-size:0.72rem; color:#64748b;">Issued by Torpedo Learning • ID: TRP-CERT-8842</div>
+            </div>
+            <span style="font-size:0.72rem; font-weight:750; color:#059669;">Verified ✓</span>
+          </div>
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:8px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="font-size:0.84rem; color:#0f172a;">Data Structures &amp; High-Throughput Algorithms</strong>
+              <div style="font-size:0.72rem; color:#64748b;">Top 2.4% Student Bracket • Score: 98.4%</div>
+            </div>
+            <span style="font-size:0.72rem; font-weight:750; color:#059669;">Verified ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeStudentDossierModal()">Close</button>
+      <button type="button" class="btn-apply-fasttrack" onclick="showToast('Verified Dossier PDF downloaded.', 'success')">
+        <span>Download Official PDF ↓</span>
+      </button>
+    </div>
+  </dialog>
+
   <!-- Scripts -->
   <script src="js/courses-data.js"></script>
   <script src="js/quizzes-data.js"></script>
+  <script src="js/jobs-data.js"></script>
   <script src="js/api-client.js"></script>
   <script src="js/app.js"></script>
 
@@ -3223,15 +3542,18 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (typeof initQuizzesPortal === 'function') {
         initQuizzesPortal();
       }
+      if (typeof initJobsPortal === 'function') {
+        initJobsPortal();
+      }
 
-      // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes)
+      // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes, #jobs)
       const initialHash = window.location.hash.replace('#', '').toLowerCase();
-      if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes'].includes(initialHash)) {
+      if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs'].includes(initialHash)) {
         switchPortalTab(initialHash);
       }
       window.addEventListener('hashchange', () => {
         const h = window.location.hash.replace('#', '').toLowerCase();
-        if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes'].includes(h)) {
+        if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs'].includes(h)) {
           switchPortalTab(h);
         }
       });
@@ -3552,6 +3874,9 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       } else if (tabName === 'quizzes') {
         const g = document.getElementById('nav-group-quizzes');
         if (g) g.classList.add('open');
+      } else if (tabName === 'jobs') {
+        const g = document.getElementById('nav-group-jobs');
+        if (g) g.classList.add('open');
       }
 
       // Update sidebar nav button active classes
@@ -3607,13 +3932,20 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         }
       }
 
+      if (tabName === 'jobs') {
+        if (typeof initJobsPortal === 'function') {
+          initJobsPortal();
+        }
+      }
+
       const titles = {
         home: 'Home Dashboard',
         courses: 'Our Courses Catalog',
         library: 'Torpedo Digital Library',
         certifications: 'Certifications & Credentials Vault',
         lifecode: 'Lifecode Problem Arena (520+ DSA Problems)',
-        quizzes: 'Mock Quizzes & Assessment Arena'
+        quizzes: 'Mock Quizzes & Assessment Arena',
+        jobs: 'Jobs & Internships Placement Portal (48+ Active Drives)'
       };
       if (titles[tabName]) {
         showToast(`Navigated to ${titles[tabName]}.`, 'info');
@@ -5493,6 +5825,506 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
             <td style="font-family: var(--font-code); font-size: 0.76rem; color: var(--lc-text-muted);">${p.acceptance || '52.4%'}</td>
           </tr>
         `).join('');
+      }
+    }
+
+    /* ========================================================================
+       JOBS & INTERNSHIPS PLACEMENT PORTAL CONTROLLER (Embedded in Dashboard)
+       ======================================================================== */
+    let jobsActiveCategoryTab = 'all';
+    let jobsSearchQuery = '';
+    let jobsSelectedExperience = 'all';
+    let jobsSelectedWorkMode = 'all';
+    let jobsSelectedTech = 'all';
+    let jobsSelectedSort = 'match';
+    let jobsSelectedJobForApply = null;
+
+    let appliedJobs = [];
+    let savedJobIds = new Set();
+
+    try {
+      const storedApplied = localStorage.getItem('torpedo_applied_jobs');
+      appliedJobs = storedApplied ? JSON.parse(storedApplied) : (typeof INITIAL_APPLIED_JOBS !== 'undefined' ? INITIAL_APPLIED_JOBS : []);
+      const storedSaved = localStorage.getItem('torpedo_saved_jobs');
+      if (storedSaved) {
+        savedJobIds = new Set(JSON.parse(storedSaved));
+      }
+    } catch (e) {
+      appliedJobs = (typeof INITIAL_APPLIED_JOBS !== 'undefined' ? INITIAL_APPLIED_JOBS : []);
+    }
+
+    function saveJobsStateToStorage() {
+      try {
+        localStorage.setItem('torpedo_applied_jobs', JSON.stringify(appliedJobs));
+        localStorage.setItem('torpedo_saved_jobs', JSON.stringify(Array.from(savedJobIds)));
+      } catch (e) {}
+    }
+
+    function initJobsPortal() {
+      if (typeof TORPEDO_JOBS_DATA === 'undefined') return;
+      applyJobFilters();
+      updateJobsAppliedCounter();
+      setupJobsLightDismissFallbacks();
+    }
+
+    function onJobSearchInput(val) {
+      jobsSearchQuery = (val || '').trim().toLowerCase();
+      applyJobFilters();
+    }
+
+    function setJobCategoryTab(tab, btn) {
+      jobsActiveCategoryTab = tab;
+      const tabWrap = document.getElementById('tab-view-jobs');
+      if (tabWrap) {
+        tabWrap.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+      }
+      if (btn) btn.classList.add('active');
+      applyJobFilters();
+    }
+
+    function applyJobFilters() {
+      if (typeof TORPEDO_JOBS_DATA === 'undefined') return;
+      const expSelect = document.getElementById('filter-experience-select');
+      const wmSelect = document.getElementById('filter-workmode-select');
+      const techSelect = document.getElementById('filter-tech-select');
+      const sortSelect = document.getElementById('sort-jobs-select');
+
+      if (expSelect) jobsSelectedExperience = expSelect.value;
+      if (wmSelect) jobsSelectedWorkMode = wmSelect.value;
+      if (techSelect) jobsSelectedTech = techSelect.value;
+      if (sortSelect) jobsSelectedSort = sortSelect.value;
+
+      let filtered = [...TORPEDO_JOBS_DATA];
+
+      // Tab filter
+      if (jobsActiveCategoryTab === 'Full-Time') {
+        filtered = filtered.filter(j => j.type === 'Full-Time');
+      } else if (jobsActiveCategoryTab === 'Internship') {
+        filtered = filtered.filter(j => j.type === 'Internship');
+      } else if (jobsActiveCategoryTab === 'Remote') {
+        filtered = filtered.filter(j => j.workMode === 'Remote');
+      } else if (jobsActiveCategoryTab === 'fasttrack') {
+        filtered = filtered.filter(j => j.trpRequired >= 500);
+      } else if (jobsActiveCategoryTab === 'saved') {
+        filtered = filtered.filter(j => savedJobIds.has(j.id));
+      }
+
+      // Experience filter
+      if (jobsSelectedExperience !== 'all') {
+        filtered = filtered.filter(j => j.experience.toLowerCase().includes(jobsSelectedExperience.toLowerCase()) || j.batch.includes(jobsSelectedExperience));
+      }
+
+      // Work mode filter
+      if (jobsSelectedWorkMode !== 'all') {
+        filtered = filtered.filter(j => j.workMode.toLowerCase() === jobsSelectedWorkMode.toLowerCase());
+      }
+
+      // Tech Stack filter
+      if (jobsSelectedTech !== 'all') {
+        filtered = filtered.filter(j => j.tags.some(t => t.toLowerCase().includes(jobsSelectedTech.toLowerCase())));
+      }
+
+      // Search Query
+      if (jobsSearchQuery) {
+        filtered = filtered.filter(j => {
+          return j.title.toLowerCase().includes(jobsSearchQuery) ||
+                 j.company.toLowerCase().includes(jobsSearchQuery) ||
+                 j.location.toLowerCase().includes(jobsSearchQuery) ||
+                 j.tags.some(t => t.toLowerCase().includes(jobsSearchQuery));
+        });
+      }
+
+      // Sorting
+      if (jobsSelectedSort === 'match') {
+        filtered.sort((a, b) => b.matchRate - a.matchRate);
+      } else if (jobsSelectedSort === 'compensation') {
+        filtered.sort((a, b) => b.compensationValue - a.compensationValue);
+      } else if (jobsSelectedSort === 'recent') {
+        filtered.sort((a, b) => a.postedDaysAgo - b.postedDaysAgo);
+      } else if (jobsSelectedSort === 'deadline') {
+        filtered.sort((a, b) => a.deadlineDays - b.deadlineDays);
+      }
+
+      renderJobsListings(filtered);
+    }
+
+    function renderJobsListings(jobs) {
+      const container = document.getElementById('jobs-container');
+      const counterText = document.getElementById('jobs-counter-text');
+      if (counterText && typeof TORPEDO_JOBS_DATA !== 'undefined') {
+        counterText.textContent = `Showing ${jobs.length} of ${TORPEDO_JOBS_DATA.length} active openings`;
+      }
+      if (!container) return;
+
+      if (jobs.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state-card">
+            <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
+            <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 6px;">No openings matched your filter criteria</h3>
+            <p style="font-size: 0.84rem; max-width: 420px; margin: 0 auto 16px auto;">Try clearing search keywords or resetting dropdown filters.</p>
+            <button type="button" class="btn-details-ghost" onclick="resetAllJobFilters()">Reset All Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = jobs.map(job => {
+        const isApplied = appliedJobs.some(a => a.jobId === job.id);
+        const isSaved = savedJobIds.has(job.id);
+        const typeBadgeClass = job.type === 'Full-Time' ? 'badge-fulltime' : 'badge-internship';
+
+        return `
+          <article class="job-card-item" id="card-${job.id}">
+            <div>
+              <div class="job-card-top-row">
+                <div class="job-brand-meta">
+                  <div class="job-company-avatar" style="background: ${job.logoBg}; color: ${job.logoColor};">
+                    ${job.logoLetter}
+                  </div>
+                  <div>
+                    <h3 class="job-title-line" onclick="openJobDetailsModal('${job.id}')">${job.title}</h3>
+                    <div class="job-company-subtitle">
+                      <span style="color: #0f172a; font-weight: 750;">${job.company}</span>
+                      <span class="job-company-dot"></span>
+                      <span>📍 ${job.location}</span>
+                      <span class="job-company-dot"></span>
+                      <span>⏳ ${job.deadlineDays}d left</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="job-salary-callout">
+                  ${job.stipendSalary}
+                </div>
+              </div>
+
+              <!-- Badges -->
+              <div class="job-card-badges-strip" style="margin-top: 10px;">
+                <span class="badge-tag-type ${typeBadgeClass}">${job.type}</span>
+                <span class="badge-tag-type ${job.workMode === 'Remote' ? 'badge-remote' : ''}">${job.workMode}</span>
+                ${job.urgent ? '<span class="badge-tag-type badge-urgent">⚡ Urgent Drive</span>' : ''}
+                <span style="font-size: 0.70rem; color: #64748b; font-weight: 600;">🎓 ${job.batch}</span>
+              </div>
+
+              <p class="job-desc-snippet" style="margin-top: 8px;">${job.description}</p>
+
+              <!-- Skills -->
+              <div class="job-skills-chips-row" style="margin-top: 8px;">
+                ${job.tags.map(t => `<span class="skill-chip-pill" onclick="searchJobsBySkill('${t}')">${t}</span>`).join('')}
+              </div>
+            </div>
+
+            <!-- Bottom Action Row -->
+            <div class="job-card-bottom-bar">
+              <div class="job-match-indicator">
+                <span>🎯 ${job.matchRate}% Match</span>
+                <div class="match-progress-bar">
+                  <div class="match-progress-fill" style="width: ${job.matchRate}%;"></div>
+                </div>
+                <span style="color: #94a3b8; font-size: 0.70rem;">(${job.applicantsCount} applied)</span>
+              </div>
+
+              <div class="job-actions-cluster">
+                <button type="button" class="btn-bookmark-job ${isSaved ? 'active' : ''}" onclick="toggleSaveJob('${job.id}')" title="Save this role">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                </button>
+
+                <button type="button" class="btn-details-ghost" onclick="openJobDetailsModal('${job.id}')">
+                  View Details
+                </button>
+
+                <button type="button" class="btn-apply-fasttrack ${isApplied ? 'applied' : ''}" onclick="onQuickApplyClick('${job.id}')">
+                  ${isApplied ? '<span>✓ Applied</span>' : '<span>⚡ 1-Click Apply</span>'}
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function searchJobsBySkill(skill) {
+      const searchBox = document.getElementById('job-search-input');
+      if (searchBox) searchBox.value = skill;
+      jobsSearchQuery = skill.toLowerCase();
+      applyJobFilters();
+    }
+
+    function resetAllJobFilters() {
+      jobsSearchQuery = '';
+      jobsActiveCategoryTab = 'all';
+      jobsSelectedExperience = 'all';
+      jobsSelectedWorkMode = 'all';
+      jobsSelectedTech = 'all';
+      jobsSelectedSort = 'match';
+
+      const searchBox = document.getElementById('job-search-input');
+      if (searchBox) searchBox.value = '';
+      const expSelect = document.getElementById('filter-experience-select');
+      if (expSelect) expSelect.value = 'all';
+      const wmSelect = document.getElementById('filter-workmode-select');
+      if (wmSelect) wmSelect.value = 'all';
+      const techSelect = document.getElementById('filter-tech-select');
+      if (techSelect) techSelect.value = 'all';
+      const sortSelect = document.getElementById('sort-jobs-select');
+      if (sortSelect) sortSelect.value = 'match';
+
+      const tabWrap = document.getElementById('tab-view-jobs');
+      if (tabWrap) {
+        tabWrap.querySelectorAll('.filter-pill-btn').forEach((b, i) => {
+          if (i === 0) b.classList.add('active');
+          else b.classList.remove('active');
+        });
+      }
+
+      applyJobFilters();
+    }
+
+    function toggleSaveJob(id) {
+      if (savedJobIds.has(id)) {
+        savedJobIds.delete(id);
+        showToast('Role removed from saved bookmarks.', 'info');
+      } else {
+        savedJobIds.add(id);
+        showToast('Role saved to your study bookmarks! ⭐', 'success');
+      }
+      saveJobsStateToStorage();
+      applyJobFilters();
+    }
+
+    function openJobDetailsModal(jobId) {
+      if (typeof TORPEDO_JOBS_DATA === 'undefined') return;
+      const job = TORPEDO_JOBS_DATA.find(j => j.id === jobId);
+      if (!job) return;
+      jobsSelectedJobForApply = job;
+
+      const modal = document.getElementById('job-details-dialog');
+      const body = document.getElementById('jd-dialog-body');
+      const title = document.getElementById('jd-dialog-title');
+      const applyBtn = document.getElementById('btn-dialog-apply');
+
+      const isApplied = appliedJobs.some(a => a.jobId === job.id);
+      if (applyBtn) {
+        applyBtn.innerHTML = isApplied ? '<span>✓ Already Applied</span>' : '<span>Apply with Torpedo Dossier →</span>';
+        applyBtn.disabled = isApplied;
+        applyBtn.className = isApplied ? 'btn-apply-fasttrack applied' : 'btn-apply-fasttrack';
+      }
+
+      if (title) title.textContent = `${job.title} - ${job.company}`;
+
+      if (body) {
+        body.innerHTML = `
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-card);">
+            <div>
+              <div style="font-size: 1.2rem; font-weight: 850; color: #0f172a; font-family: var(--font-display);">${job.title}</div>
+              <div style="font-size: 0.86rem; font-weight: 700; color: #0f2ac7; margin-top: 2px;">${job.company} • ${job.location} (${job.workMode})</div>
+              <div style="font-size: 0.76rem; color: #64748b; margin-top: 3px;">Department: ${job.department} · Batch: ${job.batch}</div>
+            </div>
+            <div class="job-salary-callout" style="font-size: 1rem;">
+              ${job.stipendSalary}
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">About ${job.company}</h4>
+            <p style="font-size: 0.82rem; line-height: 1.6; color: #334155;">${job.aboutCompany}</p>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Role Description</h4>
+            <p style="font-size: 0.82rem; line-height: 1.6; color: #334155; margin-bottom: 8px;">${job.description}</p>
+            <h4 style="font-size: 0.84rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Key Responsibilities:</h4>
+            <ul style="padding-left: 20px; font-size: 0.80rem; line-height: 1.65; color: #334155;">
+              ${job.responsibilities.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Minimum Eligibility &amp; Requirements:</h4>
+            <ul style="padding-left: 20px; font-size: 0.80rem; line-height: 1.65; color: #334155;">
+              ${job.requirements.map(req => `<li>${req}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 8px;">Recruiter Interview Roadmap</h4>
+            <div class="roadmap-list">
+              ${job.hiringRounds.map(rnd => `
+                <div class="roadmap-step-item">
+                  <div class="roadmap-badge-num">${rnd.step}</div>
+                  <div>
+                    <div class="roadmap-text-title">${rnd.name}</div>
+                    <div class="roadmap-text-sub">${rnd.desc}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="prep-box-alert">
+            <div style="font-size: 0.82rem; font-weight: 750; color: #1e40af; margin-bottom: 6px;">
+              💡 Recommended Practice Topics on Torpedo LMS
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${job.prepTopics.map(pt => `
+                <button type="button" class="skill-chip-pill" onclick="closeJobDetailsModal(); switchPortalTab('lifecode');" style="background: #ffffff; border: 1px solid #93c5fd; color: #1d4ed8; cursor: pointer;">
+                  &lt;/&gt; Solve ${pt} in Lifecode
+                </button>
+              `).join('')}
+              <button type="button" class="skill-chip-pill" onclick="closeJobDetailsModal(); switchPortalTab('quizzes');" style="background: #ffffff; border: 1px solid #86efac; color: #15803d; cursor: pointer;">
+                Take Practice Assessment →
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeJobDetailsModal() {
+      const modal = document.getElementById('job-details-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    function openApplyFromDetails() {
+      closeJobDetailsModal();
+      if (jobsSelectedJobForApply) {
+        onQuickApplyClick(jobsSelectedJobForApply.id);
+      }
+    }
+
+    function onQuickApplyClick(jobId) {
+      if (typeof TORPEDO_JOBS_DATA === 'undefined') return;
+      const job = TORPEDO_JOBS_DATA.find(j => j.id === jobId);
+      if (!job) return;
+      jobsSelectedJobForApply = job;
+
+      const isAlready = appliedJobs.some(a => a.jobId === job.id);
+      if (isAlready) {
+        showToast(`You have already applied for ${job.title} at ${job.company}!`, 'info');
+        openApplicationsModal();
+        return;
+      }
+
+      const modal = document.getElementById('job-apply-dialog');
+      const summaryBox = document.getElementById('apply-role-summary-box');
+      if (summaryBox) {
+        summaryBox.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 1.05rem; font-weight: 850; color: #0f172a;">${job.title}</div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: #0f2ac7;">${job.company} · ${job.location}</div>
+            </div>
+            <div class="job-salary-callout" style="font-size: 0.86rem;">${job.stipendSalary}</div>
+          </div>
+        `;
+      }
+
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeApplyModal() {
+      const modal = document.getElementById('job-apply-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    function submitJobApplication() {
+      if (!jobsSelectedJobForApply) return;
+      const job = jobsSelectedJobForApply;
+
+      const newApp = {
+        jobId: job.id,
+        appliedDate: "Just now",
+        status: "Applied",
+        stageText: "Application Under Recruiter Screening",
+        statusBadgeClass: "status-applied"
+      };
+
+      appliedJobs.unshift(newApp);
+      saveJobsStateToStorage();
+      closeApplyModal();
+      updateJobsAppliedCounter();
+      applyJobFilters();
+
+      showToast(`Application successfully sent to ${job.company}! Recruiter notification dispatched. 🎉`, 'success');
+    }
+
+    function updateJobsAppliedCounter() {
+      const heroApps = document.getElementById('portal-hero-apps-count');
+      if (heroApps) heroApps.textContent = appliedJobs.length;
+    }
+
+    function openApplicationsModal() {
+      const modal = document.getElementById('my-apps-dialog');
+      const body = document.getElementById('my-apps-list-body');
+
+      if (body) {
+        if (appliedJobs.length === 0) {
+          body.innerHTML = `
+            <div class="empty-state-card" style="padding: 24px;">
+              <p>You haven't submitted any job applications yet.</p>
+              <button type="button" class="btn-apply-fasttrack" onclick="closeApplicationsModal(); switchPortalTab('jobs');" style="margin-top: 10px;">Explore Openings</button>
+            </div>
+          `;
+        } else {
+          body.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              ${appliedJobs.map(app => {
+                const job = (typeof TORPEDO_JOBS_DATA !== 'undefined' ? TORPEDO_JOBS_DATA.find(j => j.id === app.jobId) : null) || {
+                  title: "Software Engineer",
+                  company: "Technology Partner",
+                  stipendSalary: "Competitive"
+                };
+                return `
+                  <div style="background: #f8fafc; border: 1px solid var(--border-card); border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <div>
+                      <div style="font-weight: 800; font-size: 0.92rem; color: #0f172a;">${job.title}</div>
+                      <div style="font-size: 0.78rem; font-weight: 700; color: #0f2ac7; margin-top: 2px;">${job.company} · Applied ${app.appliedDate}</div>
+                      <div style="font-size: 0.74rem; color: #64748b; margin-top: 2px;">Status: <strong>${app.stageText}</strong></div>
+                    </div>
+                    <div>
+                      <span style="font-size: 0.72rem; font-weight: 750; color: #166534; background: #dcfce7; border: 1px solid #bbf7d0; padding: 3px 8px; border-radius: 6px;">
+                        ${app.status} ✓
+                      </span>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+      }
+
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeApplicationsModal() {
+      const modal = document.getElementById('my-apps-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    function openStudentDossierModal() {
+      const modal = document.getElementById('dossier-preview-dialog');
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeStudentDossierModal() {
+      const modal = document.getElementById('dossier-preview-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    function setupJobsLightDismissFallbacks() {
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        const outside = (e, dialog) => {
+          const r = dialog.getBoundingClientRect();
+          return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+        };
+        for (const dialog of document.querySelectorAll('dialog[closedby="any"]')) {
+          let pressedOutside = false;
+          dialog.addEventListener('pointerdown', (e) => { pressedOutside = outside(e, dialog); });
+          dialog.addEventListener('pointerup', (e) => { if (pressedOutside && outside(e, dialog)) dialog.close(); });
+        }
       }
     }
   </script>

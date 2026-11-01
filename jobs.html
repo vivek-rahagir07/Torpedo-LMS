@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs &amp; Internships Portal | Torpedo Learning</title>
+  <meta name="description" content="Verified SDE campus placements, summer internships, and graduate engineering drives at Google, Microsoft, Razorpay, CRED, and top tech employers.">
+  <link rel="icon" type="image/png" href="assets/LOGO.png">
+
+  <!-- Inter, Plus Jakarta Sans, Outfit & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Master Portal Layout CSS -->
+  <link rel="stylesheet" href="css/portal-layout.css">
+
+  <script>
+    // Keep user in unified single-portal view with left-hand navbar
+    const params = window.location.search || '';
+    window.location.replace("dashboard.html#jobs" + (params ? ('&' + params.substring(1)) : ''));
+  </script>
+
+  <style>
+    /* ==========================================================================
+       JOBS & INTERNSHIPS PAGE SPECIFIC STYLES
+       ========================================================================== */
+    .jobs-content-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      width: 100%;
+    }
+
+    /* 1. Hero Banner Frame with User Provided Corporate Tech Campus Illustration */
+    .jobs-hero-frame {
+      position: relative;
+      width: 100%;
+      min-height: 255px;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #f8fafc;
+      background-image: url('assets/jobs-banner.png?v=tech_campus_1');
+      background-position: right center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+      display: flex;
+      align-items: center;
+    }
+
+    .jobs-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.94) 42%,
+        rgba(255, 255, 255, 0.72) 65%,
+        rgba(255, 255, 255, 0.22) 85%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .jobs-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 30px 38px;
+      max-width: 650px;
+      color: #0f172a;
+    }
+
+    .jobs-hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.09);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: #4338ca;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .jobs-hero-title {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 2.15rem;
+      font-weight: 850;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .jobs-hero-title-highlight {
+      background: linear-gradient(135deg, #0f2ac7 0%, #3b82f6 50%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .jobs-hero-desc {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.55;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    .jobs-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-primary {
+      background: #0f2ac7;
+      color: #ffffff;
+      font-weight: 750;
+      font-size: 0.84rem;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 1px solid #0f2ac7;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 14px rgba(15, 42, 199, 0.25);
+      text-decoration: none;
+    }
+
+    .btn-hero-primary:hover {
+      background: #0c229e;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(15, 42, 199, 0.35);
+    }
+
+    .btn-hero-secondary {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      text-decoration: none;
+    }
+
+    .btn-hero-secondary:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      transform: translateY(-1px);
+    }
+      transform: translateY(-1px);
+    }
+
+    /* 2. Live Placement Metrics Strip */
+    .jobs-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .stat-card-box {
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: all 0.18s ease;
+    }
+
+    .stat-card-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .stat-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .icon-blue { background: #eff6ff; color: #2563eb; }
+    .icon-green { background: #f0fdf4; color: #059669; }
+    .icon-amber { background: #fffbeb; color: #d97706; }
+    .icon-purple { background: #faf5ff; color: #7c3aed; }
+
+    .stat-val-num {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 1.25rem;
+      font-weight: 850;
+      color: #0f172a;
+      line-height: 1.15;
+    }
+
+    .stat-label-text {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    /* 3. Compact Student Placement Dossier Banner */
+    .student-readiness-strip {
+      background: linear-gradient(135deg, #eff2ff 0%, #ffffff 50%, #f0fdf4 100%);
+      border: 1.5px solid rgba(15, 42, 199, 0.15);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      box-shadow: 0 1px 3px rgba(15, 42, 199, 0.04);
+    }
+
+    .readiness-left-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .readiness-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #0f2ac7;
+      color: #ffffff;
+      font-weight: 850;
+      font-size: 0.90rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .readiness-title {
+      font-weight: 800;
+      font-size: 0.90rem;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .readiness-sub {
+      font-size: 0.74rem;
+      color: #64748b;
+    }
+
+    .readiness-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .readiness-tag {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .readiness-tag.gold {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-view-dossier-sm {
+      background: #0f2ac7;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 13px;
+      font-size: 0.78rem;
+      font-weight: 750;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.14s ease;
+    }
+
+    .btn-view-dossier-sm:hover {
+      background: #0a1f9e;
+    }
+
+    /* 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns */
+    .jobs-toolbar-card {
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toolbar-search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search-input-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
+    .job-search-input {
+      width: 100%;
+      padding: 9px 12px 9px 38px;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      background: #f8fafc;
+      font-size: 0.84rem;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .job-search-input:focus {
+      background: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Dropdowns for Filtering without Bulky UI */
+    .select-dropdown-box {
+      padding: 9px 12px;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      background: #f8fafc;
+      font-size: 0.82rem;
+      color: #0f172a;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.14s;
+    }
+
+    .select-dropdown-box:focus {
+      border-color: #3b82f6;
+    }
+
+    .toolbar-tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .filter-tabs-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .filter-pill-btn {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid transparent;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.14s ease;
+    }
+
+    .filter-pill-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .filter-pill-btn.active {
+      background: #0f2ac7;
+      color: #ffffff;
+      border-color: #0f2ac7;
+      box-shadow: 0 2px 8px rgba(15, 42, 199, 0.22);
+    }
+
+    .counter-summary-text {
+      font-size: 0.80rem;
+      color: #64748b;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* 5. Job Cards Grid */
+    .jobs-listings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 1100px) {
+      .jobs-listings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .job-card-item {
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .job-card-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -4px rgba(15, 42, 199, 0.12);
+      border-color: #93c5fd;
+    }
+
+    .job-card-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .job-brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .job-company-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 1.1rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .job-title-line {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin-bottom: 3px;
+      cursor: pointer;
+      transition: color 0.14s ease;
+    }
+
+    .job-title-line:hover {
+      color: #0f2ac7;
+    }
+
+    .job-company-subtitle {
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .job-company-dot {
+      width: 3.5px;
+      height: 3.5px;
+      background: #cbd5e1;
+      border-radius: 50%;
+    }
+
+    .job-salary-callout {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.90rem;
+      font-weight: 800;
+      color: #059669;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 3px 9px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .job-card-badges-strip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge-tag-type {
+      font-size: 0.68rem;
+      font-weight: 750;
+      padding: 2px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-fulltime { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .badge-internship { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; }
+    .badge-remote { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    .badge-urgent { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
+
+    .job-desc-snippet {
+      font-size: 0.82rem;
+      color: #334155;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .job-skills-chips-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .skill-chip-pill {
+      background: #f8fafc;
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 2px 7px;
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .skill-chip-pill:hover {
+      background: #e2e8f0;
+      color: #0f2ac7;
+    }
+
+    .job-card-bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #f1f5f9;
+      flex-wrap: wrap;
+    }
+
+    .job-match-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      font-weight: 750;
+      color: #2563eb;
+    }
+
+    .match-progress-bar {
+      width: 60px;
+      height: 5px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .match-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      border-radius: 999px;
+    }
+
+    .job-actions-cluster {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-bookmark-job {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      background: transparent;
+      border: 1px solid var(--border-card);
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .btn-bookmark-job:hover,
+    .btn-bookmark-job.active {
+      color: #e11d48;
+      border-color: #fecdd3;
+      background: #fff1f2;
+    }
+
+    .btn-details-ghost {
+      background: transparent;
+      border: 1px solid var(--border-card);
+      color: #0f172a;
+      font-size: 0.78rem;
+      font-weight: 750;
+      padding: 6px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .btn-details-ghost:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .btn-apply-fasttrack {
+      background: #0f2ac7;
+      color: #ffffff;
+      border: none;
+      font-size: 0.78rem;
+      font-weight: 750;
+      padding: 6px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.16s ease;
+      box-shadow: 0 2px 8px rgba(15, 42, 199, 0.22);
+    }
+
+    .btn-apply-fasttrack:hover {
+      background: #0a1f9e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15, 42, 199, 0.32);
+    }
+
+    .btn-apply-fasttrack.applied {
+      background: #059669;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    /* 6. Native Accessible Modal Dialogs (<dialog>) */
+    dialog:modal {
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+      background: #ffffff;
+      max-width: 680px;
+      width: 92vw;
+      margin: auto;
+      padding: 0;
+      color: #0f172a;
+      overscroll-behavior: contain;
+    }
+
+    dialog::backdrop {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      overflow: hidden;
+      overscroll-behavior: contain;
+    }
+
+    .dialog-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fafbfc;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .dialog-header h3 {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 1.1rem;
+      font-weight: 850;
+      color: #0f172a;
+    }
+
+    .dialog-close-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .dialog-close-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .dialog-body {
+      padding: 20px;
+      max-height: 72vh;
+      overflow-y: auto;
+    }
+
+    .dialog-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #fafbfc;
+      border-radius: 0 0 16px 16px;
+    }
+
+    /* Roadmap Timeline */
+    .roadmap-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .roadmap-step-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .roadmap-badge-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #eff6ff;
+      color: #0f2ac7;
+      font-weight: 800;
+      font-size: 0.70rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .roadmap-text-title {
+      font-weight: 750;
+      font-size: 0.82rem;
+      color: #0f172a;
+    }
+
+    .roadmap-text-sub {
+      font-size: 0.74rem;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .prep-box-alert {
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 11px 16px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 10000;
+      animation: toastIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .empty-state-card {
+      background: #ffffff;
+      border: 1px dashed var(--border-card);
+      border-radius: 14px;
+      padding: 42px 20px;
+      text-align: center;
+      color: #64748b;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Root Shell -->
+  <div class="app-root-container">
+
+    <!-- ==================================================================
+         1. TOP GLOBAL HEADER (56px) - Matching Portal Dashboard
+         ================================================================== -->
+    <header class="global-top-header">
+      
+      <!-- Brand Logo Left -->
+      <div class="header-left-brand">
+        <a href="dashboard.html" class="brand-logo-wrap" title="Torpedo Student Portal">
+          <img src="assets/LOGO.png" alt="Torpedo Learning Logo" class="brand-logo-img">
+          <span class="brand-portal-tag">STUDENT</span>
+        </a>
+      </div>
+
+      <!-- Center Search Pill -->
+      <div class="header-search-wrap">
+        <svg class="header-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="header-search-input" placeholder="Search internships, companies, tech stacks..." id="portal-search-input" oninput="onSearchInput(this.value)">
+        <span class="header-kbd-hint">⌘K</span>
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="header-right-actions">
+        <!-- My Applications Tracker Pill -->
+        <button type="button" class="header-action-btn" onclick="openApplicationsModal()" title="View Applied Drives & Interview Status">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="7" rx="2"/></svg>
+          <span>My Applications</span>
+          <span style="background: #0f2ac7; color:#fff; font-size:0.68rem; font-weight:800; padding:1px 6px; border-radius:99px;" id="nav-applied-count">2</span>
+        </button>
+
+        <!-- IDE ⌘J Dark Button -->
+        <a href="lifecode.html" class="header-action-btn dark-btn" title="Open Lifecode Problem Arena (⌘J)">
+          <span>&lt;/&gt; IDE</span>
+          <span class="kbd-sub">⌘J</span>
+        </a>
+
+        <!-- Logout -->
+        <a href="index.html" class="header-icon-badge-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- ==================================================================
+         2. APP BODY LAYOUT: LEFT SIDEBAR + JOBS WORKSPACE
+         ================================================================== -->
+    <div class="app-body-layout">
+      
+      <!-- DUAL-PANE SIDEBAR ON LEFT-HAND SIDE (Exact Portal Structure) -->
+      <aside class="single-main-sidebar has-rail" id="student-portal-sidebar">
+        <!-- 1. Left Mini-Rail -->
+        <div class="sidebar-icon-rail">
+          <!-- Hamburger Button -->
+          <button type="button" class="rail-btn rail-hamburger" id="rail-toggle-btn" onclick="toggleSidebarMenuExpand()" title="Toggle Sidebar Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+
+          <div class="rail-divider"></div>
+
+          <!-- Academic / Cap -->
+          <a href="courses.html" class="rail-item" title="Courses &amp; Academic Track">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </a>
+
+          <!-- Community / Users -->
+          <button type="button" class="rail-item" title="Student Cohort &amp; Community" onclick="showToast('Student Cohort Chat: 14 Classmates Online', 'info')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </button>
+
+          <!-- 3D Cube / Tools -->
+          <a href="lifecode.html" class="rail-item" title="Lifecode Problem Arena (520+ Problems)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m21 16-9 5-9-5V8l9-5 9 5v8z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- 2. Main Navigation Panel -->
+        <div class="sidebar-main-panel">
+          <div class="sidebar-menu-scroll">
+            
+            <!-- Home -->
+            <a href="dashboard.html#home" class="sidebar-nav-link" id="nav-btn-home">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              <span>Home</span>
+            </a>
+
+            <!-- Courses -->
+            <a href="courses.html" class="sidebar-nav-link" id="nav-btn-courses">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              <span>Courses</span>
+            </a>
+
+            <!-- Library Catalog -->
+            <a href="dashboard.html#library" class="sidebar-nav-link" id="nav-btn-library">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/>
+                <polyline points="10 2 10 10 13 7 16 10 16 2"/>
+              </svg>
+              <span>Library Catalog</span>
+            </a>
+
+            <!-- Certifications -->
+            <a href="dashboard.html#certifications" class="sidebar-nav-link" id="nav-btn-certifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+              <span>Certifications</span>
+            </a>
+
+            <!-- Section: PLAYGROUNDS & EXAMS -->
+            <div class="sidebar-group-header">PLAYGROUNDS &amp; EXAMS</div>
+
+            <!-- Lifecode with Dropdown Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-lifecode">
+              <div class="sidebar-nav-link-row">
+                <a href="dashboard.html#lifecode" class="sidebar-nav-link" id="nav-btn-lifecode">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 16 4-4-4-4"/>
+                    <path d="m6 8-4 4 4 4"/>
+                    <path d="m14.5 4-5 16"/>
+                  </svg>
+                  <span>Lifecode</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('lifecode', event)" title="Toggle Lifecode sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-lifecode">
+                <a href="dashboard.html#lifecode" class="sidebar-subnav-item">
+                  <span>Problem Arena</span>
+                </a>
+                <a href="dashboard.html#lifecode" class="sidebar-subnav-item">
+                  <span>Code IDE</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Mock Quizzes with Dropdown Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-quizzes">
+              <div class="sidebar-nav-link-row">
+                <a href="dashboard.html#quizzes" class="sidebar-nav-link" id="nav-btn-quizzes">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                    <path d="M12 11h4"/>
+                    <path d="M12 16h4"/>
+                    <circle cx="9" cy="11" r="0.75" fill="currentColor"/>
+                    <circle cx="9" cy="16" r="0.75" fill="currentColor"/>
+                  </svg>
+                  <span>Mock Quizzes</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('quizzes', event)" title="Toggle Mock Quizzes sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-quizzes">
+                <a href="dashboard.html#quizzes" class="sidebar-subnav-item">
+                  <span>All Tests</span>
+                </a>
+                <a href="dashboard.html#quizzes" class="sidebar-subnav-item">
+                  <span>Faculty Code</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Section: CAREERS -->
+            <div class="sidebar-group-header">CAREERS</div>
+
+            <!-- Jobs & Internships (ACTIVE Solid Blue Pill with Dropdown) -->
+            <div class="sidebar-nav-item-wrap open" id="nav-group-jobs">
+              <div class="sidebar-nav-link-row active">
+                <a href="jobs.html" class="sidebar-nav-link active" id="nav-btn-jobs">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="7" rx="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                  <span>Jobs &amp; Internships</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('jobs', event)" title="Toggle Jobs sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-jobs">
+                <a href="javascript:void(0)" class="sidebar-subnav-item active" onclick="setCategoryTab('all')">
+                  <span>Hiring Drives</span>
+                </a>
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="openApplicationsModal()">
+                  <span>My Applications</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Hackathons -->
+            <button type="button" class="sidebar-nav-link" id="nav-btn-hackathons" onclick="showToast('Hackathons: Next National Polygon Hackathon in 4 days', 'info')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+              </svg>
+              <span>Hackathons</span>
+            </button>
+
+          </div>
+
+          <!-- Student Profile Card Bottom -->
+          <div class="sidebar-bottom-profile" onclick="openStudentDossierModal()" title="View Student Academic Dossier">
+            <div class="profile-monogram-box">
+              <div class="profile-avatar-circle">VY</div>
+              <div class="profile-text-group">
+                <div class="profile-name-text">Vivek Yadav</div>
+                <div class="profile-role-sub">GTU CSE · 8.85</div>
+              </div>
+            </div>
+            <div class="profile-gear-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ================================================================
+           3. MAIN DASHBOARD CONTENT AREA (Matching portal padding & rhythm)
+           ================================================================ -->
+      <main class="dashboard-main-view" id="main-content-scroll">
+        <div class="jobs-content-wrap">
+
+          <!-- 1. Hero Banner Frame -->
+          <section class="jobs-hero-frame">
+            <div class="jobs-hero-overlay"></div>
+            <div class="jobs-hero-content">
+              <div class="jobs-hero-pill">
+                <span>⚡ VERIFIED RECRUITER GATEWAY • 48+ SDE OPENINGS</span>
+              </div>
+              <h1 class="jobs-hero-title">
+                Land Your Dream SDE Role. <br>
+                <span class="jobs-hero-title-highlight">Fast-Track Campus Placement.</span>
+              </h1>
+              <p class="jobs-hero-desc">
+                High Torpedo TRP scores and verified Lifecode DSA rankings directly qualify you for 1-click Fast-Track interviews with Google, Microsoft, Razorpay, CRED, and top engineering teams.
+              </p>
+              <div class="jobs-hero-actions">
+                <button type="button" class="btn-hero-primary" onclick="document.getElementById('openings-section').scrollIntoView({behavior:'smooth'})">
+                  <span>Explore 48+ Openings ↓</span>
+                </button>
+                <button type="button" class="btn-hero-secondary" onclick="openApplicationsModal()">
+                  <span>💼 Track My Applications (<span id="hero-apps-count">2</span>)</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2. Live Placement Metrics Strip -->
+          <section class="jobs-stats-grid">
+            <div class="stat-card-box">
+              <div class="stat-icon-wrap icon-blue">💼</div>
+              <div>
+                <div class="stat-val-num">48+</div>
+                <div class="stat-label-text">Active Hiring Drives</div>
+              </div>
+            </div>
+
+            <div class="stat-card-box">
+              <div class="stat-icon-wrap icon-green">💰</div>
+              <div>
+                <div class="stat-val-num">₹18.4 LPA</div>
+                <div class="stat-label-text">Average SDE-1 CTC (Peak: ₹44 LPA)</div>
+              </div>
+            </div>
+
+            <div class="stat-card-box">
+              <div class="stat-icon-wrap icon-amber">⚡</div>
+              <div>
+                <div class="stat-val-num">1-Click Apply</div>
+                <div class="stat-label-text">Fast-Track with Torpedo TRP Dossier</div>
+              </div>
+            </div>
+
+            <div class="stat-card-box">
+              <div class="stat-icon-wrap icon-purple">🏆</div>
+              <div>
+                <div class="stat-val-num">94% Shortlist</div>
+                <div class="stat-label-text">For Candidates with &gt;500 TRP Score</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Compact Student Placement Readiness Strip -->
+          <section class="student-readiness-strip">
+            <div class="readiness-left-profile">
+              <div class="readiness-avatar">VY</div>
+              <div>
+                <div class="readiness-title">Vivek Yadav • Verified Candidate</div>
+                <div class="readiness-sub">GTU CSE · 2026 Batch · Top 2.4% LMS Bracket</div>
+              </div>
+            </div>
+
+            <div class="readiness-pills">
+              <span class="readiness-tag gold">⚡ Gold Tier Fast-Track Eligible</span>
+              <span class="readiness-tag">🎯 640 TRP Points</span>
+              <span class="readiness-tag">💻 14/520 Solved DSA</span>
+              <button type="button" class="btn-view-dossier-sm" onclick="openStudentDossierModal()">
+                <span>Preview Dossier Resume →</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns -->
+          <section class="jobs-toolbar-card" id="openings-section">
+            <div class="toolbar-search-row">
+              <div class="search-input-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="job-search-input" class="job-search-input" placeholder="Search by role title, company (Google, Razorpay), skill (React, Java, Go), or city..." oninput="onSearchInput(this.value)">
+              </div>
+
+              <!-- Compact Dropdown: Experience / Batch -->
+              <select class="select-dropdown-box" id="filter-experience-select" onchange="applyFilters()">
+                <option value="all">All Batches</option>
+                <option value="Freshers">Freshers / 2026 Batch</option>
+                <option value="0 - 1">0 - 1 Years Experience</option>
+                <option value="0 - 2">0 - 2 Years Experience</option>
+              </select>
+
+              <!-- Compact Dropdown: Work Mode -->
+              <select class="select-dropdown-box" id="filter-workmode-select" onchange="applyFilters()">
+                <option value="all">All Work Modes</option>
+                <option value="Remote">Remote / WFH</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="On-site">On-site</option>
+              </select>
+
+              <!-- Compact Dropdown: Tech Stack Filter (Prevents bulky sidebar) -->
+              <select class="select-dropdown-box" id="filter-tech-select" onchange="applyFilters()">
+                <option value="all">All Tech Stacks</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="React">React / Frontend</option>
+                <option value="Go">Go / Golang</option>
+                <option value="C++">C++</option>
+                <option value="Distributed Systems">Distributed Systems</option>
+                <option value="Databases & SQL">SQL / Databases</option>
+              </select>
+
+              <!-- Compact Dropdown: Sort -->
+              <select class="select-dropdown-box" id="sort-jobs-select" onchange="applyFilters()">
+                <option value="match">Best Match (TRP Fit)</option>
+                <option value="compensation">Highest CTC / Stipend</option>
+                <option value="recent">Latest Posted</option>
+                <option value="deadline">Expiring Soonest</option>
+              </select>
+            </div>
+
+            <div class="toolbar-tabs-row">
+              <div class="filter-tabs-pills">
+                <button type="button" class="filter-pill-btn active" onclick="setCategoryTab('all', this)">All Opportunities (16)</button>
+                <button type="button" class="filter-pill-btn" onclick="setCategoryTab('Full-Time', this)">Full-Time SDE (9)</button>
+                <button type="button" class="filter-pill-btn" onclick="setCategoryTab('Internship', this)">Summer &amp; 6M Internships (7)</button>
+                <button type="button" class="filter-pill-btn" onclick="setCategoryTab('Remote', this)">Remote / WFH (4)</button>
+                <button type="button" class="filter-pill-btn" onclick="setCategoryTab('fasttrack', this)">⚡ Fast-Track (&gt;500 TRP)</button>
+                <button type="button" class="filter-pill-btn" onclick="setCategoryTab('saved', this)">⭐ Saved Roles</button>
+              </div>
+
+              <div class="counter-summary-text" id="jobs-counter-text">
+                Showing 16 of 48 active openings
+              </div>
+            </div>
+          </section>
+
+          <!-- 5. Job Cards Grid -->
+          <section class="jobs-listings-grid" id="jobs-container">
+            <!-- Injected dynamically from js/jobs-data.js -->
+          </section>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       3. MODALS (Compliant with modern-web-guidance <dialog>)
+       ====================================================================== -->
+
+  <!-- Job Details Modal -->
+  <dialog id="job-details-dialog" aria-labelledby="jd-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="jd-dialog-title">Job &amp; Internship Details</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeJobDetailsModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body" id="jd-dialog-body">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeJobDetailsModal()">Close</button>
+      <button type="button" class="btn-apply-fasttrack" id="btn-dialog-apply" onclick="openApplyFromDetails()">
+        <span>Apply with Torpedo Dossier →</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Fast-Track 1-Click Apply Modal -->
+  <dialog id="job-apply-dialog" aria-labelledby="apply-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="apply-dialog-title">1-Click Fast-Track Application</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeApplyModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body">
+      <div id="apply-role-summary-box" style="background:#f8fafc; border:1px solid var(--border-card); border-radius:10px; padding:14px; margin-bottom:16px;">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Applicant Profile</label>
+        <div style="background:#ffffff; border:1px solid var(--border-card); border-radius:8px; padding:10px 14px; font-size:0.84rem;">
+          <div><strong>Vivek Yadav</strong> (GTU CSE, 2026 Batch)</div>
+          <div style="color:#64748b; font-size:0.78rem; margin-top:2px;">vivek.hr362007@gmail.com • +91 98765 43210</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Verified Torpedo LMS Credentials</label>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:8px; text-align:center;">
+            <div style="font-size:0.68rem; color:#1e40af; font-weight:750;">TRP SCORE</div>
+            <div style="font-family:var(--font-mono, monospace); font-size:1.1rem; font-weight:800; color:#1d4ed8;">640</div>
+          </div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:8px; text-align:center;">
+            <div style="font-size:0.68rem; color:#166534; font-weight:750;">DSA SOLVED</div>
+            <div style="font-family:var(--font-mono, monospace); font-size:1.1rem; font-weight:800; color:#15803d;">14 / 520</div>
+          </div>
+          <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:8px; padding:8px; text-align:center;">
+            <div style="font-size:0.68rem; color:#6b21a8; font-weight:750;">CODE RANK</div>
+            <div style="font-family:var(--font-mono, monospace); font-size:1.1rem; font-weight:800; color:#7e22ce;">Top 2.4%</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label for="apply-notes-textarea" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Note to Hiring Team (Optional)</label>
+        <textarea id="apply-notes-textarea" rows="3" style="width:100%; border:1px solid var(--border-card); border-radius:8px; padding:10px; font-family:inherit; font-size:0.82rem; outline:none;" placeholder="Highlight any specific projects, GitHub repos, or coding contest ranks..."></textarea>
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:10px 14px; font-size:0.76rem; color:#15803d; display:flex; align-items:center; gap:8px;">
+        <span>🔒</span>
+        <span>Your verified Torpedo coding badge and academic dossier will be submitted directly to the verified recruiter's ATS.</span>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeApplyModal()">Cancel</button>
+      <button type="button" class="btn-apply-fasttrack" onclick="submitJobApplication()">
+        <span>Confirm &amp; Submit Application →</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- My Applications Modal -->
+  <dialog id="my-apps-dialog" aria-labelledby="apps-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="apps-dialog-title">My Tracked Applications</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeApplicationsModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body" id="my-apps-list-body">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeApplicationsModal()">Close</button>
+    </div>
+  </dialog>
+
+  <!-- Student Dossier Preview Modal -->
+  <dialog id="dossier-preview-dialog" aria-labelledby="dossier-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="dossier-dialog-title">Student Placement Dossier</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeStudentDossierModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body">
+      <div style="border-bottom:1px solid var(--border-card); padding-bottom:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+          <h2 style="font-family:var(--font-display, 'Outfit', sans-serif); font-size:1.35rem; color:#0f172a;">Vivek Yadav</h2>
+          <div style="color:#64748b; font-size:0.84rem; margin-top:2px;">B.Tech Computer Science &amp; Engineering • Gujarat Technological University</div>
+          <div style="font-family:var(--font-mono, monospace); color:#0f2ac7; font-size:0.76rem; margin-top:4px;">Roll: 22002170310065 • CPI: 8.85 / 10</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="background:#eff6ff; color:#1d4ed8; font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:6px; border:1px solid #bfdbfe;">VERIFIED CANDIDATE</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <h4 style="font-size:0.88rem; font-weight:750; color:#0f172a; margin-bottom:8px;">Verified Algorithmic Competencies</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Dynamic Programming (Advanced)</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Binary Search &amp; Predicates</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Graph Traversal (BFS/DFS)</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">Relational Databases &amp; SQL</span>
+          <span class="skill-chip-pill" style="background:#eff6ff; color:#1d4ed8;">React.js &amp; Frontend Systems</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <h4 style="font-size:0.88rem; font-weight:750; color:#0f172a; margin-bottom:8px;">Torpedo LMS Certifications</h4>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:8px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="font-size:0.84rem; color:#0f172a;">Full Stack Web &amp; API Systems</strong>
+              <div style="font-size:0.72rem; color:#64748b;">Issued by Torpedo Learning • ID: TRP-CERT-8842</div>
+            </div>
+            <span style="font-size:0.72rem; font-weight:750; color:#059669;">Verified ✓</span>
+          </div>
+          <div style="background:#f8fafc; border:1px solid var(--border-card); border-radius:8px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="font-size:0.84rem; color:#0f172a;">Data Structures &amp; High-Throughput Algorithms</strong>
+              <div style="font-size:0.72rem; color:#64748b;">Top 2.4% Student Bracket • Score: 98.4%</div>
+            </div>
+            <span style="font-size:0.72rem; font-weight:750; color:#059669;">Verified ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeStudentDossierModal()">Close</button>
+      <button type="button" class="btn-apply-fasttrack" onclick="showToast('Verified Dossier PDF downloaded.', 'success')">
+        <span>Download Official PDF ↓</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification -->
+  <div class="toast-box" id="jobs-toast" role="status" aria-live="polite">
+    <span id="toast-text">Notification message</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/jobs-data.js"></script>
+  <script>
+    /* ========================================================================
+       JOBS & INTERNSHIPS APPLICATION CONTROLLER
+       ======================================================================== */
+    let activeCategoryTab = 'all';
+    let searchQuery = '';
+    let selectedExperience = 'all';
+    let selectedWorkMode = 'all';
+    let selectedTech = 'all';
+    let selectedSort = 'match';
+    let selectedJobForApply = null;
+
+    // Load saved applications & bookmarks from localStorage
+    let appliedJobs = [];
+    let savedJobIds = new Set();
+
+    try {
+      const storedApplied = localStorage.getItem('torpedo_applied_jobs');
+      appliedJobs = storedApplied ? JSON.parse(storedApplied) : INITIAL_APPLIED_JOBS;
+      const storedSaved = localStorage.getItem('torpedo_saved_jobs');
+      if (storedSaved) {
+        savedJobIds = new Set(JSON.parse(storedSaved));
+      }
+    } catch (e) {
+      appliedJobs = INITIAL_APPLIED_JOBS;
+    }
+
+    function saveStateToStorage() {
+      try {
+        localStorage.setItem('torpedo_applied_jobs', JSON.stringify(appliedJobs));
+        localStorage.setItem('torpedo_saved_jobs', JSON.stringify(Array.from(savedJobIds)));
+      } catch (e) {}
+    }
+
+    // Sidebar Toggling
+    function toggleSidebarMenuExpand() {
+      const sidebar = document.getElementById('student-portal-sidebar');
+      if (sidebar) sidebar.classList.toggle('collapsed');
+    }
+
+    function toggleSidebarSubnav(itemKey, event) {
+      if (event) event.stopPropagation();
+      const group = document.getElementById(`nav-group-${itemKey}`);
+      if (group) group.classList.toggle('open');
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      applyFilters();
+      updateAppliedCounter();
+      setupLightDismissFallbacks();
+
+      // Check if URL has ?view=applications
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('view') === 'applications' || window.location.hash === '#applications') {
+        openApplicationsModal();
+      }
+    });
+
+    // Search & Filter Handler
+    function onSearchInput(val) {
+      searchQuery = val.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function setCategoryTab(tab, btn) {
+      activeCategoryTab = tab;
+      document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const expSelect = document.getElementById('filter-experience-select');
+      const wmSelect = document.getElementById('filter-workmode-select');
+      const techSelect = document.getElementById('filter-tech-select');
+      const sortSelect = document.getElementById('sort-jobs-select');
+
+      if (expSelect) selectedExperience = expSelect.value;
+      if (wmSelect) selectedWorkMode = wmSelect.value;
+      if (techSelect) selectedTech = techSelect.value;
+      if (sortSelect) selectedSort = sortSelect.value;
+
+      let filtered = [...TORPEDO_JOBS_DATA];
+
+      // Tab filter
+      if (activeCategoryTab === 'Full-Time') {
+        filtered = filtered.filter(j => j.type === 'Full-Time');
+      } else if (activeCategoryTab === 'Internship') {
+        filtered = filtered.filter(j => j.type === 'Internship');
+      } else if (activeCategoryTab === 'Remote') {
+        filtered = filtered.filter(j => j.workMode === 'Remote');
+      } else if (activeCategoryTab === 'fasttrack') {
+        filtered = filtered.filter(j => j.trpRequired >= 500);
+      } else if (activeCategoryTab === 'saved') {
+        filtered = filtered.filter(j => savedJobIds.has(j.id));
+      }
+
+      // Experience filter
+      if (selectedExperience !== 'all') {
+        filtered = filtered.filter(j => j.experience.toLowerCase().includes(selectedExperience.toLowerCase()) || j.batch.includes(selectedExperience));
+      }
+
+      // Work mode filter
+      if (selectedWorkMode !== 'all') {
+        filtered = filtered.filter(j => j.workMode.toLowerCase() === selectedWorkMode.toLowerCase());
+      }
+
+      // Tech Stack Dropdown filter
+      if (selectedTech !== 'all') {
+        filtered = filtered.filter(j => j.tags.some(t => t.toLowerCase().includes(selectedTech.toLowerCase())));
+      }
+
+      // Search Query
+      if (searchQuery) {
+        filtered = filtered.filter(j => {
+          return j.title.toLowerCase().includes(searchQuery) ||
+                 j.company.toLowerCase().includes(searchQuery) ||
+                 j.location.toLowerCase().includes(searchQuery) ||
+                 j.tags.some(t => t.toLowerCase().includes(searchQuery));
+        });
+      }
+
+      // Sorting
+      if (selectedSort === 'match') {
+        filtered.sort((a, b) => b.matchRate - a.matchRate);
+      } else if (selectedSort === 'compensation') {
+        filtered.sort((a, b) => b.compensationValue - a.compensationValue);
+      } else if (selectedSort === 'recent') {
+        filtered.sort((a, b) => a.postedDaysAgo - b.postedDaysAgo);
+      } else if (selectedSort === 'deadline') {
+        filtered.sort((a, b) => a.deadlineDays - b.deadlineDays);
+      }
+
+      renderJobListings(filtered);
+    }
+
+    // Render Job Cards
+    function renderJobListings(jobs) {
+      const container = document.getElementById('jobs-container');
+      const counterText = document.getElementById('jobs-counter-text');
+      if (counterText) {
+        counterText.textContent = `Showing ${jobs.length} of ${TORPEDO_JOBS_DATA.length} active openings`;
+      }
+
+      if (jobs.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state-card">
+            <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
+            <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 6px;">No openings matched your filter criteria</h3>
+            <p style="font-size: 0.84rem; max-width: 420px; margin: 0 auto 16px auto;">Try clearing search keywords or resetting dropdown filters.</p>
+            <button type="button" class="btn-details-ghost" onclick="resetAllFilters()">Reset All Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = jobs.map(job => {
+        const isApplied = appliedJobs.some(a => a.jobId === job.id);
+        const isSaved = savedJobIds.has(job.id);
+        const typeBadgeClass = job.type === 'Full-Time' ? 'badge-fulltime' : 'badge-internship';
+
+        return `
+          <article class="job-card-item" id="card-${job.id}">
+            <div>
+              <div class="job-card-top-row">
+                <div class="job-brand-meta">
+                  <div class="job-company-avatar" style="background: ${job.logoBg}; color: ${job.logoColor};">
+                    ${job.logoLetter}
+                  </div>
+                  <div>
+                    <h3 class="job-title-line" onclick="openJobDetailsModal('${job.id}')">${job.title}</h3>
+                    <div class="job-company-subtitle">
+                      <span style="color: #0f172a; font-weight: 750;">${job.company}</span>
+                      <span class="job-company-dot"></span>
+                      <span>📍 ${job.location}</span>
+                      <span class="job-company-dot"></span>
+                      <span>⏳ ${job.deadlineDays}d left</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="job-salary-callout">
+                  ${job.stipendSalary}
+                </div>
+              </div>
+
+              <!-- Badges -->
+              <div class="job-card-badges-strip" style="margin-top: 10px;">
+                <span class="badge-tag-type ${typeBadgeClass}">${job.type}</span>
+                <span class="badge-tag-type ${job.workMode === 'Remote' ? 'badge-remote' : ''}">${job.workMode}</span>
+                ${job.urgent ? '<span class="badge-tag-type badge-urgent">⚡ Urgent Drive</span>' : ''}
+                <span style="font-size: 0.70rem; color: #64748b; font-weight: 600;">🎓 ${job.batch}</span>
+              </div>
+
+              <p class="job-desc-snippet" style="margin-top: 8px;">${job.description}</p>
+
+              <!-- Skills -->
+              <div class="job-skills-chips-row" style="margin-top: 8px;">
+                ${job.tags.map(t => `<span class="skill-chip-pill" onclick="searchBySkill('${t}')">${t}</span>`).join('')}
+              </div>
+            </div>
+
+            <!-- Bottom Action Row -->
+            <div class="job-card-bottom-bar">
+              <div class="job-match-indicator">
+                <span>🎯 ${job.matchRate}% Match</span>
+                <div class="match-progress-bar">
+                  <div class="match-progress-fill" style="width: ${job.matchRate}%;"></div>
+                </div>
+                <span style="color: #94a3b8; font-size: 0.70rem;">(${job.applicantsCount} applied)</span>
+              </div>
+
+              <div class="job-actions-cluster">
+                <button type="button" class="btn-bookmark-job ${isSaved ? 'active' : ''}" onclick="toggleSaveJob('${job.id}')" title="Save this role">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                </button>
+
+                <button type="button" class="btn-details-ghost" onclick="openJobDetailsModal('${job.id}')">
+                  View Details
+                </button>
+
+                <button type="button" class="btn-apply-fasttrack ${isApplied ? 'applied' : ''}" onclick="onQuickApplyClick('${job.id}')">
+                  ${isApplied ? '<span>✓ Applied</span>' : '<span>⚡ 1-Click Apply</span>'}
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function searchBySkill(skill) {
+      const searchBox = document.getElementById('job-search-input');
+      if (searchBox) searchBox.value = skill;
+      searchQuery = skill.toLowerCase();
+      applyFilters();
+    }
+
+    function resetAllFilters() {
+      searchQuery = '';
+      activeCategoryTab = 'all';
+      selectedExperience = 'all';
+      selectedWorkMode = 'all';
+      selectedTech = 'all';
+      selectedSort = 'match';
+
+      const searchBox = document.getElementById('job-search-input');
+      if (searchBox) searchBox.value = '';
+      const expSelect = document.getElementById('filter-experience-select');
+      if (expSelect) expSelect.value = 'all';
+      const wmSelect = document.getElementById('filter-workmode-select');
+      if (wmSelect) wmSelect.value = 'all';
+      const techSelect = document.getElementById('filter-tech-select');
+      if (techSelect) techSelect.value = 'all';
+      const sortSelect = document.getElementById('sort-jobs-select');
+      if (sortSelect) sortSelect.value = 'match';
+
+      document.querySelectorAll('.filter-pill-btn').forEach((b, i) => {
+        if (i === 0) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+
+      applyFilters();
+    }
+
+    // Bookmark / Save
+    function toggleSaveJob(id) {
+      if (savedJobIds.has(id)) {
+        savedJobIds.delete(id);
+        showToast('Role removed from saved bookmarks.', 'info');
+      } else {
+        savedJobIds.add(id);
+        showToast('Role saved to your study bookmarks! ⭐', 'success');
+      }
+      saveStateToStorage();
+      applyFilters();
+    }
+
+    // Job Details Modal
+    function openJobDetailsModal(jobId) {
+      const job = TORPEDO_JOBS_DATA.find(j => j.id === jobId);
+      if (!job) return;
+      selectedJobForApply = job;
+
+      const modal = document.getElementById('job-details-dialog');
+      const body = document.getElementById('jd-dialog-body');
+      const title = document.getElementById('jd-dialog-title');
+      const applyBtn = document.getElementById('btn-dialog-apply');
+
+      const isApplied = appliedJobs.some(a => a.jobId === job.id);
+      if (applyBtn) {
+        applyBtn.innerHTML = isApplied ? '<span>✓ Already Applied</span>' : '<span>Apply with Torpedo Dossier →</span>';
+        applyBtn.disabled = isApplied;
+        applyBtn.className = isApplied ? 'btn-apply-fasttrack applied' : 'btn-apply-fasttrack';
+      }
+
+      if (title) title.textContent = `${job.title} - ${job.company}`;
+
+      if (body) {
+        body.innerHTML = `
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-card);">
+            <div>
+              <div style="font-size: 1.2rem; font-weight: 850; color: #0f172a; font-family: var(--font-display);">${job.title}</div>
+              <div style="font-size: 0.86rem; font-weight: 700; color: #0f2ac7; margin-top: 2px;">${job.company} • ${job.location} (${job.workMode})</div>
+              <div style="font-size: 0.76rem; color: #64748b; margin-top: 3px;">Department: ${job.department} · Batch: ${job.batch}</div>
+            </div>
+            <div class="job-salary-callout" style="font-size: 1rem;">
+              ${job.stipendSalary}
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">About ${job.company}</h4>
+            <p style="font-size: 0.82rem; line-height: 1.6; color: #334155;">${job.aboutCompany}</p>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Role Description</h4>
+            <p style="font-size: 0.82rem; line-height: 1.6; color: #334155; margin-bottom: 8px;">${job.description}</p>
+            <h4 style="font-size: 0.84rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Key Responsibilities:</h4>
+            <ul style="padding-left: 20px; font-size: 0.80rem; line-height: 1.65; color: #334155;">
+              ${job.responsibilities.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Minimum Eligibility &amp; Requirements:</h4>
+            <ul style="padding-left: 20px; font-size: 0.80rem; line-height: 1.65; color: #334155;">
+              ${job.requirements.map(req => `<li>${req}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 8px;">Recruiter Interview Roadmap</h4>
+            <div class="roadmap-list">
+              ${job.hiringRounds.map(rnd => `
+                <div class="roadmap-step-item">
+                  <div class="roadmap-badge-num">${rnd.step}</div>
+                  <div>
+                    <div class="roadmap-text-title">${rnd.name}</div>
+                    <div class="roadmap-text-sub">${rnd.desc}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="prep-box-alert">
+            <div style="font-size: 0.82rem; font-weight: 750; color: #1e40af; margin-bottom: 6px;">
+              💡 Recommended Practice Topics on Torpedo LMS
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${job.prepTopics.map(pt => `
+                <a href="lifecode.html" class="skill-chip-pill" style="background: #ffffff; border-color: #93c5fd; color: #1d4ed8; text-decoration: none;">
+                  &lt;/&gt; Solve ${pt} in Lifecode
+                </a>
+              `).join('')}
+              <a href="mock-quizzes.html" class="skill-chip-pill" style="background: #ffffff; border-color: #86efac; color: #15803d; text-decoration: none;">
+                Take Practice Assessment →
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      if (modal) modal.showModal();
+    }
+
+    function closeJobDetailsModal() {
+      const modal = document.getElementById('job-details-dialog');
+      if (modal) modal.close();
+    }
+
+    function openApplyFromDetails() {
+      closeJobDetailsModal();
+      if (selectedJobForApply) {
+        onQuickApplyClick(selectedJobForApply.id);
+      }
+    }
+
+    // 1-Click Fast-Track Application Modal
+    function onQuickApplyClick(jobId) {
+      const job = TORPEDO_JOBS_DATA.find(j => j.id === jobId);
+      if (!job) return;
+      selectedJobForApply = job;
+
+      const isAlready = appliedJobs.some(a => a.jobId === job.id);
+      if (isAlready) {
+        showToast(`You have already applied for ${job.title} at ${job.company}!`, 'info');
+        openApplicationsModal();
+        return;
+      }
+
+      const modal = document.getElementById('job-apply-dialog');
+      const summaryBox = document.getElementById('apply-role-summary-box');
+      if (summaryBox) {
+        summaryBox.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 1.05rem; font-weight: 850; color: #0f172a;">${job.title}</div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: #0f2ac7;">${job.company} · ${job.location}</div>
+            </div>
+            <div class="job-salary-callout" style="font-size: 0.86rem;">${job.stipendSalary}</div>
+          </div>
+        `;
+      }
+
+      if (modal) modal.showModal();
+    }
+
+    function closeApplyModal() {
+      const modal = document.getElementById('job-apply-dialog');
+      if (modal) modal.close();
+    }
+
+    function submitJobApplication() {
+      if (!selectedJobForApply) return;
+      const job = selectedJobForApply;
+
+      const newApp = {
+        jobId: job.id,
+        appliedDate: "Just now",
+        status: "Applied",
+        stageText: "Application Under Recruiter Screening",
+        statusBadgeClass: "status-applied"
+      };
+
+      appliedJobs.unshift(newApp);
+      saveStateToStorage();
+      closeApplyModal();
+      updateAppliedCounter();
+      applyFilters();
+
+      showToast(`Application successfully sent to ${job.company}! Recruiter notification dispatched. 🎉`, 'success');
+    }
+
+    function updateAppliedCounter() {
+      const badge = document.getElementById('nav-applied-count');
+      if (badge) badge.textContent = appliedJobs.length;
+      const heroApps = document.getElementById('hero-apps-count');
+      if (heroApps) heroApps.textContent = appliedJobs.length;
+    }
+
+    // Track Applications Modal
+    function openApplicationsModal() {
+      const modal = document.getElementById('my-apps-dialog');
+      const body = document.getElementById('my-apps-list-body');
+
+      if (body) {
+        if (appliedJobs.length === 0) {
+          body.innerHTML = `
+            <div class="empty-state-card" style="padding: 24px;">
+              <p>You haven't submitted any job applications yet.</p>
+              <button type="button" class="btn-apply-fasttrack" onclick="closeApplicationsModal();" style="margin-top: 10px;">Explore Openings</button>
+            </div>
+          `;
+        } else {
+          body.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              ${appliedJobs.map(app => {
+                const job = TORPEDO_JOBS_DATA.find(j => j.id === app.jobId) || {
+                  title: "Software Engineer",
+                  company: "Technology Partner",
+                  stipendSalary: "Competitive"
+                };
+                return `
+                  <div style="background: #f8fafc; border: 1px solid var(--border-card); border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <div>
+                      <div style="font-weight: 800; font-size: 0.92rem; color: #0f172a;">${job.title}</div>
+                      <div style="font-size: 0.78rem; font-weight: 700; color: #0f2ac7; margin-top: 2px;">${job.company} · Applied ${app.appliedDate}</div>
+                      <div style="font-size: 0.74rem; color: #64748b; margin-top: 2px;">Status: <strong>${app.stageText}</strong></div>
+                    </div>
+                    <div>
+                      <span style="font-size: 0.72rem; font-weight: 750; color: #166534; background: #dcfce7; border: 1px solid #bbf7d0; padding: 3px 8px; border-radius: 6px;">
+                        ${app.status} ✓
+                      </span>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+      }
+
+      if (modal) modal.showModal();
+    }
+
+    function closeApplicationsModal() {
+      const modal = document.getElementById('my-apps-dialog');
+      if (modal) modal.close();
+    }
+
+    // Student Placement Dossier Modal
+    function openStudentDossierModal() {
+      const modal = document.getElementById('dossier-preview-dialog');
+      if (modal) modal.showModal();
+    }
+
+    function closeStudentDossierModal() {
+      const modal = document.getElementById('dossier-preview-dialog');
+      if (modal) modal.close();
+    }
+
+    // Toast Utility
+    function showToast(msg, type = 'info') {
+      const toast = document.getElementById('jobs-toast');
+      const text = document.getElementById('toast-text');
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.style.display = 'flex';
+      toast.style.border = type === 'success' ? '1px solid #10b981' : (type === 'error' ? '1px solid #ef4444' : '1px solid #3b82f6');
+      setTimeout(() => { toast.style.display = 'none'; }, 3200);
+    }
+
+    // Light dismiss fallback for older browsers
+    function setupLightDismissFallbacks() {
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        const outside = (e, dialog) => {
+          const r = dialog.getBoundingClientRect();
+          return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+        };
+        for (const dialog of document.querySelectorAll('dialog[closedby="any"]')) {
+          let pressedOutside = false;
+          dialog.addEventListener('pointerdown', (e) => { pressedOutside = outside(e, dialog); });
+          dialog.addEventListener('pointerup', (e) => { if (pressedOutside && outside(e, dialog)) dialog.close(); });
+        }
+      }
+    }
+  </script>
+</body>
+</html>

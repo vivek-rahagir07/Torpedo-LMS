@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mock Quizzes &amp; Assessment Engine | Torpedo Learning</title>
-  <meta name="description" content="Simulate real-time university exams, FAANG technical screenings, and algorithmic sprint assessments with live timers, proctoring, and diagnostic answer keys.">
+  <meta name="description"
+    content="Simulate real-time university exams, FAANG technical screenings, and algorithmic sprint assessments with live timers, proctoring, and diagnostic answer keys.">
   <link rel="icon" type="image/png" href="assets/LOGO.png">
 
   <!-- Modern Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/portal-layout.css?v=mock_quizzes_v3">
+
+  <script>
+    // Keep user in unified single-portal view with left-hand navbar
+    const params = window.location.search || '';
+    window.location.replace("dashboard.html#quizzes" + (params ? ('&' + params.substring(1)) : ''));
+  </script>
 
   <style>
     body {
@@ -104,6 +114,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navigation Header -->
@@ -111,7 +122,9 @@
     <div class="quizzes-nav-container">
       <a href="dashboard.html" class="quizzes-brand">
         <img src="assets/LOGO.png" alt="Torpedo Learning">
-        <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; color: #0f172a; letter-spacing: -0.02em;">TORPEDO <span style="color: #2563eb;">EXAMS</span></span>
+        <span
+          style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; color: #0f172a; letter-spacing: -0.02em;">TORPEDO
+          <span style="color: #2563eb;">EXAMS</span></span>
       </a>
 
       <nav class="quizzes-nav-links">
@@ -146,8 +159,25 @@
             <a href="javascript:void(0)" onclick="setQuizCategoryFilter('all')" class="top-nav-dropdown-item">
               <span>All Tests</span>
             </a>
-            <a href="javascript:void(0)" onclick="openJoinCourseQuizModal()" class="top-nav-dropdown-item" style="color: #7c3aed; font-weight: 700;">
+            <a href="javascript:void(0)" onclick="openJoinCourseQuizModal()" class="top-nav-dropdown-item"
+              style="color: #7c3aed; font-weight: 700;">
               <span>Faculty Code</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Jobs & Internships Simple Sub-Nav -->
+        <div class="top-nav-dropdown-wrap">
+          <a href="jobs.html" class="quizzes-nav-link top-nav-dropdown-trigger">
+            <span>Jobs &amp; Internships</span>
+            <span class="top-nav-chevron">▾</span>
+          </a>
+          <div class="top-nav-dropdown-menu">
+            <a href="jobs.html" class="top-nav-dropdown-item">
+              <span>Hiring Drives</span>
+            </a>
+            <a href="jobs.html?view=applications" class="top-nav-dropdown-item">
+              <span>My Applications</span>
             </a>
           </div>
         </div>
@@ -175,7 +205,8 @@
           Test Knowledge. <span class="quiz-hero-title-highlight">Master Speed.</span>
         </h1>
         <p class="quiz-hero-subtitle">
-          Simulate university finals, FAANG technical screenings, and algorithmic sprint exams with automated proctoring, live countdown timers, and diagnostic skill analytics.
+          Simulate university finals, FAANG technical screenings, and algorithmic sprint exams with automated
+          proctoring, live countdown timers, and diagnostic skill analytics.
         </p>
         <div class="quiz-hero-actions">
           <button type="button" class="quiz-hero-btn-code" onclick="openJoinCourseQuizModal()">
@@ -184,7 +215,8 @@
           <button type="button" class="quiz-hero-btn-primary" onclick="startQuizRunner('quiz-dsa-01')">
             <span>⚡ Take Daily Assessment Sprint</span>
           </button>
-          <button type="button" class="quiz-hero-btn-secondary" onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
+          <button type="button" class="quiz-hero-btn-secondary"
+            onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
             <span>📋 Browse All Quizzes (24+)</span>
           </button>
         </div>
@@ -197,13 +229,17 @@
         <div class="faculty-banner-icon">🎓</div>
         <div class="faculty-banner-text">
           <h4>Course Midterm &amp; Faculty Quizzes</h4>
-          <p>Have an access code from your university professor or instructor? Enter it below to unlock your course assessment.</p>
+          <p>Have an access code from your university professor or instructor? Enter it below to unlock your course
+            assessment.</p>
         </div>
       </div>
 
       <div class="faculty-banner-right">
-        <input type="text" id="faculty-quick-code-input" class="faculty-code-input-sm" placeholder="CODE (e.g. CSE-401)" maxlength="12" onkeyup="if(event.key==='Enter') { quickFillQuizCode(this.value); openJoinCourseQuizModal(); }">
-        <button type="button" class="btn-unlock-faculty-quiz" onclick="const v = document.getElementById('faculty-quick-code-input').value; if(v.trim()) { quickFillQuizCode(v); openJoinCourseQuizModal(); } else { openJoinCourseQuizModal(); }">
+        <input type="text" id="faculty-quick-code-input" class="faculty-code-input-sm" placeholder="CODE (e.g. CSE-401)"
+          maxlength="12"
+          onkeyup="if(event.key==='Enter') { quickFillQuizCode(this.value); openJoinCourseQuizModal(); }">
+        <button type="button" class="btn-unlock-faculty-quiz"
+          onclick="const v = document.getElementById('faculty-quick-code-input').value; if(v.trim()) { quickFillQuizCode(v); openJoinCourseQuizModal(); } else { openJoinCourseQuizModal(); }">
           <span>Unlock Exam</span>
           <span>→</span>
         </button>
@@ -265,7 +301,7 @@
           </div>
 
           <h3 class="quiz-daily-title">FAANG DSA Sprint: Binary Search &amp; Two Pointers</h3>
-          
+
           <div class="quiz-daily-tags">
             <span class="quiz-diff-badge medium">MEDIUM</span>
             <span class="quiz-topic-pill">Binary Search</span>
@@ -274,12 +310,14 @@
           </div>
 
           <p class="quiz-daily-desc">
-            Sharpen your algorithmic intuition on answer-space boundaries, rotated array pivoting, and optimal sliding window contraction under strict time constraints.
+            Sharpen your algorithmic intuition on answer-space boundaries, rotated array pivoting, and optimal sliding
+            window contraction under strict time constraints.
           </p>
         </div>
 
         <div class="quiz-daily-footer">
-          <span style="font-size: 0.76rem; font-weight: 750; color: #4338ca;">🎁 +120 TRP Points • 1 Assessment Key 🔑</span>
+          <span style="font-size: 0.76rem; font-weight: 750; color: #4338ca;">🎁 +120 TRP Points • 1 Assessment Key
+            🔑</span>
           <button type="button" class="btn-start-daily-quiz" onclick="startQuizRunner('quiz-dsa-01')">
             <span>Start Assessment Sprint</span>
             <span>→</span>
@@ -329,10 +367,12 @@
         </div>
 
         <div class="quiz-tracks-footer">
-          <button type="button" class="lc-btn-browse-lib" style="flex: 1;" onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
+          <button type="button" class="lc-btn-browse-lib" style="flex: 1;"
+            onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
             <span>🔍 Explore Full Test Catalog</span>
           </button>
-          <button type="button" class="lc-btn-shuffle-sm" onclick="startQuizRunner('quiz-apt-01')" title="Launch Random Sprint">
+          <button type="button" class="lc-btn-shuffle-sm" onclick="startQuizRunner('quiz-apt-01')"
+            title="Launch Random Sprint">
             <span class="lc-dice-icon">🎲</span>
             <span>Surprise Quiz</span>
           </button>
@@ -354,19 +394,27 @@
         <!-- Search Bar with shortcut chip -->
         <div class="lc-practice-search-wrap" style="max-width: 380px;">
           <span class="lc-practice-search-icon">🔍</span>
-          <input type="text" class="lc-practice-search-input" id="quiz-search-box" placeholder="Search assessments, topics (e.g. React, B-Tree, Dijkstra)..." oninput="handleQuizSearchInput(this.value)">
+          <input type="text" class="lc-practice-search-input" id="quiz-search-box"
+            placeholder="Search assessments, topics (e.g. React, B-Tree, Dijkstra)..."
+            oninput="handleQuizSearchInput(this.value)">
           <span class="lc-search-kbd">⌘K</span>
         </div>
       </div>
 
       <!-- Category Filter Pills -->
       <div class="quiz-filter-pills-row">
-        <button type="button" class="quiz-filter-pill active" data-cat="all" onclick="setQuizCategoryFilter('all', this)">📋 All Sprints</button>
-        <button type="button" class="quiz-filter-pill" data-cat="dsa" onclick="setQuizCategoryFilter('dsa', this)">⚡ DSA &amp; Algorithms</button>
-        <button type="button" class="quiz-filter-pill" data-cat="web" onclick="setQuizCategoryFilter('web', this)">🌐 Full Stack Web</button>
-        <button type="button" class="quiz-filter-pill" data-cat="db" onclick="setQuizCategoryFilter('db', this)">🗄️ Databases &amp; SQL</button>
-        <button type="button" class="quiz-filter-pill" data-cat="os" onclick="setQuizCategoryFilter('os', this)">⚙️ OS &amp; Networks</button>
-        <button type="button" class="quiz-filter-pill" data-cat="aptitude" onclick="setQuizCategoryFilter('aptitude', this)">🧠 Aptitude &amp; Logic</button>
+        <button type="button" class="quiz-filter-pill active" data-cat="all"
+          onclick="setQuizCategoryFilter('all', this)">📋 All Sprints</button>
+        <button type="button" class="quiz-filter-pill" data-cat="dsa" onclick="setQuizCategoryFilter('dsa', this)">⚡ DSA
+          &amp; Algorithms</button>
+        <button type="button" class="quiz-filter-pill" data-cat="web" onclick="setQuizCategoryFilter('web', this)">🌐
+          Full Stack Web</button>
+        <button type="button" class="quiz-filter-pill" data-cat="db" onclick="setQuizCategoryFilter('db', this)">🗄️
+          Databases &amp; SQL</button>
+        <button type="button" class="quiz-filter-pill" data-cat="os" onclick="setQuizCategoryFilter('os', this)">⚙️ OS
+          &amp; Networks</button>
+        <button type="button" class="quiz-filter-pill" data-cat="aptitude"
+          onclick="setQuizCategoryFilter('aptitude', this)">🧠 Aptitude &amp; Logic</button>
       </div>
 
       <!-- Quiz Grid populated by JS -->
@@ -394,13 +442,15 @@
             <span>⏱️</span>
             <span id="quiz-countdown-timer">20:00</span>
           </div>
-          <button type="button" class="quiz-runner-close-btn" onclick="closeQuizRunnerModal()" title="Exit Assessment">✕</button>
+          <button type="button" class="quiz-runner-close-btn" onclick="closeQuizRunnerModal()"
+            title="Exit Assessment">✕</button>
         </div>
       </div>
 
       <!-- Progress Strip -->
       <div class="quiz-runner-progress-strip">
-        <span style="font-size: 0.75rem; font-weight: 750; color: #475569;" id="quiz-progress-counter">0 of 5 Answered</span>
+        <span style="font-size: 0.75rem; font-weight: 750; color: #475569;" id="quiz-progress-counter">0 of 5
+          Answered</span>
         <div class="quiz-progress-track">
           <div class="quiz-progress-bar-fill" id="quiz-progress-bar-fill"></div>
         </div>
@@ -451,13 +501,16 @@
       <!-- Footer Controls -->
       <div class="quiz-runner-footer">
         <div class="quiz-footer-left">
-          <button type="button" class="btn-quiz-ctrl" id="btn-quiz-flag" onclick="toggleQuizFlag()">🏳️ Flag for Review</button>
+          <button type="button" class="btn-quiz-ctrl" id="btn-quiz-flag" onclick="toggleQuizFlag()">🏳️ Flag for
+            Review</button>
           <button type="button" class="btn-quiz-ctrl" onclick="clearQuizSelection()">Clear Selection</button>
         </div>
 
         <div class="quiz-footer-right">
-          <button type="button" class="btn-quiz-ctrl" id="btn-quiz-prev" onclick="quizPrevQuestion()">← Previous</button>
-          <button type="button" class="btn-quiz-primary" id="btn-quiz-next" onclick="quizNextQuestion()">Save &amp; Next →</button>
+          <button type="button" class="btn-quiz-ctrl" id="btn-quiz-prev" onclick="quizPrevQuestion()">←
+            Previous</button>
+          <button type="button" class="btn-quiz-primary" id="btn-quiz-next" onclick="quizNextQuestion()">Save &amp; Next
+            →</button>
           <button type="button" class="btn-quiz-submit" onclick="promptSubmitQuiz()">Submit Assessment</button>
         </div>
       </div>
@@ -471,8 +524,10 @@
     <div class="quiz-result-container">
       <div class="quiz-result-header">
         <div>
-          <span style="font-size: 0.70rem; font-weight: 800; color: #38bdf8; text-transform: uppercase;">Assessment Complete</span>
-          <h3 style="margin: 2px 0 0 0; color: #ffffff; font-size: 1.15rem;" id="result-quiz-title">Assessment Report</h3>
+          <span style="font-size: 0.70rem; font-weight: 800; color: #38bdf8; text-transform: uppercase;">Assessment
+            Complete</span>
+          <h3 style="margin: 2px 0 0 0; color: #ffffff; font-size: 1.15rem;" id="result-quiz-title">Assessment Report
+          </h3>
         </div>
         <button type="button" class="quiz-runner-close-btn" onclick="closeQuizScorecardModal()">✕</button>
       </div>
@@ -508,8 +563,10 @@
       </div>
 
       <div class="quiz-result-footer">
-        <button type="button" class="btn-quiz-ctrl" onclick="closeQuizScorecardModal()">Close &amp; Return to Hub</button>
-        <button type="button" class="btn-quiz-primary" onclick="closeQuizScorecardModal(); startQuizRunner(currentActiveQuiz.id);">Retake Assessment ↻</button>
+        <button type="button" class="btn-quiz-ctrl" onclick="closeQuizScorecardModal()">Close &amp; Return to
+          Hub</button>
+        <button type="button" class="btn-quiz-primary"
+          onclick="closeQuizScorecardModal(); startQuizRunner(currentActiveQuiz.id);">Retake Assessment ↻</button>
       </div>
     </div>
   </div>
@@ -517,16 +574,21 @@
   <!-- ====================================================================
        JOIN COURSE QUIZ MODAL (Faculty Access Code)
        ==================================================================== -->
-  <div class="dossier-modal-backdrop" id="join-course-quiz-modal" onclick="if(event.target===this) closeJoinCourseQuizModal()">
+  <div class="dossier-modal-backdrop" id="join-course-quiz-modal"
+    onclick="if(event.target===this) closeJoinCourseQuizModal()">
     <div class="dossier-modal-card" style="max-width: 520px;">
       <div class="dossier-modal-header" style="border-bottom: none; padding: 24px 24px 0 24px;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div style="width: 40px; height: 40px; border-radius: 10px; background: #eef2ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+          <div
+            style="width: 40px; height: 40px; border-radius: 10px; background: #eef2ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
             🎓
           </div>
           <div>
-            <h3 style="margin: 0; font-family: var(--font-display, 'Inter', sans-serif); font-size: 1.22rem; font-weight: 850; color: #0f172a;">Join Course Assessment</h3>
-            <p style="margin: 3px 0 0 0; font-size: 0.80rem; color: #64748b;">Enter the code provided by your course faculty or instructor.</p>
+            <h3
+              style="margin: 0; font-family: var(--font-display, 'Inter', sans-serif); font-size: 1.22rem; font-weight: 850; color: #0f172a;">
+              Join Course Assessment</h3>
+            <p style="margin: 3px 0 0 0; font-size: 0.80rem; color: #64748b;">Enter the code provided by your course
+              faculty or instructor.</p>
           </div>
         </div>
         <button type="button" class="dossier-modal-close" onclick="closeJoinCourseQuizModal()">✕</button>
@@ -535,21 +597,32 @@
       <div style="padding: 20px 24px 24px 24px;">
         <!-- Code Input -->
         <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 0.70rem; font-weight: 800; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;">FACULTY ASSESSMENT CODE</label>
+          <label
+            style="display: block; font-size: 0.70rem; font-weight: 800; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;">FACULTY
+            ASSESSMENT CODE</label>
           <div style="position: relative;">
-            <input type="text" id="course-quiz-code-input" placeholder="E.G. CSE-401, DSA-302, WEB-109" style="width: 100%; box-sizing: border-box; padding: 13px 16px; border: 2px solid #cbd5e1; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.06em; outline: none; transition: border-color 0.16s;" oninput="checkCourseQuizCode(this.value)" onkeyup="if(event.key==='Enter') submitJoinCourseQuiz()">
-            <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #94a3b8;">🔑</span>
+            <input type="text" id="course-quiz-code-input" placeholder="E.G. CSE-401, DSA-302, WEB-109"
+              style="width: 100%; box-sizing: border-box; padding: 13px 16px; border: 2px solid #cbd5e1; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.06em; outline: none; transition: border-color 0.16s;"
+              oninput="checkCourseQuizCode(this.value)" onkeyup="if(event.key==='Enter') submitJoinCourseQuiz()">
+            <span
+              style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #94a3b8;">🔑</span>
           </div>
-          <span id="course-quiz-error-msg" style="display: none; font-size: 0.74rem; color: #e11d48; font-weight: 600; margin-top: 6px;"></span>
+          <span id="course-quiz-error-msg"
+            style="display: none; font-size: 0.74rem; color: #e11d48; font-weight: 600; margin-top: 6px;"></span>
         </div>
 
         <!-- Quick Code Chips for Testing / Faculty Reference -->
         <div style="margin-bottom: 18px;">
-          <div style="font-size: 0.70rem; font-weight: 750; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Available Course Codes (Faculty Sample Codes):</div>
+          <div
+            style="font-size: 0.70rem; font-weight: 750; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">
+            Available Course Codes (Faculty Sample Codes):</div>
           <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-            <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('CSE-401')">⚡ CSE-401 (DevOps Midterm)</button>
-            <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('DSA-302')">📊 DSA-302 (Algorithms Viva)</button>
-            <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('WEB-109')">🌐 WEB-109 (Full-Stack Final)</button>
+            <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('CSE-401')">⚡ CSE-401 (DevOps
+              Midterm)</button>
+            <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('DSA-302')">📊 DSA-302 (Algorithms
+              Viva)</button>
+            <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('WEB-109')">🌐 WEB-109 (Full-Stack
+              Final)</button>
           </div>
         </div>
 
@@ -561,7 +634,8 @@
         <!-- Action Buttons -->
         <div style="display: flex; justify-content: flex-end; gap: 10px;">
           <button type="button" class="btn-workspace-cancel" onclick="closeJoinCourseQuizModal()">Cancel</button>
-          <button type="button" class="btn-unlock-faculty-quiz" id="btn-submit-join-quiz" onclick="submitJoinCourseQuiz()">
+          <button type="button" class="btn-unlock-faculty-quiz" id="btn-submit-join-quiz"
+            onclick="submitJoinCourseQuiz()">
             <span>Start Assessment</span>
             <span>→</span>
           </button>
@@ -585,11 +659,11 @@
       const bg = type === 'success' ? '#0f172a' : type === 'error' ? '#991b1b' : '#1e293b';
       const border = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#38bdf8';
       toast.style.cssText = `background: ${bg}; color: #ffffff; border-left: 4px solid ${border}; padding: 12px 18px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: auto; transform: translateY(12px); opacity: 0; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; gap: 10px; max-width: 380px; font-family: Inter, system-ui, sans-serif;`;
-      
+
       const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
       toast.innerHTML = `<span style="font-weight: 800; color: ${border}; font-size: 1rem;">${icon}</span><span>${message}</span>`;
       toastContainer.appendChild(toast);
-      
+
       requestAnimationFrame(() => {
         toast.style.transform = 'translateY(0)';
         toast.style.opacity = '1';
@@ -607,4 +681,5 @@
     });
   </script>
 </body>
+
 </html>

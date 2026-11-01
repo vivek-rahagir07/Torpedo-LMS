@@ -11,6 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <script>
+    // Keep user in unified single-portal view with left-hand navbar
+    const params = new URLSearchParams(window.location.search);
+    if (!params.get('standalone')) {
+      const q = window.location.search ? ('&' + window.location.search.substring(1)) : '';
+      window.location.replace("dashboard.html#lifecode" + q);
+    }
+  </script>
+
   <style>
     /* ==========================================================================
        LIFECODE DARK THEME DESIGN SYSTEM (LeetCode / VS Code Dark Aesthetic)

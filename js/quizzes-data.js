@@ -636,6 +636,209 @@ function handleQuizSearchInput(query) {
 }
 
 /**
+ * ============================================================================
+ * 2-TIER DROPDOWN COMPACT QUIZ SELECTOR (Compact No-Scroll Mode)
+ * ============================================================================
+ */
+let selectedQuizDropdownId = null;
+
+function initQuizDropdownLauncher() {
+  const catSelect = document.getElementById('quiz-category-select');
+  const quizSelect = document.getElementById('quiz-item-select');
+  if (!catSelect || !quizSelect) return;
+
+  // 1. Populate Category Dropdown
+  const categories = TORPEDO_QUIZZES_DATA.categories || [];
+  catSelect.innerHTML = categories.map(cat => {
+    const count = cat.id === 'all' 
+      ? TORPEDO_QUIZZES_DATA.quizzes.length 
+      : TORPEDO_QUIZZES_DATA.quizzes.filter(q => q.category === cat.id).length;
+    return `<option value="${cat.id}">${cat.icon || '📁'} ${cat.name} (${count} Tests)</option>`;
+  }).join('');
+
+  // Set default category to 'all' or preserved filter
+  catSelect.value = quizCategoryFilter || 'all';
+
+  // 2. Populate Quizzes Dropdown based on category
+  populateQuizItemDropdown(catSelect.value);
+
+  // 3. Initialize Display Mode (default: 'dropdown' for compact zero-scrolling experience)
+  let savedMode = 'dropdown';
+  try {
+    savedMode = localStorage.getItem('torpedo_quiz_view_mode') || 'dropdown';
+  } catch(e) {}
+  setQuizDisplayMode(savedMode);
+}
+
+function populateQuizItemDropdown(categoryId, preferredQuizId = null) {
+  const quizSelect = document.getElementById('quiz-item-select');
+  if (!quizSelect) return;
+
+  let list = TORPEDO_QUIZZES_DATA.quizzes;
+  if (categoryId !== 'all') {
+    list = list.filter(q => q.category === categoryId);
+  }
+
+  if (list.length === 0) {
+    quizSelect.innerHTML = `<option value="">No assessments available in this domain</option>`;
+    updateQuizDropdownPreview(null);
+    return;
+  }
+
+  quizSelect.innerHTML = list.map(q => {
+    const diffIcon = q.difficulty === 'Hard' ? '🔴' : q.difficulty === 'Medium' ? '🟡' : '🟢';
+    return `<option value="${q.id}">${diffIcon} [${q.difficulty}] ${q.title} • ${q.totalQuestions} Qs (${q.durationMinutes}m)</option>`;
+  }).join('');
+
+  // Target selection
+  let targetId = preferredQuizId;
+  if (!targetId || !list.some(q => q.id === targetId)) {
+    targetId = list[0].id;
+  }
+
+  quizSelect.value = targetId;
+  selectedQuizDropdownId = targetId;
+  updateQuizDropdownPreview(targetId);
+}
+
+function onQuizCategoryDropdownChange(catId) {
+  quizCategoryFilter = catId;
+  populateQuizItemDropdown(catId);
+  
+  // Keep category pills in sync if visible
+  document.querySelectorAll('.quiz-filter-pill').forEach(btn => {
+    if (btn.getAttribute('data-cat') === catId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  // If in grid mode, update catalog grid too
+  renderQuizzesCatalog();
+}
+
+function onQuizItemDropdownChange(quizId) {
+  selectedQuizDropdownId = quizId;
+  updateQuizDropdownPreview(quizId);
+}
+
+function updateQuizDropdownPreview(quizId) {
+  const previewContainer = document.getElementById('quiz-selected-preview');
+  if (!previewContainer) return;
+
+  if (!quizId) {
+    previewContainer.innerHTML = `
+      <div style="text-align: center; padding: 24px; color: #64748b;">
+        <span style="font-size: 1.8rem;">📋</span>
+        <p style="margin: 8px 0 0 0; font-size: 0.9rem;">Please choose a valid assessment from the dropdown above.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const quiz = TORPEDO_QUIZZES_DATA.quizzes.find(q => q.id === quizId) || TORPEDO_QUIZZES_DATA.quizzes[0];
+  if (!quiz) return;
+
+  const diffClass = quiz.difficulty.toLowerCase();
+  const isCompleted = quiz.status === 'completed' || quiz.lastScore !== null;
+  const scoreTag = isCompleted ? `<span class="quiz-score-tag">Past Score: ${quiz.lastScore}%</span>` : `<span style="font-size: 0.75rem; color: #64748b; font-weight: 700; background: #f1f5f9; padding: 3px 9px; border-radius: 6px;">Status: Unattempted</span>`;
+
+  previewContainer.innerHTML = `
+    <div class="quiz-preview-top-row">
+      <div class="quiz-badge-wrap">
+        <span class="quiz-cat-chip">${quiz.categoryLabel}</span>
+        <span class="quiz-diff-badge ${diffClass}">${quiz.difficulty}</span>
+        <span style="font-size: 0.72rem; color: #2563eb; font-weight: 750; background: #eff6ff; padding: 2px 8px; border-radius: 4px;">⚡ Instant Ready</span>
+      </div>
+      <div>
+        ${scoreTag}
+      </div>
+    </div>
+
+    <h3 class="quiz-preview-title">${quiz.title}</h3>
+    <p class="quiz-preview-desc">${quiz.description}</p>
+
+    <div class="quiz-topics-wrap" style="margin-bottom: 14px;">
+      ${quiz.topics.map(t => `<span class="quiz-topic-tag">${t}</span>`).join('')}
+    </div>
+
+    <div class="quiz-preview-meta-grid">
+      <div class="quiz-preview-meta-item">
+        <span style="font-size: 1rem;">⏱️</span>
+        <span>Duration: <strong>${quiz.durationMinutes} Mins</strong></span>
+      </div>
+      <div class="quiz-preview-meta-item">
+        <span style="font-size: 1rem;">📝</span>
+        <span>Questions: <strong>${quiz.totalQuestions} Questions</strong></span>
+      </div>
+      <div class="quiz-preview-meta-item">
+        <span style="font-size: 1rem;">⚡</span>
+        <span style="color: #d97706;">Reward: <strong>+${quiz.xpReward} TRP Points</strong></span>
+      </div>
+      <div class="quiz-preview-meta-item">
+        <span style="font-size: 1rem;">🎯</span>
+        <span>Pass Rate: <strong>${quiz.passRate}</strong> (${quiz.attempts} attempts)</span>
+      </div>
+    </div>
+
+    <div class="quiz-preview-footer">
+      <div style="font-size: 0.82rem; color: #64748b;">
+        <span>🔒 Proctored Environment • Live Countdown Timer • Diagnostic Scorecard</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button type="button" class="btn-dropdown-surprise-quiz" onclick="startRandomQuiz()" title="Select a random quiz to test your readiness">
+          <span>🎲 Surprise Quiz</span>
+        </button>
+        <button type="button" class="btn-dropdown-launch-quiz" onclick="startQuizRunner('${quiz.id}')">
+          <span>${isCompleted ? '↻ Retake Assessment Now' : '⚡ Start Proctored Assessment →'}</span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function startRandomQuiz() {
+  const quizzes = TORPEDO_QUIZZES_DATA.quizzes;
+  const randQuiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+  const catSelect = document.getElementById('quiz-category-select');
+  if (catSelect) {
+    catSelect.value = randQuiz.category;
+  }
+  populateQuizItemDropdown(randQuiz.category, randQuiz.id);
+  if (typeof showToast === 'function') {
+    showToast(`Surprise Sprint selected: ${randQuiz.title}! Launching...`, 'info');
+  }
+  setTimeout(() => {
+    startQuizRunner(randQuiz.id);
+  }, 350);
+}
+
+function setQuizDisplayMode(mode) {
+  const section = document.getElementById('quizzes-practice-section');
+  const btnDropdown = document.getElementById('btn-toggle-dropdown-view');
+  const btnGrid = document.getElementById('btn-toggle-grid-view');
+  const noticeBox = document.getElementById('compact-catalog-notice-box');
+
+  if (mode === 'dropdown') {
+    if (section) section.classList.add('hide-catalog-grid');
+    if (btnDropdown) btnDropdown.classList.add('active');
+    if (btnGrid) btnGrid.classList.remove('active');
+    if (noticeBox) noticeBox.style.display = 'flex';
+  } else {
+    if (section) section.classList.remove('hide-catalog-grid');
+    if (btnDropdown) btnDropdown.classList.remove('active');
+    if (btnGrid) btnGrid.classList.add('active');
+    if (noticeBox) noticeBox.style.display = 'none';
+    renderQuizzesCatalog();
+  }
+
+  try {
+    localStorage.setItem('torpedo_quiz_view_mode', mode);
+  } catch (e) {}
+}
+
+/**
  * Launch Interactive Quiz Runner
  */
 function startQuizRunner(quizId) {
@@ -1421,10 +1624,17 @@ function submitJoinCourseQuiz() {
  * Initialize Quizzes Portal Tab
  */
 function initQuizzesPortal() {
+  initQuizDropdownLauncher();
   renderQuizzesCatalog();
 }
 
 // Global window exposure for robust click handlers
+window.initQuizDropdownLauncher = initQuizDropdownLauncher;
+window.onQuizCategoryDropdownChange = onQuizCategoryDropdownChange;
+window.onQuizItemDropdownChange = onQuizItemDropdownChange;
+window.updateQuizDropdownPreview = updateQuizDropdownPreview;
+window.setQuizDisplayMode = setQuizDisplayMode;
+window.startRandomQuiz = startRandomQuiz;
 window.openJoinCourseQuizModal = openJoinCourseQuizModal;
 window.closeJoinCourseQuizModal = closeJoinCourseQuizModal;
 window.checkCourseQuizCode = checkCourseQuizCode;

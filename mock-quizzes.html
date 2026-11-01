@@ -119,8 +119,38 @@
         <a href="courses.html" class="quizzes-nav-link">Courses</a>
         <a href="dashboard.html#library" class="quizzes-nav-link">Library</a>
         <a href="dashboard.html#certifications" class="quizzes-nav-link">Certifications</a>
-        <a href="dashboard.html#lifecode" class="quizzes-nav-link">Lifecode Arena</a>
-        <a href="mock-quizzes.html" class="quizzes-nav-link active">Mock Quizzes</a>
+
+        <!-- Lifecode Simple Sub-Nav -->
+        <div class="top-nav-dropdown-wrap">
+          <a href="dashboard.html#lifecode" class="quizzes-nav-link top-nav-dropdown-trigger">
+            <span>Lifecode</span>
+            <span class="top-nav-chevron">▾</span>
+          </a>
+          <div class="top-nav-dropdown-menu">
+            <a href="dashboard.html#lifecode" class="top-nav-dropdown-item">
+              <span>Problem Arena</span>
+            </a>
+            <a href="lifecode.html" class="top-nav-dropdown-item">
+              <span>Code IDE</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mock Quizzes Simple Sub-Nav -->
+        <div class="top-nav-dropdown-wrap">
+          <a href="mock-quizzes.html" class="quizzes-nav-link active top-nav-dropdown-trigger">
+            <span>Mock Quizzes</span>
+            <span class="top-nav-chevron">▾</span>
+          </a>
+          <div class="top-nav-dropdown-menu">
+            <a href="javascript:void(0)" onclick="setQuizCategoryFilter('all')" class="top-nav-dropdown-item">
+              <span>All Tests</span>
+            </a>
+            <a href="javascript:void(0)" onclick="openJoinCourseQuizModal()" class="top-nav-dropdown-item" style="color: #7c3aed; font-weight: 700;">
+              <span>Faculty Code</span>
+            </a>
+          </div>
+        </div>
       </nav>
 
       <div style="display: flex; align-items: center; gap: 12px;">
@@ -572,6 +602,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      initQuizDropdownLauncher();
       renderQuizzesCatalog();
     });
   </script>

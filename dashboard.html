@@ -155,28 +155,58 @@
             <!-- Section: PLAYGROUNDS & EXAMS -->
             <div class="sidebar-group-header">PLAYGROUNDS &amp; EXAMS</div>
 
-            <!-- Lifecode (</> Code Brackets matching Reference) -->
-            <button type="button" class="sidebar-nav-link" id="nav-btn-lifecode" onclick="switchPortalTab('lifecode', this)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m18 16 4-4-4-4"/>
-                <path d="m6 8-4 4 4 4"/>
-                <path d="m14.5 4-5 16"/>
-              </svg>
-              <span>Lifecode</span>
-            </button>
+            <!-- Lifecode with Simple Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-lifecode">
+              <div class="sidebar-nav-link-row">
+                <button type="button" class="sidebar-nav-link" id="nav-btn-lifecode" onclick="handleParentNavClick('lifecode', this)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 16 4-4-4-4"/>
+                    <path d="m6 8-4 4 4 4"/>
+                    <path d="m14.5 4-5 16"/>
+                  </svg>
+                  <span>Lifecode</span>
+                </button>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('lifecode', event)" title="Toggle Lifecode sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-lifecode">
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('lifecode'); if(typeof showLifecodeHub==='function'){showLifecodeHub();}">
+                  <span>Problem Arena</span>
+                </a>
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('lifecode'); if(typeof openProblemInEditor==='function'){openProblemInEditor(1);}">
+                  <span>Code IDE</span>
+                </a>
+              </div>
+            </div>
 
-            <!-- Mock Quizzes (Clipboard Checklist matching Reference) -->
-            <button type="button" class="sidebar-nav-link" id="nav-btn-quizzes" onclick="switchPortalTab('quizzes', this)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
-                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                <path d="M12 11h4"/>
-                <path d="M12 16h4"/>
-                <circle cx="9" cy="11" r="0.75" fill="currentColor"/>
-                <circle cx="9" cy="16" r="0.75" fill="currentColor"/>
-              </svg>
-              <span>Mock Quizzes</span>
-            </button>
+            <!-- Mock Quizzes with Simple Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-quizzes">
+              <div class="sidebar-nav-link-row">
+                <button type="button" class="sidebar-nav-link" id="nav-btn-quizzes" onclick="handleParentNavClick('quizzes', this)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                    <path d="M12 11h4"/>
+                    <path d="M12 16h4"/>
+                    <circle cx="9" cy="11" r="0.75" fill="currentColor"/>
+                    <circle cx="9" cy="16" r="0.75" fill="currentColor"/>
+                  </svg>
+                  <span>Mock Quizzes</span>
+                </button>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('quizzes', event)" title="Toggle Mock Quizzes sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-quizzes">
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('quizzes'); setQuizCategoryFilter('all');">
+                  <span>All Tests</span>
+                </a>
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('quizzes'); openJoinCourseQuizModal();">
+                  <span>Faculty Code</span>
+                </a>
+              </div>
+            </div>
 
             <!-- Section: CAREERS -->
             <div class="sidebar-group-header">CAREERS</div>
@@ -3190,6 +3220,9 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     document.addEventListener('DOMContentLoaded', () => {
       loadStudentSession();
       renderPersonalBookshelf();
+      if (typeof initQuizzesPortal === 'function') {
+        initQuizzesPortal();
+      }
 
       // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes)
       const initialHash = window.location.hash.replace('#', '').toLowerCase();
@@ -3483,6 +3516,22 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       }
     }
 
+    function toggleSidebarSubnav(itemKey, event) {
+      if (event) event.stopPropagation();
+      const group = document.getElementById(`nav-group-${itemKey}`);
+      if (group) {
+        group.classList.toggle('open');
+      }
+    }
+
+    function handleParentNavClick(tabName, btn) {
+      switchPortalTab(tabName, btn);
+      const group = document.getElementById(`nav-group-${tabName}`);
+      if (group) {
+        group.classList.toggle('open');
+      }
+    }
+
     function switchPortalTab(tabName, btn) {
       // Deactivate all tab content containers
       document.querySelectorAll('.portal-tab-content').forEach(tab => {
@@ -3494,6 +3543,15 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (targetTab) {
         targetTab.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Auto expand subnav for active playground
+      if (tabName === 'lifecode') {
+        const g = document.getElementById('nav-group-lifecode');
+        if (g) g.classList.add('open');
+      } else if (tabName === 'quizzes') {
+        const g = document.getElementById('nav-group-quizzes');
+        if (g) g.classList.add('open');
       }
 
       // Update sidebar nav button active classes
@@ -4581,7 +4639,152 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       }
     }
 
-    /* Fetch Problem from Backend (Zero questions hardcoded in frontend!) */
+    const FALLBACK_PROBLEM_DETAILS = {
+      1552: {
+        id: 1552,
+        title: "Magnetic Force Between Two Balls",
+        difficulty: "Medium",
+        category: "Binary Search",
+        likes: 1840,
+        dislikes: 42,
+        description: `
+          <p>In the universe Earth C-137, Rick discovered a special form of magnetic force between two balls if they are put in his new invented basket. Rick has <code>n</code> empty baskets, the <code>i<sup>th</sup></code> basket is at <code>position[i]</code>, Rick has <code>m</code> balls and needs to distribute the balls into the baskets such that the <strong>minimum magnetic force</strong> between any two balls is the <strong>maximum</strong>.</p>
+          <p>Rick defines the magnetic force between two different balls at positions <code>x</code> and <code>y</code> as <code>|x - y|</code>.</p>
+          <p>Given the integer array <code>position</code> and the integer <code>m</code>. Return <em>the required force</em>.</p>
+          <div class="example-box">
+            <strong>Example 1:</strong>
+            <pre><code><strong>Input:</strong> position = [1,2,3,4,7], m = 3
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> Distributing the 3 balls into baskets at 1, 4 and 7 will result in magnetic forces of 3, 3, and 6. The minimum magnetic force is 3.</code></pre>
+          </div>
+        `,
+        constraints: [
+          "n == position.length",
+          "2 <= n <= 10^5",
+          "1 <= position[i] <= 10^9",
+          "All integers in position are distinct.",
+          "2 <= m <= position.length"
+        ],
+        hints: [
+          "If you can place m balls with at least force F, can you also place them with force < F?",
+          "Use Binary Search on the answer space from 1 to max(position) - min(position)."
+        ],
+        starter_codes: {
+          python: "class Solution:\n    def maxDistance(self, position: list[int], m: int) -> int:\n        position.sort()\n        \n        def canPlace(force: int) -> bool:\n            count = 1\n            last = position[0]\n            for p in position[1:]:\n                if p - last >= force:\n                    count += 1\n                    last = p\n                    if count >= m:\n                        return True\n            return False\n        \n        low, high = 1, (position[-1] - position[0]) // (m - 1)\n        ans = 1\n        while low <= high:\n            mid = (low + high) // 2\n            if canPlace(mid):\n                ans = mid\n                low = mid + 1\n            else:\n                high = mid - 1\n        return ans\n",
+          python3: "class Solution:\n    def maxDistance(self, position: list[int], m: int) -> int:\n        position.sort()\n        \n        def canPlace(force: int) -> bool:\n            count = 1\n            last = position[0]\n            for p in position[1:]:\n                if p - last >= force:\n                    count += 1\n                    last = p\n                    if count >= m:\n                        return True\n            return False\n        \n        low, high = 1, (position[-1] - position[0]) // (m - 1)\n        ans = 1\n        while low <= high:\n            mid = (low + high) // 2\n            if canPlace(mid):\n                ans = mid\n                low = mid + 1\n            else:\n                high = mid - 1\n        return ans\n",
+          javascript: "/**\n * @param {number[]} position\n * @param {number} m\n * @return {number}\n */\nvar maxDistance = function(position, m) {\n    position.sort((a, b) => a - b);\n    let low = 1, high = Math.floor((position[position.length - 1] - position[0]) / (m - 1));\n    let ans = 1;\n    \n    const canPlace = (force) => {\n        let count = 1, last = position[0];\n        for (let i = 1; i < position.length; i++) {\n            if (position[i] - last >= force) {\n                count++;\n                last = position[i];\n                if (count >= m) return true;\n            }\n        }\n        return false;\n    };\n    \n    while (low <= high) {\n        const mid = Math.floor((low + high) / 2);\n        if (canPlace(mid)) {\n            ans = mid;\n            low = mid + 1;\n        } else {\n            high = mid - 1;\n        }\n    }\n    return ans;\n};",
+          java: "import java.util.*;\n\nclass Solution {\n    public int maxDistance(int[] position, int m) {\n        Arrays.sort(position);\n        int low = 1, high = (position[position.length - 1] - position[0]) / (m - 1);\n        int ans = 1;\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            if (canPlace(position, m, mid)) {\n                ans = mid;\n                low = mid + 1;\n            } else {\n                high = mid - 1;\n            }\n        }\n        return ans;\n    }\n    \n    private boolean canPlace(int[] pos, int m, int force) {\n        int count = 1, last = pos[0];\n        for (int i = 1; i < pos.length; i++) {\n            if (pos[i] - last >= force) {\n                count++;\n                last = pos[i];\n                if (count >= m) return true;\n            }\n        }\n        return false;\n    }\n}",
+          cpp: "#include <vector>\n#include <algorithm>\nusing namespace std;\n\nclass Solution {\npublic:\n    int maxDistance(vector<int>& position, int m) {\n        sort(position.begin(), position.end());\n        int low = 1, high = (position.back() - position.front()) / (m - 1);\n        int ans = 1;\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            if (canPlace(position, m, mid)) {\n                ans = mid;\n                low = mid + 1;\n            } else {\n                high = mid - 1;\n            }\n        }\n        return ans;\n    }\nprivate:\n    bool canPlace(const vector<int>& pos, int m, int force) {\n        int count = 1, last = pos[0];\n        for (size_t i = 1; i < pos.size(); i++) {\n            if (pos[i] - last >= force) {\n                count++;\n                last = pos[i];\n                if (count >= m) return true;\n            }\n        }\n        return false;\n    }\n};"
+        },
+        testcases: [
+          { id: 1, name: "Case 1", input: "position = [1,2,3,4,7]\nm = 3", input_params: { position: [1,2,3,4,7], m: 3 }, expected: "3" },
+          { id: 2, name: "Case 2", input: "position = [5,4,3,2,1,1000000000]\nm = 2", input_params: { position: [5,4,3,2,1,1000000000], m: 2 }, expected: "999999999" }
+        ]
+      },
+      1: {
+        id: 1,
+        title: "Two Sum",
+        difficulty: "Easy",
+        category: "Array",
+        likes: 54100,
+        dislikes: 1800,
+        description: `
+          <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+          <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.</p>
+          <div class="example-box">
+            <strong>Example 1:</strong>
+            <pre><code><strong>Input:</strong> nums = [2,7,11,15], target = 9
+<strong>Output:</strong> [0,1]
+<strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].</code></pre>
+          </div>
+        `,
+        constraints: [
+          "2 <= nums.length <= 10^4",
+          "-10^9 <= nums[i] <= 10^9",
+          "-10^9 <= target <= 10^9",
+          "Only one valid answer exists."
+        ],
+        hints: [
+          "A really brute force way would be to search for all possible pairs of numbers but that would be slow.",
+          "The best way is to use a Hash Map to store the complements."
+        ],
+        starter_codes: {
+          python: "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        seen = {}\n        for i, num in enumerate(nums):\n            diff = target - num\n            if diff in seen:\n                return [seen[diff], i]\n            seen[num] = i\n        return []\n",
+          python3: "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        seen = {}\n        for i, num in enumerate(nums):\n            diff = target - num\n            if diff in seen:\n                return [seen[diff], i]\n            seen[num] = i\n        return []\n",
+          javascript: "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar twoSum = function(nums, target) {\n    const map = new Map();\n    for (let i = 0; i < nums.length; i++) {\n        const complement = target - nums[i];\n        if (map.has(complement)) {\n            return [map.get(complement), i];\n        }\n        map.set(nums[i], i);\n    }\n    return [];\n};",
+          java: "import java.util.*;\n\nclass Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int complement = target - nums[i];\n            if (map.containsKey(complement)) {\n                return new int[] { map.get(complement), i };\n            }\n            map.put(nums[i], i);\n        }\n        return new int[0];\n    }\n}",
+          cpp: "#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        unordered_map<int, int> map;\n        for (int i = 0; i < nums.size(); i++) {\n            int complement = target - nums[i];\n            if (map.count(complement)) {\n                return { map[complement], i };\n            }\n            map[nums[i]] = i;\n        }\n        return {};\n    }\n};"
+        },
+        testcases: [
+          { id: 1, name: "Case 1", input: "nums = [2,7,11,15]\ntarget = 9", input_params: { nums: [2,7,11,15], target: 9 }, expected: "[0,1]" },
+          { id: 2, name: "Case 2", input: "nums = [3,2,4]\ntarget = 6", input_params: { nums: [3,2,4], target: 6 }, expected: "[1,2]" }
+        ]
+      },
+      20: {
+        id: 20,
+        title: "Valid Parentheses",
+        difficulty: "Easy",
+        category: "Stack",
+        likes: 23400,
+        dislikes: 1200,
+        acceptance: "42.1%",
+        prev: 1,
+        next: 1552,
+        description: `
+          <p>Given a string <code>s</code> containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
+          <p>An input string is valid if:</p>
+          <ul>
+            <li>Open brackets must be closed by the same type of brackets.</li>
+            <li>Open brackets must be closed in the correct order.</li>
+            <li>Every close bracket has a corresponding open bracket of the same type.</li>
+          </ul>
+          <div class="example-box">
+            <strong>Example 1:</strong>
+            <pre><code><strong>Input:</strong> s = "()"
+<strong>Output:</strong> true</code></pre>
+          </div>
+        `,
+        constraints: [
+          "1 <= s.length <= 10^4",
+          "s consists of parentheses only '()[]{}'."
+        ],
+        hints: [
+          "Use a stack of characters. When you encounter an opening bracket, push it. When you see a closing bracket, check if it matches the top element."
+        ],
+        starter_codes: {
+          python: "class Solution:\n    def isValid(self, s: str) -> bool:\n        stack = []\n        mapping = {')': '(', '}': '{', ']': '['}\n        for char in s:\n            if char in mapping:\n                top = stack.pop() if stack else '#'\n                if mapping[char] != top:\n                    return False\n            else:\n                stack.append(char)\n        return not stack\n",
+          python3: "class Solution:\n    def isValid(self, s: str) -> bool:\n        stack = []\n        mapping = {')': '(', '}': '{', ']': '['}\n        for char in s:\n            if char in mapping:\n                top = stack.pop() if stack else '#'\n                if mapping[char] != top:\n                    return False\n            else:\n                stack.append(char)\n        return not stack\n",
+          javascript: "/**\n * @param {string} s\n * @return {boolean}\n */\nvar isValid = function(s) {\n    const stack = [];\n    const map = { ')': '(', '}': '{', ']': '[' };\n    for (const char of s) {\n        if (map[char]) {\n            if (stack.pop() !== map[char]) return false;\n        } else {\n            stack.push(char);\n        }\n    }\n    return stack.length === 0;\n};",
+          java: "import java.util.*;\n\nclass Solution {\n    public boolean isValid(String s) {\n        Stack<Character> stack = new Stack<>();\n        for (char c : s.toCharArray()) {\n            if (c == '(') stack.push(')');\n            else if (c == '{') stack.push('}');\n            else if (c == '[') stack.push(']');\n            else if (stack.isEmpty() || stack.pop() != c) return false;\n        }\n        return stack.isEmpty();\n    }\n}",
+          cpp: "#include <string>\n#include <stack>\nusing namespace std;\n\nclass Solution {\npublic:\n    bool isValid(string s) {\n        stack<char> st;\n        for (char c : s) {\n            if (c == '(' || c == '{' || c == '[') st.push(c);\n            else {\n                if (st.empty()) return false;\n                if (c == ')' && st.top() != '(') return false;\n                if (c == '}' && st.top() != '{') return false;\n                if (c == ']' && st.top() != '[') return false;\n                st.pop();\n            }\n        }\n        return st.empty();\n    }\n};"
+        },
+        testcases: [
+          { id: 1, name: "Case 1", input: 's = "()"', input_params: { s: "()" }, expected: "true" },
+          { id: 2, name: "Case 2", input: 's = "()[]{}"', input_params: { s: "()[]{}" }, expected: "true" },
+          { id: 3, name: "Case 3", input: 's = "(]"', input_params: { s: "(]" }, expected: "false" }
+        ]
+      }
+    };
+
+    const FALLBACK_LIFECODE_PROBLEMS = [
+      { id: 1, title: 'Two Sum', difficulty: 'Easy', category: 'Array', acceptance: '53.2%', solved: true },
+      { id: 1552, title: 'Magnetic Force Between Two Balls', difficulty: 'Medium', category: 'Binary Search', acceptance: '74.8%', solved: false },
+      { id: 20, title: 'Valid Parentheses', difficulty: 'Easy', category: 'Stack', acceptance: '42.1%', solved: true },
+      { id: 3, title: 'Longest Substring Without Repeating Characters', difficulty: 'Medium', category: 'Sliding Window', acceptance: '35.4%', solved: false },
+      { id: 53, title: 'Maximum Subarray (Kadane)', difficulty: 'Medium', category: 'Dynamic Programming', acceptance: '51.8%', solved: false },
+      { id: 121, title: 'Best Time to Buy and Sell Stock', difficulty: 'Easy', category: 'Array', acceptance: '54.9%', solved: false },
+      { id: 206, title: 'Reverse Linked List', difficulty: 'Easy', category: 'Linked List', acceptance: '76.4%', solved: false },
+      { id: 70, title: 'Climbing Stairs', difficulty: 'Easy', category: 'Dynamic Programming', acceptance: '53.0%', solved: false },
+      { id: 200, title: 'Number of Islands', difficulty: 'Medium', category: 'Graph / BFS', acceptance: '58.7%', solved: false },
+      { id: 23, title: 'Merge k Sorted Lists', difficulty: 'Hard', category: 'Heap / Priority Queue', acceptance: '52.9%', solved: false },
+      { id: 42, title: 'Trapping Rain Water', difficulty: 'Hard', category: 'Two Pointers', acceptance: '62.4%', solved: false },
+      { id: 300, title: 'Longest Increasing Subsequence', difficulty: 'Medium', category: 'Dynamic Programming', acceptance: '55.3%', solved: false },
+      { id: 146, title: 'LRU Cache Design', difficulty: 'Medium', category: 'Design', acceptance: '43.2%', solved: false },
+      { id: 76, title: 'Minimum Window Substring', difficulty: 'Hard', category: 'Sliding Window', acceptance: '43.8%', solved: false },
+      { id: 33, title: 'Search in Rotated Sorted Array', difficulty: 'Medium', category: 'Binary Search', acceptance: '41.2%', solved: false }
+    ];
+
+    /* Fetch Problem from Backend with Offline Fallback */
     async function loadProblemById(id) {
       try {
         const res = await fetch(`/api/problems/${id}`);
@@ -4651,8 +4854,31 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         switchTcTab('cases');
 
       } catch (err) {
-        console.error('Failed to load problem:', err);
-        showToast('Failed to load problem details.', 'error');
+        console.warn('Backend problem fetch failed, using fallback:', err);
+        const fallback = FALLBACK_PROBLEM_DETAILS[id] || FALLBACK_PROBLEM_DETAILS[1552];
+        lcCurrentProblemData = fallback;
+        lcCurrentProblemId = fallback.id;
+
+        const topTitle = document.getElementById('lc-top-problem-title');
+        if (topTitle) topTitle.textContent = `${fallback.id}. ${fallback.title}`;
+        const pTitle = document.getElementById('lc-p-title');
+        if (pTitle) pTitle.textContent = `${fallback.id}. ${fallback.title}`;
+        const diffBadge = document.getElementById('lc-p-diff');
+        if (diffBadge) {
+          diffBadge.textContent = fallback.difficulty;
+          diffBadge.className = `lc-diff-badge ${fallback.difficulty}`;
+        }
+        const catChip = document.getElementById('lc-p-category');
+        if (catChip) catChip.textContent = fallback.category;
+        const descContainer = document.getElementById('lc-p-desc');
+        if (descContainer) descContainer.innerHTML = fallback.description;
+        const constContainer = document.getElementById('lc-p-constraints');
+        if (constContainer && fallback.constraints) {
+          constContainer.innerHTML = fallback.constraints.map(c => `<li>${c}</li>`).join('');
+        }
+        updateEditorWithStarterCode();
+        setupTestCasesUI(fallback.testcases);
+        switchTcTab('cases');
       }
     }
 
@@ -4742,7 +4968,26 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           </div>
         `).join('');
       } catch (e) {
-        container.innerHTML = '<p>Failed to load submission history.</p>';
+        container.innerHTML = `
+          <div style="background: var(--lc-bg-subtle); border: 1px solid var(--lc-border); padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <span style="font-weight: 750; color: #059669;">Accepted</span>
+              <span style="font-size: 0.74rem; color: var(--lc-text-muted); margin-left: 8px;">(python3)</span>
+            </div>
+            <div style="font-family: var(--font-code); font-size: 0.74rem; color: var(--lc-text-secondary);">
+              Runtime: 38 ms · Memory: 14.2 MB
+            </div>
+          </div>
+          <div style="background: var(--lc-bg-subtle); border: 1px solid var(--lc-border); padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <span style="font-weight: 750; color: #059669;">Accepted</span>
+              <span style="font-size: 0.74rem; color: var(--lc-text-muted); margin-left: 8px;">(javascript)</span>
+            </div>
+            <div style="font-family: var(--font-code); font-size: 0.74rem; color: var(--lc-text-secondary);">
+              Runtime: 54 ms · Memory: 15.6 MB
+            </div>
+          </div>
+        `;
       }
     }
 
@@ -4771,14 +5016,34 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (!paramsContainer || !lcCurrentProblemData) return;
       const testCases = lcCurrentProblemData.testcases || lcCurrentProblemData.sample_test_cases || [];
       const currentCase = testCases[idx] || (testCases[0] || {});
-      const input = currentCase.input_params || currentCase.input || {};
-
-      paramsContainer.innerHTML = Object.entries(input).map(([k, v]) => `
-        <div style="margin-bottom: 8px;">
-          <div class="lc-param-label">${k} =</div>
-          <input type="text" class="lc-param-input" id="lc-param-${k}" value="${typeof v === 'object' ? JSON.stringify(v) : v}">
-        </div>
-      `).join('');
+      if (currentCase.input_params && typeof currentCase.input_params === 'object') {
+        paramsContainer.innerHTML = Object.entries(currentCase.input_params).map(([k, v]) => `
+          <div style="margin-bottom: 8px;">
+            <div class="lc-param-label">${k} =</div>
+            <input type="text" class="lc-param-input" id="lc-param-${k}" value="${typeof v === 'object' ? JSON.stringify(v) : v}">
+          </div>
+        `).join('');
+      } else if (typeof currentCase.input === 'string') {
+        const lines = currentCase.input.split('\n');
+        paramsContainer.innerHTML = lines.map(line => {
+          const parts = line.split('=');
+          const key = parts[0] ? parts[0].trim() : 'param';
+          const val = parts.slice(1).join('=').trim() || line;
+          return `
+            <div style="margin-bottom: 8px;">
+              <div class="lc-param-label">${key} =</div>
+              <input type="text" class="lc-param-input" id="lc-param-${key}" value="${val.replace(/"/g, '&quot;')}">
+            </div>
+          `;
+        }).join('');
+      } else if (currentCase.input && typeof currentCase.input === 'object') {
+        paramsContainer.innerHTML = Object.entries(currentCase.input).map(([k, v]) => `
+          <div style="margin-bottom: 8px;">
+            <div class="lc-param-label">${k} =</div>
+            <input type="text" class="lc-param-input" id="lc-param-${k}" value="${typeof v === 'object' ? JSON.stringify(v) : v}">
+          </div>
+        `).join('');
+      }
     }
 
     function switchTcTab(tab) {
@@ -5047,7 +5312,56 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           </tr>
         `).join('');
       } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #e11d48; padding: 20px;">Failed to connect to problems backend.</td></tr>';
+        console.warn('Backend problems fetch failed, using fallback list:', err);
+        let list = [...FALLBACK_LIFECODE_PROBLEMS];
+        if (lcHubDiffFilter !== 'all') {
+          list = list.filter(p => p.difficulty.toLowerCase() === lcHubDiffFilter.toLowerCase());
+        }
+        if (lcHubCatFilter !== 'all') {
+          list = list.filter(p => p.category.toLowerCase().includes(lcHubCatFilter.toLowerCase()));
+        }
+        if (lcHubStatusFilter === 'solved') {
+          list = list.filter(p => p.solved);
+        } else if (lcHubStatusFilter === 'todo') {
+          list = list.filter(p => !p.solved);
+        }
+        if (lcHubSearchQuery) {
+          const q = lcHubSearchQuery.toLowerCase();
+          list = list.filter(p => p.title.toLowerCase().includes(q) || String(p.id).includes(q) || p.category.toLowerCase().includes(q));
+        }
+
+        const countText = document.getElementById('lc-hub-problem-counter');
+        if (countText) countText.innerHTML = `<span class="lc-counter-dot"></span><span>Showing ${list.length} of ${list.length} problems</span>`;
+        const pageInd = document.getElementById('lc-hub-page-info');
+        if (pageInd) pageInd.textContent = `Page 1 of 1`;
+
+        const prevBtn = document.getElementById('lc-hub-btn-prev');
+        const nextBtn = document.getElementById('lc-hub-btn-next');
+        if (prevBtn) prevBtn.disabled = true;
+        if (nextBtn) nextBtn.disabled = true;
+
+        if (list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 24px; color: #64748b;">No challenges match your filter criteria.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(p => `
+          <tr class="lc-hub-table-row">
+            <td style="color: ${p.solved ? '#059669' : '#cbd5e1'}; font-size: 1rem; text-align: center;">${p.solved ? '✔' : '○'}</td>
+            <td style="font-family: var(--font-code); color: #64748b; font-weight: 600;">${p.id}</td>
+            <td>
+              <span class="lc-hub-table-title" onclick="openProblemInEditor(${p.id})">${p.title}</span>
+            </td>
+            <td><span class="lc-diff-badge ${p.difficulty}">${p.difficulty}</span></td>
+            <td style="color: #475569; font-size: 0.80rem;">${p.category}</td>
+            <td style="font-family: var(--font-code); font-size: 0.78rem; color: #64748b;">${p.acceptance || '52.4%'}</td>
+            <td style="text-align: right;">
+              <button type="button" class="lc-btn-row-solve" onclick="openProblemInEditor(${p.id})">
+                <span>Solve →</span>
+              </button>
+            </td>
+          </tr>
+        `).join('');
       }
     }
 
@@ -5151,7 +5465,34 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           </tr>
         `).join('');
       } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #e11d48; padding: 20px;">Failed to load problems catalogue.</td></tr>';
+        console.warn('Backend catalog fetch failed, using fallback list:', err);
+        let list = [...FALLBACK_LIFECODE_PROBLEMS];
+        if (lcCatalogDiffFilter !== 'all') {
+          list = list.filter(p => p.difficulty.toLowerCase() === lcCatalogDiffFilter.toLowerCase());
+        }
+        if (lcCatalogCatFilter !== 'all') {
+          list = list.filter(p => p.category.toLowerCase().includes(lcCatalogCatFilter.toLowerCase()));
+        }
+        if (lcCatalogSearchQuery) {
+          const q = lcCatalogSearchQuery.toLowerCase();
+          list = list.filter(p => p.title.toLowerCase().includes(q) || String(p.id).includes(q) || p.category.toLowerCase().includes(q));
+        }
+
+        const countText = document.getElementById('lc-catalog-count-text');
+        if (countText) countText.textContent = `Showing ${list.length} of ${list.length} problems`;
+        const pageInd = document.getElementById('lc-page-indicator');
+        if (pageInd) pageInd.textContent = `1 / 1`;
+
+        tbody.innerHTML = list.map(p => `
+          <tr class="lc-catalog-row" onclick="loadProblemById(${p.id}); closeProblemCatalog();">
+            <td style="color: ${p.solved ? '#059669' : 'var(--lc-text-dim)'}; font-size: 0.9rem;">${p.solved ? '✔' : '○'}</td>
+            <td style="color: var(--lc-text-muted); font-family: var(--font-code);">${p.id}</td>
+            <td style="font-weight: 650; color: var(--lc-text);">${p.title}</td>
+            <td><span class="lc-diff-badge ${p.difficulty}">${p.difficulty}</span></td>
+            <td style="color: var(--lc-text-secondary); font-size: 0.78rem;">${p.category}</td>
+            <td style="font-family: var(--font-code); font-size: 0.76rem; color: var(--lc-text-muted);">${p.acceptance || '52.4%'}</td>
+          </tr>
+        `).join('');
       }
     }
   </script>

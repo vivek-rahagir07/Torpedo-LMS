@@ -724,3 +724,8 @@ const INITIAL_APPLIED_JOBS = [
   }
 ];
 
+if (typeof window !== 'undefined') {
+  window.TORPEDO_JOBS_DATA = TORPEDO_JOBS_DATA;
+  window.INITIAL_APPLIED_JOBS = INITIAL_APPLIED_JOBS;
+}
+

@@ -38,6 +38,7 @@
         <svg class="header-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" class="header-search-input" placeholder="Search internships, courses, achievements..." id="portal-search-input" oninput="handleSpotlightSearch(this.value)" onfocus="handleSpotlightSearch(this.value)" onblur="setTimeout(hideSpotlightSearch, 250)">
         <span class="header-kbd-hint">⌘K</span>
+        <div class="header-spotlight-dropdown" id="header-spotlight-dropdown" style="display: none;"></div>
       </div>
 
       <!-- Right Header Actions -->
@@ -235,18 +236,33 @@
               </div>
             </div>
 
-            <!-- Hackathons (Trophy Cup matching Reference) -->
-            <button type="button" class="sidebar-nav-link" id="nav-btn-hackathons" onclick="showToast('Hackathons: Next National Polygon Hackathon in 4 days', 'info')">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                <path d="M4 22h16"/>
-                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-              </svg>
-              <span>Hackathons</span>
-            </button>
+            <!-- Hackathons with Simple Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-hackathons">
+              <div class="sidebar-nav-link-row">
+                <button type="button" class="sidebar-nav-link" id="nav-btn-hackathons" onclick="handleParentNavClick('hackathons', this)" title="National &amp; Campus Hackathons (Live Sprints &amp; SDE Prizes)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                    <path d="M4 22h16"/>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                  </svg>
+                  <span>Hackathons</span>
+                </button>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('hackathons', event)" title="Toggle Hackathons sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-hackathons">
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('hackathons'); setHackathonCategoryTab('all');">
+                  <span>Explore Sprints</span>
+                </a>
+                <a href="javascript:void(0)" class="sidebar-subnav-item" onclick="switchPortalTab('hackathons'); openMyTeamsModal();">
+                  <span>My Teams</span>
+                </a>
+              </div>
+            </div>
 
           </div>
 
@@ -670,6 +686,9 @@
           <div class="course-hero-banner-frame">
             <div class="course-hero-banner-overlay"></div>
             <div class="course-hero-banner-content">
+              <div class="course-hero-pill">
+                <span>🎓 ACCREDITED CURRICULUM • 60+ HOURS PRACTICAL SPRINT</span>
+              </div>
               <h1 class="course-hero-title">
                 <span class="course-hero-title-dark">Cour</span><span class="course-hero-title-blue">ses</span>
               </h1>
@@ -1340,6 +1359,9 @@
           <div class="cert-hero-banner-frame">
             <div class="cert-hero-banner-overlay"></div>
             <div class="cert-hero-banner-content">
+              <div class="cert-hero-pill">
+                <span>🏆 INDUSTRY RECOGNIZED • GTU &amp; VERIFIED PARTNERS</span>
+              </div>
               <h1 class="cert-hero-title">
                 Certifications &amp;<br>
                 <span class="cert-hero-title-blue">Credentials</span>
@@ -2522,6 +2544,137 @@
 
           </div>
         </div> <!-- end tab-view-jobs -->
+
+        <!-- ================================================================
+             TAB 8: HACKATHONS & CODE SPRINTS ARENA (National & Campus Sprints)
+             Embedded natively within Torpedo LMS Portal
+             ================================================================ -->
+        <div id="tab-view-hackathons" class="portal-tab-content">
+          <div class="hack-content-wrap">
+
+            <!-- 1. Hero Banner Frame with User Provided Innovation & Ideation Illustration -->
+            <section class="hack-hero-frame">
+              <div class="hack-hero-overlay"></div>
+              <div class="hack-hero-content">
+                <div class="hack-hero-pill">
+                  <span>⚡ NATIONAL &amp; CAMPUS SPRINTS • ₹31+ LAKH PRIZE POOL</span>
+                </div>
+                <h1 class="hack-hero-title">
+                  Build Bold. <br>
+                  <span class="hack-hero-title-highlight">Win National Podiums.</span>
+                </h1>
+                <p class="hack-hero-desc">
+                  Form student engineering squads, tackle live corporate problem statements in GenAI, Web3 &amp; Distributed Systems, and unlock fast-track Pre-Placement Interviews (PPI) with top recruiters.
+                </p>
+                <div class="hack-hero-actions">
+                  <button type="button" class="btn-hack-primary" onclick="document.getElementById('portal-hacks-openings-section').scrollIntoView({behavior:'smooth'})">
+                    <span>Explore Active Sprints ↓</span>
+                  </button>
+                  <button type="button" class="btn-hack-secondary" onclick="openMyTeamsModal()">
+                    <span>🚀 My Team Workspace (<span id="portal-hero-teams-count">1</span>)</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2. Live Hackathon Metrics Strip -->
+            <section class="hack-stats-grid">
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-amber">🏆</div>
+                <div>
+                  <div class="stat-val-num">₹31 Lakhs</div>
+                  <div class="stat-label-text">Total Cash &amp; Grant Pool</div>
+                </div>
+              </div>
+
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-blue">⚡</div>
+                <div>
+                  <div class="stat-val-num">6 Sprints</div>
+                  <div class="stat-label-text">Active National Hackathons</div>
+                </div>
+              </div>
+
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-green">⏳</div>
+                <div>
+                  <div class="stat-val-num">4 Days Left</div>
+                  <div class="stat-label-text">Polygon BUIDL Sprint Demo Day</div>
+                </div>
+              </div>
+
+              <div class="stat-card-box">
+                <div class="stat-icon-wrap icon-purple">🌟</div>
+                <div>
+                  <div class="stat-val-num">+200 TRP</div>
+                  <div class="stat-label-text">LMS Boost per Merged Prototype</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 3. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns -->
+            <section class="jobs-toolbar-card" id="portal-hacks-openings-section">
+              <div class="toolbar-search-row">
+                <div class="search-input-wrap">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="hack-search-input" class="job-search-input" placeholder="Search by hackathon title, tech stack (Solidity, GenAI, Python), or sponsor..." oninput="onHackSearchInput(this.value)">
+                </div>
+
+                <!-- Compact Dropdown: Status -->
+                <select class="select-dropdown-box" id="filter-hack-status-select" onchange="applyHackFilters()">
+                  <option value="all">All Statuses</option>
+                  <option value="Live Now">Live Now</option>
+                  <option value="Registration Open">Registration Open</option>
+                  <option value="Closing Soon">Closing Soon</option>
+                </select>
+
+                <!-- Compact Dropdown: Format -->
+                <select class="select-dropdown-box" id="filter-hack-format-select" onchange="applyHackFilters()">
+                  <option value="all">All Team Formats</option>
+                  <option value="1 - 4">1 - 4 Members</option>
+                  <option value="2 - 4">2 - 4 Members</option>
+                  <option value="6 Members">6 Members (Campus SIH)</option>
+                </select>
+
+                <!-- Compact Dropdown: Mode -->
+                <select class="select-dropdown-box" id="filter-hack-mode-select" onchange="applyHackFilters()">
+                  <option value="all">All Modes</option>
+                  <option value="Virtual">Virtual / Online</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="In-Person">In-Person / Campus</option>
+                </select>
+
+                <!-- Compact Dropdown: Sort -->
+                <select class="select-dropdown-box" id="sort-hack-select" onchange="applyHackFilters()">
+                  <option value="prize">Highest Prize Pool</option>
+                  <option value="deadline">Closing Soonest</option>
+                  <option value="popular">Most Teams Joined</option>
+                </select>
+              </div>
+
+              <div class="toolbar-tabs-row">
+                <div class="filter-tabs-pills">
+                  <button type="button" class="filter-pill-btn active" onclick="setHackathonCategoryTab('all', this)">All Sprints (6)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setHackathonCategoryTab('Web3', this)">⚡ Web3 (1)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setHackathonCategoryTab('AI/ML', this)">🤖 GenAI &amp; ML (2)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setHackathonCategoryTab('Fintech', this)">💳 Fintech (1)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setHackathonCategoryTab('Campus', this)">🏛️ Campus SIH (1)</button>
+                  <button type="button" class="filter-pill-btn" onclick="setHackathonCategoryTab('Open Source', this)">🌐 Open Source (1)</button>
+                </div>
+
+                <div class="counter-summary-text" id="hacks-counter-text">
+                  Showing 6 of 6 active hackathons
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. Hackathons Listings Grid -->
+            <section class="hack-listings-grid" id="hackathons-container">
+              <!-- Injected dynamically from js/hackathons-data.js -->
+            </section>
+
+          </div>
+        </div> <!-- end tab-view-hackathons -->
       </main>
     </div>
   </div>
@@ -3411,10 +3564,93 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     </div>
   </dialog>
 
+  <!-- ======================================================================
+       HACKATHONS MODAL DIALOGS
+       ====================================================================== -->
+
+  <!-- Hackathon Details Modal -->
+  <dialog id="hack-details-dialog" aria-labelledby="hd-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="hd-dialog-title">Hackathon Sprint Details</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeHackDetailsModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body" id="hd-dialog-body">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeHackDetailsModal()">Close</button>
+      <button type="button" class="btn-hack-primary" id="btn-dialog-register-hack" onclick="openRegisterFromDetails()">
+        <span>Register Team Now →</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- Hackathon Registration Modal -->
+  <dialog id="hack-register-dialog" aria-labelledby="reg-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="reg-dialog-title">Register Engineering Team</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeHackRegisterModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body">
+      <div id="reg-hack-summary-box" style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:14px; margin-bottom:16px;">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label for="reg-team-name-input" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Team Name *</label>
+        <input type="text" id="reg-team-name-input" class="job-search-input" placeholder="e.g. Torpedo ByteForce" style="padding-left:14px;" required>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label for="reg-track-select" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Select Problem Statement / Track *</label>
+        <select id="reg-track-select" class="select-dropdown-box" style="width:100%; font-size:0.84rem;">
+          <!-- Injected dynamically -->
+        </select>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label for="reg-teammates-input" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Invite Classmates (Roll Numbers or Email IDs)</label>
+        <input type="text" id="reg-teammates-input" class="job-search-input" placeholder="e.g. 22002170310042, 22002170310018" style="padding-left:14px;">
+        <span style="font-size:0.72rem; color:#64748b; margin-top:4px; display:block;">Your profile (Vivek Yadav - Lead) will be automatically added as Team Captain.</span>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label for="reg-github-repo-input" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">GitHub / Project Repository URL (Optional)</label>
+        <input type="url" id="reg-github-repo-input" class="job-search-input" placeholder="https://github.com/your-username/project-repo" style="padding-left:14px;">
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:10px 14px; font-size:0.76rem; color:#15803d; display:flex; align-items:center; gap:8px;">
+        <span>🔒</span>
+        <span>Registered team will receive official hackathon Discord role and mentor check-in access.</span>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeHackRegisterModal()">Cancel</button>
+      <button type="button" class="btn-hack-primary" onclick="submitHackTeamRegistration()">
+        <span>Confirm Team Registration →</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- My Teams Modal -->
+  <dialog id="my-teams-dialog" aria-labelledby="teams-dialog-title" closedby="any">
+    <div class="dialog-header">
+      <h3 id="teams-dialog-title">My Registered Hackathon Teams</h3>
+      <button type="button" class="dialog-close-btn" onclick="closeMyTeamsModal()" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dialog-body" id="my-teams-list-body">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn-details-ghost" onclick="closeMyTeamsModal()">Close</button>
+    </div>
+  </dialog>
+
   <!-- Scripts -->
   <script src="js/courses-data.js"></script>
   <script src="js/quizzes-data.js"></script>
   <script src="js/jobs-data.js"></script>
+  <script src="js/hackathons-data.js"></script>
   <script src="js/api-client.js"></script>
   <script src="js/app.js"></script>
 
@@ -3446,7 +3682,13 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateY(12px)';
-        setTimeout(() => toast.remove(), 260);
+        setTimeout(() => {
+          if (toast && typeof toast.remove === 'function') {
+            toast.remove();
+          } else if (toast && toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+          }
+        }, 260);
       }, 3500);
     }
 
@@ -3545,15 +3787,19 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (typeof initJobsPortal === 'function') {
         initJobsPortal();
       }
+      if (typeof initHackathonsPortal === 'function') {
+        initHackathonsPortal();
+      }
 
-      // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes, #jobs)
-      const initialHash = window.location.hash.replace('#', '').toLowerCase();
-      if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs'].includes(initialHash)) {
+      // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes, #jobs, #hackathons)
+      const parseHash = () => (window.location.hash || '').replace(/^#/, '').split(/[?&/]/)[0].toLowerCase();
+      const initialHash = parseHash();
+      if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs', 'hackathons'].includes(initialHash)) {
         switchPortalTab(initialHash);
       }
       window.addEventListener('hashchange', () => {
-        const h = window.location.hash.replace('#', '').toLowerCase();
-        if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs'].includes(h)) {
+        const h = parseHash();
+        if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs', 'hackathons'].includes(h)) {
           switchPortalTab(h);
         }
       });
@@ -3589,6 +3835,76 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         }
       });
     });
+
+    /* ========================================================================
+       SPOTLIGHT HEADER SEARCH (⌘K / Input Handlers)
+       ======================================================================== */
+    const SPOTLIGHT_SEARCH_ITEMS = [
+      { id: 'c1', title: 'Full Stack MERN Architecture', category: 'Courses', icon: '💻', tab: 'courses', action: () => switchPortalTab('courses') },
+      { id: 'c2', title: 'Data Structures & Algorithms Mastery', category: 'Courses', icon: '⚡', tab: 'courses', action: () => switchPortalTab('courses') },
+      { id: 'c3', title: 'Cloud & Distributed Systems', category: 'Courses', icon: '☁️', tab: 'courses', action: () => switchPortalTab('courses') },
+      { id: 'c4', title: 'AI & Autonomous Multi-Agent Systems', category: 'Courses', icon: '🤖', tab: 'courses', action: () => switchPortalTab('courses') },
+      { id: 'lc1', title: 'Daily Coding Sprint (#1552)', category: 'Lifecode', icon: '⚡', tab: 'lifecode', action: () => { switchPortalTab('lifecode'); if (typeof openProblemInEditor === 'function') openProblemInEditor(1552); } },
+      { id: 'lc2', title: '520+ SDE Practice Problems', category: 'Lifecode', icon: '📚', tab: 'lifecode', action: () => { switchPortalTab('lifecode'); if (typeof scrollToPracticeProblems === 'function') scrollToPracticeProblems(); } },
+      { id: 'lc3', title: 'Online Code IDE & Judge', category: 'Lifecode', icon: '🖥️', tab: 'lifecode', action: () => { switchPortalTab('lifecode'); if (typeof openProblemInEditor === 'function') openProblemInEditor(1); } },
+      { id: 'qz1', title: 'Daily Proctored DSA Quiz', category: 'Quizzes', icon: '📝', tab: 'quizzes', action: () => { switchPortalTab('quizzes'); if (typeof startQuizRunner === 'function') startQuizRunner('quiz-dsa-01'); } },
+      { id: 'qz2', title: 'Faculty Exam Code Entry', category: 'Quizzes', icon: '🔑', tab: 'quizzes', action: () => { switchPortalTab('quizzes'); if (typeof openJoinCourseQuizModal === 'function') openJoinCourseQuizModal(); } },
+      { id: 'jb1', title: 'Google - Backend SDE Intern', category: 'Jobs', icon: '💼', tab: 'jobs', action: () => { switchPortalTab('jobs'); } },
+      { id: 'jb2', title: 'Razorpay - Platform Engineer (Go/Rust)', category: 'Jobs', icon: '💼', tab: 'jobs', action: () => { switchPortalTab('jobs'); } },
+      { id: 'jb3', title: 'Fast-Track Placement Applications', category: 'Jobs', icon: '🚀', tab: 'jobs', action: () => { switchPortalTab('jobs'); if (typeof openApplicationsModal === 'function') openApplicationsModal(); } },
+      { id: 'hk1', title: 'Polygon BUIDL India Sprint', category: 'Hackathons', icon: '🏆', tab: 'hackathons', action: () => { switchPortalTab('hackathons'); } },
+      { id: 'hk2', title: 'Google Cloud GenAI Hackathon', category: 'Hackathons', icon: '🏆', tab: 'hackathons', action: () => { switchPortalTab('hackathons'); } },
+      { id: 'hk3', title: 'My Team Sprints Workspace', category: 'Hackathons', icon: '👥', tab: 'hackathons', action: () => { switchPortalTab('hackathons'); if (typeof openMyTeamsModal === 'function') openMyTeamsModal(); } },
+      { id: 'lib1', title: 'Central Digital Repository (10,000+ Volumes)', category: 'Library', icon: '📖', tab: 'library', action: () => switchPortalTab('library') },
+      { id: 'crt1', title: 'Blockchain Verified Credentials Vault', category: 'Certifications', icon: '🛡️', tab: 'certifications', action: () => switchPortalTab('certifications') }
+    ];
+
+    function handleSpotlightSearch(query) {
+      const dropdown = document.getElementById('header-spotlight-dropdown');
+      if (!dropdown) return;
+      const q = (query || '').trim().toLowerCase();
+      if (q.length < 1) {
+        dropdown.style.display = 'none';
+        dropdown.innerHTML = '';
+        return;
+      }
+
+      const matches = SPOTLIGHT_SEARCH_ITEMS.filter(it => 
+        it.title.toLowerCase().includes(q) || it.category.toLowerCase().includes(q)
+      ).slice(0, 7);
+
+      if (matches.length === 0) {
+        dropdown.innerHTML = `<div style="padding: 12px; font-size: 0.85rem; color: #64748b; text-align: center;">No quick matches for "<strong>${escapeHtml(query)}</strong>"</div>`;
+      } else {
+        dropdown.innerHTML = matches.map((item, idx) => `
+          <div class="spotlight-item" onmousedown="selectSpotlightItem('${item.id}')">
+            <div class="spotlight-item-left">
+              <span class="spotlight-item-icon">${item.icon}</span>
+              <span class="spotlight-item-title">${escapeHtml(item.title)}</span>
+            </div>
+            <span class="spotlight-item-badge">${item.category}</span>
+          </div>
+        `).join('');
+      }
+      dropdown.style.display = 'block';
+    }
+
+    function selectSpotlightItem(id) {
+      const item = SPOTLIGHT_SEARCH_ITEMS.find(it => it.id === id);
+      if (item && typeof item.action === 'function') {
+        item.action();
+      }
+      hideSpotlightSearch();
+      const input = document.getElementById('portal-search-input');
+      if (input) input.value = '';
+    }
+
+    function hideSpotlightSearch() {
+      const dropdown = document.getElementById('header-spotlight-dropdown');
+      if (dropdown) {
+        dropdown.style.display = 'none';
+      }
+    }
 
     /* ========================================================================
        MODAL CONTROLS
@@ -3877,6 +4193,9 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       } else if (tabName === 'jobs') {
         const g = document.getElementById('nav-group-jobs');
         if (g) g.classList.add('open');
+      } else if (tabName === 'hackathons') {
+        const g = document.getElementById('nav-group-hackathons');
+        if (g) g.classList.add('open');
       }
 
       // Update sidebar nav button active classes
@@ -3884,10 +4203,10 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         link.classList.remove('active');
       });
 
-      if (btn) {
-        btn.classList.add('active');
+      const targetBtn = btn || document.getElementById(`nav-btn-${tabName}`);
+      if (targetBtn) {
+        targetBtn.classList.add('active');
       } else {
-        // Find corresponding sidebar button if called programmatically
         const sideBtns = document.querySelectorAll('.sidebar-nav-link');
         sideBtns.forEach(b => {
           if (b.textContent.toLowerCase().includes(tabName)) {
@@ -3917,7 +4236,11 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
       // Update URL hash cleanly
       if (window.location.hash !== `#${tabName}`) {
-        history.replaceState(null, '', `#${tabName}`);
+        if (window.history && typeof window.history.replaceState === 'function') {
+          window.history.replaceState(null, '', `#${tabName}`);
+        } else {
+          window.location.hash = `#${tabName}`;
+        }
       }
 
       if (tabName === 'lifecode') {
@@ -3938,6 +4261,12 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         }
       }
 
+      if (tabName === 'hackathons') {
+        if (typeof initHackathonsPortal === 'function') {
+          initHackathonsPortal();
+        }
+      }
+
       const titles = {
         home: 'Home Dashboard',
         courses: 'Our Courses Catalog',
@@ -3945,7 +4274,8 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         certifications: 'Certifications & Credentials Vault',
         lifecode: 'Lifecode Problem Arena (520+ DSA Problems)',
         quizzes: 'Mock Quizzes & Assessment Arena',
-        jobs: 'Jobs & Internships Placement Portal (48+ Active Drives)'
+        jobs: 'Jobs & Internships Placement Portal (48+ Active Drives)',
+        hackathons: 'Hackathons Arena (National & Campus Sprints)'
       };
       if (titles[tabName]) {
         showToast(`Navigated to ${titles[tabName]}.`, 'info');
@@ -3995,7 +4325,10 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     /* ========================================================================
        COURSES CATALOG FILTERING & TABS (Matching Image 2)
        ======================================================================== */
+    let currentCourseTabFilter = 'all';
+
     function filterCoursesTab(type) {
+      currentCourseTabFilter = type;
       const btnAll = document.getElementById('btn-courses-explore-all');
       const btnEnrolled = document.getElementById('btn-courses-my-learning');
       
@@ -4006,25 +4339,11 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         if (btnAll) btnAll.classList.remove('active');
         if (btnEnrolled) btnEnrolled.classList.add('active');
       }
-      
-      const cards = document.querySelectorAll('#courses-catalog-grid-items .catalog-course-item-card');
-      let visible = 0;
-      cards.forEach(card => {
-        const isEnrolled = card.getAttribute('data-enrolled') === 'true';
-        if (type === 'all' || (type === 'enrolled' && isEnrolled)) {
-          card.style.display = 'flex';
-          visible++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      const countEl = document.getElementById('courses-count-indicator');
-      if (countEl) countEl.textContent = `Showing ${visible} courses available`;
+      handleCourseCatalogFilter();
     }
 
     function handleCourseCatalogFilter() {
-      const query = (document.getElementById('course-catalog-search')?.value || '').toLowerCase();
+      const query = (document.getElementById('course-catalog-search')?.value || '').toLowerCase().trim();
       const cat = document.getElementById('course-category-select')?.value || 'all';
       const diff = document.getElementById('course-difficulty-select')?.value || 'all';
 
@@ -4035,12 +4354,14 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         const text = card.textContent.toLowerCase();
         const cardCat = card.getAttribute('data-cat') || '';
         const cardDiff = card.getAttribute('data-diff') || '';
+        const isEnrolled = card.getAttribute('data-enrolled') === 'true';
 
         const matchQuery = !query || text.includes(query);
         const matchCat = cat === 'all' || cardCat === cat;
         const matchDiff = diff === 'all' || cardDiff === diff;
+        const matchTab = currentCourseTabFilter === 'all' || isEnrolled;
 
-        if (matchQuery && matchCat && matchDiff) {
+        if (matchQuery && matchCat && matchDiff && matchTab) {
           card.style.display = 'flex';
           visible++;
         } else {
@@ -6314,7 +6635,481 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (modal && typeof modal.close === 'function') modal.close();
     }
 
+    /* ========================================================================
+       HACKATHONS & CODE SPRINTS CONTROLLER (Embedded in Dashboard)
+       ======================================================================== */
+    let hackActiveCategoryTab = 'all';
+    let hackSearchQuery = '';
+    let hackSelectedStatus = 'all';
+    let hackSelectedFormat = 'all';
+    let hackSelectedMode = 'all';
+    let hackSelectedSort = 'prize';
+    let hackSelectedForRegister = null;
+
+    let registeredTeams = [];
+
+    try {
+      const storedTeams = localStorage.getItem('torpedo_registered_teams');
+      registeredTeams = storedTeams ? JSON.parse(storedTeams) : (typeof INITIAL_REGISTERED_TEAMS !== 'undefined' ? INITIAL_REGISTERED_TEAMS : []);
+    } catch (e) {
+      registeredTeams = (typeof INITIAL_REGISTERED_TEAMS !== 'undefined' ? INITIAL_REGISTERED_TEAMS : []);
+    }
+
+    function saveHackTeamsToStorage() {
+      try {
+        localStorage.setItem('torpedo_registered_teams', JSON.stringify(registeredTeams));
+      } catch (e) {}
+    }
+
+    function initHackathonsPortal() {
+      if (typeof TORPEDO_HACKATHONS_DATA === 'undefined') return;
+      applyHackFilters();
+      updateTeamsCounter();
+    }
+
+    function onHackSearchInput(val) {
+      hackSearchQuery = (val || '').trim().toLowerCase();
+      applyHackFilters();
+    }
+
+    function setHackathonCategoryTab(tab, btn) {
+      hackActiveCategoryTab = tab;
+      const tabWrap = document.getElementById('tab-view-hackathons');
+      if (tabWrap) {
+        tabWrap.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+      }
+      if (btn) btn.classList.add('active');
+      applyHackFilters();
+    }
+
+    function applyHackFilters() {
+      if (typeof TORPEDO_HACKATHONS_DATA === 'undefined') return;
+      const statusSelect = document.getElementById('filter-hack-status-select');
+      const formatSelect = document.getElementById('filter-hack-format-select');
+      const modeSelect = document.getElementById('filter-hack-mode-select');
+      const sortSelect = document.getElementById('sort-hack-select');
+
+      if (statusSelect) hackSelectedStatus = statusSelect.value;
+      if (formatSelect) hackSelectedFormat = formatSelect.value;
+      if (modeSelect) hackSelectedMode = modeSelect.value;
+      if (sortSelect) hackSelectedSort = sortSelect.value;
+
+      let filtered = [...TORPEDO_HACKATHONS_DATA];
+
+      // Tab filter
+      if (hackActiveCategoryTab !== 'all') {
+        filtered = filtered.filter(h => h.category.toLowerCase().includes(hackActiveCategoryTab.toLowerCase()) || h.tags.some(t => t.toLowerCase().includes(hackActiveCategoryTab.toLowerCase())));
+      }
+
+      // Status filter
+      if (hackSelectedStatus !== 'all') {
+        filtered = filtered.filter(h => h.status.toLowerCase().includes(hackSelectedStatus.toLowerCase()));
+      }
+
+      // Format filter
+      if (hackSelectedFormat !== 'all') {
+        filtered = filtered.filter(h => h.teamSize.includes(hackSelectedFormat));
+      }
+
+      // Mode filter
+      if (hackSelectedMode !== 'all') {
+        filtered = filtered.filter(h => h.mode.toLowerCase().includes(hackSelectedMode.toLowerCase()));
+      }
+
+      // Search Query
+      if (hackSearchQuery) {
+        filtered = filtered.filter(h => {
+          return h.title.toLowerCase().includes(hackSearchQuery) ||
+                 h.organizer.toLowerCase().includes(hackSearchQuery) ||
+                 h.tags.some(t => t.toLowerCase().includes(hackSearchQuery)) ||
+                 h.category.toLowerCase().includes(hackSearchQuery);
+        });
+      }
+
+      // Sorting
+      if (hackSelectedSort === 'deadline') {
+        filtered.sort((a, b) => a.deadlineDays - b.deadlineDays);
+      } else if (hackSelectedSort === 'popular') {
+        filtered.sort((a, b) => b.registeredTeams - a.registeredTeams);
+      } else {
+        // Prize pool
+        filtered.sort((a, b) => b.featured - a.featured);
+      }
+
+      renderHackathonsListings(filtered);
+    }
+
+    function renderHackathonsListings(hacks) {
+      const container = document.getElementById('hackathons-container');
+      const counterText = document.getElementById('hacks-counter-text');
+      if (counterText && typeof TORPEDO_HACKATHONS_DATA !== 'undefined') {
+        counterText.textContent = `Showing ${hacks.length} of ${TORPEDO_HACKATHONS_DATA.length} active hackathons`;
+      }
+      if (!container) return;
+
+      if (hacks.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state-card">
+            <div style="font-size: 2.2rem; margin-bottom: 8px;">🚀</div>
+            <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 6px;">No hackathons matched your filters</h3>
+            <p style="font-size: 0.84rem; max-width: 420px; margin: 0 auto 16px auto;">Try clearing search keywords or resetting dropdown selectors.</p>
+            <button type="button" class="btn-details-ghost" onclick="resetAllHackFilters()">Reset All Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = hacks.map(hack => {
+        const isRegistered = registeredTeams.some(t => t.hackathonId === hack.id);
+
+        return `
+          <article class="hack-card-item" id="hack-card-${hack.id}">
+            <div>
+              <div class="hack-card-top-row">
+                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                  <div class="hack-brand-avatar" style="background: ${hack.badgeBg}; color: ${hack.badgeColor};">
+                    ${hack.badgeLetter}
+                  </div>
+                  <div>
+                    <h3 class="hack-title-line" onclick="openHackDetailsModal('${hack.id}')">${hack.title}</h3>
+                    <div style="font-size: 0.78rem; color: #64748b; margin-top: 3px; font-weight: 600;">
+                      ${hack.organizer} • 📍 ${hack.mode}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hack-prize-badge">
+                  <div>${hack.prizePool}</div>
+                  <div style="font-size: 0.68rem; font-weight: 600; color: #9a3412;">${hack.prizeSub}</div>
+                </div>
+              </div>
+
+              <!-- Badges Strip -->
+              <div style="display: flex; gap: 6px; align-items: center; margin-top: 12px; flex-wrap: wrap;">
+                <span class="hack-status-pill ${hack.statusClass}">
+                  <span class="hack-pulse-dot"></span>
+                  ${hack.status}
+                </span>
+                <span style="font-size: 0.72rem; color: #475569; background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-weight: 700;">
+                  👥 ${hack.teamSize}
+                </span>
+                <span style="font-size: 0.72rem; color: #1e40af; background: #eff6ff; padding: 2px 8px; border-radius: 6px; font-weight: 700;">
+                  ⏳ ${hack.deadlineDays}d Left (${hack.deadlineDate})
+                </span>
+                <span style="font-size: 0.72rem; color: #64748b; margin-left: auto; font-weight: 600;">
+                  🔥 ${hack.registeredTeams} Teams
+                </span>
+              </div>
+
+              <p style="font-size: 0.82rem; color: #334155; line-height: 1.55; margin-top: 10px;">
+                ${hack.description}
+              </p>
+
+              <!-- Tags -->
+              <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px;">
+                ${hack.tags.map(t => `<span class="skill-chip-pill" onclick="searchHacksByTag('${t}')">${t}</span>`).join('')}
+              </div>
+            </div>
+
+            <!-- Actions Row -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; border-top: 1px solid #f1f5f9; padding-top: 12px;">
+              <span style="font-size: 0.72rem; font-weight: 750; color: #ea580c;">
+                🌟 Track: ${hack.category}
+              </span>
+
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn-details-ghost" onclick="openHackDetailsModal('${hack.id}')">
+                  Sprint Details
+                </button>
+                <button type="button" class="btn-hack-primary ${isRegistered ? 'registered' : ''}" onclick="onQuickRegisterHackClick('${hack.id}')">
+                  ${isRegistered ? '<span>✓ Registered</span>' : '<span>⚡ Register Team</span>'}
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function searchHacksByTag(tag) {
+      const searchBox = document.getElementById('hack-search-input');
+      if (searchBox) searchBox.value = tag;
+      hackSearchQuery = tag.toLowerCase();
+      applyHackFilters();
+    }
+
+    function resetAllHackFilters() {
+      hackSearchQuery = '';
+      hackActiveCategoryTab = 'all';
+      hackSelectedStatus = 'all';
+      hackSelectedFormat = 'all';
+      hackSelectedMode = 'all';
+      hackSelectedSort = 'prize';
+
+      const searchBox = document.getElementById('hack-search-input');
+      if (searchBox) searchBox.value = '';
+      const stSelect = document.getElementById('filter-hack-status-select');
+      if (stSelect) stSelect.value = 'all';
+      const fmtSelect = document.getElementById('filter-hack-format-select');
+      if (fmtSelect) fmtSelect.value = 'all';
+      const mdSelect = document.getElementById('filter-hack-mode-select');
+      if (mdSelect) mdSelect.value = 'all';
+      const sortSelect = document.getElementById('sort-hack-select');
+      if (sortSelect) sortSelect.value = 'prize';
+
+      const tabWrap = document.getElementById('tab-view-hackathons');
+      if (tabWrap) {
+        tabWrap.querySelectorAll('.filter-pill-btn').forEach((b, i) => {
+          if (i === 0) b.classList.add('active');
+          else b.classList.remove('active');
+        });
+      }
+
+      applyHackFilters();
+    }
+
+    function openHackDetailsModal(hackId) {
+      if (typeof TORPEDO_HACKATHONS_DATA === 'undefined') return;
+      const hack = TORPEDO_HACKATHONS_DATA.find(h => h.id === hackId);
+      if (!hack) return;
+      hackSelectedForRegister = hack;
+
+      const modal = document.getElementById('hack-details-dialog');
+      const body = document.getElementById('hd-dialog-body');
+      const title = document.getElementById('hd-dialog-title');
+      const regBtn = document.getElementById('btn-dialog-register-hack');
+
+      const isRegistered = registeredTeams.some(t => t.hackathonId === hack.id);
+      if (regBtn) {
+        regBtn.innerHTML = isRegistered ? '<span>✓ Team Registered</span>' : '<span>Register Team Now →</span>';
+        regBtn.disabled = isRegistered;
+        regBtn.className = isRegistered ? 'btn-hack-primary registered' : 'btn-hack-primary';
+      }
+
+      if (title) title.textContent = `${hack.title} - ${hack.organizer}`;
+
+      if (body) {
+        body.innerHTML = `
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-card);">
+            <div>
+              <div style="font-size: 1.25rem; font-weight: 850; color: #0f172a; font-family: var(--font-display);">${hack.title}</div>
+              <div style="font-size: 0.86rem; font-weight: 700; color: #ea580c; margin-top: 2px;">${hack.organizer} • ${hack.mode}</div>
+              <div style="font-size: 0.76rem; color: #64748b; margin-top: 3px;">Format: ${hack.teamSize} · Deadline: ${hack.deadlineDate} (${hack.deadlineDays}d left)</div>
+            </div>
+            <div class="hack-prize-badge" style="font-size: 1.05rem;">
+              <div>${hack.prizePool}</div>
+              <div style="font-size: 0.72rem; color: #9a3412;">${hack.prizeSub}</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Sprint Overview</h4>
+            <p style="font-size: 0.82rem; line-height: 1.6; color: #334155;">${hack.description}</p>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Live Problem Statements &amp; Tracks:</h4>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              ${hack.problemStatements.map((ps, idx) => `
+                <div style="background: #fff7ed; border: 1px solid #ffedd5; border-radius: 8px; padding: 10px 14px; font-size: 0.80rem; color: #9a3412; display: flex; gap: 8px;">
+                  <strong style="color: #ea580c;">PS #${idx+1}:</strong>
+                  <span>${ps}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 8px;">Sprint Timeline &amp; Demo Milestones:</h4>
+            <div class="roadmap-list">
+              ${hack.timeline.map(tl => `
+                <div class="roadmap-step-item">
+                  <div class="roadmap-badge-num" style="background: #ea580c;">${tl.step}</div>
+                  <div>
+                    <div class="roadmap-text-title">${tl.name}</div>
+                    <div class="roadmap-text-sub">Milestone Date: ${tl.date}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; font-size: 0.78rem; color: #475569; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <strong>Official Sponsors:</strong> ${hack.sponsors.join(', ')}
+            </div>
+            <span style="font-weight: 750; color: #059669;">Verified Partner Drive ✓</span>
+          </div>
+        `;
+      }
+
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeHackDetailsModal() {
+      const modal = document.getElementById('hack-details-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    function openRegisterFromDetails() {
+      closeHackDetailsModal();
+      if (hackSelectedForRegister) {
+        onQuickRegisterHackClick(hackSelectedForRegister.id);
+      }
+    }
+
+    function onQuickRegisterHackClick(hackId) {
+      if (typeof TORPEDO_HACKATHONS_DATA === 'undefined') return;
+      const hack = TORPEDO_HACKATHONS_DATA.find(h => h.id === hackId);
+      if (!hack) return;
+      hackSelectedForRegister = hack;
+
+      const isAlready = registeredTeams.some(t => t.hackathonId === hack.id);
+      if (isAlready) {
+        showToast(`You are already part of a registered team for ${hack.title}!`, 'info');
+        openMyTeamsModal();
+        return;
+      }
+
+      const modal = document.getElementById('hack-register-dialog');
+      const summaryBox = document.getElementById('reg-hack-summary-box');
+      const trackSelect = document.getElementById('reg-track-select');
+
+      if (summaryBox) {
+        summaryBox.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 1.05rem; font-weight: 850; color: #0f172a;">${hack.title}</div>
+              <div style="font-size: 0.80rem; font-weight: 700; color: #ea580c;">${hack.organizer} · ${hack.mode}</div>
+            </div>
+            <div class="hack-prize-badge" style="font-size: 0.86rem;">${hack.prizePool}</div>
+          </div>
+        `;
+      }
+
+      if (trackSelect) {
+        trackSelect.innerHTML = hack.problemStatements.map((ps, idx) => `
+          <option value="${ps}">Track ${idx+1}: ${ps}</option>
+        `).join('');
+      }
+
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeHackRegisterModal() {
+      const modal = document.getElementById('hack-register-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    function submitHackTeamRegistration() {
+      if (!hackSelectedForRegister) return;
+      const hack = hackSelectedForRegister;
+      const teamNameInput = document.getElementById('reg-team-name-input');
+      const trackSelect = document.getElementById('reg-track-select');
+      const repoInput = document.getElementById('reg-github-repo-input');
+
+      const teamName = teamNameInput && teamNameInput.value.trim() ? teamNameInput.value.trim() : 'Torpedo Team ' + Math.floor(100 + Math.random() * 900);
+      const track = trackSelect ? trackSelect.value : hack.problemStatements[0];
+      const repo = repoInput && repoInput.value.trim() ? repoInput.value.trim() : 'https://github.com/vivek-yadav/' + hack.id;
+
+      const newTeam = {
+        id: 'team-' + Date.now(),
+        hackathonId: hack.id,
+        hackathonTitle: hack.title,
+        teamName: teamName,
+        track: track,
+        status: "Active Squad",
+        statusClass: "status-active",
+        repoUrl: repo,
+        members: [
+          { name: "Vivek Yadav (Lead)", role: "Team Captain / Full-Stack", roll: "22002170310065" }
+        ],
+        submissionStatus: "In Progress (Draft)",
+        submittedAt: "Just now"
+      };
+
+      registeredTeams.unshift(newTeam);
+      saveHackTeamsToStorage();
+      closeHackRegisterModal();
+      updateTeamsCounter();
+      applyHackFilters();
+
+      showToast(`Team '${teamName}' registered for ${hack.title}! Discord invite sent. 🚀`, 'success');
+    }
+
+    function updateTeamsCounter() {
+      const heroTeams = document.getElementById('portal-hero-teams-count');
+      if (heroTeams) heroTeams.textContent = registeredTeams.length;
+    }
+
+    function openMyTeamsModal() {
+      const modal = document.getElementById('my-teams-dialog');
+      const body = document.getElementById('my-teams-list-body');
+
+      if (body) {
+        if (registeredTeams.length === 0) {
+          body.innerHTML = `
+            <div class="empty-state-card" style="padding: 24px;">
+              <p>You haven't formed or registered any hackathon teams yet.</p>
+              <button type="button" class="btn-hack-primary" onclick="closeMyTeamsModal(); switchPortalTab('hackathons');" style="margin-top: 10px;">Explore Sprints</button>
+            </div>
+          `;
+        } else {
+          body.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              ${registeredTeams.map(team => `
+                <div style="background: #ffffff; border: 1px solid var(--border-card); border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <div>
+                      <div style="font-weight: 850; font-size: 1.05rem; color: #0f172a;">${team.teamName}</div>
+                      <div style="font-size: 0.80rem; font-weight: 700; color: #ea580c; margin-top: 2px;">${team.hackathonTitle}</div>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 750; color: #166534; background: #dcfce7; border: 1px solid #bbf7d0; padding: 3px 8px; border-radius: 6px;">
+                      ${team.status} ✓
+                    </span>
+                  </div>
+
+                  <div style="font-size: 0.78rem; color: #475569; margin-bottom: 10px;">
+                    <strong>Track:</strong> ${team.track}
+                  </div>
+
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;">
+                    <div style="font-size: 0.72rem; font-weight: 750; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Team Roster:</div>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                      ${team.members.map(m => `
+                        <div style="font-size: 0.78rem; color: #0f172a; display: flex; justify-content: space-between;">
+                          <span>👤 <strong>${m.name}</strong> (${m.role})</span>
+                          <span style="color: #64748b; font-family: var(--font-mono, monospace); font-size: 0.72rem;">${m.roll}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem;">
+                    <a href="${team.repoUrl}" target="_blank" rel="noopener" style="color: #2563eb; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                      <span>🔗 GitHub Repo ↗</span>
+                    </a>
+                    <span style="color: #059669; font-weight: 700;">Status: ${team.submissionStatus}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+      }
+
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeMyTeamsModal() {
+      const modal = document.getElementById('my-teams-dialog');
+      if (modal && typeof modal.close === 'function') modal.close();
+    }
+
+    let jobsLightDismissSetup = false;
     function setupJobsLightDismissFallbacks() {
+      if (jobsLightDismissSetup) return;
+      jobsLightDismissSetup = true;
       if (!('closedBy' in HTMLDialogElement.prototype)) {
         const outside = (e, dialog) => {
           const r = dialog.getBoundingClientRect();
@@ -6323,7 +7118,11 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         for (const dialog of document.querySelectorAll('dialog[closedby="any"]')) {
           let pressedOutside = false;
           dialog.addEventListener('pointerdown', (e) => { pressedOutside = outside(e, dialog); });
-          dialog.addEventListener('pointerup', (e) => { if (pressedOutside && outside(e, dialog)) dialog.close(); });
+          dialog.addEventListener('pointerup', (e) => { 
+            if (pressedOutside && outside(e, dialog) && dialog.open) {
+              dialog.close(); 
+            }
+          });
         }
       }
     }

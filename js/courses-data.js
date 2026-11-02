@@ -192,3 +192,7 @@ GROUP BY c.track_name
 ORDER BY avg_package_lpa DESC;`
   }
 };
+
+if (typeof window !== 'undefined') {
+  window.TORPEDO_DATA = TORPEDO_DATA;
+}

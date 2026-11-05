@@ -7,10 +7,10 @@
   <meta name="description" content="Verified SDE campus placements, summer internships, and graduate engineering drives at Google, Microsoft, Razorpay, CRED, and top tech employers.">
   <link rel="icon" type="image/png" href="assets/LOGO.png">
 
-  <!-- Inter, Plus Jakarta Sans, Outfit & JetBrains Mono Fonts -->
+  <!-- Inter Inter, Plus Jakarta Sans, Outfit & JetBrains Mono JetBrains Mono Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Master Portal Layout CSS -->
   <link rel="stylesheet" href="css/portal-layout.css">
@@ -36,8 +36,9 @@
     .jobs-hero-frame {
       position: relative;
       width: 100%;
-      min-height: 255px;
-      border-radius: 16px;
+      min-height: 155px;
+      height: 160px;
+      border-radius: 14px;
       overflow: hidden;
       background-color: #f8fafc;
       background-image: url('assets/jobs-banner.png?v=tech_campus_1');
@@ -45,7 +46,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
       display: flex;
       align-items: center;
     }
@@ -68,34 +69,34 @@
     .jobs-hero-content {
       position: relative;
       z-index: 2;
-      padding: 30px 38px;
-      max-width: 650px;
+      padding: 16px 24px;
+      max-width: 580px;
       color: #0f172a;
     }
 
     .jobs-hero-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       background: rgba(99, 102, 241, 0.09);
       border: 1px solid rgba(99, 102, 241, 0.25);
-      font-size: 0.70rem;
+      font-size: 0.68rem;
       font-weight: 800;
       color: #4338ca;
-      letter-spacing: 0.06em;
-      padding: 4px 10px;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
       border-radius: 999px;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       text-transform: uppercase;
     }
 
     .jobs-hero-title {
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 2.15rem;
-      font-weight: 850;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 4px;
       color: #0f172a;
     }
 
@@ -106,17 +107,17 @@
     }
 
     .jobs-hero-desc {
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       color: #475569;
-      line-height: 1.55;
-      margin-bottom: 18px;
+      line-height: 1.42;
+      margin-bottom: 10px;
       font-weight: 500;
     }
 
     .jobs-hero-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -124,23 +125,23 @@
       background: #0f2ac7;
       color: #ffffff;
       font-weight: 750;
-      font-size: 0.84rem;
-      padding: 9px 18px;
-      border-radius: 8px;
+      font-size: 0.78rem;
+      padding: 7px 14px;
+      border-radius: 7px;
       border: 1px solid #0f2ac7;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.15s ease;
-      box-shadow: 0 4px 14px rgba(15, 42, 199, 0.25);
+      box-shadow: 0 3px 10px rgba(15, 42, 199, 0.22);
       text-decoration: none;
     }
 
     .btn-hero-primary:hover {
       background: #0c229e;
       transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(15, 42, 199, 0.35);
+      box-shadow: 0 5px 14px rgba(15, 42, 199, 0.32);
     }
 
     .btn-hero-secondary {
@@ -148,15 +149,15 @@
       color: #1e293b;
       border: 1px solid #cbd5e1;
       font-weight: 700;
-      font-size: 0.84rem;
-      padding: 9px 16px;
-      border-radius: 8px;
+      font-size: 0.78rem;
+      padding: 7px 13px;
+      border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.15s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
       text-decoration: none;
     }
 
@@ -165,42 +166,41 @@
       border-color: #94a3b8;
       transform: translateY(-1px);
     }
-      transform: translateY(-1px);
-    }
 
     /* 2. Live Placement Metrics Strip */
     .jobs-stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .stat-card-box {
       background: #ffffff;
       border: 1px solid var(--border-card);
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 10px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      gap: 10px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
       transition: all 0.18s ease;
     }
 
     .stat-card-box:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.07);
       border-color: #cbd5e1;
     }
 
     .stat-icon-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       flex-shrink: 0;
     }
 
@@ -210,15 +210,15 @@
     .icon-purple { background: #faf5ff; color: #7c3aed; }
 
     .stat-val-num {
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 1.25rem;
-      font-weight: 850;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.10rem;
+      font-weight: 800;
       color: #0f172a;
       line-height: 1.15;
     }
 
     .stat-label-text {
-      font-size: 0.74rem;
+      font-size: 0.70rem;
       font-weight: 600;
       color: #64748b;
       margin-top: 1px;
@@ -228,8 +228,8 @@
     .student-readiness-strip {
       background: linear-gradient(135deg, #eff2ff 0%, #ffffff 50%, #f0fdf4 100%);
       border: 1.5px solid rgba(15, 42, 199, 0.15);
-      border-radius: 12px;
-      padding: 12px 18px;
+      border-radius: 10px;
+      padding: 8px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -486,7 +486,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.1rem;
       font-weight: 900;
       flex-shrink: 0;
@@ -494,7 +494,7 @@
     }
 
     .job-title-line {
-      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.05rem;
       font-weight: 800;
       color: #0f172a;
@@ -732,7 +732,7 @@
     }
 
     .dialog-header h3 {
-      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.1rem;
       font-weight: 850;
       color: #0f172a;
@@ -1360,7 +1360,7 @@
     <div class="dialog-body">
       <div style="border-bottom:1px solid var(--border-card); padding-bottom:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-start;">
         <div>
-          <h2 style="font-family:var(--font-display, 'Outfit', sans-serif); font-size:1.35rem; color:#0f172a;">Vivek Yadav</h2>
+          <h2 style="font-family:var(--font-display, 'Inter', sans-serif); font-size:1.35rem; color:#0f172a;">Vivek Yadav</h2>
           <div style="color:#64748b; font-size:0.84rem; margin-top:2px;">B.Tech Computer Science &amp; Engineering • Gujarat Technological University</div>
           <div style="font-family:var(--font-mono, monospace); color:#0f2ac7; font-size:0.76rem; margin-top:4px;">Roll: 22002170310065 • CPI: 8.85 / 10</div>
         </div>

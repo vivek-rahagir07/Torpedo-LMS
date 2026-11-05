@@ -3188,18 +3188,18 @@ body {
 .cert-hero-banner-frame {
   position: relative;
   width: 100%;
-  min-height: 255px;
-  height: 260px;
-  border-radius: 16px;
+  min-height: 155px;
+  height: 160px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   background-color: #f8fafc;
   background-image: url('../assets/certifications-banner.png?v=cert_vault_2');
   background-position: right center;
   background-size: cover;
   background-repeat: no-repeat;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
   display: flex;
   align-items: center;
 }
@@ -3222,8 +3222,8 @@ body {
 .cert-hero-banner-content {
   position: relative;
   z-index: 2;
-  padding: 30px 38px;
-  max-width: 650px;
+  padding: 16px 24px;
+  max-width: 580px;
 }
 
 .cert-hero-pill {
@@ -3232,23 +3232,23 @@ body {
   gap: 6px;
   background: rgba(147, 51, 234, 0.08);
   border: 1px solid rgba(147, 51, 234, 0.25);
-  padding: 4px 12px;
+  padding: 3px 9px;
   border-radius: 999px;
-  font-size: 0.73rem;
+  font-size: 0.68rem;
   font-weight: 750;
   letter-spacing: 0.04em;
   color: #7e22ce;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .cert-hero-title {
-  margin: 0 0 8px 0;
-  font-family: var(--font-display, 'Outfit', sans-serif);
-  font-size: 2.15rem;
-  font-weight: 850;
+  margin: 0 0 4px 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
   color: #0f172a;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .cert-hero-title-blue {
@@ -3347,18 +3347,18 @@ body {
 .course-hero-banner-frame {
   position: relative;
   width: 100%;
-  min-height: 255px;
-  height: 260px;
-  border-radius: 16px;
+  min-height: 155px;
+  height: 160px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   background-color: #f8fafc;
   background-image: url('../assets/courses-banner.png?v=courses_banner_2');
   background-position: right center;
   background-size: cover;
   background-repeat: no-repeat;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
   display: flex;
   align-items: center;
 }
@@ -3381,8 +3381,8 @@ body {
 .course-hero-banner-content {
   position: relative;
   z-index: 2;
-  padding: 30px 38px;
-  max-width: 650px;
+  padding: 16px 24px;
+  max-width: 580px;
 }
 
 .course-hero-pill {
@@ -3391,22 +3391,22 @@ body {
   gap: 6px;
   background: rgba(37, 99, 235, 0.08);
   border: 1px solid rgba(37, 99, 235, 0.25);
-  padding: 4px 12px;
+  padding: 3px 9px;
   border-radius: 999px;
-  font-size: 0.73rem;
+  font-size: 0.68rem;
   font-weight: 750;
   letter-spacing: 0.04em;
   color: #1d4ed8;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .course-hero-title {
-  margin: 0 0 8px 0;
-  font-family: var(--font-display, 'Outfit', sans-serif);
-  font-size: 2.15rem;
-  font-weight: 850;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  margin: 0 0 4px 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
   display: block;
 }
 
@@ -5561,18 +5561,18 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .lc-hero-banner-frame {
   position: relative;
   width: 100%;
-  min-height: 255px;
-  height: 260px;
-  border-radius: 16px;
+  min-height: 155px;
+  height: 160px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   background-color: #f8fafc;
   background-image: url('../assets/lifecode-banner.png?v=lc_hub_v2');
   background-position: right center;
   background-size: cover;
   background-repeat: no-repeat;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
   display: flex;
   align-items: center;
 }
@@ -5595,8 +5595,8 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .lc-hero-banner-content {
   position: relative;
   z-index: 2;
-  padding: 30px 38px;
-  max-width: 650px;
+  padding: 16px 24px;
+  max-width: 580px;
 }
 
 .lc-hero-pill {
@@ -5606,22 +5606,22 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: rgba(37, 99, 235, 0.09);
   color: #1d4ed8;
   border: 1px solid rgba(37, 99, 235, 0.22);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 4px 10px;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
   border-radius: 999px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
 .lc-hero-title {
-  margin: 0 0 8px 0;
-  font-family: var(--font-display, 'Outfit', sans-serif);
-  font-size: 2.15rem;
-  font-weight: 850;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  margin: 0 0 4px 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
   color: #0b1329;
 }
 
@@ -5633,60 +5633,60 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .lc-hero-accent-bar {
-  width: 38px;
-  height: 4px;
+  width: 32px;
+  height: 3px;
   background: #2563eb;
   border-radius: 999px;
-  margin: 10px 0 12px 0;
+  margin: 6px 0 8px 0;
 }
 
 .lc-hero-desc {
-  font-size: 0.90rem;
+  font-size: 0.82rem;
   color: #475569;
-  line-height: 1.55;
-  margin: 0 0 18px 0;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
 }
 
 .lc-hero-actions-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .lc-btn-hero-primary {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
-  font-weight: 750;
-  font-size: 0.88rem;
-  padding: 10px 20px;
-  border-radius: 9px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 7px 14px;
+  border-radius: 8px;
   border: none;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.15s ease;
 }
 
 .lc-btn-hero-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
 .lc-btn-hero-secondary {
   background: #ffffff;
   color: #0f172a;
   font-weight: 700;
-  font-size: 0.88rem;
-  padding: 9px 18px;
-  border-radius: 9px;
+  font-size: 0.78rem;
+  padding: 6px 13px;
+  border-radius: 8px;
   border: 1px solid #cbd5e1;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.15s ease;
 }
 
@@ -5700,9 +5700,9 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: rgba(255, 255, 255, 0.85);
   color: #475569;
   font-weight: 700;
-  font-size: 0.84rem;
-  padding: 9px 14px;
-  border-radius: 9px;
+  font-size: 0.76rem;
+  padding: 6px 11px;
+  border-radius: 8px;
   border: 1px solid #e2e8f0;
   cursor: pointer;
   display: inline-flex;
@@ -5721,20 +5721,20 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .lc-hub-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .lc-stat-tile {
   background: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 12px;
-  padding: 11px 15px;
+  border-radius: 10px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
   overflow: hidden;
   animation: lcTileSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
@@ -5768,13 +5768,13 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .lc-stat-icon-wrap {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.18rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
   transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -5789,24 +5789,24 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .lc-stat-icon-purple { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
 
 .lc-stat-label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   font-weight: 750;
   color: #64748b;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .lc-stat-val {
-  font-size: 1.25rem;
+  font-size: 1.08rem;
   font-weight: 850;
   color: #0f172a;
-  font-family: var(--font-display, 'Inter', sans-serif);
+  font-family: 'Inter', sans-serif;
   line-height: 1.15;
 }
 
 .lc-stat-sub {
-  font-size: 0.70rem;
+  font-size: 0.66rem;
   color: #94a3b8;
   margin-top: 1px;
   font-weight: 500;
@@ -5816,8 +5816,8 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .lc-hub-choice-grid {
   display: grid;
   grid-template-columns: 1.14fr 0.86fr;
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 /* Daily Challenge Card */
@@ -6604,18 +6604,18 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .quiz-hero-banner-frame {
   position: relative;
   width: 100%;
-  min-height: 255px;
-  height: 260px;
-  border-radius: 16px;
+  min-height: 155px;
+  height: 160px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   background-color: #f8fafc;
   background-image: url('../assets/mock-quizzes-banner.png?v=quiz_arena_2');
   background-position: right center;
   background-size: cover;
   background-repeat: no-repeat;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
   display: flex;
   align-items: center;
 }
@@ -6638,8 +6638,8 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .quiz-hero-banner-content {
   position: relative;
   z-index: 2;
-  padding: 30px 38px;
-  max-width: 650px;
+  padding: 16px 24px;
+  max-width: 580px;
 }
 
 .quiz-hero-pill {
@@ -6649,22 +6649,23 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: rgba(99, 102, 241, 0.09);
   color: #4f46e5;
   border: 1px solid rgba(99, 102, 241, 0.25);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 4px 10px;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
   border-radius: 999px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
 .quiz-hero-title {
-  font-size: 2.15rem;
-  font-weight: 850;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
   color: #0f172a;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin: 0 0 10px 0;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 4px 0;
 }
 
 .quiz-hero-title-highlight {
@@ -6674,26 +6675,26 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .quiz-hero-subtitle {
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   color: #475569;
-  line-height: 1.55;
-  margin: 0 0 18px 0;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
 }
 
 .quiz-hero-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .quiz-hero-btn-primary {
   background: #2563eb;
   color: #ffffff;
-  font-size: 0.84rem;
-  font-weight: 750;
-  padding: 9px 18px;
-  border-radius: 9px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   display: inline-flex;
@@ -6734,23 +6735,23 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .quiz-hero-btn-code {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   color: #ffffff;
-  font-size: 0.84rem;
-  font-weight: 750;
-  padding: 9px 18px;
-  border-radius: 9px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.30);
-  transition: all 0.18s ease;
+  gap: 6px;
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.25);
+  transition: all 0.16s ease;
 }
 
 .quiz-hero-btn-code:hover {
   background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.40);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
 }
 
 /* Faculty Course Assessment Banner */
@@ -6758,92 +6759,92 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #ffffff;
   background-image: radial-gradient(circle at 10% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
   border: 1.5px solid #e0e7ff;
-  border-radius: 14px;
-  padding: 14px 20px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.05);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.04);
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 10px;
 }
 
 .faculty-banner-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .faculty-banner-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   background: #eef2ff;
   color: #4f46e5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
   border: 1px solid #e0e7ff;
 }
 
 .faculty-banner-text h4 {
-  margin: 0 0 2px 0;
-  font-size: 0.95rem;
+  margin: 0 0 1px 0;
+  font-size: 0.86rem;
   font-weight: 800;
   color: #0f172a;
 }
 
 .faculty-banner-text p {
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: #64748b;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .faculty-banner-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .faculty-code-input-sm {
-  height: 38px;
-  padding: 6px 14px;
+  height: 32px;
+  padding: 4px 10px;
   border: 1.5px solid #cbd5e1;
-  border-radius: 8px;
+  border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 750;
   text-transform: uppercase;
   color: #0f172a;
   outline: none;
-  width: 140px;
+  width: 120px;
   letter-spacing: 0.05em;
   transition: all 0.16s ease;
 }
 
 .faculty-code-input-sm:focus {
   border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
 }
 
 .btn-unlock-faculty-quiz {
-  height: 38px;
+  height: 32px;
   background: #4f46e5;
   color: #ffffff;
   border: none;
-  border-radius: 8px;
-  padding: 0 16px;
-  font-size: 0.82rem;
+  border-radius: 6px;
+  padding: 0 12px;
+  font-size: 0.76rem;
   font-weight: 750;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   transition: all 0.16s ease;
   white-space: nowrap;
 }
@@ -6851,7 +6852,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .btn-unlock-faculty-quiz:hover {
   background: #4338ca;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
 }
 
 .quick-code-chip {
@@ -6859,10 +6860,10 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: 1px solid #cbd5e1;
   color: #334155;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 2px 7px;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.14s ease;
 }
@@ -6897,19 +6898,19 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .quiz-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .quiz-stat-tile {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 11px 15px;
+  border-radius: 10px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -8111,12 +8112,12 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .quiz-dropdown-title {
-  font-size: 1.25rem;
-  font-weight: 850;
+  font-size: 1.15rem;
+  font-weight: 800;
   color: #0f172a;
   margin: 0 0 4px 0;
-  font-family: 'Outfit', sans-serif;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display, 'Inter', sans-serif);
+  letter-spacing: -0.015em;
 }
 
 .quiz-dropdown-subtitle {
@@ -8268,11 +8269,11 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .quiz-preview-title {
-  font-size: 1.25rem;
-  font-weight: 850;
+  font-size: 1.15rem;
+  font-weight: 800;
   color: #0f172a;
   margin: 0 0 6px 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display, 'Inter', sans-serif);
   letter-spacing: -0.015em;
 }
 
@@ -8446,18 +8447,18 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .jobs-hero-frame {
       position: relative;
       width: 100%;
-      min-height: 255px;
-      height: 260px;
-      border-radius: 16px;
+      min-height: 155px;
+      height: 160px;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 22px;
+      margin-bottom: 14px;
       background-color: #f8fafc;
       background-image: url('../assets/jobs-banner.png?v=tech_campus_1');
       background-position: right center;
       background-size: cover;
       background-repeat: no-repeat;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
       display: flex;
       align-items: center;
     }
@@ -8480,34 +8481,34 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .jobs-hero-content {
       position: relative;
       z-index: 2;
-      padding: 30px 38px;
-      max-width: 650px;
+      padding: 16px 24px;
+      max-width: 580px;
       color: #0f172a;
     }
 
     .jobs-hero-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       background: rgba(99, 102, 241, 0.09);
       border: 1px solid rgba(99, 102, 241, 0.25);
-      font-size: 0.70rem;
+      font-size: 0.68rem;
       font-weight: 800;
       color: #4338ca;
-      letter-spacing: 0.06em;
-      padding: 4px 10px;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
       border-radius: 999px;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       text-transform: uppercase;
     }
 
     .jobs-hero-title {
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 2.15rem;
-      font-weight: 850;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 4px;
       color: #0f172a;
     }
 
@@ -8518,17 +8519,17 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     }
 
     .jobs-hero-desc {
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       color: #475569;
-      line-height: 1.55;
-      margin-bottom: 18px;
+      line-height: 1.42;
+      margin-bottom: 10px;
       font-weight: 500;
     }
 
     .jobs-hero-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -8536,23 +8537,23 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       background: #0f2ac7;
       color: #ffffff;
       font-weight: 750;
-      font-size: 0.84rem;
-      padding: 9px 18px;
-      border-radius: 8px;
+      font-size: 0.78rem;
+      padding: 7px 14px;
+      border-radius: 7px;
       border: 1px solid #0f2ac7;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.15s ease;
-      box-shadow: 0 4px 14px rgba(15, 42, 199, 0.25);
+      box-shadow: 0 3px 10px rgba(15, 42, 199, 0.22);
       text-decoration: none;
     }
 
     .btn-hero-primary:hover {
       background: #0c229e;
       transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(15, 42, 199, 0.35);
+      box-shadow: 0 5px 14px rgba(15, 42, 199, 0.32);
     }
 
     .btn-hero-secondary {
@@ -8560,15 +8561,15 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       color: #1e293b;
       border: 1px solid #cbd5e1;
       font-weight: 700;
-      font-size: 0.84rem;
-      padding: 9px 16px;
-      border-radius: 8px;
+      font-size: 0.78rem;
+      padding: 7px 13px;
+      border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.15s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
       text-decoration: none;
     }
 
@@ -8582,35 +8583,36 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .jobs-stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .stat-card-box {
       background: #ffffff;
       border: 1px solid var(--border-card);
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 10px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      gap: 10px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
       transition: all 0.18s ease;
     }
 
     .stat-card-box:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.07);
       border-color: #cbd5e1;
     }
 
     .stat-icon-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       flex-shrink: 0;
     }
 
@@ -8620,15 +8622,15 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .icon-purple { background: #faf5ff; color: #7c3aed; }
 
     .stat-val-num {
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 1.25rem;
-      font-weight: 850;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.10rem;
+      font-weight: 800;
       color: #0f172a;
       line-height: 1.15;
     }
 
     .stat-label-text {
-      font-size: 0.74rem;
+      font-size: 0.70rem;
       font-weight: 600;
       color: #64748b;
       margin-top: 1px;
@@ -8638,30 +8640,31 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .student-readiness-strip {
       background: linear-gradient(135deg, #eff2ff 0%, #ffffff 50%, #f0fdf4 100%);
       border: 1.5px solid rgba(15, 42, 199, 0.15);
-      border-radius: 12px;
-      padding: 12px 18px;
+      border-radius: 10px;
+      padding: 8px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 10px;
       flex-wrap: wrap;
-      box-shadow: 0 1px 3px rgba(15, 42, 199, 0.04);
+      box-shadow: 0 1px 2px rgba(15, 42, 199, 0.03);
+      margin-bottom: 12px;
     }
 
     .readiness-left-profile {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .readiness-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
       background: #0f2ac7;
       color: #ffffff;
-      font-weight: 850;
-      font-size: 0.90rem;
+      font-weight: 800;
+      font-size: 0.80rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -8670,29 +8673,29 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
     .readiness-title {
       font-weight: 800;
-      font-size: 0.90rem;
+      font-size: 0.82rem;
       color: #0f172a;
       line-height: 1.2;
     }
 
     .readiness-sub {
-      font-size: 0.74rem;
+      font-size: 0.70rem;
       color: #64748b;
     }
 
     .readiness-pills {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .readiness-tag {
       background: #ffffff;
       border: 1px solid #cbd5e1;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.74rem;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.70rem;
       font-weight: 700;
       color: #334155;
     }
@@ -8708,13 +8711,13 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       color: #ffffff;
       border: none;
       border-radius: 6px;
-      padding: 6px 13px;
-      font-size: 0.78rem;
+      padding: 5px 11px;
+      font-size: 0.74rem;
       font-weight: 750;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       transition: all 0.14s ease;
     }
 
@@ -8726,12 +8729,13 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .jobs-toolbar-card {
       background: #ffffff;
       border: 1px solid var(--border-card);
-      border-radius: 14px;
-      padding: 14px 18px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .toolbar-search-row {
@@ -8860,14 +8864,14 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .job-card-item {
       background: #ffffff;
       border: 1px solid var(--border-card);
-      border-radius: 14px;
-      padding: 18px 20px;
+      border-radius: 12px;
+      padding: 14px 16px;
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .job-card-item:hover {
@@ -8880,37 +8884,37 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .job-brand-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .job-company-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 1.1rem;
-      font-weight: 900;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.95rem;
+      font-weight: 850;
       flex-shrink: 0;
       border: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     .job-title-line {
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 1.05rem;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.96rem;
       font-weight: 800;
       color: #0f172a;
       letter-spacing: -0.015em;
       line-height: 1.25;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       cursor: pointer;
       transition: color 0.14s ease;
     }
@@ -9143,9 +9147,9 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     }
 
     .dialog-header h3 {
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 1.1rem;
-      font-weight: 850;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.05rem;
+      font-weight: 800;
       color: #0f172a;
     }
 
@@ -9284,18 +9288,18 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .hack-hero-frame {
   position: relative;
   width: 100%;
-  min-height: 255px;
-  height: 260px;
-  border-radius: 16px;
+  min-height: 155px;
+  height: 160px;
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   background-color: #f8fafc;
   background-image: url('../assets/hackathons-banner.png?v=build_sprint_1');
   background-position: right center;
   background-size: cover;
   background-repeat: no-repeat;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.06);
   display: flex;
   align-items: center;
 }
@@ -9318,34 +9322,34 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .hack-hero-content {
   position: relative;
   z-index: 2;
-  padding: 30px 38px;
-  max-width: 650px;
+  padding: 16px 24px;
+  max-width: 580px;
   color: #0f172a;
 }
 
 .hack-hero-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: rgba(249, 115, 22, 0.1);
   border: 1px solid rgba(249, 115, 22, 0.3);
-  font-size: 0.70rem;
+  font-size: 0.68rem;
   font-weight: 800;
   color: #c2410c;
-  letter-spacing: 0.06em;
-  padding: 4px 10px;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
   border-radius: 999px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
 .hack-hero-title {
-  font-family: var(--font-display, 'Outfit', sans-serif);
-  font-size: 2.15rem;
-  font-weight: 850;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin-bottom: 8px;
+  font-family: var(--font-display, 'Inter', sans-serif);
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin-bottom: 4px;
   color: #0f172a;
 }
 
@@ -9356,17 +9360,17 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .hack-hero-desc {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: #475569;
-  line-height: 1.55;
-  margin-bottom: 18px;
+  line-height: 1.42;
+  margin-bottom: 10px;
   font-weight: 500;
 }
 
 .hack-hero-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -9374,23 +9378,23 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #ea580c;
   color: #ffffff;
   font-weight: 750;
-  font-size: 0.84rem;
-  padding: 9px 18px;
-  border-radius: 8px;
+  font-size: 0.78rem;
+  padding: 7px 14px;
+  border-radius: 7px;
   border: 1px solid #ea580c;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   transition: all 0.15s ease;
-  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.28);
+  box-shadow: 0 3px 10px rgba(234, 88, 12, 0.22);
   text-decoration: none;
 }
 
 .btn-hack-primary:hover {
   background: #c2410c;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.38);
+  box-shadow: 0 5px 14px rgba(234, 88, 12, 0.32);
 }
 
 .btn-hack-secondary {
@@ -9398,15 +9402,15 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #1e293b;
   border: 1px solid #cbd5e1;
   font-weight: 700;
-  font-size: 0.84rem;
-  padding: 9px 16px;
-  border-radius: 8px;
+  font-size: 0.78rem;
+  padding: 7px 13px;
+  border-radius: 7px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   transition: all 0.15s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   text-decoration: none;
 }
 
@@ -9420,21 +9424,22 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .hack-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 /* 3. Hackathon Listings Grid */
 .hack-listings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .hack-card-item {
   background: #ffffff;
   border: 1px solid var(--border-card, #e2e8f0);
-  border-radius: 14px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 14px 16px;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
@@ -9453,25 +9458,25 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
 
 .hack-brand-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-family: var(--font-display, 'Inter', sans-serif);
   font-weight: 850;
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .hack-title-line {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: #0f172a;
   cursor: pointer;

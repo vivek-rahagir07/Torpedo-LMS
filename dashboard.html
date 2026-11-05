@@ -27,6 +27,9 @@
       
       <!-- Brand Logo Left -->
       <div class="header-left-brand">
+        <button type="button" class="header-mobile-toggle" onclick="toggleMobileSidebar()" title="Toggle Navigation Menu" aria-label="Toggle Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
         <a href="dashboard.html" class="brand-logo-wrap">
           <img src="assets/LOGO.png" alt="Torpedo Learning Logo" class="brand-logo-img">
           <span class="brand-portal-tag">STUDENT</span>
@@ -3793,15 +3796,54 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
       // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes, #jobs, #hackathons)
       const parseHash = () => (window.location.hash || '').replace(/^#/, '').split(/[?&/]/)[0].toLowerCase();
+      
+      function handleDeepLinkParams() {
+        const hashStr = window.location.hash || '';
+        const searchStr = window.location.search || '';
+        const combined = (searchStr + '&' + hashStr.replace(/^#/, '')).toLowerCase();
+        
+        // 1. Applications modal deep-link
+        if (combined.includes('view=applications') || combined.includes('my-applications') || combined.includes('view=apps')) {
+          setTimeout(() => {
+            if (typeof openApplicationsModal === 'function') openApplicationsModal();
+          }, 250);
+        }
+        
+        // 2. Teams modal deep-link
+        if (combined.includes('view=teams') || combined.includes('my-teams')) {
+          setTimeout(() => {
+            if (typeof openMyTeamsModal === 'function') openMyTeamsModal();
+          }, 250);
+        }
+
+        // 3. Course category filter
+        const catMatch = combined.match(/[?&]category=([a-z0-9_-]+)/);
+        if (catMatch && catMatch[1]) {
+          const cat = catMatch[1];
+          const catSelect = document.getElementById('course-category-select');
+          if (catSelect) {
+            let val = cat;
+            if (cat === 'development') val = 'frontend';
+            if (catSelect.querySelector(`option[value="${val}"]`)) {
+              catSelect.value = val;
+              if (typeof handleCourseCatalogFilter === 'function') handleCourseCatalogFilter();
+            }
+          }
+        }
+      }
+
       const initialHash = parseHash();
       if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs', 'hackathons'].includes(initialHash)) {
         switchPortalTab(initialHash);
       }
+      handleDeepLinkParams();
+
       window.addEventListener('hashchange', () => {
         const h = parseHash();
         if (['home', 'courses', 'library', 'certifications', 'lifecode', 'quizzes', 'jobs', 'hackathons'].includes(h)) {
           switchPortalTab(h);
         }
+        handleDeepLinkParams();
       });
 
       // Keyboard shortcuts ⌘K and ⌘J
@@ -4154,6 +4196,13 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       }
     }
 
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('student-portal-sidebar');
+      if (sidebar) {
+        sidebar.classList.toggle('mobile-open');
+      }
+    }
+
     function toggleSidebarSubnav(itemKey, event) {
       if (event) event.stopPropagation();
       const group = document.getElementById(`nav-group-${itemKey}`);
@@ -4171,6 +4220,12 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     }
 
     function switchPortalTab(tabName, btn) {
+      // Dismiss mobile offcanvas if open
+      const portalSidebar = document.getElementById('student-portal-sidebar');
+      if (portalSidebar && portalSidebar.classList.contains('mobile-open')) {
+        portalSidebar.classList.remove('mobile-open');
+      }
+
       // Deactivate all tab content containers
       document.querySelectorAll('.portal-tab-content').forEach(tab => {
         tab.classList.remove('active');
@@ -6505,7 +6560,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeJobDetailsModal() {
       const modal = document.getElementById('job-details-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     function openApplyFromDetails() {
@@ -6547,7 +6602,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeApplyModal() {
       const modal = document.getElementById('job-apply-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     function submitJobApplication() {
@@ -6622,7 +6677,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeApplicationsModal() {
       const modal = document.getElementById('my-apps-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     function openStudentDossierModal() {
@@ -6632,7 +6687,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeStudentDossierModal() {
       const modal = document.getElementById('dossier-preview-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     /* ========================================================================
@@ -6948,7 +7003,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeHackDetailsModal() {
       const modal = document.getElementById('hack-details-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     function openRegisterFromDetails() {
@@ -6998,7 +7053,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeHackRegisterModal() {
       const modal = document.getElementById('hack-register-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     function submitHackTeamRegistration() {
@@ -7103,7 +7158,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function closeMyTeamsModal() {
       const modal = document.getElementById('my-teams-dialog');
-      if (modal && typeof modal.close === 'function') modal.close();
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
 
     let jobsLightDismissSetup = false;

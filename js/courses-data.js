@@ -2,7 +2,7 @@
  * Torpedo LMS - Catalog Data & Sandbox Previews
  */
 
-const TORPEDO_DATA = {
+var TORPEDO_DATA = {
   categories: [
     { id: 'all', name: 'All Categories', count: '1,200+' },
     { id: 'development', name: 'Design & Development', count: '250+' },
@@ -195,4 +195,7 @@ ORDER BY avg_package_lpa DESC;`
 
 if (typeof window !== 'undefined') {
   window.TORPEDO_DATA = TORPEDO_DATA;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = TORPEDO_DATA;
 }

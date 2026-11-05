@@ -380,9 +380,41 @@ body {
   display: none !important;
 }
 
+.header-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #0f172a;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.header-mobile-toggle:hover {
+  background-color: #f1f5f9;
+}
+
 @media (max-width: 900px) {
+  .header-mobile-toggle {
+    display: inline-flex;
+  }
   .single-main-sidebar {
-    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.15);
+    background: #ffffff;
+  }
+  .single-main-sidebar.mobile-open {
+    transform: translateX(0);
+    display: flex !important;
   }
 }
 

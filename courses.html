@@ -3,618 +3,736 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses Catalog & Career Pathways | Torpedo Learning</title>
+  <title>Courses Catalog &amp; Career Pathways | Torpedo Learning</title>
   <meta name="description" content="Browse industry-accredited courses, in-browser Lifecode sandboxes, and recruiter-connected syllabus pathways at Torpedo Learning.">
   <link rel="icon" type="image/png" href="assets/LOGO.png">
 
-  <!-- Modern Fonts -->
+  <!-- Inter, Plus Jakarta Sans, Outfit & JetBrains Mono Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/animations.css">
-
-  <script>
-    // Keep user in unified single-portal view with permanent left-hand navbar
-    const params = new URLSearchParams(window.location.search);
-    if (!params.get('standalone')) {
-      const q = window.location.search ? ('&' + window.location.search.substring(1)) : '';
-      window.location.replace("dashboard.html#courses" + q);
-    }
-  </script>
+  <!-- Master Portal Layout CSS -->
+  <link rel="stylesheet" href="css/portal-layout.css?v=courses_v4">
 
   <style>
-    /* Catalog Specific Light Theme Styles */
-    .catalog-hero {
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-      padding: 32px 0 24px 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .course-hero-banner-frame {
-      position: relative;
-      width: 100%;
-      height: 260px;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      background-color: #f8fafc;
-      background-image: url('assets/courses-banner.png?v=courses_banner_2');
-      background-position: right center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 20px -3px rgba(15, 23, 42, 0.08);
+    /* Courses Catalog Page Enhancements */
+    .courses-page-canvas {
       display: flex;
-      align-items: center;
-      text-align: left;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
     }
 
-    .course-hero-banner-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.98) 0%,
-        rgba(255, 255, 255, 0.94) 42%,
-        rgba(255, 255, 255, 0.70) 65%,
-        rgba(255, 255, 255, 0.20) 85%,
-        transparent 100%
-      );
-      pointer-events: none;
-      z-index: 1;
+    .courses-category-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
     }
 
-    .course-hero-banner-content {
-      position: relative;
-      z-index: 2;
-      padding: 30px 38px;
-      max-width: 650px;
-    }
-
-    .course-hero-pill {
+    .course-cat-pill-btn {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 7px 15px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(37, 99, 235, 0.08);
-      border: 1px solid rgba(37, 99, 235, 0.25);
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      font-weight: 750;
-      letter-spacing: 0.04em;
+    }
+
+    .course-cat-pill-btn:hover {
+      border-color: #2563eb;
       color: #1d4ed8;
-      margin-bottom: 10px;
-    }
-
-    .course-hero-title {
-      margin: 0 0 8px 0;
-      font-family: var(--font-display, 'Outfit', sans-serif);
-      font-size: 2.15rem;
-      font-weight: 850;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      display: block;
-    }
-    }
-
-    .course-hero-title-dark {
-      color: #0b1329;
-    }
-
-    .course-hero-title-blue {
-      color: #2563eb;
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .course-hero-accent-bar {
-      width: 38px;
-      height: 4.5px;
-      background: #2563eb;
-      border-radius: 999px;
-      margin: 10px 0 14px 0;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-    }
-
-    .course-hero-sub-lead {
-      margin: 0 0 5px 0;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #0b1329;
-      letter-spacing: -0.015em;
-    }
-
-    .course-hero-sub-desc {
-      margin: 0;
-      font-size: 0.92rem;
-      line-height: 1.48;
-      color: #334155;
-      max-width: 380px;
-      font-weight: 450;
-    }
-
-    @media (max-width: 860px) {
-      .course-hero-banner-frame {
-        height: auto;
-        min-height: 220px;
-        background-position: 80% center;
-      }
-      .course-hero-banner-content {
-        padding: 20px 18px;
-      }
-    }
-
-    .catalog-title {
-      font-size: 2.6rem;
-      font-weight: 850;
-      color: var(--text-title);
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .catalog-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 30px auto;
-      line-height: 1.6;
-    }
-
-    .filter-pills-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .catalog-filter-pill {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      padding: 10px 20px;
-      border-radius: var(--radius-pill);
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text-body);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      box-shadow: var(--shadow-xs);
-    }
-
-    .catalog-filter-pill:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    .catalog-filter-pill.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
-    }
-
-    .catalog-main-layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 36px;
-      padding: 48px 0 80px 0;
-    }
-
-    @media (max-width: 960px) {
-      .catalog-main-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .catalog-sidebar {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 18px;
-      padding: 24px;
-      height: fit-content;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .sidebar-heading {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--text-title);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .sidebar-filter-group {
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 18px;
-      margin-bottom: 18px;
-    }
-
-    .sidebar-filter-group:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
-    }
-
-    .sidebar-filter-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-title);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .sidebar-check-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: var(--text-body);
-      margin-bottom: 8px;
-      cursor: pointer;
-    }
-
-    .sidebar-check-item input {
-      accent-color: var(--primary);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-
-    .courses-grid-catalog {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .catalog-card {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 18px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      transition: all var(--transition-normal);
-      position: relative;
-    }
-
-    .catalog-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-card-hover);
-      border-color: #cbd5e1;
-    }
-
-    .catalog-card-header {
-      padding: 20px 24px 14px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .catalog-card-body {
-      padding: 0 24px 20px 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .catalog-card-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-title);
-      line-height: 1.35;
-      margin-bottom: 10px;
-    }
-
-    .catalog-card-instructor {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .catalog-syllabus-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 18px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
       background: #f8fafc;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      color: #334155;
     }
 
-    .catalog-syllabus-list li {
+    .course-cat-pill-btn.active {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Course player modal */
+    .course-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .course-modal-backdrop.active {
+      display: flex;
+    }
+
+    .course-modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      max-width: 820px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .course-player-video-box {
+      width: 100%;
+      height: 290px;
+      background: #0f172a;
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    .catalog-card-footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 16px 24px;
-      background: #fafbfc;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .catalog-price {
-      font-size: 1.25rem;
-      font-weight: 850;
-      color: var(--text-title);
+      justify-content: center;
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Progress Bar -->
-  <div class="scroll-progress-bar" id="scroll-progress"></div>
+  <!-- App Root Shell -->
+  <div class="app-root-container">
 
-  <!-- Sticky Header -->
-  <header class="site-header" id="site-header">
-    <div class="header-container">
-      <a href="index.html" class="nav-brand" aria-label="Torpedo Learning Home">
-        <img src="assets/LOGO.png" alt="Torpedo Learning Logo" class="brand-logo-img">
-      </a>
-
-      <!-- Navigation Links -->
-      <nav aria-label="Main Navigation">
-        <ul class="nav-menu">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="courses.html" class="nav-link" style="color: var(--primary); font-weight: 700;">Courses</a></li>
-          <li><a href="dashboard.html#jobs" class="nav-link">Jobs &amp; Internships</a></li>
-          <li><a href="dashboard.html#hackathons" class="nav-link">Hackathons</a></li>
-          <li><a href="dashboard.html" class="nav-link">Student Portal</a></li>
-        </ul>
-      </nav>
-
-      <!-- Center Search Bar -->
-      <div class="header-search-form" style="max-width: 420px;">
-        <input 
-          type="text" 
-          id="catalog-search-input" 
-          class="header-search-input" 
-          placeholder="Search by track, skill, or keyword..." 
-          oninput="renderCatalogCourses()"
-        >
-        <button type="button" class="header-search-btn" aria-label="Search" onclick="renderCatalogCourses()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <!-- ==================================================================
+         1. TOP GLOBAL HEADER (56px) - Matching Student Portal Dashboard
+         ================================================================== -->
+    <header class="global-top-header">
+      
+      <!-- Brand Logo Left -->
+      <div class="header-left-brand">
+        <button type="button" class="header-mobile-toggle" onclick="toggleMobileSidebar()" title="Toggle Navigation Menu" aria-label="Toggle Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
         </button>
+        <a href="dashboard.html" class="brand-logo-wrap" title="Torpedo Student Portal">
+          <img src="assets/LOGO.png" alt="Torpedo Learning Logo" class="brand-logo-img">
+          <span class="brand-portal-tag">STUDENT</span>
+        </a>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="nav-actions">
-        <a href="#login" class="nav-login-link" onclick="event.preventDefault(); openAuthModal('login');">Login</a>
-        <a href="login.html" class="btn btn-dark btn-pill-sm">Get Started</a>
+      <!-- Center Search Pill -->
+      <div class="header-search-wrap">
+        <svg class="header-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="header-search-input" placeholder="Search courses, instructors, syllabus tracks..." id="portal-search-input" oninput="onHeaderSearch(this.value)">
+        <span class="header-kbd-hint">⌘K</span>
       </div>
-    </div>
-  </header>
 
-  <!-- Catalog Hero Section -->
-  <section class="catalog-hero">
-    <div class="container">
-      <div class="course-hero-banner-frame">
-        <div class="course-hero-banner-overlay"></div>
-        <div class="course-hero-banner-content">
-          <div class="course-hero-pill">
-            <span>🎓 ACCREDITED CURRICULUM • 60+ HOURS PRACTICAL SPRINT</span>
+      <!-- Right Header Actions -->
+      <div class="header-right-actions">
+        <!-- My Dossier Button -->
+        <button type="button" class="header-action-btn" onclick="openStudentDossierModal()" title="View Student Academic Records">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>My Dossier</span>
+        </button>
+
+        <!-- IDE ⌘J Dark Button -->
+        <a href="lifecode.html" class="header-action-btn dark-btn" title="Open Lifecode Problem Arena (⌘J)">
+          <span>&lt;/&gt; IDE</span>
+          <span class="kbd-sub">⌘J</span>
+        </a>
+
+        <!-- Notification Bell -->
+        <div class="header-icon-badge-btn" onclick="showToast('Notification: 2 New Course Video Lessons Available', 'info')" title="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="icon-badge-num">2</span>
+        </div>
+
+        <!-- Logout -->
+        <a href="index.html" class="header-icon-badge-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- ==================================================================
+         2. APP BODY LAYOUT: LEFT SIDEBAR + COURSES WORKSPACE
+         ================================================================== -->
+    <div class="app-body-layout">
+      
+      <!-- DUAL-PANE SIDEBAR ON LEFT-HAND SIDE (Exact Portal Structure) -->
+      <aside class="single-main-sidebar has-rail" id="student-portal-sidebar">
+        <!-- 1. Left Mini-Rail -->
+        <div class="sidebar-icon-rail">
+          <!-- Hamburger Button -->
+          <button type="button" class="rail-btn rail-hamburger" id="rail-toggle-btn" onclick="toggleSidebarMenuExpand()" title="Toggle Sidebar Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+
+          <div class="rail-divider"></div>
+
+          <!-- Academic / Cap (Active) -->
+          <a href="courses.html" class="rail-item active" title="Courses &amp; Academic Track">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </a>
+
+          <!-- Community / Users -->
+          <button type="button" class="rail-item" title="Student Cohort &amp; Community" onclick="showToast('Student Cohort Chat: 14 Classmates Online', 'info')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </button>
+
+          <!-- 3D Cube / Tools -->
+          <a href="lifecode.html" class="rail-item" title="Lifecode Problem Arena (520+ Problems)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m21 16-9 5-9-5V8l9-5 9 5v8z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- 2. Main Navigation Panel -->
+        <div class="sidebar-main-panel">
+          <div class="sidebar-menu-scroll">
+            
+            <!-- Home -->
+            <a href="dashboard.html#home" class="sidebar-nav-link" id="nav-btn-home">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              <span>Home</span>
+            </a>
+
+            <!-- Courses (ACTIVE Solid Blue Pill) -->
+            <a href="courses.html" class="sidebar-nav-link active" id="nav-btn-courses">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              <span>Courses</span>
+            </a>
+
+            <!-- Library Catalog -->
+            <a href="dashboard.html#library" class="sidebar-nav-link" id="nav-btn-library">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/>
+                <polyline points="10 2 10 10 13 7 16 10 16 2"/>
+              </svg>
+              <span>Library Catalog</span>
+            </a>
+
+            <!-- Certifications -->
+            <a href="dashboard.html#certifications" class="sidebar-nav-link" id="nav-btn-certifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+              <span>Certifications</span>
+            </a>
+
+            <!-- Section: PLAYGROUNDS & EXAMS -->
+            <div class="sidebar-group-header">PLAYGROUNDS &amp; EXAMS</div>
+
+            <!-- Lifecode with Dropdown Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-lifecode">
+              <div class="sidebar-nav-link-row">
+                <a href="dashboard.html#lifecode" class="sidebar-nav-link" id="nav-btn-lifecode">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 16 4-4-4-4"/>
+                    <path d="m6 8-4 4 4 4"/>
+                    <path d="m14.5 4-5 16"/>
+                  </svg>
+                  <span>Lifecode</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('lifecode', event)" title="Toggle Lifecode sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-lifecode">
+                <a href="dashboard.html#lifecode" class="sidebar-subnav-item">
+                  <span>Problem Arena</span>
+                </a>
+                <a href="dashboard.html#lifecode" class="sidebar-subnav-item">
+                  <span>Code IDE</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Mock Quizzes with Dropdown Sub-Nav -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-quizzes">
+              <div class="sidebar-nav-link-row">
+                <a href="dashboard.html#quizzes" class="sidebar-nav-link" id="nav-btn-quizzes">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                    <path d="M12 11h4"/>
+                    <path d="M12 16h4"/>
+                    <circle cx="9" cy="11" r="0.75" fill="currentColor"/>
+                    <circle cx="9" cy="16" r="0.75" fill="currentColor"/>
+                  </svg>
+                  <span>Mock Quizzes</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('quizzes', event)" title="Toggle Mock Quizzes sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-quizzes">
+                <a href="dashboard.html#quizzes" class="sidebar-subnav-item">
+                  <span>All Tests</span>
+                </a>
+                <a href="dashboard.html#quizzes" class="sidebar-subnav-item">
+                  <span>Faculty Code</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Section: CAREERS -->
+            <div class="sidebar-group-header">CAREERS</div>
+
+            <!-- Jobs & Internships with Dropdown -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-jobs">
+              <div class="sidebar-nav-link-row">
+                <a href="jobs.html" class="sidebar-nav-link" id="nav-btn-jobs">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="7" rx="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                  <span>Jobs &amp; Internships</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('jobs', event)" title="Toggle Jobs sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-jobs">
+                <a href="jobs.html" class="sidebar-subnav-item">
+                  <span>Hiring Drives</span>
+                </a>
+                <a href="dashboard.html#jobs&view=applications" class="sidebar-subnav-item">
+                  <span>My Applications</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Hackathons -->
+            <div class="sidebar-nav-item-wrap" id="nav-group-hackathons">
+              <div class="sidebar-nav-link-row">
+                <a href="dashboard.html#hackathons" class="sidebar-nav-link" id="nav-btn-hackathons">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                    <path d="M4 22h16"/>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                  </svg>
+                  <span>Hackathons</span>
+                </a>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('hackathons', event)" title="Toggle Hackathons sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="sidebar-subnav-menu" id="subnav-menu-hackathons">
+                <a href="dashboard.html#hackathons" class="sidebar-subnav-item">
+                  <span>Explore Sprints</span>
+                </a>
+                <a href="dashboard.html#hackathons&view=teams" class="sidebar-subnav-item">
+                  <span>My Teams</span>
+                </a>
+              </div>
+            </div>
+
           </div>
-          <h1 class="course-hero-title">
-            <span class="course-hero-title-dark">Cour</span><span class="course-hero-title-blue">ses</span>
-          </h1>
-          <div class="course-hero-accent-bar"></div>
-          <div class="course-hero-sub-lead">Skill up. Explore. Grow.</div>
-          <p class="course-hero-sub-desc">Curated courses to help you learn, build and achieve your goals.</p>
-        </div>
-      </div>
 
-      <!-- Category Filter Pills -->
-      <div class="filter-pills-wrap" id="category-pills">
-        <button class="catalog-filter-pill active" onclick="selectCategory('all', this)">All Categories (1,200+)</button>
-        <button class="catalog-filter-pill" onclick="selectCategory('development', this)">Design & Development</button>
-        <button class="catalog-filter-pill" onclick="selectCategory('marketing', this)">Marketing & Communication</button>
-        <button class="catalog-filter-pill" onclick="selectCategory('digital-marketing', this)">Digital Marketing</button>
-        <button class="catalog-filter-pill" onclick="selectCategory('finance', this)">Finance Management</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Catalog Layout -->
-  <main class="container">
-    <div class="catalog-main-layout">
-      <!-- Left Filters Sidebar -->
-      <aside class="catalog-sidebar">
-        <div class="sidebar-heading">
-          <span>Filters</span>
-          <a href="#" style="font-size: 0.8rem; color: var(--primary); font-weight: 700; text-decoration: none;" onclick="event.preventDefault(); resetFilters();">Reset</a>
-        </div>
-
-        <div class="sidebar-filter-group">
-          <div class="sidebar-filter-title">Certification Level</div>
-          <label class="sidebar-check-item">
-            <input type="checkbox" checked onchange="renderCatalogCourses()"> Placement Fast-Track
-          </label>
-          <label class="sidebar-check-item">
-            <input type="checkbox" checked onchange="renderCatalogCourses()"> Dean Accredited
-          </label>
-          <label class="sidebar-check-item">
-            <input type="checkbox" onchange="renderCatalogCourses()"> Enterprise Sponsorship
-          </label>
-        </div>
-
-        <div class="sidebar-filter-group">
-          <div class="sidebar-filter-title">Duration</div>
-          <label class="sidebar-check-item">
-            <input type="checkbox" checked onchange="renderCatalogCourses()"> 8 - 12 Weeks
-          </label>
-          <label class="sidebar-check-item">
-            <input type="checkbox" checked onchange="renderCatalogCourses()"> 14 - 16 Weeks (Intensive)
-          </label>
-        </div>
-
-        <div class="sidebar-filter-group">
-          <div class="sidebar-filter-title">Interactive VM Labs</div>
-          <label class="sidebar-check-item">
-            <input type="checkbox" checked onchange="renderCatalogCourses()"> Lifecode Sandbox Included
-          </label>
-          <label class="sidebar-check-item">
-            <input type="checkbox" checked onchange="renderCatalogCourses()"> Live Code Review by Mentors
-          </label>
+          <!-- Student Profile Card Bottom -->
+          <div class="sidebar-bottom-profile" onclick="openStudentDossierModal()" title="View Student Academic Dossier">
+            <div class="profile-monogram-box">
+              <span>VY</span>
+              <span class="avatar-live-indicator" title="Connected"></span>
+            </div>
+            <div class="profile-info-wrap">
+              <div class="profile-name" id="sidebar-student-name">Vivek Yadav</div>
+              <div class="profile-role" id="sidebar-student-role">GTU CSE • Batch '26</div>
+            </div>
+            <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
         </div>
       </aside>
 
-      <!-- Right Courses Grid -->
-      <section>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-          <div style="font-size: 1rem; color: var(--text-muted); font-weight: 600;" id="results-count-text">
-            Showing <strong style="color: var(--text-title);" id="courses-count">6</strong> verified tracks
-          </div>
-          <div>
-            <select style="background: #ffffff; border: 1px solid var(--border-card); padding: 8px 14px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; color: var(--text-body); outline: none;">
-              <option>Highest Rated (Default)</option>
-              <option>Most Popular</option>
-              <option>Duration: Short to Long</option>
-            </select>
-          </div>
-        </div>
+      <!-- ==================================================================
+           3. MAIN CANVAS: COURSES WORKSPACE
+           ================================================================== -->
+      <main class="portal-main-canvas">
+        <div class="courses-page-canvas">
 
-        <div class="courses-grid-catalog" id="courses-grid-container">
-          <!-- Dynamically populated via courses-data.js -->
-        </div>
-      </section>
-    </div>
-  </main>
+          <!-- ==============================================================
+               HARMONIZED PANORAMIC COURSES HERO BANNER
+               ============================================================== -->
+          <div class="course-hero-banner-frame">
+            <div class="course-hero-banner-overlay"></div>
+            <div class="course-hero-banner-content">
+              <div class="course-hero-pill">
+                <span>🎓 ACCREDITED CURRICULUM • 60+ HOURS PRACTICAL SPRINT</span>
+              </div>
+              <h1 class="course-hero-title">
+                <span class="course-hero-title-dark">Cour</span><span class="course-hero-title-blue">ses</span>
+              </h1>
+              <div class="course-hero-accent-bar"></div>
+              <div class="course-hero-sub-lead">Skill up. Explore. Grow.</div>
+              <p class="course-hero-sub-desc">Curated courses to help you learn, build and achieve your goals.</p>
+              
+              <div class="course-hero-actions-row">
+                <button type="button" class="course-hero-pill-btn view-pill-btn active" id="btn-courses-explore-all" onclick="filterCoursesTab('all')">
+                  <span class="pill-live-dot"></span>
+                  <span>Explore All Courses (6)</span>
+                </button>
+                <button type="button" class="course-hero-pill-btn view-pill-btn" id="btn-courses-my-learning" onclick="filterCoursesTab('enrolled')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  <span>My Learning (3)</span>
+                </button>
+              </div>
+            </div>
+          </div>
 
-  <!-- Clean Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a href="index.html" class="nav-brand">
-            <img src="assets/LOGO.png" alt="Torpedo Learning" class="brand-logo-img">
-          </a>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-top: 14px; max-width: 320px;">
-            The next-generation monolithic LMS combining syllabus-driven courses, browser sandboxes, and recruiter-connected B2B placement pipelines.
-          </p>
-        </div>
-        <div>
-          <h4 class="footer-title">Navigation</h4>
-          <ul class="footer-links">
-            <li class="footer-link"><a href="index.html">Home</a></li>
-            <li class="footer-link"><a href="courses.html">All Courses</a></li>
-            <li class="footer-link"><a href="dashboard.html">Student Portal</a></li>
-            <li class="footer-link"><a href="login.html">Login & Register</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer-title">Platform</h4>
-          <ul class="footer-links">
-            <li class="footer-link"><a href="index.html#lifecode-sandbox">Lifecode VM Sandbox</a></li>
-            <li class="footer-link"><a href="index.html#strategic-pillars">Corporate Hackathons</a></li>
-            <li class="footer-link"><a href="index.html#why-choose-us">Why Choose Us</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer-title">Company</h4>
-          <ul class="footer-links">
-            <li class="footer-link"><a href="index.html#testimonials-section">Dean's Council</a></li>
-            <li class="footer-link"><a href="index.html#partners-section">Recruiter Partners</a></li>
-            <li class="footer-link"><a href="#">Support 24/7</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div>© 2026 Torpedo Learning. All rights reserved.</div>
-        <div>Engineered for academic deans, developers & enterprise recruiters.</div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Include Auth Modal from index.html -->
-  <div id="auth-modal" class="auth-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="auth-tabs">
-    <div class="auth-modal-card">
-      <button class="auth-close-btn" onclick="closeAuthModal()" aria-label="Close dialog">×</button>
-      <div class="auth-tabs-row" id="auth-tabs">
-        <button type="button" class="auth-tab-btn active" id="tab-student-btn" onclick="switchAuthRole('student')">Student</button>
-        <button type="button" class="auth-tab-btn" id="tab-employer-btn" onclick="switchAuthRole('employer')">Employer & Staff</button>
-      </div>
-      <button type="button" class="auth-google-btn" onclick="handleGoogleLogin()">
-        <svg class="google-icon-svg" viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-        </svg>
-        <span>Login with Google</span>
-      </button>
-      <div class="auth-divider">
-        <span>OR</span>
-      </div>
-      <form id="auth-form" onsubmit="handleAuthSubmit(event)">
-        <div id="auth-extra-fields" style="display: none;">
-          <div class="auth-field-group">
-            <div class="auth-label-row">
-              <label class="auth-label" for="auth-name-input">Full Name <span class="required-star">*</span></label>
-            </div>
-            <div class="auth-input-container">
-              <input type="text" id="auth-name-input" class="auth-input" placeholder="John Doe">
-            </div>
-          </div>
-          <div class="auth-field-group" id="auth-org-group">
-            <div class="auth-label-row">
-              <label class="auth-label" id="auth-org-label" for="auth-org-input">University / Institution <span class="required-star">*</span></label>
-            </div>
-            <div class="auth-input-container">
-              <input type="text" id="auth-org-input" class="auth-input" placeholder="Delhi Technological University">
-            </div>
-          </div>
-        </div>
-        <div class="auth-field-group">
-          <div class="auth-label-row">
-            <label class="auth-label" for="auth-email-input">Email Address <span class="required-star">*</span></label>
-          </div>
-          <div class="auth-input-container">
-            <input type="email" id="auth-email-input" class="auth-input" placeholder="john@example.com" required>
-          </div>
-        </div>
-        <div class="auth-field-group">
-          <div class="auth-label-row">
-            <label class="auth-label" for="auth-password-input">Password <span class="required-star">*</span></label>
-            <a href="#forgot" class="auth-forgot-link" id="auth-forgot-link" onclick="handleForgotPassword(event)">Forgot Password?</a>
-          </div>
-          <div class="auth-input-container">
-            <input type="password" id="auth-password-input" class="auth-input" placeholder="Must be at least 6 characters" minlength="6" required>
-            <button type="button" class="password-toggle-trigger" id="password-toggle-btn" onclick="togglePasswordVisibility('auth-password-input', 'password-toggle-btn')" aria-label="Toggle password visibility">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <!-- ==============================================================
+               CATEGORY PILLS FILTER ROW
+               ============================================================== -->
+          <div class="courses-category-pills-row" id="courses-category-pills">
+            <button type="button" class="course-cat-pill-btn active" onclick="selectCourseCategoryPill('all', this)">
+              <span>All Tracks (6)</span>
+            </button>
+            <button type="button" class="course-cat-pill-btn" onclick="selectCourseCategoryPill('cloud', this)">
+              <span>☁️ Cloud &amp; DevOps</span>
+            </button>
+            <button type="button" class="course-cat-pill-btn" onclick="selectCourseCategoryPill('ai', this)">
+              <span>🤖 AI &amp; LLM Agents</span>
+            </button>
+            <button type="button" class="course-cat-pill-btn" onclick="selectCourseCategoryPill('distributed', this)">
+              <span>⚡ Distributed Systems</span>
+            </button>
+            <button type="button" class="course-cat-pill-btn" onclick="selectCourseCategoryPill('frontend', this)">
+              <span>⚛️ Modern Frontend (React 19)</span>
             </button>
           </div>
+
+          <!-- ==============================================================
+               FILTER CONTROLS STRIP CARD
+               ============================================================== -->
+          <div class="filter-strip-card">
+            <div class="filter-controls-group">
+              <div class="filter-search-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="course-catalog-search" placeholder="Search title, instructor, skill..." oninput="handleCourseCatalogFilter()">
+              </div>
+              <select class="filter-select" id="course-category-select" onchange="onCategorySelectChange(this.value)">
+                <option value="all">All Categories</option>
+                <option value="cloud">Cloud &amp; DevOps</option>
+                <option value="ai">AI &amp; Autonomous Agents</option>
+                <option value="distributed">Distributed Systems</option>
+                <option value="frontend">Frontend Architecture</option>
+              </select>
+              <select class="filter-select" id="course-difficulty-select" onchange="handleCourseCatalogFilter()">
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+            <div style="font-size: 0.78rem; font-weight: 700; color: #64748b;" id="courses-count-indicator">
+              Showing 6 courses available
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               COURSES CATALOG GRID (Matching Reference)
+               ============================================================== -->
+          <div class="courses-catalog-grid" id="courses-catalog-grid-items">
+            
+            <!-- Course 1 -->
+            <div class="catalog-course-item-card" data-cat="cloud" data-diff="advanced" data-enrolled="true">
+              <div class="course-card-top-banner">
+                <img src="assets/courses/devops.jpg" class="course-card-thumb-img" alt="Cloud DevOps &amp; Microservices Architecture">
+                <div class="course-card-banner-overlay"></div>
+                <span class="course-card-level-badge">Advanced • 5 Hours</span>
+              </div>
+              <div class="course-card-body-content">
+                <div class="course-card-cat-meta">Cloud &amp; DevOps Architecture</div>
+                <h3 class="course-card-title-h3">Cloud DevOps &amp; Microservices Architecture</h3>
+                <p class="course-card-desc-text">Production Kubernetes cluster orchestration, gRPC protocol buffers, Istio service meshes, and GitOps CI/CD pipelines.</p>
+                <div class="course-card-instructor-meta">
+                  <div class="instructor-left-block">
+                    <span class="instructor-monogram">VM</span>
+                    <span class="instructor-name-label">Dr. Vikram Malhotra</span>
+                  </div>
+                  <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Cloud DevOps &amp; Microservices Architecture')">
+                    Resume Lesson &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="catalog-course-item-card" data-cat="ai" data-diff="intermediate" data-enrolled="true">
+              <div class="course-card-top-banner">
+                <img src="assets/courses/ai_agents.jpg" class="course-card-thumb-img" alt="Autonomous AI Agent Architecture">
+                <div class="course-card-banner-overlay"></div>
+                <span class="course-card-level-badge">Intermediate • 6 Hours</span>
+              </div>
+              <div class="course-card-body-content">
+                <div class="course-card-cat-meta">Artificial Intelligence &amp; LLMs</div>
+                <h3 class="course-card-title-h3">Autonomous AI Agent Architecture (LangGraph)</h3>
+                <p class="course-card-desc-text">Multi-agent supervisory workflows, planning loops, recursive reflection, model context protocol (MCP) servers, and LangGraph.</p>
+                <div class="course-card-instructor-meta">
+                  <div class="instructor-left-block">
+                    <span class="instructor-monogram purple">RS</span>
+                    <span class="instructor-name-label">Prof. R. Sengupta</span>
+                  </div>
+                  <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Autonomous AI Agent Architecture with LangGraph')">
+                    Resume Lesson &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="catalog-course-item-card" data-cat="distributed" data-diff="beginner" data-enrolled="true">
+              <div class="course-card-top-banner">
+                <img src="assets/courses/distributed_systems.jpg" class="course-card-thumb-img" alt="Distributed Systems Architecture">
+                <div class="course-card-banner-overlay"></div>
+                <span class="course-card-level-badge">Beginner • 7 Hours</span>
+              </div>
+              <div class="course-card-body-content">
+                <div class="course-card-cat-meta">Backend Systems &amp; Go</div>
+                <h3 class="course-card-title-h3">Distributed Systems &amp; High-Throughput Architecture</h3>
+                <p class="course-card-desc-text">Event-driven Kafka message streaming, distributed consensus (Raft/Paxos), sharded storage, and concurrent Go routines.</p>
+                <div class="course-card-instructor-meta">
+                  <div class="instructor-left-block">
+                    <span class="instructor-monogram teal">VM</span>
+                    <span class="instructor-name-label">Dr. Vikram Malhotra</span>
+                  </div>
+                  <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Full-Stack Distributed Systems (Go &amp; React)')">
+                    Review Material &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="catalog-course-item-card" data-cat="frontend" data-diff="intermediate" data-enrolled="false">
+              <div class="course-card-top-banner">
+                <img src="assets/courses/react_frontend.jpg" class="course-card-thumb-img" alt="Modern Frontend Architecture &amp; React 19">
+                <div class="course-card-banner-overlay"></div>
+                <span class="course-card-level-badge">Intermediate • 12 Weeks</span>
+              </div>
+              <div class="course-card-body-content">
+                <div class="course-card-cat-meta">Frontend Engineering</div>
+                <h3 class="course-card-title-h3">Modern Frontend Architecture &amp; React 19 Internals</h3>
+                <p class="course-card-desc-text">React 19 Server Actions, Compiler &amp; Fiber reconciler, enterprise design system tokens, and Core Web Vitals optimization.</p>
+                <div class="course-card-instructor-meta">
+                  <div class="instructor-left-block">
+                    <span class="instructor-monogram blue">AS</span>
+                    <span class="instructor-name-label">Ananya Sharma</span>
+                  </div>
+                  <button type="button" class="btn-card-launch-course" onclick="enrollCourseItem(this, 'React 19 Internals')">
+                    Enroll Now &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="catalog-course-item-card" data-cat="distributed" data-diff="advanced" data-enrolled="false">
+              <div class="course-card-top-banner">
+                <img src="assets/courses/rust_concurrency.jpg" class="course-card-thumb-img" alt="Rust Systems Concurrency">
+                <div class="course-card-banner-overlay"></div>
+                <span class="course-card-level-badge">Advanced • 16 Weeks</span>
+              </div>
+              <div class="course-card-body-content">
+                <div class="course-card-cat-meta">Systems Programming</div>
+                <h3 class="course-card-title-h3">Low-Level Concurrency &amp; Memory Models in Rust</h3>
+                <p class="course-card-desc-text">Zero-cost abstractions, borrow checker memory guarantees, async Tokio runtimes, and lock-free ring buffers.</p>
+                <div class="course-card-instructor-meta">
+                  <div class="instructor-left-block">
+                    <span class="instructor-monogram orange">AR</span>
+                    <span class="instructor-name-label">Alex Rivera</span>
+                  </div>
+                  <button type="button" class="btn-card-launch-course" onclick="enrollCourseItem(this, 'Rust Systems Concurrency')">
+                    Enroll Now &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="catalog-course-item-card" data-cat="cloud" data-diff="intermediate" data-enrolled="false">
+              <div class="course-card-top-banner">
+                <img src="assets/courses/zero_trust.jpg" class="course-card-thumb-img" alt="Enterprise Security &amp; Zero-Trust">
+                <div class="course-card-banner-overlay"></div>
+                <span class="course-card-level-badge">Intermediate • 8 Weeks</span>
+              </div>
+              <div class="course-card-body-content">
+                <div class="course-card-cat-meta">Security &amp; Cloud Infra</div>
+                <h3 class="course-card-title-h3">Enterprise Security &amp; Zero-Trust Architecture</h3>
+                <p class="course-card-desc-text">IAM policies, OIDC OAuth2 tokens, KMS key management, and cryptographic transport layers across hybrid clouds.</p>
+                <div class="course-card-instructor-meta">
+                  <div class="instructor-left-block">
+                    <span class="instructor-monogram emerald">SJ</span>
+                    <span class="instructor-name-label">Sarah Jenkins</span>
+                  </div>
+                  <button type="button" class="btn-card-launch-course" onclick="enrollCourseItem(this, 'Zero-Trust Architecture')">
+                    Enroll Now &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
-        <div class="auth-checkbox-row" id="auth-remember-row">
-          <input type="checkbox" id="auth-remember-checkbox" class="auth-checkbox-input" checked>
-          <label for="auth-remember-checkbox" class="auth-checkbox-label">Remember Me</label>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       INTERACTIVE COURSE PLAYER MODAL (Video & Syllabus Tracking)
+       ==================================================================== -->
+  <div class="course-modal-backdrop" id="course-player-modal" onclick="if(event.target===this) closeCoursePlayerModal()">
+    <div class="course-modal-card">
+      <div class="course-player-video-box">
+        <div style="text-align: center; padding: 20px;">
+          <div style="font-size: 3rem; margin-bottom: 8px;">🎬</div>
+          <div style="font-size: 1.15rem; font-weight: 800;" id="player-modal-title">Cloud DevOps &amp; Microservices Architecture</div>
+          <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Module 3: High-Throughput gRPC Protocols &amp; Streaming Handlers</div>
+          <div style="margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 999px; font-size: 0.78rem;">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+            <span>HD 1080p • 60 FPS • Torpedo Interactive Video Lab</span>
+          </div>
         </div>
-        <button type="submit" class="auth-submit-btn" id="auth-submit-btn">LOGIN</button>
-      </form>
-      <div class="auth-footer-text" id="auth-footer-container">
-        <span>New to Torpedo? Register ( </span>
-        <a href="#register-student" onclick="setAuthMode('register', 'student', event)">Student</a>
-        <span> / </span>
-        <a href="#register-company" onclick="setAuthMode('register', 'employer', event)">Company</a>
-        <span> )</span>
+        <button type="button" onclick="closeCoursePlayerModal()" style="position: absolute; top: 12px; right: 14px; background: rgba(0,0,0,0.4); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;">✕</button>
+      </div>
+
+      <div style="padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 1rem; font-weight: 800; color: #0f172a;">Syllabus Lesson Modules</div>
+            <div style="font-size: 0.80rem; color: #64748b;">Complete modules to advance your Torpedo TRP score</div>
+          </div>
+          <button type="button" class="btn-card-launch-course" style="background: #10b981;" onclick="completeCurrentLesson()">
+            ✔ Complete Lesson (+25 TRP)
+          </button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: #10b981; font-weight: 800;">✓</span>
+              <span style="font-size: 0.88rem; font-weight: 600; color: #0f172a;">1. Production Kubernetes Cluster Architecture</span>
+            </div>
+            <span style="font-size: 0.76rem; color: #64748b; font-weight: 700;">Completed</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: #2563eb; font-weight: 800;">▶</span>
+              <span style="font-size: 0.88rem; font-weight: 700; color: #1e40af;">2. gRPC Protocol Buffers &amp; Concurrent Stream Handlers</span>
+            </div>
+            <span style="font-size: 0.76rem; color: #2563eb; font-weight: 800;">Playing Now</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: #94a3b8; font-weight: 800;">○</span>
+              <span style="font-size: 0.88rem; font-weight: 600; color: #475569;">3. Istio Service Mesh, Circuit Breaking &amp; Rate Limiting</span>
+            </div>
+            <span style="font-size: 0.76rem; color: #94a3b8;">Locked</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="color: #94a3b8; font-weight: 800;">○</span>
+              <span style="font-size: 0.88rem; font-weight: 600; color: #475569;">4. GitOps CI/CD Pipelines with ArgoCD &amp; Helm Charts</span>
+            </div>
+            <span style="font-size: 0.76rem; color: #94a3b8;">Locked</span>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- ====================================================================
+       STUDENT ACADEMIC DOSSIER MODAL
+       ==================================================================== -->
+  <dialog id="dossier-preview-dialog" class="jobs-dialog-frame" style="max-width: 680px; padding: 0; border: none; border-radius: 16px; background: #ffffff; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);" onclick="if(event.target===this && this.open) closeStudentDossierModal()">
+    <div style="padding: 24px 28px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 48px; height: 48px; border-radius: 12px; background: #2563eb; color: #fff; font-size: 1.2rem; font-weight: 850; display: flex; align-items: center; justify-content: center;">
+          VY
+        </div>
+        <div>
+          <div style="font-size: 1.15rem; font-weight: 850; color: #0f172a;">Vivek Yadav</div>
+          <div style="font-size: 0.82rem; color: #64748b; font-weight: 600;">GTU CSE • Batch of 2026 • Verified Dossier</div>
+        </div>
+      </div>
+      <button type="button" onclick="closeStudentDossierModal()" style="background: none; border: none; font-size: 1.3rem; color: #94a3b8; cursor: pointer;">✕</button>
+    </div>
+    <div style="padding: 24px 28px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
+          <div style="font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Cumulative GPA</div>
+          <div style="font-size: 1.3rem; font-weight: 850; color: #0f172a; margin-top: 4px;">8.85</div>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
+          <div style="font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Torpedo TRP</div>
+          <div style="font-size: 1.3rem; font-weight: 850; color: #2563eb; margin-top: 4px;">542</div>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
+          <div style="font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase;">Active Courses</div>
+          <div style="font-size: 1.3rem; font-weight: 850; color: #10b981; margin-top: 4px;">3</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 0.85rem; font-weight: 750; color: #0f172a; margin-bottom: 8px;">Enrolled Curriculums:</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
+            <span>☁️ Cloud DevOps &amp; Microservices Architecture</span>
+            <span style="color: #2563eb; font-weight: 700;">68% Completed</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
+            <span>🤖 Autonomous AI Agent Architecture (LangGraph)</span>
+            <span style="color: #2563eb; font-weight: 700;">45% Completed</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
+            <span>⚡ Distributed Systems &amp; High-Throughput Architecture</span>
+            <span style="color: #2563eb; font-weight: 700;">90% Completed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 16px 28px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
+      <button type="button" class="btn-card-launch-course" onclick="closeStudentDossierModal()">Close Dossier</button>
+    </div>
+  </dialog>
+
+  <!-- Interactive Toast Notification System -->
+  <div id="courses-toast" style="position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.88rem; font-weight: 600; display: none; align-items: center; gap: 10px; z-index: 9999999; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); transition: all 0.2s ease;">
+    <span id="courses-toast-text">Toast message</span>
   </div>
 
   <!-- Scripts -->
@@ -623,120 +741,183 @@
   <script src="js/app.js"></script>
 
   <script>
-    let activeCategory = 'all';
+    /* ========================================================================
+       COURSES CATALOG CONTROLLER
+       ======================================================================== */
+    let currentCourseFilterTab = 'all';
+    let currentCourseCategory = 'all';
 
-    function initCatalog() {
-      // Check URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const catParam = urlParams.get('category');
-      const qParam = urlParams.get('q');
+    function toggleSidebarMenuExpand() {
+      const sidebar = document.getElementById('student-portal-sidebar');
+      if (sidebar) sidebar.classList.toggle('collapsed');
+    }
 
-      if (catParam) {
-        activeCategory = catParam;
-        const pills = document.querySelectorAll('.catalog-filter-pill');
-        pills.forEach(p => {
-          if (p.textContent.toLowerCase().includes(catParam.toLowerCase())) {
-            pills.forEach(el => el.classList.remove('active'));
-            p.classList.add('active');
-          }
-        });
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('student-portal-sidebar');
+      if (sidebar) sidebar.classList.toggle('mobile-open');
+    }
+
+    function toggleSidebarSubnav(itemKey, event) {
+      if (event) event.stopPropagation();
+      const group = document.getElementById(`nav-group-${itemKey}`);
+      if (group) group.classList.toggle('open');
+    }
+
+    function filterCoursesTab(type) {
+      currentCourseFilterTab = type;
+      const btnAll = document.getElementById('btn-courses-explore-all');
+      const btnEnrolled = document.getElementById('btn-courses-my-learning');
+
+      if (type === 'all') {
+        if (btnAll) btnAll.classList.add('active');
+        if (btnEnrolled) btnEnrolled.classList.remove('active');
+      } else {
+        if (btnAll) btnAll.classList.remove('active');
+        if (btnEnrolled) btnEnrolled.classList.add('active');
       }
-
-      if (qParam) {
-        const searchInput = document.getElementById('catalog-search-input');
-        if (searchInput) searchInput.value = qParam;
-      }
-
-      renderCatalogCourses();
+      handleCourseCatalogFilter();
     }
 
-    function selectCategory(cat, btn) {
-      activeCategory = cat;
-      document.querySelectorAll('.catalog-filter-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderCatalogCourses();
+    function selectCourseCategoryPill(cat, btn) {
+      currentCourseCategory = cat;
+      document.querySelectorAll('#courses-category-pills .course-cat-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const select = document.getElementById('course-category-select');
+      if (select) select.value = cat;
+
+      handleCourseCatalogFilter();
     }
 
-    function resetFilters() {
-      activeCategory = 'all';
-      document.getElementById('catalog-search-input').value = '';
-      document.querySelectorAll('.catalog-filter-pill').forEach(b => b.classList.remove('active'));
-      document.querySelector('.catalog-filter-pill').classList.add('active');
-      renderCatalogCourses();
+    function onCategorySelectChange(cat) {
+      currentCourseCategory = cat;
+      const pillButtons = document.querySelectorAll('#courses-category-pills .course-cat-pill-btn');
+      pillButtons.forEach(b => {
+        const text = b.textContent.toLowerCase();
+        if ((cat === 'all' && text.includes('all')) || 
+            (cat === 'cloud' && text.includes('cloud')) ||
+            (cat === 'ai' && text.includes('ai')) ||
+            (cat === 'distributed' && text.includes('distributed')) ||
+            (cat === 'frontend' && text.includes('frontend'))) {
+          pillButtons.forEach(el => el.classList.remove('active'));
+          b.classList.add('active');
+        }
+      });
+      handleCourseCatalogFilter();
     }
 
-    function renderCatalogCourses() {
-      const container = document.getElementById('courses-grid-container');
-      const searchVal = (document.getElementById('catalog-search-input')?.value || '').toLowerCase().trim();
-      const countEl = document.getElementById('courses-count');
-      const data = (typeof TORPEDO_DATA !== 'undefined' ? TORPEDO_DATA : (typeof window !== 'undefined' ? window.TORPEDO_DATA : null));
-      if (!container || !data || !Array.isArray(data.courses)) return;
+    function onHeaderSearch(query) {
+      const input = document.getElementById('course-catalog-search');
+      if (input) input.value = query;
+      handleCourseCatalogFilter();
+    }
 
-      const filtered = data.courses.filter(c => {
-        const matchesCategory = activeCategory === 'all' || c.category === activeCategory;
-        const matchesSearch = !searchVal || 
-          c.title.toLowerCase().includes(searchVal) || 
-          c.instructor.toLowerCase().includes(searchVal);
-        return matchesCategory && matchesSearch;
+    function handleCourseCatalogFilter() {
+      const query = (document.getElementById('course-catalog-search')?.value || '').toLowerCase().trim();
+      const cat = currentCourseCategory || 'all';
+      const diff = document.getElementById('course-difficulty-select')?.value || 'all';
+
+      const cards = document.querySelectorAll('#courses-catalog-grid-items .catalog-course-item-card');
+      let visible = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const cardCat = card.getAttribute('data-cat') || '';
+        const cardDiff = card.getAttribute('data-diff') || '';
+        const isEnrolled = card.getAttribute('data-enrolled') === 'true';
+
+        const matchQuery = !query || text.includes(query);
+        const matchCat = cat === 'all' || cardCat === cat;
+        const matchDiff = diff === 'all' || cardDiff === diff;
+        const matchTab = currentCourseFilterTab === 'all' || isEnrolled;
+
+        if (matchQuery && matchCat && matchDiff && matchTab) {
+          card.style.display = 'flex';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
       });
 
-      if (countEl) countEl.textContent = filtered.length;
-
-      if (filtered.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: #ffffff; border: 1px dashed var(--border-card); border-radius: 16px;">
-            <div style="font-size: 2.5rem; margin-bottom: 12px;">🔍</div>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-title); margin-bottom: 8px;">No matching tracks found</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keyword or reset filters to view all courses.</p>
-            <button class="btn btn-secondary btn-pill-sm" style="margin-top: 16px;" onclick="resetFilters()">Reset All Filters</button>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = filtered.map(course => `
-        <article class="catalog-card">
-          <div class="catalog-card-header">
-            <span class="badge ${course.badgeClass || 'badge-hot'}">${course.badge}</span>
-            <div style="display: flex; gap: 4px; font-size: 1.1rem;">
-              ${(course.techIcons || []).map(icon => `<span>${icon}</span>`).join('')}
-            </div>
-          </div>
-          <div class="catalog-card-body">
-            <h3 class="catalog-card-title">${course.title}</h3>
-            <div class="catalog-card-instructor">Instructor: <strong>${course.instructor}</strong></div>
-
-            <div style="display: flex; align-items: center; gap: 14px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
-              <span style="color: #f59e0b; font-weight: 700;">★ ${course.rating} (${course.reviews})</span>
-              <span>👥 ${course.students} enrolled</span>
-              <span>⏱ ${course.duration}</span>
-            </div>
-
-            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-title); margin-bottom: 8px;">Syllabus Modules:</div>
-            <ul class="catalog-syllabus-list">
-              ${(course.syllabusPreview || []).slice(0, 3).map(mod => `
-                <li><span style="color: var(--primary);">✓</span> ${mod}</li>
-              `).join('')}
-            </ul>
-
-            <div style="margin-top: auto; display: flex; gap: 10px;">
-              <button class="btn btn-primary" style="flex: 1;" onclick="openAuthModal('login')">
-                Enroll Now
-              </button>
-              <button class="btn btn-secondary" style="padding: 10px 14px;" onclick="window.location.href='index.html#lifecode-sandbox'" title="Test in Lifecode Sandbox">
-                ⚡ VM Lab
-              </button>
-            </div>
-          </div>
-          <div class="catalog-card-footer">
-            <div class="catalog-price">${course.price}</div>
-            <div style="font-size: 0.8rem; color: #10b981; font-weight: 700;">✔ Job Guarantee Included</div>
-          </div>
-        </article>
-      `).join('');
+      const countEl = document.getElementById('courses-count-indicator');
+      if (countEl) countEl.textContent = `Showing ${visible} courses available`;
     }
 
-    document.addEventListener('DOMContentLoaded', initCatalog);
+    function enrollCourseItem(btn, courseName) {
+      if (btn) {
+        btn.textContent = 'Resume Lesson →';
+        btn.onclick = () => openCoursePlayerModal(courseName);
+      }
+      const card = btn ? btn.closest('.catalog-course-item-card') : null;
+      if (card) {
+        card.setAttribute('data-enrolled', 'true');
+      }
+      showToast(`Enrolled in ${courseName}! Added to your My Learning tab.`, 'success');
+    }
+
+    function openCoursePlayerModal(title) {
+      const modal = document.getElementById('course-player-modal');
+      const titleEl = document.getElementById('player-modal-title');
+      if (titleEl && title) titleEl.textContent = title;
+      if (modal) modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCoursePlayerModal() {
+      const modal = document.getElementById('course-player-modal');
+      if (modal) modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function completeCurrentLesson() {
+      showToast('Lesson marked complete! +25 TRP awarded to Vivek Yadav.', 'success');
+      setTimeout(closeCoursePlayerModal, 600);
+    }
+
+    function openStudentDossierModal() {
+      const modal = document.getElementById('dossier-preview-dialog');
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+    }
+
+    function closeStudentDossierModal() {
+      const modal = document.getElementById('dossier-preview-dialog');
+      if (modal && modal.open && typeof modal.close === 'function') modal.close();
+    }
+
+    function showToast(msg, type = 'info') {
+      const toast = document.getElementById('courses-toast');
+      const text = document.getElementById('courses-toast-text');
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.style.display = 'flex';
+      toast.style.border = type === 'success' ? '1px solid #10b981' : (type === 'error' ? '1px solid #ef4444' : '1px solid #3b82f6');
+      setTimeout(() => { toast.style.display = 'none'; }, 3200);
+    }
+
+    // Keyboard shortcuts & light-dismiss
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const s = document.getElementById('course-catalog-search') || document.getElementById('portal-search-input');
+        if (s) s.focus();
+      }
+      if (e.key === 'Escape') {
+        closeCoursePlayerModal();
+        closeStudentDossierModal();
+      }
+    });
+
+    // Check for query parameters (?category=...)
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('category');
+      if (cat) {
+        let mapped = cat;
+        if (cat === 'development') mapped = 'frontend';
+        selectCourseCategoryPill(mapped);
+      }
+      handleCourseCatalogFilter();
+    });
   </script>
 </body>
 </html>

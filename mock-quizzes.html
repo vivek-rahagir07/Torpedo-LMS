@@ -210,14 +210,17 @@
         </p>
         <div class="quiz-hero-actions">
           <button type="button" class="quiz-hero-btn-code" onclick="openJoinCourseQuizModal()">
-            <span>🔑 Join Quiz with Faculty Code</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            <span>Join Quiz with Faculty Code</span>
           </button>
           <button type="button" class="quiz-hero-btn-primary" onclick="startQuizRunner('quiz-dsa-01')">
-            <span>⚡ Take Daily Assessment Sprint</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Take Daily Assessment Sprint</span>
           </button>
           <button type="button" class="quiz-hero-btn-secondary"
             onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
-            <span>📋 Browse All Quizzes (24+)</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+            <span>Browse All Quizzes (24+)</span>
           </button>
         </div>
       </div>
@@ -226,7 +229,9 @@
     <!-- Faculty Course Assessment Code Bar -->
     <div class="faculty-course-quiz-banner">
       <div class="faculty-banner-left">
-        <div class="faculty-banner-icon">🎓</div>
+        <div class="faculty-banner-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+        </div>
         <div class="faculty-banner-text">
           <h4>Course Midterm &amp; Faculty Quizzes</h4>
           <p>Have an access code from your university professor or instructor? Enter it below to unlock your course
@@ -235,7 +240,7 @@
       </div>
 
       <div class="faculty-banner-right">
-        <input type="text" id="faculty-quick-code-input" class="faculty-code-input-sm" placeholder="CODE (e.g. CSE-401)"
+        <input type="text" id="faculty-quick-code-input" class="faculty-code-input-sm" placeholder="Faculty code (e.g. CSE-401)"
           maxlength="12"
           onkeyup="if(event.key==='Enter') { quickFillQuizCode(this.value); openJoinCourseQuizModal(); }">
         <button type="button" class="btn-unlock-faculty-quiz"
@@ -249,7 +254,9 @@
     <!-- 2. Key Metrics Row -->
     <div class="quiz-stats-grid">
       <div class="quiz-stat-tile indigo">
-        <div class="quiz-stat-icon-wrap indigo">📝</div>
+        <div class="quiz-stat-icon-wrap indigo">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
         <div class="quiz-stat-info">
           <span class="quiz-stat-label">Assessments Taken</span>
           <span class="quiz-stat-val">14 / 24</span>
@@ -258,7 +265,9 @@
       </div>
 
       <div class="quiz-stat-tile emerald">
-        <div class="quiz-stat-icon-wrap emerald">🎯</div>
+        <div class="quiz-stat-icon-wrap emerald">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
         <div class="quiz-stat-info">
           <span class="quiz-stat-label">Accuracy Rate</span>
           <span class="quiz-stat-val">91.4%</span>
@@ -267,7 +276,9 @@
       </div>
 
       <div class="quiz-stat-tile amber">
-        <div class="quiz-stat-icon-wrap amber">⏱️</div>
+        <div class="quiz-stat-icon-wrap amber">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <div class="quiz-stat-info">
           <span class="quiz-stat-label">Avg Speed / Q</span>
           <span class="quiz-stat-val">42s</span>
@@ -276,7 +287,9 @@
       </div>
 
       <div class="quiz-stat-tile blue">
-        <div class="quiz-stat-icon-wrap blue">🏆</div>
+        <div class="quiz-stat-icon-wrap blue">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </div>
         <div class="quiz-stat-info">
           <span class="quiz-stat-label">Global LMS Rank</span>
           <span class="quiz-stat-val">#11</span>

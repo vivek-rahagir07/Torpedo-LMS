@@ -1032,7 +1032,12 @@ body {
 .metrics-row-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 16px;
 }
 
 @media (max-width: 1000px) {
@@ -1048,24 +1053,30 @@ body {
 }
 
 .exact-metric-card {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #f1f5f9;
+  border-radius: 0;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 84px;
-  box-shadow: var(--shadow-subtle);
-  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 80px;
+  box-shadow: none;
+  transition: background 0.15s ease;
   cursor: pointer;
   position: relative;
 }
 
+.exact-metric-card:last-child {
+  border-right: none;
+}
+
 .exact-metric-card:hover {
-  border-color: #93c5fd;
-  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
+  background: #f8fafc;
+  transform: none;
+  box-shadow: none;
+  border-color: #f1f5f9;
 }
 
 .metric-card-top-flex {
@@ -2070,17 +2081,17 @@ body {
 }
 
 .filter-strip-card {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  box-shadow: var(--shadow-subtle);
+  box-shadow: none;
 }
 
 .filter-controls-group {
@@ -2093,34 +2104,42 @@ body {
 .filter-search-box {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: #f8fafc;
+  gap: 8px;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 5px;
-  padding: 5px 10px;
-  min-width: 220px;
+  border-radius: 8px;
+  padding: 7px 12px;
+  min-width: 240px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .filter-search-box input {
   background: transparent;
   border: none;
   outline: none;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-family: inherit;
   color: #0f172a;
   width: 100%;
 }
 
 .filter-select {
-  background: #f8fafc;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 0.74rem;
-  font-weight: 600;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 0.76rem;
+  font-weight: 500;
   color: #334155;
   outline: none;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  transition: border-color 0.14s ease;
+}
+
+.filter-select:hover,
+.filter-search-box:focus-within {
+  border-color: #cbd5e1;
 }
 
 /* ==========================================================================
@@ -5717,54 +5736,40 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border-color: #cbd5e1;
 }
 
-/* 2. Quick Mastery Stats Strip (Sleek, Dynamic, Animated) */
+/* 2. Quick Mastery Stats Strip (Formal Unified Panel) */
 .lc-hub-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .lc-stat-tile {
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 10px;
-  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #f1f5f9;
+  border-radius: 0;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  gap: 12px;
+  box-shadow: none;
+  transition: background 0.15s ease;
   position: relative;
-  overflow: hidden;
-  animation: lcTileSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.lc-stat-tile:nth-child(1) { animation-delay: 0.04s; }
-.lc-stat-tile:nth-child(2) { animation-delay: 0.08s; }
-.lc-stat-tile:nth-child(3) { animation-delay: 0.12s; }
-.lc-stat-tile:nth-child(4) { animation-delay: 0.16s; }
+.lc-stat-tile:last-child {
+  border-right: none;
+}
 
-/* Themed micro-glows on hover */
-.lc-stat-tile:nth-child(1):hover {
-  transform: translateY(-3px);
-  border-color: #fcd34d;
-  box-shadow: 0 10px 22px -4px rgba(245, 158, 11, 0.16), 0 2px 6px rgba(245, 158, 11, 0.08);
-}
-.lc-stat-tile:nth-child(2):hover {
-  transform: translateY(-3px);
-  border-color: #93c5fd;
-  box-shadow: 0 10px 22px -4px rgba(37, 99, 235, 0.16), 0 2px 6px rgba(37, 99, 235, 0.08);
-}
-.lc-stat-tile:nth-child(3):hover {
-  transform: translateY(-3px);
-  border-color: #6ee7b7;
-  box-shadow: 0 10px 22px -4px rgba(16, 185, 129, 0.16), 0 2px 6px rgba(16, 185, 129, 0.08);
-}
-.lc-stat-tile:nth-child(4):hover {
-  transform: translateY(-3px);
-  border-color: #c4b5fd;
-  box-shadow: 0 10px 22px -4px rgba(139, 92, 246, 0.16), 0 2px 6px rgba(139, 92, 246, 0.08);
+.lc-stat-tile:hover {
+  background: #f8fafc;
+  transform: none;
+  box-shadow: none;
 }
 
 .lc-stat-icon-wrap {
@@ -5820,36 +5825,25 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   margin-bottom: 14px;
 }
 
-/* Daily Challenge Card */
+/* Daily Challenge Card (Formal Enterprise Refinement) */
 .lc-daily-card {
   background: #ffffff;
-  background-image: radial-gradient(circle at 95% 10%, rgba(254, 215, 170, 0.25) 0%, transparent 55%);
-  border: 1px solid #fed7aa;
-  border-radius: 14px;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
   padding: 18px 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 3px 14px -2px rgba(249, 115, 22, 0.08);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .lc-daily-card:hover {
-  transform: translateY(-2px);
-  border-color: #fdba74;
-  box-shadow: 0 12px 28px -6px rgba(249, 115, 22, 0.15);
-}
-
-.lc-daily-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #f59e0b 0%, #f97316 50%, #ea580c 100%);
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .lc-daily-header {
@@ -6041,36 +6035,25 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   transform: translateX(3px);
 }
 
-/* Practice Tracks Card (Sleek & Animated) */
+/* Practice Tracks Card (Formal Enterprise Refinement) */
 .lc-tracks-card {
   background: #ffffff;
-  background-image: radial-gradient(circle at 95% 10%, rgba(186, 230, 253, 0.22) 0%, transparent 55%);
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
   padding: 18px 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .lc-tracks-card:hover {
-  transform: translateY(-2px);
-  border-color: #93c5fd;
-  box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.12);
-}
-
-.lc-tracks-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .lc-tracks-header {
@@ -6233,11 +6216,11 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 /* 4. Practice Problems Library Table Section (Clean & Non-Bulky) */
 .lc-hub-practice-section {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 18px 20px;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   scroll-margin-top: 74px;
 }
 
@@ -6754,18 +6737,17 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
 }
 
-/* Faculty Course Assessment Banner */
+/* Faculty Course Assessment Banner (Formal Enterprise Row) */
 .faculty-course-quiz-banner {
   background: #ffffff;
-  background-image: radial-gradient(circle at 10% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
-  border: 1.5px solid #e0e7ff;
-  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 10px;
   padding: 10px 16px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.04);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -6894,35 +6876,40 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   display: flex !important;
 }
 
-/* 2. Key Metrics Row */
+/* 2. Key Metrics Row (Formal Unified Panel) */
 .quiz-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .quiz-stat-tile {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #f1f5f9;
+  border-radius: 0;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  gap: 12px;
+  box-shadow: none;
+  transition: background 0.15s ease;
+}
+
+.quiz-stat-tile:last-child {
+  border-right: none;
 }
 
 .quiz-stat-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+  transform: none;
+  box-shadow: none;
 }
-
-.quiz-stat-tile.indigo:hover { border-color: #c7d2fe; box-shadow: 0 6px 20px rgba(99, 102, 241, 0.15); }
-.quiz-stat-tile.emerald:hover { border-color: #a7f3d0; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15); }
-.quiz-stat-tile.amber:hover { border-color: #fde68a; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15); }
-.quiz-stat-tile.blue:hover { border-color: #bae6fd; box-shadow: 0 6px 20px rgba(14, 165, 233, 0.15); }
 
 .quiz-stat-icon-wrap {
   width: 32px;
@@ -6978,33 +6965,22 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-daily-card {
   background: #ffffff;
-  background-image: radial-gradient(circle at 95% 10%, rgba(199, 210, 254, 0.3) 0%, transparent 60%);
-  border: 1px solid #c7d2fe;
-  border-radius: 14px;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
   padding: 18px 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 3px 14px -2px rgba(79, 70, 229, 0.08);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .quiz-daily-card:hover {
-  transform: translateY(-2px);
-  border-color: #a5b4fc;
-  box-shadow: 0 12px 28px -6px rgba(79, 70, 229, 0.16);
-}
-
-.quiz-daily-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #6366f1 0%, #3b82f6 50%, #06b6d4 100%);
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .quiz-daily-header {
@@ -7107,29 +7083,24 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   box-shadow: 0 5px 16px rgba(37, 99, 235, 0.45);
 }
 
-/* Quick Sprint Tracks Card */
+/* Quick Sprint Tracks Card (Formal Enterprise Refinement) */
 .quiz-tracks-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
   padding: 16px 18px;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-.quiz-tracks-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #0ea5e9 0%, #3b82f6 100%);
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
+.quiz-tracks-card:hover {
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .quiz-tracks-header {
@@ -7205,11 +7176,11 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 /* 4. Quiz Catalog Section */
 .quiz-hub-practice-section {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 18px 20px;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   scroll-margin-top: 74px;
 }
 
@@ -8579,30 +8550,41 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       transform: translateY(-1px);
     }
 
-    /* 2. Live Placement Metrics Strip */
-    .jobs-stats-grid {
+    /* 2. Live Placement Metrics Strip (Unified Continuous Panel) */
+    .jobs-stats-grid,
+    .hack-stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     .stat-card-box {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 10px;
-      padding: 8px 12px;
+      background: transparent;
+      border: none;
+      border-right: 1px solid #f1f5f9;
+      border-radius: 0;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
-      transition: all 0.18s ease;
+      gap: 12px;
+      box-shadow: none;
+      transition: background 0.15s ease;
+    }
+
+    .stat-card-box:last-child {
+      border-right: none;
     }
 
     .stat-card-box:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.07);
-      border-color: #cbd5e1;
+      background: #f8fafc;
+      transform: none;
+      box-shadow: none;
+      border-color: #f1f5f9;
     }
 
     .stat-icon-wrap {
@@ -8636,19 +8618,19 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       margin-top: 1px;
     }
 
-    /* 3. Compact Student Placement Dossier Banner */
+    /* 3. Compact Student Placement Dossier Row (Formal Enterprise Style) */
     .student-readiness-strip {
-      background: linear-gradient(135deg, #eff2ff 0%, #ffffff 50%, #f0fdf4 100%);
-      border: 1.5px solid rgba(15, 42, 199, 0.15);
-      border-radius: 10px;
-      padding: 8px 14px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 8px;
+      padding: 9px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
-      box-shadow: 0 1px 2px rgba(15, 42, 199, 0.03);
-      margin-bottom: 12px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+      margin-bottom: 14px;
     }
 
     .readiness-left-profile {
@@ -8658,13 +8640,13 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     }
 
     .readiness-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
       background: #0f2ac7;
       color: #ffffff;
       font-weight: 600;
-      font-size: 0.80rem;
+      font-size: 0.78rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -8691,19 +8673,19 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     }
 
     .readiness-tag {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       padding: 3px 8px;
       border-radius: 5px;
       font-size: 0.70rem;
-      font-weight: 700;
+      font-weight: 550;
       color: #334155;
     }
 
     .readiness-tag.gold {
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.08);
       color: #059669;
-      border-color: rgba(16, 185, 129, 0.25);
+      border-color: rgba(16, 185, 129, 0.2);
     }
 
     .btn-view-dossier-sm {
@@ -8725,17 +8707,17 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       background: #0a1f9e;
     }
 
-    /* 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns */
+    /* 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns (De-containerized) */
     .jobs-toolbar-card {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 10px;
-      padding: 10px 14px;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .toolbar-search-row {
@@ -9418,14 +9400,6 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #f8fafc;
   border-color: #94a3b8;
   transform: translateY(-1px);
-}
-
-/* 2. Hackathons Live Stats Strip */
-.hack-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 12px;
 }
 
 /* 3. Hackathon Listings Grid */

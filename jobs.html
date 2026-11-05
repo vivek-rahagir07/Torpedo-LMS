@@ -167,30 +167,40 @@
       transform: translateY(-1px);
     }
 
-    /* 2. Live Placement Metrics Strip */
+    /* 2. Live Placement Metrics Strip (Unified Continuous Panel) */
     .jobs-stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     .stat-card-box {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 10px;
-      padding: 8px 12px;
+      background: transparent;
+      border: none;
+      border-right: 1px solid #f1f5f9;
+      border-radius: 0;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
-      transition: all 0.18s ease;
+      gap: 12px;
+      box-shadow: none;
+      transition: background 0.15s ease;
+    }
+
+    .stat-card-box:last-child {
+      border-right: none;
     }
 
     .stat-card-box:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.07);
-      border-color: #cbd5e1;
+      background: #f8fafc;
+      transform: none;
+      box-shadow: none;
+      border-color: #f1f5f9;
     }
 
     .stat-icon-wrap {
@@ -224,34 +234,35 @@
       margin-top: 1px;
     }
 
-    /* 3. Compact Student Placement Dossier Banner */
+    /* 3. Compact Student Placement Dossier Row (Formal Enterprise Style) */
     .student-readiness-strip {
-      background: linear-gradient(135deg, #eff2ff 0%, #ffffff 50%, #f0fdf4 100%);
-      border: 1.5px solid rgba(15, 42, 199, 0.15);
-      border-radius: 10px;
-      padding: 8px 14px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 8px;
+      padding: 9px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 10px;
       flex-wrap: wrap;
-      box-shadow: 0 1px 3px rgba(15, 42, 199, 0.04);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+      margin-bottom: 14px;
     }
 
     .readiness-left-profile {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .readiness-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
       background: #0f2ac7;
       color: #ffffff;
-      font-weight: 700;
-      font-size: 0.90rem;
+      font-weight: 600;
+      font-size: 0.78rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -260,35 +271,38 @@
 
     .readiness-title {
       font-weight: 600;
-      font-size: 0.90rem;
+      font-size: 0.82rem;
       color: #0f172a;
       line-height: 1.2;
     }
 
     .readiness-sub {
-      font-size: 0.74rem;
+      font-size: 0.70rem;
       color: #64748b;
     }
 
     .readiness-pills {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .readiness-tag {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.74rem;
-      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.70rem;
+      font-weight: 550;
       color: #334155;
     }
 
     .readiness-tag.gold {
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.08);
+      color: #059669;
+      border-color: rgba(16, 185, 129, 0.2);
+    }
       color: #059669;
       border-color: rgba(16, 185, 129, 0.25);
     }
@@ -298,13 +312,13 @@
       color: #ffffff;
       border: none;
       border-radius: 6px;
-      padding: 6px 13px;
-      font-size: 0.78rem;
+      padding: 5px 11px;
+      font-size: 0.74rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       transition: all 0.14s ease;
     }
 
@@ -312,16 +326,17 @@
       background: #0a1f9e;
     }
 
-    /* 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns */
+    /* 4. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns (De-containerized) */
     .jobs-toolbar-card {
-      background: #ffffff;
-      border: 1px solid var(--border-card);
-      border-radius: 14px;
-      padding: 14px 18px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-bottom: 16px;
     }
 
     .toolbar-search-row {
@@ -1128,7 +1143,8 @@
                   <span>Explore 48+ Openings ↓</span>
                 </button>
                 <button type="button" class="btn-hero-secondary" onclick="openApplicationsModal()">
-                  <span>💼 Track My Applications (<span id="hero-apps-count">2</span>)</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                  <span>Track My Applications (<span id="hero-apps-count">2</span>)</span>
                 </button>
               </div>
             </div>
@@ -1137,7 +1153,9 @@
           <!-- 2. Live Placement Metrics Strip -->
           <section class="jobs-stats-grid">
             <div class="stat-card-box">
-              <div class="stat-icon-wrap icon-blue">💼</div>
+              <div class="stat-icon-wrap icon-blue">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
               <div>
                 <div class="stat-val-num">48+</div>
                 <div class="stat-label-text">Active Hiring Drives</div>
@@ -1145,7 +1163,9 @@
             </div>
 
             <div class="stat-card-box">
-              <div class="stat-icon-wrap icon-green">💰</div>
+              <div class="stat-icon-wrap icon-green">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
               <div>
                 <div class="stat-val-num">₹18.4 LPA</div>
                 <div class="stat-label-text">Average SDE-1 CTC (Peak: ₹44 LPA)</div>
@@ -1153,7 +1173,9 @@
             </div>
 
             <div class="stat-card-box">
-              <div class="stat-icon-wrap icon-amber">⚡</div>
+              <div class="stat-icon-wrap icon-amber">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
               <div>
                 <div class="stat-val-num">1-Click Apply</div>
                 <div class="stat-label-text">Fast-Track with Torpedo TRP Dossier</div>
@@ -1161,7 +1183,9 @@
             </div>
 
             <div class="stat-card-box">
-              <div class="stat-icon-wrap icon-purple">🏆</div>
+              <div class="stat-icon-wrap icon-purple">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </div>
               <div>
                 <div class="stat-val-num">94% Shortlist</div>
                 <div class="stat-label-text">For Candidates with &gt;500 TRP Score</div>
@@ -1180,9 +1204,9 @@
             </div>
 
             <div class="readiness-pills">
-              <span class="readiness-tag gold">⚡ Gold Tier Fast-Track Eligible</span>
-              <span class="readiness-tag">🎯 640 TRP Points</span>
-              <span class="readiness-tag">💻 14/520 Solved DSA</span>
+              <span class="readiness-tag gold">Gold Tier Fast-Track Eligible</span>
+              <span class="readiness-tag">640 TRP Points</span>
+              <span class="readiness-tag">14/520 Solved DSA</span>
               <button type="button" class="btn-view-dossier-sm" onclick="openStudentDossierModal()">
                 <span>Preview Dossier Resume →</span>
               </button>
@@ -1590,9 +1614,9 @@
                     <div class="job-company-subtitle">
                       <span style="color: #0f172a; font-weight: 600;">${job.company}</span>
                       <span class="job-company-dot"></span>
-                      <span>📍 ${job.location}</span>
+                      <span>${job.location}</span>
                       <span class="job-company-dot"></span>
-                      <span>⏳ ${job.deadlineDays}d left</span>
+                      <span>${job.deadlineDays}d left</span>
                     </div>
                   </div>
                 </div>
@@ -1606,8 +1630,8 @@
               <div class="job-card-badges-strip" style="margin-top: 10px;">
                 <span class="badge-tag-type ${typeBadgeClass}">${job.type}</span>
                 <span class="badge-tag-type ${job.workMode === 'Remote' ? 'badge-remote' : ''}">${job.workMode}</span>
-                ${job.urgent ? '<span class="badge-tag-type badge-urgent">⚡ Urgent Drive</span>' : ''}
-                <span style="font-size: 0.70rem; color: #64748b; font-weight: 600;">🎓 ${job.batch}</span>
+                ${job.urgent ? '<span class="badge-tag-type badge-urgent">Urgent Drive</span>' : ''}
+                <span style="font-size: 0.70rem; color: #64748b; font-weight: 600;">${job.batch}</span>
               </div>
 
               <p class="job-desc-snippet" style="margin-top: 8px;">${job.description}</p>
@@ -1621,7 +1645,7 @@
             <!-- Bottom Action Row -->
             <div class="job-card-bottom-bar">
               <div class="job-match-indicator">
-                <span>🎯 ${job.matchRate}% Match</span>
+                <span>${job.matchRate}% Match</span>
                 <div class="match-progress-bar">
                   <div class="match-progress-fill" style="width: ${job.matchRate}%;"></div>
                 </div>

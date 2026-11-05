@@ -51,47 +51,6 @@
         </button>
       </div>
 
-      <!-- Quick 1-Click Persona Pre-fills -->
-      <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 10px; margin: 12px 0 16px 0;">
-        <div style="font-size: 0.76rem; font-weight: 750; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
-          <span>⚡ 1-Click Demo Profiles</span>
-          <span style="font-size: 0.7rem; color: #2563eb;">Ready to Test</span>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 6px;">
-          <button type="button" onclick="startStudentOnboardingTest()" style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 6px; padding: 7px 10px; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; transition: all 0.15s ease;">
-            <div>
-              <strong style="color: #1d4ed8;">🚀 New Student: Verify OTP & Onboarding</strong>
-              <div style="font-size: 0.72rem; color: #2563eb;">Test OTP verification screen & 3-step profile wizard</div>
-            </div>
-            <span style="font-size: 0.72rem; color: #1d4ed8; font-weight: 800;">Launch ➔</span>
-          </button>
-
-          <button type="button" onclick="quickFillLogin('student')" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; transition: all 0.15s ease;">
-            <div>
-              <strong style="color: #0f172a;">🎓 Vivek Yadav</strong>
-              <div style="font-size: 0.72rem; color: #64748b;">vivek.hr362007@gmail.com (Verified Student Portal)</div>
-            </div>
-            <span style="font-size: 0.72rem; color: #2563eb; font-weight: 700;">Fill ➔</span>
-          </button>
-
-          <button type="button" onclick="quickFillLogin('admin')" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; transition: all 0.15s ease;">
-            <div>
-              <strong style="color: #0f172a;">🛡️ Super Admin</strong>
-              <div style="font-size: 0.72rem; color: #64748b;">admin@torpedo.edu (Full System & Student Dossier Access)</div>
-            </div>
-            <span style="font-size: 0.72rem; color: #2563eb; font-weight: 700;">Fill ➔</span>
-          </button>
-
-          <button type="button" onclick="quickFillLogin('employer')" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; transition: all 0.15s ease;">
-            <div>
-              <strong style="color: #0f172a;">💼 Vivek (Corporate Partner)</strong>
-              <div style="font-size: 0.72rem; color: #64748b;">recruiter@torpedo.com (Talent Sourcing & ATS Pipeline)</div>
-            </div>
-            <span style="font-size: 0.72rem; color: #2563eb; font-weight: 700;">Fill ➔</span>
-          </button>
-        </div>
-      </div>
-
       <!-- Google Login Button -->
       <button type="button" class="google-login-btn" onclick="handleGoogleLogin()">
         <svg class="google-icon-svg" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
@@ -140,6 +99,16 @@
         <button type="submit" class="login-primary-btn" id="login-submit-btn">
           LOGIN
         </button>
+
+        <!-- Subtle 1-Click Persona Pre-fills -->
+        <div class="login-quick-personas">
+          <span class="quick-persona-label">Demo:</span>
+          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('student')">🎓 Student</button>
+          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('admin')">🛡️ Admin</button>
+          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('employer')">💼 Employer</button>
+          <button type="button" class="quick-persona-pill" onclick="startStudentOnboardingTest()" style="color: #2563eb;">🚀 OTP Onboarding</button>
+        </div>
+      </form>
       </form>
 
       <!-- Register Switcher Footer -->
@@ -342,10 +311,10 @@
       <!-- Right Panel: Verify Code Input -->
       <section class="auth-card-form-panel" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 36px; text-align: center;">
         <div style="max-width: 420px; width: 100%;">
-          <h2 style="font-size: 2.2rem; font-weight: 850; color: #0f172a; margin-bottom: 8px; letter-spacing: -0.03em;">Verify Code</h2>
+          <h2 style="font-size: 2.2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: -0.03em;">Verify Code</h2>
           <p style="font-size: 0.94rem; color: #64748b; margin-bottom: 30px; line-height: 1.5;">
             Please enter the verification code sent to <br>
-            <strong id="otp-sent-to-email" style="color: #0f172a; font-weight: 750;">vivek.hr362007@gmail.com</strong>
+            <strong id="otp-sent-to-email" style="color: #0f172a; font-weight: 600;">vivek.hr362007@gmail.com</strong>
           </p>
 
           <!-- 6-digit OTP input row -->
@@ -360,11 +329,11 @@
 
           <!-- Didn't receive OTP? Sent! -->
           <div style="font-size: 0.88rem; color: #64748b; margin-bottom: 26px;">
-            Didn't receive OTP? <span id="otp-resend-link" style="color: #1d4ed8; font-weight: 800; cursor: pointer;" onclick="handleResendOtp()">Sent!</span>
+            Didn't receive OTP? <span id="otp-resend-link" style="color: #1d4ed8; font-weight: 600; cursor: pointer;" onclick="handleResendOtp()">Sent!</span>
           </div>
 
           <!-- VERIFY Button -->
-          <button type="button" class="otp-submit-btn" id="btn-verify-otp" onclick="handleVerifyOtpSubmit()" style="width: 100%; background: #1d4ed8; color: #ffffff; border: none; border-radius: 12px; padding: 15px; font-size: 1rem; font-weight: 800; letter-spacing: 0.05em; cursor: pointer; transition: all 0.18s ease; box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);">
+          <button type="button" class="otp-submit-btn" id="btn-verify-otp" onclick="handleVerifyOtpSubmit()" style="width: 100%; background: #1d4ed8; color: #ffffff; border: none; border-radius: 12px; padding: 15px; font-size: 1rem; font-weight: 600; letter-spacing: 0.05em; cursor: pointer; transition: all 0.18s ease; box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);">
             VERIFY
           </button>
 

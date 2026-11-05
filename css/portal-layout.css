@@ -9,23 +9,23 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
   --font-code: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Surfaces & Backgrounds - Sharp Clean Slate */
-  --bg-page: #fafafa;
+  /* Surfaces & Backgrounds - Modern Daylight Canvas */
+  --bg-page: #f8fafc;
   --bg-card: #ffffff;
-  --bg-hover: #f4f4f5;
-  --bg-active: #e4e4e7;
+  --bg-hover: #f1f5f9;
+  --bg-active: #e2e8f0;
 
-  /* Precision Hairline Borders */
-  --border-card: #e4e4e7;
-  --border-subtle: #f4f4f5;
-  --border-hover: #09090b;
+  /* Subtle Soft Hairline Borders */
+  --border-card: rgba(226, 232, 240, 0.85);
+  --border-subtle: #f1f5f9;
+  --border-hover: #cbd5e1;
 
-  /* Brand Accents - High Contrast Punchy */
+  /* Brand Accents */
   --primary-blue: #2563eb;
   --primary-blue-hover: #1d4ed8;
   --primary-blue-light: #eff6ff;
 
-  --accent-teal: #0f766e;
+  --accent-teal: #0d9488;
   --accent-teal-light: #f0fdfa;
 
   --accent-purple: #7c3aed;
@@ -34,23 +34,23 @@
   --accent-orange: #ea580c;
   --accent-orange-light: #fff7ed;
 
-  /* Typography Colors - Deep Inks & High-Contrast Muted */
-  --text-dark: #09090b;
-  --text-secondary: #27272a;
-  --text-muted: #71717a;
-  --text-dim: #a1a1aa;
+  /* Typography Colors - Softer, Calmer High-Legibility Slate */
+  --text-dark: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
 
-  /* Crisp Micro Radii - Razor Sharp Architectural */
-  --radius-xs: 3px;
-  --radius-sm: 5px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 10px;
+  /* Smooth Modern Rounded Radii */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
 
-  /* Razor Keyline Shadows */
-  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-  --shadow-hover: 0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -2px rgba(0, 0, 0, 0.04);
+  /* Soft Ambient Light Elevation */
+  --shadow-subtle: 0 1px 2px 0 rgba(15, 23, 42, 0.03);
+  --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 8px 20px -3px rgba(15, 23, 42, 0.07), 0 3px 6px -2px rgba(15, 23, 42, 0.03);
 }
 
 * {
@@ -136,7 +136,7 @@ body {
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #09090b;
+  color: #0f172a;
   background: #f4f4f5;
   border: 1px solid #e4e4e7;
   padding: 2px 6px;
@@ -179,7 +179,7 @@ body {
 
 .header-search-input:focus {
   background: #ffffff;
-  border-color: #09090b;
+  border-color: #93c5fd;
   box-shadow: 0 0 0 2px rgba(9, 9, 11, 0.08);
 }
 
@@ -326,7 +326,7 @@ body {
   top: 2px;
   right: 2px;
   font-size: 0.58rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #ffffff;
   min-width: 15px;
   height: 15px;
@@ -532,7 +532,7 @@ body {
 
 .sidebar-group-header {
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -737,7 +737,7 @@ body {
 .sidebar-subnav-item.active {
   color: #0f2ac7;
   background: #eff6ff;
-  font-weight: 750;
+  font-weight: 600;
 }
 
 /* Top Nav Floating Dropdown Menus */
@@ -805,7 +805,7 @@ body {
   gap: 9px;
   padding: 7px 12px;
   font-size: 0.82rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #334155;
   text-decoration: none;
   border-radius: 8px;
@@ -840,9 +840,9 @@ body {
 }
 
 .nav-micro-badge.join {
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border-color: #09090b;
+  border-color: #93c5fd;
   font-size: 0.58rem;
   letter-spacing: 0.05em;
   font-weight: 700;
@@ -865,14 +865,14 @@ body {
 
 .sidebar-bottom-profile:hover {
   background: #f4f4f5;
-  border-color: #09090b;
+  border-color: #93c5fd;
 }
 
 .profile-monogram-box {
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
   font-size: 0.68rem;
   font-weight: 700;
@@ -902,7 +902,7 @@ body {
 
 .profile-name {
   font-size: 0.76rem;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--text-dark);
   white-space: nowrap;
   overflow: hidden;
@@ -925,7 +925,7 @@ body {
 }
 
 .sidebar-bottom-profile:hover .profile-gear-icon {
-  color: #09090b;
+  color: #0f172a;
 }
 
 /* ==========================================================================
@@ -966,7 +966,7 @@ body {
   font-weight: 700;
   color: var(--text-dark);
   margin: 0 0 2px 0;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
 
 .welcome-greeting-sub {
@@ -981,7 +981,7 @@ body {
   gap: 6px;
   font-size: 0.68rem;
   font-weight: 600;
-  color: #09090b;
+  color: #0f172a;
   background: #ffffff;
   border: 1px solid #e4e4e7;
   padding: 4px 10px;
@@ -1063,7 +1063,7 @@ body {
 }
 
 .exact-metric-card:hover {
-  border-color: #09090b;
+  border-color: #93c5fd;
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
 }
@@ -1077,7 +1077,7 @@ body {
 .metric-caption-text {
   font-size: 0.65rem;
   color: var(--text-muted);
-  font-weight: 650;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
@@ -1092,15 +1092,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #09090b;
+  color: #0f172a;
   flex-shrink: 0;
   transition: all 0.15s ease;
 }
 
 .exact-metric-card:hover .metric-icon-box {
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border-color: #09090b;
+  border-color: #93c5fd;
 }
 
 .metric-number-bold {
@@ -1109,7 +1109,7 @@ body {
   font-weight: 700;
   color: var(--text-dark);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
   margin: 6px 0 2px 0;
 }
@@ -1209,7 +1209,7 @@ body {
   background: #f8fafc;
   border-radius: 4px;
   font-size: 0.65rem;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1385,7 +1385,7 @@ body {
 }
 
 .course-table-row:hover .course-chevron-action-col {
-  color: #09090b;
+  color: #0f172a;
 }
 
 /* ==========================================================================
@@ -1425,7 +1425,7 @@ body {
 }
 
 .recommended-tile-card:hover {
-  border-color: #09090b;
+  border-color: #93c5fd;
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
 }
@@ -1474,14 +1474,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #09090b;
+  color: #0f172a;
   transition: all 0.15s ease;
 }
 
 .recommended-tile-card:hover .tile-icon-micro {
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border-color: #09090b;
+  border-color: #93c5fd;
 }
 
 .tile-body-content {
@@ -1492,7 +1492,7 @@ body {
 
 .tile-title-text {
   font-size: 0.82rem;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--text-dark);
   letter-spacing: -0.015em;
   margin: 0 0 3px 0;
@@ -1512,7 +1512,7 @@ body {
 .tile-action-link {
   font-size: 0.68rem;
   font-weight: 600;
-  color: #09090b;
+  color: #0f172a;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -1602,7 +1602,7 @@ body {
   font-weight: 700;
   color: var(--text-dark);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1642,7 +1642,7 @@ body {
 }
 
 .ref-bar-rect.active-day {
-  background: #09090b;
+  background: #1d4ed8;
 }
 
 .ref-day-label {
@@ -1652,7 +1652,7 @@ body {
 }
 
 .ref-day-label.active {
-  color: #09090b;
+  color: #0f172a;
   font-weight: 700;
 }
 
@@ -1660,7 +1660,7 @@ body {
 .challenge-title-text {
   font-family: var(--font-display);
   font-size: 0.85rem;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--text-dark);
   margin-bottom: 2px;
   letter-spacing: -0.01em;
@@ -1674,7 +1674,7 @@ body {
 }
 
 .challenge-terminal-box {
-  background: #09090b;
+  background: #1d4ed8;
   border: 1px solid #27272a;
   border-radius: 5px;
   padding: 7px 9px;
@@ -1716,9 +1716,9 @@ body {
 .btn-solve-sharp {
   width: 100%;
   height: 30px;
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border: 1px solid #09090b;
+  border: 1px solid #1d4ed8;
   border-radius: 5px;
   font-size: 0.72rem;
   font-weight: 600;
@@ -1767,16 +1767,16 @@ body {
 
 .todo-text-input:focus {
   background: #ffffff;
-  border-color: #09090b;
+  border-color: #93c5fd;
 }
 
 .btn-add-todo-sm {
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border: 1px solid #09090b;
+  border: 1px solid #1d4ed8;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1825,7 +1825,7 @@ body {
 .todo-custom-check {
   width: 14px;
   height: 14px;
-  accent-color: #09090b;
+  accent-color: #0f172a;
   cursor: pointer;
   margin-top: 2px;
   flex-shrink: 0;
@@ -1970,7 +1970,7 @@ body {
 .nav-badge-pill {
   margin-left: auto;
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 7px;
   border-radius: 99px;
   line-height: 1.2;
@@ -2030,7 +2030,7 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-dark);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   margin: 0 0 3px 0;
 }
 
@@ -2065,7 +2065,7 @@ body {
 
 .view-pill-btn.active {
   background: #ffffff;
-  color: #09090b;
+  color: #0f172a;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -2107,7 +2107,7 @@ body {
   outline: none;
   font-size: 0.76rem;
   font-family: inherit;
-  color: #09090b;
+  color: #0f172a;
   width: 100%;
 }
 
@@ -2159,7 +2159,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #09090b;
+  background: #1d4ed8;
   border-bottom: 1px solid var(--border-card);
 }
 
@@ -2190,7 +2190,7 @@ body {
   backdrop-filter: blur(8px);
   color: #ffffff;
   font-size: 0.6rem;
-  font-weight: 650;
+  font-weight: 600;
   padding: 2px 7px;
   border-radius: 4px;
   text-transform: uppercase;
@@ -2217,8 +2217,8 @@ body {
 .course-card-title-h3 {
   font-family: var(--font-display);
   font-size: 0.92rem;
-  font-weight: 650;
-  color: #09090b;
+  font-weight: 600;
+  color: #0f172a;
   margin: 0 0 6px 0;
   line-height: 1.35;
   letter-spacing: -0.015em;
@@ -2245,9 +2245,9 @@ body {
 }
 
 .btn-card-launch-course {
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border: 1px solid #09090b;
+  border: 1px solid #1d4ed8;
   border-radius: 5px;
   padding: 5px 11px;
   font-size: 0.7rem;
@@ -2645,9 +2645,9 @@ body {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.65rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .library-catalog-sub {
@@ -2684,7 +2684,7 @@ body {
 
 .lib-res-stat-label {
   font-size: 0.62rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.85);
   text-transform: uppercase;
@@ -2692,7 +2692,7 @@ body {
 
 .lib-res-stat-count {
   font-size: 1.25rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #ffffff;
   line-height: 1.2;
 }
@@ -2748,7 +2748,7 @@ body {
   border-radius: 999px;
   padding: 10px 16px;
   font-size: 0.78rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #1e293b;
   cursor: pointer;
   outline: none;
@@ -2812,7 +2812,7 @@ body {
 .bookshelf-main-title {
   font-family: var(--font-display);
   font-size: 0.95rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
 }
 
@@ -2820,7 +2820,7 @@ body {
   background: #dbeafe;
   color: #1d4ed8;
   font-size: 0.68rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 2px 9px;
   border-radius: 999px;
 }
@@ -2904,7 +2904,7 @@ body {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
 }
 
@@ -2955,7 +2955,7 @@ body {
 
 .book-card-cover-wrap {
   height: 200px;
-  background: #09090b;
+  background: #1d4ed8;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -3023,7 +3023,7 @@ body {
   background: #eff6ff;
   color: #1d4ed8;
   font-size: 0.65rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 3px 8px;
   border-radius: 6px;
   border: 1px solid #dbeafe;
@@ -3041,7 +3041,7 @@ body {
 .book-title-h3 {
   font-family: var(--font-display);
   font-size: 0.96rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 6px 0;
   letter-spacing: -0.015em;
@@ -3107,7 +3107,7 @@ body {
   border-radius: 6px;
   padding: 3px 9px;
   font-size: 0.68rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #475569;
   cursor: pointer;
   display: flex;
@@ -3235,7 +3235,7 @@ body {
   padding: 3px 9px;
   border-radius: 999px;
   font-size: 0.68rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.04em;
   color: #7e22ce;
   margin-bottom: 6px;
@@ -3245,10 +3245,10 @@ body {
   margin: 0 0 4px 0;
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.45rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
 
 .cert-hero-title-blue {
@@ -3394,7 +3394,7 @@ body {
   padding: 3px 9px;
   border-radius: 999px;
   font-size: 0.68rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.04em;
   color: #1d4ed8;
   margin-bottom: 6px;
@@ -3404,9 +3404,9 @@ body {
   margin: 0 0 4px 0;
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.45rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   display: block;
 }
 
@@ -3541,7 +3541,7 @@ body {
 
 .cert-stat-label {
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3550,16 +3550,16 @@ body {
 .cert-stat-num {
   font-family: var(--font-display);
   font-size: 1.55rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #0f172a;
   line-height: 1.15;
   margin: 4px 0 2px 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .cert-stat-sub-note {
   font-size: 0.68rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #64748b;
 }
 
@@ -3650,7 +3650,7 @@ body {
   border-radius: 999px;
   padding: 7px 16px;
   font-size: 0.76rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #64748b;
   cursor: pointer;
   display: inline-flex;
@@ -3667,7 +3667,7 @@ body {
   background: #ffffff;
   color: #0f172a;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  font-weight: 750;
+  font-weight: 600;
 }
 
 .btn-share-portfolio {
@@ -3676,7 +3676,7 @@ body {
   border-radius: 999px;
   padding: 7px 16px;
   font-size: 0.76rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #334155;
   cursor: pointer;
   display: inline-flex;
@@ -3711,7 +3711,7 @@ body {
 
 .cert-filter-type-label {
   font-size: 0.74rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #64748b;
   display: inline-flex;
   align-items: center;
@@ -3853,7 +3853,7 @@ body {
 .cert-add-dashed-title {
   font-family: var(--font-display);
   font-size: 0.94rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 6px 0;
 }
@@ -3872,7 +3872,7 @@ body {
   border-radius: 999px;
   padding: 7px 18px;
   font-size: 0.74rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -3950,7 +3950,7 @@ body {
 
 .cert-verified-pill {
   font-size: 0.62rem;
-  font-weight: 750;
+  font-weight: 600;
   background: #ecfdf5;
   color: #059669;
   border: 1px solid #a7f3d0;
@@ -3975,7 +3975,7 @@ body {
 .cert-card-title {
   font-family: var(--font-display);
   font-size: 0.98rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 6px 0;
   letter-spacing: -0.015em;
@@ -4020,7 +4020,7 @@ body {
   border-radius: 6px;
   padding: 7px 12px;
   font-size: 0.74rem;
-  font-weight: 650;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -4041,7 +4041,7 @@ body {
   border-radius: 6px;
   padding: 7px 12px;
   font-size: 0.74rem;
-  font-weight: 650;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -4082,7 +4082,7 @@ body {
 .form-field-label {
   display: block;
   font-size: 0.68rem;
-  font-weight: 750;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #475569;
@@ -4098,7 +4098,7 @@ body {
   padding: 9px 12px;
   font-size: 0.82rem;
   font-family: inherit;
-  color: #09090b;
+  color: #0f172a;
   transition: all 0.14s ease;
 }
 
@@ -4124,9 +4124,9 @@ body {
 }
 
 .btn-submit-audit {
-  background: #09090b;
+  background: #1d4ed8;
   color: #ffffff;
-  border: 1px solid #09090b;
+  border: 1px solid #1d4ed8;
   border-radius: 8px;
   padding: 10px 18px;
   font-size: 0.8rem;
@@ -4165,7 +4165,7 @@ body {
 
 .audit-status-pill {
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 8px;
   border-radius: 999px;
   display: inline-flex;
@@ -4193,7 +4193,7 @@ body {
 
 .faculty-audit-panel-title {
   font-size: 0.68rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #475569;
   margin-bottom: 6px;
   display: flex;
@@ -4213,7 +4213,7 @@ body {
   border-radius: 6px;
   padding: 5px 12px;
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.14s ease;
   display: flex;
@@ -4233,7 +4233,7 @@ body {
   border-radius: 6px;
   padding: 5px 10px;
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.14s ease;
 }
@@ -4254,7 +4254,7 @@ body {
 .skill-badge-matrix-title {
   font-family: var(--font-display);
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 3px 0;
 }
@@ -4270,7 +4270,7 @@ body {
   color: #334155;
   border: 1px solid #e2e8f0;
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 4px 12px;
   border-radius: 999px;
 }
@@ -4323,7 +4323,7 @@ body {
 
 .skill-badge-category-tag {
   font-size: 0.62rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #475569;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -4334,7 +4334,7 @@ body {
 
 .skill-badge-grade-pill {
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #059669;
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
@@ -4376,7 +4376,7 @@ body {
 .skill-badge-title {
   font-family: var(--font-display);
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 4px 0;
   letter-spacing: -0.01em;
@@ -4425,7 +4425,7 @@ body {
   font-family: var(--font-display);
   font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   flex-shrink: 0;
 }
 .instructor-monogram.purple { background: #faf5ff; color: #7e22ce; border-color: #f3e8ff; }
@@ -4493,7 +4493,7 @@ body {
   align-items: center;
   gap: 6px;
   font-size: 0.65rem;
-  font-weight: 650;
+  font-weight: 600;
   padding: 4px 9px;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -4659,7 +4659,7 @@ button:active,
 .book-card-item:hover,
 .cert-item-card:hover {
   transform: translateY(-3px) scale(1.006);
-  border-color: #09090b;
+  border-color: #93c5fd;
   box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
 }
 
@@ -4895,7 +4895,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-brand-pill {
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.04em;
   padding: 3px 8px;
   border-radius: 5px;
@@ -4980,7 +4980,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   padding: 5px 16px;
   border-radius: 6px;
   font-size: 0.82rem;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -5000,7 +5000,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   padding: 5px 10px;
   border-radius: 6px;
   font-size: 0.78rem;
-  font-weight: 650;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -5020,7 +5020,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   padding: 5px 10px;
   border-radius: 6px;
   font-size: 0.78rem;
-  font-weight: 650;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -5031,7 +5031,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-stats-pill {
   font-size: 0.74rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #ea580c;
   background: #fff7ed;
   border: 1px solid #ffedd5;
@@ -5125,8 +5125,8 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-problem-title {
   font-size: 1.35rem;
-  font-weight: 750;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 12px;
   color: var(--lc-text);
 }
@@ -5141,7 +5141,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-diff-badge {
   font-size: 0.74rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 3px 9px;
   border-radius: 20px;
   display: inline-flex;
@@ -5218,7 +5218,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-example-key {
   color: #2563eb;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .lc-workbench.theme-dark .lc-example-key {
@@ -5249,7 +5249,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: 1px solid var(--lc-border);
   color: var(--lc-text);
   font-size: 0.8rem;
-  font-weight: 650;
+  font-weight: 600;
   padding: 4px 10px;
   border-radius: 5px;
   outline: none;
@@ -5327,7 +5327,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: none;
   color: var(--lc-text-muted);
   font-size: 0.78rem;
-  font-weight: 650;
+  font-weight: 600;
   padding: 4px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -5344,7 +5344,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .lc-tc-tab-btn.active {
   color: #2563eb;
   background: var(--lc-bg-subtle);
-  font-weight: 750;
+  font-weight: 600;
 }
 
 .lc-testcase-body {
@@ -5365,7 +5365,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: 1px solid var(--lc-border);
   color: var(--lc-text-secondary);
   font-size: 0.76rem;
-  font-weight: 650;
+  font-weight: 600;
   padding: 3px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -5407,7 +5407,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   align-items: center;
   gap: 6px;
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #059669;
   margin-bottom: 6px;
 }
@@ -5417,7 +5417,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   align-items: center;
   gap: 6px;
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #e11d48;
   margin-bottom: 6px;
 }
@@ -5607,7 +5607,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #1d4ed8;
   border: 1px solid rgba(37, 99, 235, 0.22);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   padding: 3px 9px;
   border-radius: 999px;
@@ -5619,9 +5619,9 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   margin: 0 0 4px 0;
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.45rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   color: #0b1329;
 }
 
@@ -5792,14 +5792,14 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-weight: 750;
+  font-weight: 600;
   color: #64748b;
   margin-bottom: 1px;
 }
 
 .lc-stat-val {
   font-size: 1.08rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #0f172a;
   font-family: 'Inter', sans-serif;
   line-height: 1.15;
@@ -5867,7 +5867,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #c2410c;
   border: 1px solid #ffedd5;
   font-size: 0.70rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   padding: 3px 9px;
   border-radius: 6px;
@@ -5904,7 +5904,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-daily-title {
   font-size: 1.18rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 7px 0;
   font-family: var(--font-display, 'Inter', sans-serif);
@@ -5925,7 +5925,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #475569;
   border: 1px solid #e2e8f0;
   font-size: 0.72rem;
-  font-weight: 650;
+  font-weight: 600;
   padding: 2px 7px;
   border-radius: 5px;
   transition: all 0.15s ease;
@@ -5938,7 +5938,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-diff-badge {
   font-size: 0.70rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 8px;
   border-radius: 5px;
   text-transform: uppercase;
@@ -5988,7 +5988,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   align-items: center;
   gap: 5px;
   font-size: 0.75rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #b45309;
 }
 
@@ -5998,7 +5998,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
   color: #ffffff;
   font-size: 0.84rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 8px 16px;
   border-radius: 8px;
   border: none;
@@ -6088,7 +6088,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #1e40af;
   border: 1px solid #dbeafe;
   font-size: 0.70rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   padding: 3px 9px;
   border-radius: 6px;
@@ -6134,7 +6134,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-track-title {
   font-size: 0.80rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
   line-height: 1.2;
 }
@@ -6172,7 +6172,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #0f172a;
   color: #ffffff;
   font-size: 0.82rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 8px 14px;
   border-radius: 8px;
   border: none;
@@ -6252,7 +6252,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .lc-practice-title-group h3 {
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 3px 0;
   font-family: var(--font-display, 'Inter', sans-serif);
@@ -6421,7 +6421,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #f8fafc;
   color: #64748b;
   font-size: 0.70rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   border-bottom: 1px solid #e2e8f0;
@@ -6458,7 +6458,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #2563eb;
   border: 1px solid #bfdbfe;
   font-size: 0.76rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 4px 11px;
   border-radius: 6px;
   cursor: pointer;
@@ -6556,7 +6556,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: var(--lc-text, #334155);
   border: 1px solid var(--lc-border, #cbd5e1);
   font-size: 0.74rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 4px 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -6650,7 +6650,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #4f46e5;
   border: 1px solid rgba(99, 102, 241, 0.25);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   padding: 3px 9px;
   border-radius: 999px;
@@ -6661,9 +6661,9 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .quiz-hero-title {
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.45rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   line-height: 1.2;
   margin: 0 0 4px 0;
 }
@@ -6793,7 +6793,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .faculty-banner-text h4 {
   margin: 0 0 1px 0;
   font-size: 0.86rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
 }
 
@@ -6818,7 +6818,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 600;
   text-transform: uppercase;
   color: #0f172a;
   outline: none;
@@ -6840,7 +6840,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border-radius: 6px;
   padding: 0 12px;
   font-size: 0.76rem;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -6925,13 +6925,13 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .quiz-stat-tile.blue:hover { border-color: #bae6fd; box-shadow: 0 6px 20px rgba(14, 165, 233, 0.15); }
 
 .quiz-stat-icon-wrap {
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   flex-shrink: 0;
 }
 
@@ -6946,18 +6946,18 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 .quiz-stat-label {
-  font-size: 0.69rem;
-  font-weight: 750;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   color: #64748b;
   text-transform: uppercase;
 }
 
 .quiz-stat-val {
-  font-size: 1.28rem;
-  font-weight: 850;
+  font-size: 1.10rem;
+  font-weight: 700;
   color: #0f172a;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.15;
 }
 
@@ -7022,7 +7022,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #4338ca;
   border: 1px solid #e0e7ff;
   font-size: 0.70rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   padding: 3px 9px;
   border-radius: 6px;
@@ -7045,7 +7045,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-daily-title {
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 6px 0;
   line-height: 1.25;
@@ -7090,7 +7090,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
   color: #ffffff;
   font-size: 0.84rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 8px 16px;
   border-radius: 8px;
   border: none;
@@ -7144,7 +7144,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   align-items: center;
   gap: 6px;
   font-size: 0.72rem;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: 0.05em;
   color: #0369a1;
   background: #f0f9ff;
@@ -7182,7 +7182,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-track-name {
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #1e293b;
   display: flex;
   align-items: center;
@@ -7298,7 +7298,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-cat-chip {
   font-size: 0.67rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #475569;
   background: #f1f5f9;
   padding: 2px 7px;
@@ -7307,7 +7307,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-diff-badge {
   font-size: 0.67rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 7px;
   border-radius: 4px;
 }
@@ -7318,7 +7318,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-score-tag {
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   background: #ecfdf5;
   color: #059669;
   padding: 2px 7px;
@@ -7328,7 +7328,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-card-title {
   font-size: 0.96rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   line-height: 1.32;
   margin: 0 0 6px 0;
@@ -7397,7 +7397,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: 1px solid #cbd5e1;
   color: #1e293b;
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 6px 12px;
   border-radius: 7px;
   cursor: pointer;
@@ -7463,7 +7463,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-runner-title {
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
 }
@@ -7473,7 +7473,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #60a5fa;
   border: 1px solid rgba(59, 130, 246, 0.4);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 3px 8px;
   border-radius: 5px;
 }
@@ -7494,7 +7494,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   gap: 7px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #38bdf8;
 }
 
@@ -7579,7 +7579,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #eff6ff;
   color: #1d4ed8;
   font-size: 0.74rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 4px 9px;
   border-radius: 6px;
 }
@@ -7595,7 +7595,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-question-title {
   font-size: 1.15rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #0f172a;
   line-height: 1.45;
   margin: 0 0 22px 0;
@@ -7637,7 +7637,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border-radius: 7px;
   background: #f1f5f9;
   color: #334155;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 0.82rem;
   display: flex;
   align-items: center;
@@ -7701,7 +7701,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-palette-header {
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
   color: #64748b;
   letter-spacing: 0.05em;
@@ -7719,7 +7719,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   aspect-ratio: 1;
   border-radius: 8px;
   font-size: 0.82rem;
-  font-weight: 750;
+  font-weight: 600;
   border: 1px solid #cbd5e1;
   background: #ffffff;
   color: #334155;
@@ -7823,7 +7823,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: none;
   color: #ffffff;
   font-size: 0.82rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 8px 18px;
   border-radius: 8px;
   cursor: pointer;
@@ -7841,7 +7841,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: none;
   color: #ffffff;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 8px 18px;
   border-radius: 8px;
   cursor: pointer;
@@ -7943,7 +7943,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .result-metric-num {
   font-size: 1.45rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #0f172a;
 }
 
@@ -7957,7 +7957,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .result-review-section-title {
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 14px 0;
 }
@@ -7982,7 +7982,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .result-review-pill {
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 7px;
   border-radius: 4px;
 }
@@ -8034,14 +8034,14 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   margin-left: auto;
   font-size: 0.70rem;
   color: #059669;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .review-wrong-tag {
   margin-left: auto;
   font-size: 0.70rem;
   color: #dc2626;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .result-explanation-box {
@@ -8103,7 +8103,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   color: #2563eb;
   border: 1px solid #bfdbfe;
   font-size: 0.70rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 3px 10px;
   border-radius: 999px;
   text-transform: uppercase;
@@ -8113,7 +8113,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-dropdown-title {
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 4px 0;
   font-family: var(--font-display, 'Inter', sans-serif);
@@ -8143,7 +8143,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   padding: 7px 14px;
   border-radius: 7px;
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #64748b;
   cursor: pointer;
   transition: all 0.16s ease;
@@ -8160,7 +8160,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #ffffff;
   color: #2563eb;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .quiz-dropdown-selectors-row {
@@ -8178,7 +8178,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-field-label {
   font-size: 0.82rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #1e293b;
   display: flex;
   align-items: center;
@@ -8195,7 +8195,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   align-items: center;
   justify-content: center;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 600;
   flex-shrink: 0;
 }
 
@@ -8213,7 +8213,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border-radius: 10px;
   padding: 12px 38px 12px 14px;
   font-size: 0.90rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #0f172a;
   font-family: inherit;
   cursor: pointer;
@@ -8270,7 +8270,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .quiz-preview-title {
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   margin: 0 0 6px 0;
   font-family: var(--font-display, 'Inter', sans-serif);
@@ -8319,7 +8319,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
   font-size: 0.94rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 11px 24px;
   border-radius: 10px;
   border: none;
@@ -8342,7 +8342,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border: 1.5px solid #cbd5e1;
   color: #334155;
   font-size: 0.85rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 10px 18px;
   border-radius: 10px;
   cursor: pointer;
@@ -8385,7 +8385,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: none;
   border: none;
   color: #2563eb;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
   padding: 0;
@@ -8493,7 +8493,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       background: rgba(99, 102, 241, 0.09);
       border: 1px solid rgba(99, 102, 241, 0.25);
       font-size: 0.68rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #4338ca;
       letter-spacing: 0.05em;
       padding: 3px 8px;
@@ -8505,9 +8505,9 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .jobs-hero-title {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.45rem;
-      font-weight: 800;
+      font-weight: 600;
       line-height: 1.2;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.01em;
       margin-bottom: 4px;
       color: #0f172a;
     }
@@ -8536,7 +8536,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .btn-hero-primary {
       background: #0f2ac7;
       color: #ffffff;
-      font-weight: 750;
+      font-weight: 600;
       font-size: 0.78rem;
       padding: 7px 14px;
       border-radius: 7px;
@@ -8624,7 +8624,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .stat-val-num {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.10rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #0f172a;
       line-height: 1.15;
     }
@@ -8663,7 +8663,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       border-radius: 8px;
       background: #0f2ac7;
       color: #ffffff;
-      font-weight: 800;
+      font-weight: 600;
       font-size: 0.80rem;
       display: flex;
       align-items: center;
@@ -8672,7 +8672,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     }
 
     .readiness-title {
-      font-weight: 800;
+      font-weight: 600;
       font-size: 0.82rem;
       color: #0f172a;
       line-height: 1.2;
@@ -8713,7 +8713,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       border-radius: 6px;
       padding: 5px 11px;
       font-size: 0.74rem;
-      font-weight: 750;
+      font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -8902,7 +8902,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       justify-content: center;
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 0.95rem;
-      font-weight: 850;
+      font-weight: 700;
       flex-shrink: 0;
       border: 1px solid rgba(0, 0, 0, 0.06);
     }
@@ -8910,7 +8910,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .job-title-line {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 0.96rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #0f172a;
       letter-spacing: -0.015em;
       line-height: 1.25;
@@ -8943,7 +8943,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .job-salary-callout {
       font-family: var(--font-mono, monospace);
       font-size: 0.90rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #059669;
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
@@ -8962,7 +8962,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
     .badge-tag-type {
       font-size: 0.68rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 2px 8px;
       border-radius: 5px;
       text-transform: uppercase;
@@ -9023,7 +9023,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       align-items: center;
       gap: 6px;
       font-size: 0.74rem;
-      font-weight: 750;
+      font-weight: 600;
       color: #2563eb;
     }
 
@@ -9073,7 +9073,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       border: 1px solid var(--border-card);
       color: #0f172a;
       font-size: 0.78rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 6px 12px;
       border-radius: 7px;
       cursor: pointer;
@@ -9090,7 +9090,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       color: #ffffff;
       border: none;
       font-size: 0.78rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 6px 14px;
       border-radius: 7px;
       cursor: pointer;
@@ -9149,7 +9149,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     .dialog-header h3 {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.05rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #0f172a;
     }
 
@@ -9209,7 +9209,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       border-radius: 50%;
       background: #eff6ff;
       color: #0f2ac7;
-      font-weight: 800;
+      font-weight: 600;
       font-size: 0.70rem;
       display: flex;
       align-items: center;
@@ -9219,7 +9219,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     }
 
     .roadmap-text-title {
-      font-weight: 750;
+      font-weight: 600;
       font-size: 0.82rem;
       color: #0f172a;
     }
@@ -9334,7 +9334,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: rgba(249, 115, 22, 0.1);
   border: 1px solid rgba(249, 115, 22, 0.3);
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #c2410c;
   letter-spacing: 0.05em;
   padding: 3px 8px;
@@ -9346,9 +9346,9 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .hack-hero-title {
   font-family: var(--font-display, 'Inter', sans-serif);
   font-size: 1.45rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   margin-bottom: 4px;
   color: #0f172a;
 }
@@ -9377,7 +9377,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .btn-hack-primary {
   background: #ea580c;
   color: #ffffff;
-  font-weight: 750;
+  font-weight: 600;
   font-size: 0.78rem;
   padding: 7px 14px;
   border-radius: 7px;
@@ -9469,7 +9469,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   align-items: center;
   justify-content: center;
   font-family: var(--font-display, 'Inter', sans-serif);
-  font-weight: 850;
+  font-weight: 700;
   font-size: 0.95rem;
   flex-shrink: 0;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
@@ -9477,7 +9477,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .hack-title-line {
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #0f172a;
   cursor: pointer;
   line-height: 1.3;
@@ -9492,7 +9492,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   background: #fff7ed;
   border: 1px solid #fed7aa;
   color: #c2410c;
-  font-weight: 850;
+  font-weight: 700;
   font-family: var(--font-mono, monospace);
   font-size: 0.95rem;
   padding: 6px 12px;
@@ -9503,7 +9503,7 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 .hack-status-pill {
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 8px;
   border-radius: 99px;
   display: inline-flex;

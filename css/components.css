@@ -45,9 +45,9 @@
 
 .hero-title {
   font-size: clamp(2.4rem, 3.7vw, 3.5rem);
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.16;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   color: #ffffff;
   margin-bottom: 22px;
 }
@@ -100,7 +100,7 @@
   background-color: #ffffff;
   color: #0b1a3d;
   font-size: 0.88rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
@@ -236,16 +236,17 @@
 
 .feature-box {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 26px 24px 22px 24px;
+  border: 1px solid rgba(226, 232, 240, 0.75);
+  border-radius: 14px;
+  padding: 20px 20px 18px 20px;
   text-align: left;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 14px -2px rgba(15, 23, 42, 0.04);
 }
 
 .feature-box::before {
@@ -324,7 +325,7 @@
 
 .feature-title {
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-title);
   margin-top: 16px;
   margin-bottom: 8px;
@@ -360,7 +361,7 @@
   height: 18px;
   border-radius: 50%;
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 700;
   flex-shrink: 0;
 }
 
@@ -376,15 +377,16 @@
    ========================================================================== */
 .master-ecosystem-card {
   background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: 26px;
-  padding: 44px 44px;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.75);
+  border-radius: 20px;
+  padding: 32px 32px;
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.03);
 }
 
 @media (max-width: 768px) {
   .master-ecosystem-card {
-    padding: 32px 18px;
+    padding: 24px 16px;
+    border-radius: 16px;
   }
 }
 
@@ -454,18 +456,19 @@
 
 .category-tile {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 16px 20px;
+  border: 1px solid rgba(226, 232, 240, 0.75);
+  border-radius: 12px;
+  padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 3px 10px -2px rgba(15, 23, 42, 0.03);
 }
 
 .category-tile::before {
@@ -539,7 +542,7 @@
 
 .category-tile-title {
   font-size: 0.96rem;
-  font-weight: 750;
+  font-weight: 600;
   color: var(--text-title);
   letter-spacing: -0.01em;
   white-space: normal;
@@ -592,7 +595,7 @@
 
 .ecosystem-subtitle {
   font-size: 1.5rem;
-  font-weight: 850;
+  font-weight: 700;
   color: var(--text-title);
   letter-spacing: -0.01em;
   margin-top: 8px;
@@ -651,7 +654,7 @@
 
 .curriculum-banner-title {
   font-size: 1.7rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 6px;
   letter-spacing: -0.01em;
@@ -704,9 +707,9 @@
 /* Image Showcase Wrap with Capability Badges */
 .image-showcase-wrap {
   background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 22px 20px;
+  border: 1px solid rgba(226, 232, 240, 0.75);
+  border-radius: 14px;
+  padding: 20px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -714,7 +717,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 2px 10px -2px rgba(15, 23, 42, 0.03);
 }
 
 .image-showcase-wrap::before {
@@ -746,7 +749,7 @@
   padding: 4px 12px;
   border-radius: 999px;
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   box-shadow: 0 2px 4px rgba(15, 23, 42, 0.02);
@@ -823,7 +826,7 @@
 
 .cap-title {
   font-size: 0.77rem;
-  font-weight: 750;
+  font-weight: 600;
   color: var(--text-title);
   white-space: nowrap;
   overflow: hidden;
@@ -934,9 +937,9 @@
 
 .metric-stat-val {
   font-size: 1.6rem;
-  font-weight: 850;
+  font-weight: 700;
   color: var(--primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .metric-stat-label {
@@ -1024,7 +1027,7 @@
   font-family: Georgia, serif;
   color: rgba(37, 99, 235, 0.05);
   pointer-events: none;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .dean-avatar-wrapper {
@@ -1051,7 +1054,7 @@
   background: #2563eb;
   color: #ffffff;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1074,7 +1077,7 @@
   padding: 4px 14px;
   border-radius: 999px;
   font-size: 0.74rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: 14px;
@@ -1094,14 +1097,14 @@
 
 .dean-name {
   font-size: 1.25rem;
-  font-weight: 850;
+  font-weight: 700;
   color: var(--text-title);
   letter-spacing: -0.01em;
 }
 
 .dean-title {
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--primary);
@@ -1171,7 +1174,7 @@
 
 .story-tag {
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 3px 10px;
   border-radius: 999px;
   background: #f1f5f9;
@@ -1204,7 +1207,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
   color: #1e40af;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 0.85rem;
   display: flex;
   align-items: center;
@@ -1222,7 +1225,7 @@
 
 .story-author-name {
   font-size: 0.90rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-title);
   white-space: nowrap;
   overflow: hidden;
@@ -1396,15 +1399,15 @@
 
 .auth-split-card {
   width: 100%;
-  max-width: 1060px;
+  max-width: 1020px;
   background: #ffffff;
-  border-radius: 28px;
+  border-radius: 20px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  box-shadow: 0 30px 80px -15px rgba(11, 26, 61, 0.25), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 16px 48px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.8);
   position: relative;
-  min-height: 640px;
+  min-height: 560px;
 }
 
 @media (max-width: 960px) {
@@ -1536,7 +1539,7 @@
 
 .auth-brand-wordmark {
   font-size: 1.15rem;
-  font-weight: 850;
+  font-weight: 700;
   letter-spacing: 0.22em;
   color: #ffffff;
   text-transform: uppercase;
@@ -1552,9 +1555,9 @@
 
 .auth-card-headline {
   font-size: 2.9rem;
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   color: #ffffff;
   margin: 28px 0 16px 0;
   position: relative;
@@ -1593,7 +1596,7 @@
 .auth-footer-tagline {
   font-size: 0.7rem;
   letter-spacing: 0.16em;
-  font-weight: 800;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
 }
@@ -1663,18 +1666,18 @@
 }
 
 .auth-form-title {
-  font-size: 1.85rem;
-  font-weight: 850;
+  font-size: 1.55rem;
+  font-weight: 650;
   color: #0f172a;
-  margin-bottom: 6px;
-  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  letter-spacing: -0.015em;
 }
 
 .auth-form-sub {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: #64748b;
   line-height: 1.45;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 /* Role Selector Pills */
@@ -1700,7 +1703,7 @@
   background: transparent;
   font-family: var(--font-sans);
   font-size: 0.84rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #64748b;
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -1714,7 +1717,7 @@
 .role-pill-btn.active {
   background: #dbeafe;
   color: #1d4ed8;
-  font-weight: 750;
+  font-weight: 600;
   border-color: #bfdbfe;
 }
 
@@ -1759,7 +1762,7 @@
   text-align: center;
   color: #94a3b8;
   font-size: 0.74rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.08em;
   margin-bottom: 18px;
 }
@@ -1790,7 +1793,7 @@
 .auth-field-label {
   display: block;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.06em;
   color: #475569;
   text-transform: uppercase;
@@ -1899,7 +1902,7 @@
   border-radius: 10px;
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1932,7 +1935,7 @@
 
 .auth-card-bottom-link a {
   color: var(--primary);
-  font-weight: 750;
+  font-weight: 600;
   text-decoration: none;
   margin-left: 4px;
   cursor: pointer;
@@ -1963,13 +1966,49 @@
    ========================================================================== */
 .compact-login-card {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 16px;
   width: 100%;
-  max-width: 440px;
-  padding: 32px 34px 28px 34px;
-  box-shadow: 0 25px 60px -12px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  max-width: 420px;
+  padding: 28px 30px 24px 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 16px 36px -4px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.85);
   position: relative;
   box-sizing: border-box;
+}
+
+.login-quick-personas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.quick-persona-label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.quick-persona-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.quick-persona-pill:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
 }
 
 .auth-modal-overlay .compact-login-card {
@@ -2087,7 +2126,7 @@
   margin: 20px 0;
   color: #94a3b8;
   font-size: 0.76rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 
@@ -2222,7 +2261,7 @@
   border-radius: 10px;
   font-family: inherit;
   font-size: 0.95rem;
-  font-weight: 750;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
@@ -2251,7 +2290,7 @@
 
 .login-footer-link {
   color: #1d4ed8;
-  font-weight: 750;
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
 }
@@ -2301,9 +2340,9 @@
 
 .setup-stepper-title-grp h1 {
   font-size: 1.6rem;
-  font-weight: 850;
+  font-weight: 700;
   color: var(--text-title);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   margin-bottom: 4px;
 }
 
@@ -2320,7 +2359,7 @@
   border: 1px solid #bfdbfe;
   color: var(--primary);
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 5px 12px;
   border-radius: 999px;
   text-transform: uppercase;
@@ -2377,7 +2416,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 0.95rem;
   color: var(--text-muted);
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
@@ -2449,7 +2488,7 @@
 
 .wizard-section-heading h2 {
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-title);
   letter-spacing: -0.01em;
   margin-bottom: 4px;
@@ -2496,7 +2535,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
-  font-weight: 800;
+  font-weight: 600;
   object-fit: cover;
   border: 3px solid #ffffff;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
@@ -2518,7 +2557,7 @@
   padding: 8px 18px;
   border-radius: var(--radius-pill);
   font-size: 0.86rem;
-  font-weight: 750;
+  font-weight: 600;
   color: var(--text-title);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -2555,7 +2594,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.84rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #1e293b;
   margin-bottom: 7px;
   letter-spacing: 0.01em;
@@ -2632,7 +2671,7 @@
   align-items: center;
   gap: 10px;
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-title);
 }
 
@@ -2654,7 +2693,7 @@
 
 .edu-mandatory-tag {
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 3px 9px;
   border-radius: 999px;
   background: #fee2e2;
@@ -2664,7 +2703,7 @@
 
 .edu-optional-tag {
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 3px 9px;
   border-radius: 999px;
   background: #f1f5f9;
@@ -2716,7 +2755,7 @@
 
 .file-dropzone-prompt {
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 600;
   color: var(--text-title);
 }
 
@@ -2748,7 +2787,7 @@
   background: #dc2626;
   color: #ffffff;
   font-size: 0.68rem;
-  font-weight: 850;
+  font-weight: 700;
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -2774,7 +2813,7 @@
   color: #dc2626;
   cursor: pointer;
   font-size: 0.82rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 4px 8px;
   border-radius: 6px;
   transition: background 0.15s ease;
@@ -2843,7 +2882,7 @@
 
 .track-card-title {
   font-size: 0.98rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-title);
 }
 
@@ -2871,7 +2910,7 @@
   border: 1.5px solid var(--border-subtle);
   color: var(--text-body);
   font-size: 0.92rem;
-  font-weight: 750;
+  font-weight: 600;
   padding: 11px 22px;
   border-radius: var(--radius-pill);
   cursor: pointer;
@@ -2891,7 +2930,7 @@
   border: 1.5px solid var(--primary);
   color: #ffffff;
   font-size: 0.94rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 11px 28px;
   border-radius: var(--radius-pill);
   cursor: pointer;
@@ -3026,7 +3065,7 @@
   border: none;
   background: transparent;
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -3172,9 +3211,9 @@
 .edunext-brand-title {
   font-family: var(--font-sans);
   font-size: 1.55rem;
-  font-weight: 850;
+  font-weight: 700;
   color: var(--text-title);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
 }
 
 .edunext-nav-scroll-area {
@@ -3303,7 +3342,7 @@
 .edunext-submenu-link.active {
   background-color: #eff6ff;
   color: #2563eb;
-  font-weight: 750;
+  font-weight: 600;
 }
 
 [data-theme="dark"] .edunext-submenu-link.active {
@@ -3330,7 +3369,7 @@
   background: #2563eb;
   color: #ffffff;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 8px;
   border-radius: 999px;
   letter-spacing: -0.01em;
@@ -3371,7 +3410,7 @@
   border: none;
   background: transparent;
   font-size: 0.84rem;
-  font-weight: 650;
+  font-weight: 600;
   color: #64748b;
   cursor: pointer;
   transition: all 0.16s ease;
@@ -3385,7 +3424,7 @@
   background-color: #ffffff;
   color: #0f172a;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  font-weight: 750;
+  font-weight: 600;
 }
 
 [data-theme="dark"] .theme-switch-btn.active {
@@ -3439,7 +3478,7 @@
 
 .profile-footer-name {
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 600;
   color: var(--text-title);
   white-space: nowrap;
   overflow: hidden;
@@ -3547,9 +3586,9 @@
 
 .otp-title {
   font-size: 2rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #0f172a;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   margin: 0 0 8px 0;
 }
 
@@ -3574,7 +3613,7 @@
   border-radius: 12px;
   background: #f8fafc;
   font-size: 1.4rem;
-  font-weight: 800;
+  font-weight: 600;
   text-align: center;
   color: #0f172a;
   outline: none;
@@ -3595,7 +3634,7 @@
 
 .otp-resend-text a {
   color: #2563eb;
-  font-weight: 750;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -3607,7 +3646,7 @@
   border-radius: 12px;
   padding: 14px 20px;
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
   transition: all 0.18s ease;
@@ -3681,7 +3720,7 @@
 
 .student-nav-group-title {
   font-size: 0.68rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3697,7 +3736,7 @@
   color: #475569;
   text-decoration: none;
   font-size: 0.88rem;
-  font-weight: 650;
+  font-weight: 600;
   transition: all 0.15s ease;
   cursor: pointer;
   border: none;
@@ -3722,7 +3761,7 @@
 .student-nav-item-btn.active {
   background: #1d4ed8;
   color: #ffffff;
-  font-weight: 750;
+  font-weight: 600;
   box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
 }
 
@@ -3860,7 +3899,7 @@
 
 .student-metric-title {
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -3868,7 +3907,7 @@
 
 .student-metric-num {
   font-size: 1.8rem;
-  font-weight: 850;
+  font-weight: 700;
   color: #0f172a;
   margin: 6px 0 2px 0;
 }
@@ -3942,7 +3981,7 @@
 
 .weekly-bar-day {
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 600;
   color: #64748b;
 }
 

@@ -81,7 +81,7 @@
       background: rgba(99, 102, 241, 0.09);
       border: 1px solid rgba(99, 102, 241, 0.25);
       font-size: 0.68rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #4338ca;
       letter-spacing: 0.05em;
       padding: 3px 8px;
@@ -93,7 +93,7 @@
     .jobs-hero-title {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.45rem;
-      font-weight: 800;
+      font-weight: 600;
       line-height: 1.2;
       letter-spacing: -0.025em;
       margin-bottom: 4px;
@@ -124,7 +124,7 @@
     .btn-hero-primary {
       background: #0f2ac7;
       color: #ffffff;
-      font-weight: 750;
+      font-weight: 600;
       font-size: 0.78rem;
       padding: 7px 14px;
       border-radius: 7px;
@@ -212,7 +212,7 @@
     .stat-val-num {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.10rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #0f172a;
       line-height: 1.15;
     }
@@ -250,7 +250,7 @@
       border-radius: 10px;
       background: #0f2ac7;
       color: #ffffff;
-      font-weight: 850;
+      font-weight: 700;
       font-size: 0.90rem;
       display: flex;
       align-items: center;
@@ -259,7 +259,7 @@
     }
 
     .readiness-title {
-      font-weight: 800;
+      font-weight: 600;
       font-size: 0.90rem;
       color: #0f172a;
       line-height: 1.2;
@@ -300,7 +300,7 @@
       border-radius: 6px;
       padding: 6px 13px;
       font-size: 0.78rem;
-      font-weight: 750;
+      font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -496,7 +496,7 @@
     .job-title-line {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.05rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #0f172a;
       letter-spacing: -0.015em;
       line-height: 1.25;
@@ -529,7 +529,7 @@
     .job-salary-callout {
       font-family: var(--font-mono, monospace);
       font-size: 0.90rem;
-      font-weight: 800;
+      font-weight: 600;
       color: #059669;
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
@@ -548,7 +548,7 @@
 
     .badge-tag-type {
       font-size: 0.68rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 2px 8px;
       border-radius: 5px;
       text-transform: uppercase;
@@ -609,7 +609,7 @@
       align-items: center;
       gap: 6px;
       font-size: 0.74rem;
-      font-weight: 750;
+      font-weight: 600;
       color: #2563eb;
     }
 
@@ -659,7 +659,7 @@
       border: 1px solid var(--border-card);
       color: #0f172a;
       font-size: 0.78rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 6px 12px;
       border-radius: 7px;
       cursor: pointer;
@@ -676,7 +676,7 @@
       color: #ffffff;
       border: none;
       font-size: 0.78rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 6px 14px;
       border-radius: 7px;
       cursor: pointer;
@@ -734,7 +734,7 @@
     .dialog-header h3 {
       font-family: var(--font-display, 'Inter', sans-serif);
       font-size: 1.1rem;
-      font-weight: 850;
+      font-weight: 700;
       color: #0f172a;
     }
 
@@ -794,7 +794,7 @@
       border-radius: 50%;
       background: #eff6ff;
       color: #0f2ac7;
-      font-weight: 800;
+      font-weight: 600;
       font-size: 0.70rem;
       display: flex;
       align-items: center;
@@ -804,7 +804,7 @@
     }
 
     .roadmap-text-title {
-      font-weight: 750;
+      font-weight: 600;
       font-size: 0.82rem;
       color: #0f172a;
     }
@@ -1588,7 +1588,7 @@
                   <div>
                     <h3 class="job-title-line" onclick="openJobDetailsModal('${job.id}')">${job.title}</h3>
                     <div class="job-company-subtitle">
-                      <span style="color: #0f172a; font-weight: 750;">${job.company}</span>
+                      <span style="color: #0f172a; font-weight: 600;">${job.company}</span>
                       <span class="job-company-dot"></span>
                       <span>📍 ${job.location}</span>
                       <span class="job-company-dot"></span>
@@ -1718,7 +1718,7 @@
         body.innerHTML = `
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-card);">
             <div>
-              <div style="font-size: 1.2rem; font-weight: 850; color: #0f172a; font-family: var(--font-display);">${job.title}</div>
+              <div style="font-size: 1.2rem; font-weight: 700; color: #0f172a; font-family: var(--font-display);">${job.title}</div>
               <div style="font-size: 0.86rem; font-weight: 700; color: #0f2ac7; margin-top: 2px;">${job.company} • ${job.location} (${job.workMode})</div>
               <div style="font-size: 0.76rem; color: #64748b; margin-top: 3px;">Department: ${job.department} · Batch: ${job.batch}</div>
             </div>
@@ -1728,28 +1728,28 @@
           </div>
 
           <div style="margin-bottom: 16px;">
-            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">About ${job.company}</h4>
+            <h4 style="font-size: 0.88rem; font-weight: 600; color: #0f172a; margin-bottom: 6px;">About ${job.company}</h4>
             <p style="font-size: 0.82rem; line-height: 1.6; color: #334155;">${job.aboutCompany}</p>
           </div>
 
           <div style="margin-bottom: 16px;">
-            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Role Description</h4>
+            <h4 style="font-size: 0.88rem; font-weight: 600; color: #0f172a; margin-bottom: 6px;">Role Description</h4>
             <p style="font-size: 0.82rem; line-height: 1.6; color: #334155; margin-bottom: 8px;">${job.description}</p>
-            <h4 style="font-size: 0.84rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Key Responsibilities:</h4>
+            <h4 style="font-size: 0.84rem; font-weight: 600; color: #0f172a; margin-bottom: 6px;">Key Responsibilities:</h4>
             <ul style="padding-left: 20px; font-size: 0.80rem; line-height: 1.65; color: #334155;">
               ${job.responsibilities.map(r => `<li>${r}</li>`).join('')}
             </ul>
           </div>
 
           <div style="margin-bottom: 16px;">
-            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 6px;">Minimum Eligibility &amp; Requirements:</h4>
+            <h4 style="font-size: 0.88rem; font-weight: 600; color: #0f172a; margin-bottom: 6px;">Minimum Eligibility &amp; Requirements:</h4>
             <ul style="padding-left: 20px; font-size: 0.80rem; line-height: 1.65; color: #334155;">
               ${job.requirements.map(req => `<li>${req}</li>`).join('')}
             </ul>
           </div>
 
           <div style="margin-bottom: 16px;">
-            <h4 style="font-size: 0.88rem; font-weight: 750; color: #0f172a; margin-bottom: 8px;">Recruiter Interview Roadmap</h4>
+            <h4 style="font-size: 0.88rem; font-weight: 600; color: #0f172a; margin-bottom: 8px;">Recruiter Interview Roadmap</h4>
             <div class="roadmap-list">
               ${job.hiringRounds.map(rnd => `
                 <div class="roadmap-step-item">
@@ -1764,7 +1764,7 @@
           </div>
 
           <div class="prep-box-alert">
-            <div style="font-size: 0.82rem; font-weight: 750; color: #1e40af; margin-bottom: 6px;">
+            <div style="font-size: 0.82rem; font-weight: 600; color: #1e40af; margin-bottom: 6px;">
               💡 Recommended Practice Topics on Torpedo LMS
             </div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
@@ -1815,7 +1815,7 @@
         summaryBox.innerHTML = `
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <div style="font-size: 1.05rem; font-weight: 850; color: #0f172a;">${job.title}</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: #0f172a;">${job.title}</div>
               <div style="font-size: 0.82rem; font-weight: 700; color: #0f2ac7;">${job.company} · ${job.location}</div>
             </div>
             <div class="job-salary-callout" style="font-size: 0.86rem;">${job.stipendSalary}</div>
@@ -1884,12 +1884,12 @@
                 return `
                   <div style="background: #f8fafc; border: 1px solid var(--border-card); border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
                     <div>
-                      <div style="font-weight: 800; font-size: 0.92rem; color: #0f172a;">${job.title}</div>
+                      <div style="font-weight: 600; font-size: 0.92rem; color: #0f172a;">${job.title}</div>
                       <div style="font-size: 0.78rem; font-weight: 700; color: #0f2ac7; margin-top: 2px;">${job.company} · Applied ${app.appliedDate}</div>
                       <div style="font-size: 0.74rem; color: #64748b; margin-top: 2px;">Status: <strong>${app.stageText}</strong></div>
                     </div>
                     <div>
-                      <span style="font-size: 0.72rem; font-weight: 750; color: #166534; background: #dcfce7; border: 1px solid #bbf7d0; padding: 3px 8px; border-radius: 6px;">
+                      <span style="font-size: 0.72rem; font-weight: 600; color: #166534; background: #dcfce7; border: 1px solid #bbf7d0; padding: 3px 8px; border-radius: 6px;">
                         ${app.status} ✓
                       </span>
                     </div>

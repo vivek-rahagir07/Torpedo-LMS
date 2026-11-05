@@ -91,7 +91,7 @@
       color: #ffffff;
       text-decoration: none;
       font-size: 0.84rem;
-      font-weight: 750;
+      font-weight: 600;
       padding: 8px 16px;
       border-radius: 8px;
       display: inline-flex;
@@ -123,7 +123,7 @@
       <a href="dashboard.html" class="quizzes-brand">
         <img src="assets/LOGO.png" alt="Torpedo Learning">
         <span
-          style="font-family: var(--font-display, 'Inter', sans-serif); font-weight: 800; font-size: 1.15rem; color: #0f172a; letter-spacing: -0.02em;">TORPEDO
+          style="font-family: var(--font-display, 'Inter', sans-serif); font-weight: 600; font-size: 1.15rem; color: #0f172a; letter-spacing: -0.02em;">TORPEDO
           <span style="color: #2563eb;">EXAMS</span></span>
       </a>
 
@@ -316,7 +316,7 @@
         </div>
 
         <div class="quiz-daily-footer">
-          <span style="font-size: 0.76rem; font-weight: 750; color: #4338ca;">🎁 +120 TRP Points • 1 Assessment Key
+          <span style="font-size: 0.76rem; font-weight: 600; color: #4338ca;">🎁 +120 TRP Points • 1 Assessment Key
             🔑</span>
           <button type="button" class="btn-start-daily-quiz" onclick="startQuizRunner('quiz-dsa-01')">
             <span>Start Assessment Sprint</span>
@@ -388,7 +388,7 @@
             <span class="status-live-dot" style="background: #2563eb; width: 6px; height: 6px;"></span>
             6 Core Sprints Available
           </span>
-          <h3 style="margin-top: 4px; font-size: 1.12rem; font-weight: 800; color: #0f172a;">Assessment Library</h3>
+          <h3 style="margin-top: 4px; font-size: 1.12rem; font-weight: 600; color: #0f172a;">Assessment Library</h3>
         </div>
 
         <!-- Search Bar with shortcut chip -->
@@ -449,7 +449,7 @@
 
       <!-- Progress Strip -->
       <div class="quiz-runner-progress-strip">
-        <span style="font-size: 0.75rem; font-weight: 750; color: #475569;" id="quiz-progress-counter">0 of 5
+        <span style="font-size: 0.75rem; font-weight: 600; color: #475569;" id="quiz-progress-counter">0 of 5
           Answered</span>
         <div class="quiz-progress-track">
           <div class="quiz-progress-bar-fill" id="quiz-progress-bar-fill"></div>
@@ -524,7 +524,7 @@
     <div class="quiz-result-container">
       <div class="quiz-result-header">
         <div>
-          <span style="font-size: 0.70rem; font-weight: 800; color: #38bdf8; text-transform: uppercase;">Assessment
+          <span style="font-size: 0.70rem; font-weight: 600; color: #38bdf8; text-transform: uppercase;">Assessment
             Complete</span>
           <h3 style="margin: 2px 0 0 0; color: #ffffff; font-size: 1.15rem;" id="result-quiz-title">Assessment Report
           </h3>
@@ -585,7 +585,7 @@
           </div>
           <div>
             <h3
-              style="margin: 0; font-family: var(--font-display, 'Inter', sans-serif); font-size: 1.22rem; font-weight: 850; color: #0f172a;">
+              style="margin: 0; font-family: var(--font-display, 'Inter', sans-serif); font-size: 1.22rem; font-weight: 700; color: #0f172a;">
               Join Course Assessment</h3>
             <p style="margin: 3px 0 0 0; font-size: 0.80rem; color: #64748b;">Enter the code provided by your course
               faculty or instructor.</p>
@@ -598,11 +598,11 @@
         <!-- Code Input -->
         <div style="margin-bottom: 14px;">
           <label
-            style="display: block; font-size: 0.70rem; font-weight: 800; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;">FACULTY
+            style="display: block; font-size: 0.70rem; font-weight: 600; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;">FACULTY
             ASSESSMENT CODE</label>
           <div style="position: relative;">
             <input type="text" id="course-quiz-code-input" placeholder="E.G. CSE-401, DSA-302, WEB-109"
-              style="width: 100%; box-sizing: border-box; padding: 13px 16px; border: 2px solid #cbd5e1; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.06em; outline: none; transition: border-color 0.16s;"
+              style="width: 100%; box-sizing: border-box; padding: 13px 16px; border: 2px solid #cbd5e1; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 600; color: #0f172a; text-transform: uppercase; letter-spacing: 0.06em; outline: none; transition: border-color 0.16s;"
               oninput="checkCourseQuizCode(this.value)" onkeyup="if(event.key==='Enter') submitJoinCourseQuiz()">
             <span
               style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #94a3b8;">🔑</span>
@@ -614,7 +614,7 @@
         <!-- Quick Code Chips for Testing / Faculty Reference -->
         <div style="margin-bottom: 18px;">
           <div
-            style="font-size: 0.70rem; font-weight: 750; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">
+            style="font-size: 0.70rem; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">
             Available Course Codes (Faculty Sample Codes):</div>
           <div style="display: flex; gap: 6px; flex-wrap: wrap;">
             <button type="button" class="quick-code-chip" onclick="quickFillQuizCode('CSE-401')">⚡ CSE-401 (DevOps
@@ -661,7 +661,7 @@
       toast.style.cssText = `background: ${bg}; color: #ffffff; border-left: 4px solid ${border}; padding: 12px 18px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.25); pointer-events: auto; transform: translateY(12px); opacity: 0; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; gap: 10px; max-width: 380px; font-family: Inter, system-ui, sans-serif;`;
 
       const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
-      toast.innerHTML = `<span style="font-weight: 800; color: ${border}; font-size: 1rem;">${icon}</span><span>${message}</span>`;
+      toast.innerHTML = `<span style="font-weight: 600; color: ${border}; font-size: 1rem;">${icon}</span><span>${message}</span>`;
       toastContainer.appendChild(toast);
 
       requestAnimationFrame(() => {

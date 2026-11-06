@@ -383,23 +383,14 @@
       <main class="portal-main-canvas">
         <div class="courses-page-canvas">
 
-          <!-- ==============================================================
-               HARMONIZED PANORAMIC COURSES HERO BANNER
-               ============================================================== -->
-          <div class="course-hero-banner-frame">
-            <div class="course-hero-banner-overlay"></div>
-            <div class="course-hero-banner-content">
-              <div class="course-hero-pill">
-                <span>Accredited Curriculum • 60+ Hours Practical Sprint</span>
-              </div>
-              <h1 class="course-hero-title">
-                <span class="course-hero-title-dark">Cour</span><span class="course-hero-title-blue">ses</span>
-              </h1>
-              <div class="course-hero-accent-bar"></div>
-              <div class="course-hero-sub-lead">Skill up. Explore. Grow.</div>
-              <p class="course-hero-sub-desc">Curated courses to help you learn, build and achieve your goals.</p>
+          <!-- 1. Consolidated Courses Command Deck (De-Bulked) -->
+          <div class="courses-command-deck">
+            <div class="courses-deck-left">
+              <span class="courses-deck-pill">⚡ ACCREDITED CURRICULUM • 60+ HOURS SPRINT</span>
+              <h1 class="courses-deck-title">Courses &amp; Learning Pathways</h1>
+              <p class="courses-deck-desc">Curated syllabus pathways, Lifecode hands-on sandboxes, and recruiter-connected engineering tracks.</p>
               
-              <div class="course-hero-actions-row">
+              <div class="courses-deck-actions">
                 <button type="button" class="course-hero-pill-btn view-pill-btn active" id="btn-courses-explore-all" onclick="filterCoursesTab('all')">
                   <span class="pill-live-dot"></span>
                   <span>Explore All Courses (6)</span>
@@ -410,11 +401,27 @@
                 </button>
               </div>
             </div>
+
+            <div class="courses-deck-stats">
+              <div class="courses-deck-stat-item">
+                <span class="courses-deck-stat-label">Enrolled</span>
+                <span class="courses-deck-stat-val">3 Tracks</span>
+                <span class="courses-deck-stat-sub">In Progress</span>
+              </div>
+              <div class="courses-deck-stat-item">
+                <span class="courses-deck-stat-label">Certified</span>
+                <span class="courses-deck-stat-val">1 Track</span>
+                <span class="courses-deck-stat-sub" style="color:#059669;">Verified ✓</span>
+              </div>
+              <div class="courses-deck-stat-item">
+                <span class="courses-deck-stat-label">Content</span>
+                <span class="courses-deck-stat-val">60+ Hrs</span>
+                <span class="courses-deck-stat-sub" style="color:#4f46e5;">6 Modules</span>
+              </div>
+            </div>
           </div>
 
-          <!-- ==============================================================
-               CATEGORY PILLS FILTER ROW
-               ============================================================== -->
+          <!-- Category Pills Filter Row -->
           <div class="courses-category-pills-row" id="courses-category-pills">
             <button type="button" class="course-cat-pill-btn active" onclick="selectCourseCategoryPill('all', this)">
               <span>All Tracks (6)</span>

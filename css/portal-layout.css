@@ -8402,8 +8402,6 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-
 /* ==========================================================================
    JOBS & INTERNSHIPS PLACEMENT PORTAL STYLES
    ========================================================================== */
@@ -11781,4 +11779,175 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .cert-deck-stat-sub.amber { color: #d97706; }
 .cert-deck-stat-sub.purple { color: #7c3aed; }
 
+/* ==========================================================================
+   2026 STUDENT EXPERIENCE REFINEMENT
+   A calm, task-focused visual layer shared by every portal view.
+   ========================================================================== */
+:root {
+  --bg-page: #f7f8fc;
+  --bg-card: #ffffff;
+  --border-card: #e7eaf1;
+  --border-subtle: #f0f2f6;
+  --text-dark: #172033;
+  --text-secondary: #3f4b61;
+  --text-muted: #69758a;
+  --primary-blue: #4f46e5;
+  --primary-blue-hover: #4338ca;
+  --primary-blue-light: #eef2ff;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --shadow-card: 0 8px 24px rgba(28, 39, 71, 0.055);
+  --shadow-hover: 0 14px 30px rgba(28, 39, 71, 0.10);
+}
+
+body { line-height: 1.55; }
+
+button, input, select, textarea { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(79, 70, 229, 0.28);
+  outline-offset: 2px;
+}
+
+/* Navigation feels light, not crowded. */
+.global-top-header {
+  height: 64px;
+  padding: 0 28px;
+  border-bottom-color: #e8ebf1;
+  box-shadow: 0 1px 0 rgba(23, 32, 51, 0.02);
+}
+.brand-logo-img { height: 31px; }
+.brand-portal-tag {
+  color: var(--primary-blue);
+  background: var(--primary-blue-light);
+  border-color: #dfe3ff;
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+.header-search-wrap { width: min(440px, 38vw); }
+.header-search-input {
+  height: 38px;
+  background: #f7f8fb;
+  border-color: #e4e7ee;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+.header-search-input:focus {
+  background: #fff;
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.09);
+}
+.header-action-btn, .header-icon-badge-btn {
+  border-radius: 9px;
+  border-color: #e4e7ee;
+}
+.header-action-btn.dark-btn { background: #252f47; border-color: #252f47; }
+
+.sidebar-main-panel { background: #fff; }
+.sidebar-nav-link {
+  min-height: 40px;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  font-weight: 550;
+  margin-bottom: 2px;
+}
+.sidebar-nav-link.active {
+  background: var(--primary-blue-light);
+  color: var(--primary-blue);
+  box-shadow: inset 0 0 0 1px #e0e7ff;
+}
+.sidebar-group-header { color: #8a94a6; padding-top: 22px; }
+.sidebar-subnav-item { font-size: 0.76rem; }
+.sidebar-bottom-profile { border-top-color: #eef0f4; }
+.profile-monogram-box { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+
+/* More breathing room around the content, while retaining the familiar layout. */
+.dashboard-main-view { padding: 32px 36px 44px; gap: 24px; max-width: 1540px; }
+.welcome-greeting-row { margin-bottom: 8px; }
+.welcome-greeting-title { font-size: clamp(1.45rem, 2vw, 1.8rem); letter-spacing: -0.035em; }
+.welcome-greeting-sub { font-size: 0.82rem; margin-top: 5px; }
+.welcome-status-pill { border-radius: 999px; padding: 6px 11px; color: #46516a; }
+.dash-master-layout { gap: 24px; grid-template-columns: minmax(0, 1fr) 320px; }
+.main-content-flow { gap: 24px; }
+.side-widgets-flow { gap: 20px; }
+
+/* Separate the metrics into readable, approachable tiles. */
+.metrics-row-grid {
+  gap: 12px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+.exact-metric-card {
+  min-height: 126px;
+  background: #fff;
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 3px 10px rgba(28, 39, 71, 0.025);
+}
+.exact-metric-card, .exact-metric-card:last-child { border-right: 1px solid var(--border-card); }
+.exact-metric-card:hover { background: #fff; border-color: #c7d2fe; box-shadow: var(--shadow-card); transform: translateY(-2px); }
+.metric-caption-text { font-size: 0.66rem; color: #7b8597; }
+.metric-icon-box { width: 30px; height: 30px; border-radius: 9px; background: #f5f6fc; border-color: #e7eaff; color: var(--primary-blue); }
+.exact-metric-card:hover .metric-icon-box { background: var(--primary-blue); border-color: var(--primary-blue); }
+.metric-number-bold { font-size: 1.65rem; margin: 12px 0 6px; }
+.metric-card-bottom-flex { border-top-color: #f0f2f6; padding-top: 10px; }
+
+/* Common panels and catalogue cards. */
+.continue-learning-card, .widget-card, .quiz-card, .catalog-course-item-card, .job-card-item, .hack-card-item,
+.lc-command-deck, .quiz-command-deck, .courses-command-deck, .cert-command-deck {
+  border-color: var(--border-card);
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(28, 39, 71, 0.035);
+}
+.continue-learning-card, .widget-card { padding: 18px 20px; }
+.section-title-h2, .quiz-card-title, .course-card-title-h3, .job-title-line, .hack-title-line {
+  letter-spacing: -0.02em;
+}
+.catalog-course-item-card:hover, .quiz-card:hover, .job-card-item:hover, .hack-card-item:hover {
+  border-color: #c7d2fe;
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+.course-card-top-banner { height: 156px; }
+.course-card-body-content { padding: 16px; }
+.course-card-title-h3 { font-size: 1rem; }
+.course-card-desc-text, .job-desc-snippet { font-size: 0.78rem; line-height: 1.55; }
+.btn-card-launch-course, .btn-start-quiz { border-radius: 8px; padding: 7px 12px; }
+
+/* Filter controls and cards are comfortably tappable on mobile and desktop. */
+.quiz-filter-pill, .filter-pill-btn, .cat-pill-btn, .skill-chip-pill {
+  border-radius: 999px;
+  min-height: 32px;
+  padding-inline: 12px;
+}
+.quiz-filter-pill.active, .cat-pill-btn.active { background: var(--primary-blue); border-color: var(--primary-blue); }
+.quizzes-catalog-grid { gap: 18px; }
+.quiz-card { padding: 20px; }
+.quiz-card-title { font-size: 1rem; }
+.quiz-card-desc { font-size: 0.8rem; line-height: 1.55; }
+.jobs-listings-grid { gap: 16px; }
+.job-card-item { padding: 16px; gap: 11px; }
+.job-title-line { font-size: 0.95rem; }
+.hack-card-item { padding: 16px; }
+
+@media (max-width: 1120px) {
+  .dash-master-layout { grid-template-columns: 1fr; }
+  .dashboard-main-view { padding: 26px 24px 36px; }
+}
+@media (max-width: 760px) {
+  .global-top-header { height: 58px; padding: 0 14px; }
+  .dashboard-main-view { padding: 20px 16px 32px; }
+  .welcome-greeting-row { align-items: flex-start; }
+  .header-action-btn span:not(.kbd-sub), .header-kbd-hint, .header-search-wrap { display: none; }
+  .metrics-row-grid { gap: 10px; }
+  .exact-metric-card { min-height: 112px; padding: 14px; }
+  .course-card-top-banner { height: 142px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
 

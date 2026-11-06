@@ -4002,6 +4002,51 @@
   accent-color: #2563eb;
 }
 
+/* ==========================================================================
+   PUBLIC EXPERIENCE REFINEMENT
+   Keeps content easy to scan and gives every public-facing screen one voice.
+   ========================================================================== */
+.hero-seamless-section {
+  background: radial-gradient(circle at 80% 15%, rgba(129, 140, 248, .45), transparent 31%),
+              linear-gradient(125deg, #18254f 0%, #3730a3 52%, #4f46e5 100%);
+  padding: 82px 0 50px;
+}
+.hero-title { font-size: clamp(2.7rem, 5vw, 4.15rem); letter-spacing: -.045em; line-height: 1.08; }
+.hero-title .highlight-cyan { color: #c4b5fd; }
+.hero-desc { font-size: 1.02rem; line-height: 1.7; max-width: 530px; margin-bottom: 30px; }
+.hero-actions { margin-bottom: 24px; }
+.btn-explore { border-radius: 10px; letter-spacing: .02em; padding: 13px 22px; }
+.hero-students-cutout { filter: drop-shadow(0 24px 38px rgba(8, 15, 45, .38)); }
+
+.why-choose-section { background: linear-gradient(180deg, #f3f5ff 0%, #f8f9fc 44%, #fff 100%); }
+.features-grid { gap: 18px; }
+.feature-box { border-radius: 16px; padding: 22px; box-shadow: 0 5px 18px rgba(30, 41, 59, .045); }
+.feature-box:hover { box-shadow: 0 16px 32px rgba(30, 41, 59, .10); transform: translateY(-5px); }
+.feature-title { font-size: 1.06rem; }
+.feature-text { font-size: .86rem; line-height: 1.65; }
+.master-ecosystem-card { border-radius: 20px; padding: 36px; box-shadow: 0 8px 28px rgba(30, 41, 59, .045); }
+.category-tile { border-radius: 14px; }
+.category-tile:hover { border-color: #c7d2fe; box-shadow: 0 12px 24px rgba(79, 70, 229, .08); }
+.curriculum-banner { background: linear-gradient(120deg, #312e81, #4f46e5); border-radius: 18px; }
+
+.compact-login-card, .auth-split-card, .onboarding-shell-card {
+  border-radius: 20px;
+  border-color: #e4e7ee;
+  box-shadow: 0 20px 48px rgba(23, 32, 51, .12);
+}
+.login-page-body, .profile-setup-page { background: radial-gradient(circle at top left, #eef2ff, transparent 35%), #f8f9fc; }
+.login-field-input, .auth-card-input { border-radius: 10px; border-color: #dfe3ea; min-height: 44px; }
+.login-field-input:focus, .auth-card-input:focus { border-color: #818cf8; box-shadow: 0 0 0 4px rgba(79, 70, 229, .10); }
+.login-primary-btn, .auth-card-submit-btn { background: #4f46e5; border-radius: 10px; }
+.login-primary-btn:hover, .auth-card-submit-btn:hover { background: #4338ca; }
+
+@media (max-width: 768px) {
+  .hero-seamless-section { padding: 58px 0 28px; }
+  .hero-title { font-size: 2.55rem; }
+  .master-ecosystem-card { padding: 22px 16px; }
+  .feature-box { padding: 20px; }
+}
+
 
 
 

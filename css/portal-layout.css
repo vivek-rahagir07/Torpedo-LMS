@@ -10758,17 +10758,20 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   border-radius: 4px;
 }
 
-/* 3. Popular Domains Interactive Strip (Architectural Landmark Tiles) */
+/* 3. Popular Domains Interactive Strip (Architectural Landmark Tiles) - Sleek De-Bulked */
 .hack-domains-section {
-  background: #090d16;
-  border-radius: 12px;
-  padding: 16px 20px;
+  background: #0f172a;
+  background-image: radial-gradient(circle at 85% 20%, rgba(234, 88, 12, 0.16) 0%, transparent 60%);
+  border-radius: 14px;
+  padding: 14px 18px;
   margin-bottom: 18px;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
 }
 
-.domains-section-header {
+.domains-section-header,
+.domains-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10777,96 +10780,134 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   gap: 8px;
 }
 
-.domains-title-wrap {
+.domains-title-wrap,
+.domains-heading-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #ffffff;
 }
 
-.domains-title-wrap h3 {
-  font-size: 0.96rem;
+.domains-title-wrap h3,
+.domains-heading {
+  font-size: 0.95rem;
   font-weight: 600;
   margin: 0;
   color: #ffffff;
+  letter-spacing: -0.01em;
+  font-family: var(--font-display, "Inter", sans-serif);
 }
 
 .btn-view-all-domains {
-  background: transparent;
-  border: none;
-  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fdba74;
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: color 0.14s ease;
+  transition: all 0.14s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .btn-view-all-domains:hover {
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
-.popular-domains-grid {
+.popular-domains-grid,
+.domains-tiles-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   gap: 8px;
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .popular-domains-grid,
+  .domains-tiles-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .popular-domains-grid,
+  .domains-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .domain-tile-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 8px;
-  padding: 10px 6px;
+  background: #ffffff;
+  border: 1.5px solid #ffffff;
+  border-radius: 9px;
+  padding: 8px 4px 7px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
   cursor: pointer;
-  transition: all 0.15s ease;
-  color: #ffffff;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  min-width: 0;
+  width: 100%;
 }
 
 .domain-tile-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  border-color: #fdba74;
 }
 
 .domain-tile-btn.active {
-  background: #ea580c;
   border-color: #ea580c;
-  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+  background: #fff7ed;
+  box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.35);
 }
 
 .domain-icon-frame {
   width: 32px;
   height: 32px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.95);
+  border-radius: 7px;
+  background: #f8fafc;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.14s ease;
+  flex-shrink: 0;
+}
+
+.domain-tile-btn:hover .domain-icon-frame {
+  transform: scale(1.06);
 }
 
 .domain-tile-btn.active .domain-icon-frame {
-  background: #ffffff;
+  background: #ffedd5;
+  border-color: #fed7aa;
 }
 
 .domain-name {
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: #cbd5e1;
+  font-size: 0.69rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.15;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 90px;
+  max-width: 100%;
+  padding: 0 2px;
 }
 
 .domain-tile-btn.active .domain-name {
-  color: #ffffff;
-  font-weight: 600;
+  color: #c2410c;
+  font-weight: 700;
 }
 
 /* 4. Trusted Sponsors Row */

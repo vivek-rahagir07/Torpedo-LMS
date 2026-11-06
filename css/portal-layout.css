@@ -10442,20 +10442,25 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 
 /* Responsive Breakpoints */
 @media (max-width: 1024px) {
-  .intern-showcase-hero {
+  .intern-showcase-hero,
+  .hack-showcase-hero {
     grid-template-columns: 1fr;
     padding: 24px;
   }
-  .intern-hero-right {
+  .intern-hero-right,
+  .hack-hero-right {
     display: none;
   }
-  .career-opps-grid {
+  .career-opps-grid,
+  .hack-opps-grid {
     grid-template-columns: 1fr;
   }
-  .popular-cities-grid {
+  .popular-cities-grid,
+  .popular-domains-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  .value-prop-section {
+  .value-prop-section,
+  .hack-value-prop-section {
     grid-template-columns: 1fr;
     padding: 24px;
   }
@@ -10468,18 +10473,720 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 @media (max-width: 640px) {
-  .popular-cities-grid {
+  .popular-cities-grid,
+  .popular-domains-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .value-cards-grid {
+  .value-cards-grid,
+  .hack-value-cards-grid {
     grid-template-columns: 1fr;
   }
   .footer-columns-grid {
     grid-template-columns: 1fr;
   }
-  .intern-search-cta-box {
+  .intern-search-cta-box,
+  .hack-search-cta-box {
     flex-direction: column;
     align-items: stretch;
     padding: 10px;
   }
+}
+
+/* ==========================================================================
+   HACKATHONS & CODE SPRINTS PREMIUM SHOWCASE (National Innovation Arena)
+   ========================================================================== */
+
+/* 1. Main Showcase Hero */
+.hack-showcase-hero {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 16px;
+  padding: 30px 34px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 30px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  margin-bottom: 18px;
+}
+
+.hack-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.hack-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #c2410c;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.hack-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ea580c;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+  animation: pulseDot 1.4s infinite ease-in-out;
+}
+
+.hack-hero-heading {
+  font-family: var(--font-display, 'Inter', sans-serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+  margin: 0;
+}
+
+.highlight-orange {
+  color: #ea580c;
+  position: relative;
+  display: inline-block;
+}
+
+.hack-hero-subheading {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #334155;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.hack-hero-meta-counts {
+  font-size: 0.80rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Integrated Search & CTA Bar */
+.hack-search-cta-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 5px 6px;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+  margin-top: 6px;
+}
+
+.hack-search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding: 0 8px;
+}
+
+.hack-search-input-wrap svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.hack-search-input-wrap input {
+  border: none;
+  outline: none;
+  font-size: 0.82rem;
+  color: #0f172a;
+  width: 100%;
+  background: transparent;
+  font-family: inherit;
+}
+
+.btn-find-sprint {
+  background: #ea580c;
+  color: #ffffff;
+  border: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
+}
+
+.btn-find-sprint:hover {
+  background: #c2410c;
+  transform: translateY(-1px);
+}
+
+.btn-explore-arena {
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.btn-explore-arena:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.hack-hero-right {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* 2. Grand Challenge Tracks Strip */
+.hack-opps-strip {
+  margin-bottom: 20px;
+}
+
+.hack-opps-header {
+  margin-bottom: 12px;
+}
+
+.hack-opps-header h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  margin: 0 0 3px 0;
+}
+
+.hack-opps-header p {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.hack-opps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hack-opp-card {
+  border-radius: 10px;
+  padding: 16px 18px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.hack-opp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+}
+
+.hack-opp-card.gcp-card {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 60%, #3b82f6 100%);
+}
+
+.hack-opp-card.poly-card {
+  background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 60%, #8b5cf6 100%);
+}
+
+.hack-opp-card.sih-card {
+  background: linear-gradient(135deg, #9a3412 0%, #c2410c 60%, #ea580c 100%);
+}
+
+.hack-opp-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.hack-opp-content h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.hack-opp-content p {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.hack-opp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.hack-opp-pill {
+  background: rgba(255, 255, 255, 0.22);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* 3. Popular Domains Interactive Strip (Architectural Landmark Tiles) */
+.hack-domains-section {
+  background: #090d16;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.domains-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.domains-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+}
+
+.domains-title-wrap h3 {
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.btn-view-all-domains {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.14s ease;
+}
+
+.btn-view-all-domains:hover {
+  color: #ffffff;
+}
+
+.popular-domains-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+
+.domain-tile-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #ffffff;
+}
+
+.domain-tile-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.domain-tile-btn.active {
+  background: #ea580c;
+  border-color: #ea580c;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+}
+
+.domain-icon-frame {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.domain-tile-btn.active .domain-icon-frame {
+  background: #ffffff;
+}
+
+.domain-name {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.domain-tile-btn.active .domain-name {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 4. Trusted Sponsors Row */
+.hack-sponsors-strip {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.hack-sponsors-caption {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.hack-sponsors-logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.hack-sponsor-logo-item {
+  font-family: var(--font-display, 'Inter', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #64748b;
+  opacity: 0.85;
+  transition: all 0.15s ease;
+  cursor: default;
+}
+
+.hack-sponsor-logo-item:hover {
+  opacity: 1;
+  color: #0f172a;
+}
+
+.hack-sponsor-logo-item.gcp { color: #4285f4; }
+.hack-sponsor-logo-item.poly { color: #7b3fe4; }
+.hack-sponsor-logo-item.aws { color: #d97706; }
+.hack-sponsor-logo-item.rzp { color: #0284c7; }
+.hack-sponsor-logo-item.github { color: #24292f; }
+.hack-sponsor-logo-item.ms { color: #0078d4; }
+.hack-sponsor-logo-item.linux { color: #047857; }
+
+/* 5. Value Proposition ("Crazy prototypes take crazy execution") */
+.hack-value-prop-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+
+.hack-value-prop-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hack-value-prop-heading {
+  font-family: var(--font-display, 'Inter', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.hack-value-prop-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.hack-value-prop-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.hack-value-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.hack-vp-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hack-vp-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.hack-vp-card-icon.amber { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+.hack-vp-card-icon.blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+.hack-vp-card-icon.purple { background: #faf5ff; color: #9333ea; border: 1px solid #e9d5ff; }
+.hack-vp-card-icon.rose { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
+
+.hack-vp-card h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.hack-vp-card p {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* 6. Compact Team / Squad Readiness Strip */
+.hack-squad-strip {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.squad-left-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.squad-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: #ea580c;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.68rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.squad-title {
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.squad-sub {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.squad-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.squad-tag {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.squad-tag.orange {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: #fed7aa;
+}
+
+.btn-view-squad-sm {
+  background: #ea580c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 3.5px 9px;
+  font-size: 0.70rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.14s ease;
+}
+
+.btn-view-squad-sm:hover {
+  background: #c2410c;
+}
+
+/* 7. De-bulked Hackathon Card */
+.hack-card-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.hack-card-item:hover {
+  transform: translateY(-1px);
+  border-color: #fdba74;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.08);
+}
+
+.hack-card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.hack-brand-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display, 'Inter', sans-serif);
+  font-weight: 700;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.hack-title-line {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  line-height: 1.25;
+  margin-bottom: 1px;
+  transition: color 0.14s ease;
+}
+
+.hack-title-line:hover {
+  color: #ea580c;
+}
+
+.hack-prize-badge {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #c2410c;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  padding: 2px 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hack-status-pill {
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  text-transform: none;
+}
+
+.hack-card-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+}
+
+.hack-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

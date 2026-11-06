@@ -194,6 +194,68 @@ const TORPEDO_HACKATHONS_DATA = [
     registeredTeams: 1240,
     sponsors: ["Linux Foundation", "GitHub", "Cloud Native Foundation"],
     featured: false
+  },
+  {
+    id: "hack-oai-07",
+    title: "OpenAI & Anthropic Autonomous Agent Sprint 2026",
+    organizer: "OpenAI Dev Community & Torpedo Learning",
+    badgeLetter: "O",
+    badgeBg: "linear-gradient(135deg, #10a37f 0%, #0d8c6c 100%)",
+    badgeColor: "#ffffff",
+    prizePool: "₹8,00,000",
+    prizeSub: "+ $10,000 API Compute Credits",
+    status: "Live Now",
+    statusClass: "live",
+    deadlineDays: 14,
+    deadlineDate: "Nov 20, 2026",
+    mode: "Virtual / Global",
+    teamSize: "1 - 4 Members",
+    category: "AI/ML",
+    tags: ["Autonomous Agents", "LLMs", "Tool Use", "Python", "LangChain"],
+    description: "Design multi-agent autonomous engineering assistants that write tests, self-heal runtime exceptions, and automate complex workflows.",
+    problemStatements: [
+      "Autonomous sandbox debugger that replicates bug reports and proposes pull requests",
+      "Multi-agent collaborative research analyst with citation verification"
+    ],
+    timeline: [
+      { step: "1", name: "Agent Registration", date: "Nov 6" },
+      { step: "2", name: "Evaluation Benchmark", date: "Nov 20" },
+      { step: "3", name: "Virtual Showcase", date: "Nov 24" }
+    ],
+    registeredTeams: 610,
+    sponsors: ["OpenAI", "Anthropic", "Y Combinator"],
+    featured: true
+  },
+  {
+    id: "hack-ms-08",
+    title: "Microsoft Azure Zero-Trust CyberShield Sprint",
+    organizer: "Microsoft Security & Torpedo LMS",
+    badgeLetter: "M",
+    badgeBg: "linear-gradient(135deg, #0078d4 0%, #004578 100%)",
+    badgeColor: "#ffffff",
+    prizePool: "₹6,00,000",
+    prizeSub: "+ Azure Cloud Vouchers + PPIs",
+    status: "Registration Open",
+    statusClass: "open",
+    deadlineDays: 25,
+    deadlineDate: "Dec 1, 2026",
+    mode: "Virtual",
+    teamSize: "2 - 4 Members",
+    category: "Cybersecurity",
+    tags: ["Cybersecurity", "Zero Trust", "Azure", "Threat Detection", "Rust"],
+    description: "Build automated threat detection probes, memory-safe network firewalls, and cryptographic verifiable identity protocols for cloud-native infrastructure.",
+    problemStatements: [
+      "Real-time eBPF anomaly detection engine for container clusters",
+      "Post-quantum resistant key exchange for decentralized web apps"
+    ],
+    timeline: [
+      { step: "1", name: "Threat Briefing", date: "Nov 10" },
+      { step: "2", name: "Prototype Build", date: "Dec 1" },
+      { step: "3", name: "Blue Team Defense Day", date: "Dec 5" }
+    ],
+    registeredTeams: 380,
+    sponsors: ["Microsoft Azure", "CrowdStrike", "Cloudflare"],
+    featured: false
   }
 ];
 

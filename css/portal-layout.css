@@ -9526,3 +9526,932 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ==========================================================================
+   JOBS & INTERNSHIPS PREMIUM SHOWCASE (Inspired by Enterprise Internship Hub)
+   ========================================================================== */
+
+/* 1. Main Showcase Hero */
+.intern-showcase-hero {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 16px;
+  padding: 32px 36px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  margin-bottom: 20px;
+}
+
+.intern-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.intern-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.intern-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+.intern-hero-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+  margin: 0;
+  font-family: var(--font-display, 'Inter', sans-serif);
+}
+
+.intern-hero-heading .highlight-green {
+  color: #10b981;
+}
+
+.intern-hero-subheading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.intern-hero-meta-counts {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Integrated Search & CTA Bar */
+.intern-search-cta-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 5px 6px 5px 14px;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.intern-search-cta-box:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.intern-search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.intern-search-input-wrap svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.intern-search-input-wrap input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  color: #0f172a;
+  font-family: inherit;
+  background: transparent;
+}
+
+.intern-search-input-wrap input::placeholder {
+  color: #94a3b8;
+}
+
+.btn-find-internship {
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-find-internship:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-explore-now-hero {
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-explore-now-hero:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+/* Hero Right Mosaic Graphics */
+.intern-hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.intern-mosaic-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 260px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.mosaic-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mosaic-col:nth-child(2) {
+  transform: translateY(-10px);
+}
+
+.mosaic-card-pill {
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.mosaic-card-pill.pill-tall {
+  height: 140px;
+}
+
+.mosaic-card-pill.pill-short {
+  height: 90px;
+}
+
+.mosaic-card-pill.pill-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  padding: 12px;
+  text-align: center;
+}
+
+.mosaic-card-pill.pill-teal {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.mosaic-card-pill.pill-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.mosaic-card-pill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mosaic-stat-callout {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(4px);
+  border-radius: 999px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.mosaic-stat-callout .mini-check {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* 2. Featured Promotional Cards Strip ("The key to your biggest career opportunity") */
+.career-opps-strip {
+  margin-bottom: 24px;
+}
+
+.career-opps-header {
+  margin-bottom: 12px;
+}
+
+.career-opps-header h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 3px 0;
+  font-family: var(--font-display, 'Inter', sans-serif);
+  letter-spacing: -0.015em;
+}
+
+.career-opps-header p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.career-opps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.opp-promo-card {
+  border-radius: 14px;
+  padding: 18px 20px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.opp-promo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+}
+
+.opp-promo-card.nse-card {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+}
+
+.opp-promo-card.uipath-card {
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 60%, #ea580c 100%);
+}
+
+.opp-promo-card.linkedin-card {
+  background: linear-gradient(135deg, #075985 0%, #0284c7 60%, #0ea5e9 100%);
+}
+
+.opp-card-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.opp-card-content h4 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.opp-card-content p {
+  font-size: 0.78rem;
+  opacity: 0.9;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.opp-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.opp-pill {
+  background: rgba(255, 255, 255, 0.22);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.70rem;
+}
+
+/* 3. Popular Cities Strip (Deep Indigo Banner with Architectural SVG Icons) */
+.popular-cities-section {
+  background: #0f172a;
+  background-image: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.25) 0%, transparent 60%);
+  border-radius: 16px;
+  padding: 24px 28px;
+  color: #ffffff;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+}
+
+.cities-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cities-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cities-title-wrap h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  font-family: var(--font-display, 'Inter', sans-serif);
+}
+
+.btn-view-all-cities {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.btn-view-all-cities:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.popular-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.city-tile-btn {
+  background: #ffffff;
+  border: 1.5px solid #ffffff;
+  border-radius: 12px;
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  color: #0f172a;
+}
+
+.city-tile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-color: #60a5fa;
+}
+
+.city-tile-btn.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.city-icon-frame {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.14s ease;
+}
+
+.city-tile-btn:hover .city-icon-frame {
+  transform: scale(1.08);
+}
+
+.city-name {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.15;
+}
+
+/* 4. Trusted by 40K Candidates Logo Strip */
+.trusted-partners-strip {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 14px;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+}
+
+.trusted-caption {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.trusted-logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.partner-logo-item {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: -0.02em;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.partner-logo-item:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.partner-logo-item.amazon { font-family: 'Inter', sans-serif; }
+.partner-logo-item.google { color: #4285f4; }
+.partner-logo-item.netflix { color: #e50914; letter-spacing: 0.05em; font-weight: 800; }
+.partner-logo-item.meta { color: #0668e1; }
+.partner-logo-item.accenture { color: #a100ff; }
+.partner-logo-item.microsoft { color: #00a4ef; }
+.partner-logo-item.razorpay { color: #0c2340; }
+
+/* 5. Value Proposition ("Crazy dreams take crazy effort") */
+.value-prop-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+.value-prop-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.value-prop-heading {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-family: var(--font-display, 'Inter', sans-serif);
+}
+
+.value-prop-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.value-prop-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.check-bullet {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.value-prop-list strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.value-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.vp-feature-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.vp-feature-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+}
+
+.vp-card-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.vp-card-icon-wrap.amber { background: #fef3c7; color: #d97706; }
+.vp-card-icon-wrap.blue { background: #eff6ff; color: #2563eb; }
+.vp-card-icon-wrap.purple { background: #f5f3ff; color: #7c3aed; }
+.vp-card-icon-wrap.rose { background: #ffe4e6; color: #e11d48; }
+
+.vp-feature-card h4 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.vp-feature-card p {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 6. Testimonial Section with Student Constellation */
+.intern-testimonial-section {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 16px;
+  padding: 36px 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+.testimonial-header-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #2563eb;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.testimonial-main-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  margin: 0 0 24px 0;
+  font-family: var(--font-display, 'Inter', sans-serif);
+}
+
+.testimonial-constellation-container {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 20px 10px 20px;
+}
+
+.testimonial-center-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.quote-avatar-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid #2563eb;
+  padding: 2px;
+  background: #ffffff;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.quote-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.verified-hire-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+}
+
+.testimonial-quote-text {
+  font-size: 0.90rem;
+  color: #334155;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 0 12px 0;
+  font-style: italic;
+}
+
+.quote-mark {
+  font-size: 2.4rem;
+  color: #2563eb;
+  line-height: 0.6;
+  font-family: Georgia, serif;
+  margin-bottom: 6px;
+}
+
+.testimonial-student-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.testimonial-student-meta {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* Orbiting constellation avatars */
+.orbit-avatar {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.orbit-avatar:hover {
+  transform: scale(1.15);
+  border-color: #2563eb;
+}
+
+.orbit-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-pos-1 { top: 0; left: 8%; }
+.avatar-pos-2 { top: 12%; right: 6%; }
+.avatar-pos-3 { bottom: 18%; left: 4%; }
+.avatar-pos-4 { bottom: 8%; right: 8%; }
+.avatar-pos-5 { top: 48%; left: -14px; }
+
+/* 7. Mega Footer / Directory */
+.intern-mega-footer {
+  background: #0f172a;
+  color: #94a3b8;
+  border-radius: 16px;
+  padding: 36px 36px 20px 36px;
+  margin-top: 10px;
+}
+
+.footer-columns-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.footer-col h5 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-col ul li a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.78rem;
+  transition: color 0.14s ease, padding-left 0.14s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 3px;
+}
+
+.brand-col .footer-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.brand-col .footer-brand-logo img {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.footer-brand-desc {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0 0 12px 0;
+}
+
+.footer-contact-row {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.74rem;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-bottom-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.14s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: #ffffff;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .intern-showcase-hero {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .intern-hero-right {
+    display: none;
+  }
+  .career-opps-grid {
+    grid-template-columns: 1fr;
+  }
+  .popular-cities-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .value-prop-section {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .footer-columns-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .orbit-avatar {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .popular-cities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .value-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-columns-grid {
+    grid-template-columns: 1fr;
+  }
+  .intern-search-cta-box {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
+}

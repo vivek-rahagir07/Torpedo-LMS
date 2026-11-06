@@ -2870,217 +2870,213 @@
         <div id="tab-view-hackathons" class="portal-tab-content">
           <div class="hack-content-wrap">
 
-            <!-- 1. High-Converting Hero Showcase -->
-            <section class="hack-showcase-hero">
-              <div class="hack-hero-left">
-                <h1 class="hack-hero-heading">
-                  Who funds your crazy prototypes ?? <span class="highlight-orange">We DO!</span>
-                </h1>
-                <h2 class="hack-hero-subheading">
-                  Turn weekend code into national podiums, equity-free grants, and fast-track recruiter PPIs
-                </h2>
-                <p class="hack-hero-meta-counts">
-                  Solve live corporate challenges from Google Cloud, Polygon, AWS, Razorpay, and national SIH ministries.
-                </p>
-
-                <!-- Integrated Search & CTA Bar -->
-                <div class="hack-search-cta-box">
-                  <div class="hack-search-input-wrap">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" id="hero-hack-search-input" placeholder="Search by track (GenAI, Web3, FinTech, SIH, Rust)..." oninput="onHeroHackSearchInput(this.value)">
-                  </div>
-                  <button type="button" class="btn-find-sprint" onclick="triggerHeroHackSearch()">
-                    Find Sprints
-                  </button>
-                  <button type="button" class="btn-explore-arena" onclick="scrollToHackOpenings()">
-                    Explore Arena
-                  </button>
-                </div>
+            <!-- 1. Live Arena Command Deck (Dark, Electric, High-Stakes) -->
+            <section class="arena-hero-deck">
+              <div class="arena-ticker-strip">
+                <span class="arena-ticker-live-dot"></span>
+                <span>🔴 LIVE ARENA SPRINTS</span>
+                <span>•</span>
+                <span>₹35,00,000+ BOUNTY POOL</span>
+                <span>•</span>
+                <span>48H DEMO DAY: 03d 14h 22m</span>
+                <span>•</span>
+                <span>340+ DEV SQUADS</span>
               </div>
 
-              <div class="hack-hero-right">
-                <div class="intern-mosaic-wrap">
-                  <!-- Col 1 -->
-                  <div class="mosaic-col">
-                    <div class="mosaic-card-pill pill-tall pill-orange">
-                      <img src="assets/avatars/boy1.svg" alt="Builder Winner">
-                      <div class="mosaic-stat-callout">
-                        <span class="mini-check">✓</span>
-                        <span>₹5,00,000 Winner</span>
-                      </div>
+              <div class="arena-hero-grid">
+                <!-- Left: Tournament Title & Actions -->
+                <div>
+                  <h1 class="arena-hero-title">
+                    National Code Sprints &amp; <span class="highlight-fire">Hackathons</span>
+                  </h1>
+                  <p class="arena-hero-desc">
+                    Form student engineering squads, tackle live enterprise problem statements in GenAI, Web3 &amp; Distributed Systems, and unlock fast-track Pre-Placement Interviews (PPI) with top engineering recruiters.
+                  </p>
+
+                  <div class="arena-hero-search-row">
+                    <div class="arena-search-input-wrap">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      <input type="text" id="hero-hack-search-input" placeholder="Search problem statements, tech stacks (Solidity, GenAI, Python)..." oninput="onHeroHackSearchInput(this.value)">
                     </div>
-                    <div class="mosaic-card-pill pill-short pill-purple">
-                      <img src="assets/avatars/girl1.svg" alt="Builder Winner">
+                    <button type="button" class="btn-arena-fire" onclick="onQuickRegisterHackClick('hack-poly-01')">
+                      ⚡ Form a Squad
+                    </button>
+                    <button type="button" class="btn-arena-ghost" onclick="scrollToHackOpenings()">
+                      Explore Sprints ↓
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Right: Active Squad Terminal Widget -->
+                <div class="arena-squad-terminal">
+                  <div class="terminal-top-row">
+                    <div class="terminal-dots">
+                      <span class="terminal-dot red"></span>
+                      <span class="terminal-dot yellow"></span>
+                      <span class="terminal-dot green"></span>
+                      <span class="terminal-title-text">SQUAD COMMAND TERMINAL</span>
+                    </div>
+                    <span class="terminal-squad-badge">● DRAFT 85% READY</span>
+                  </div>
+
+                  <div class="terminal-squad-info">
+                    <div class="terminal-squad-name">
+                      <span>🚀 Team "Torpedo Titans"</span>
+                    </div>
+                    <div class="terminal-squad-sub">
+                      Target: Polygon BUIDL Demo Day (ZK Track) · Captain: Vivek Yadav
                     </div>
                   </div>
 
-                  <!-- Col 2 -->
-                  <div class="mosaic-col">
-                    <div class="mosaic-card-pill pill-short pill-blue">
-                      <img src="assets/avatars/boy2.svg" alt="Builder Winner">
+                  <div class="terminal-checklist">
+                    <div class="terminal-checklist-item ready">
+                      <span>✓ Lead Full-Stack (Vivek Yadav · GTU CSE)</span>
                     </div>
-                    <div class="mosaic-card-pill pill-tall pill-orange">
-                      <img src="assets/avatars/woman1.svg" alt="Builder Winner">
-                      <div class="mosaic-stat-callout">
-                        <span class="mini-check">✓</span>
-                        <span>Google Cloud</span>
-                      </div>
+                    <div class="terminal-checklist-item ready">
+                      <span>✓ Smart Contracts &amp; ZK Primitives (Joined)</span>
+                    </div>
+                    <div class="terminal-checklist-item ready">
+                      <span>✓ Vertex AI / Agentic Subsystems (Joined)</span>
+                    </div>
+                    <div class="terminal-checklist-item warn">
+                      <span>⚡ 1 Slot Open: UI/UX Tailwind or QA Tester</span>
                     </div>
                   </div>
 
-                  <!-- Col 3 -->
-                  <div class="mosaic-col">
-                    <div class="mosaic-card-pill pill-tall pill-purple">
-                      <img src="assets/avatars/girl2.svg" alt="Builder Winner">
-                      <div class="mosaic-stat-callout">
-                        <span class="mini-check">✓</span>
-                        <span>Devcon Grant</span>
-                      </div>
-                    </div>
-                    <div class="mosaic-card-pill pill-short pill-blue">
-                      <img src="assets/avatars/boy1.svg" alt="Builder Winner">
-                    </div>
-                  </div>
+                  <button type="button" class="btn-terminal-action" onclick="openMyTeamsModal()">
+                    <span>Manage Squad Workspace &amp; Repo →</span>
+                  </button>
                 </div>
               </div>
             </section>
 
-            <!-- 2. Featured Grand Challenge Tracks Strip -->
-            <section class="hack-opps-strip">
-              <div class="hack-opps-header">
-                <h3>National Sprints — The launchpad for your tech startup or dream SDE offer</h3>
-                <p>Corporate sponsored hackathons with verified cloud compute, jury mentorship, and fast-track interviews.</p>
-              </div>
-              <div class="hack-opps-grid">
-                <!-- Card 1: Google Cloud -->
-                <div class="hack-opp-card gcp-card" onclick="filterByHackTrack('GenAI')">
-                  <div>
-                    <div class="hack-opp-badge">Google for Developers</div>
-                    <div class="hack-opp-content">
-                      <h4>Google Cloud GenAI Challenge</h4>
-                      <p>Build multimodal autonomous copilots using Gemini 1.5 Pro and Flash APIs.</p>
-                    </div>
-                  </div>
-                  <div class="hack-opp-footer">
-                    <span>Explore Track →</span>
-                    <span class="hack-prize-pill">₹5,00,000 Pool</span>
-                  </div>
-                </div>
-
-                <!-- Card 2: Polygon BUIDL -->
-                <div class="hack-opp-card poly-card" onclick="filterByHackTrack('Web3')">
-                  <div>
-                    <div class="hack-opp-badge">Polygon Ecosystem</div>
-                    <div class="hack-opp-content">
-                      <h4>Polygon BUIDL Demo Day</h4>
-                      <p>Zero-knowledge rollups, account abstraction &amp; cross-chain DeFi primitives.</p>
-                    </div>
-                  </div>
-                  <div class="hack-opp-footer">
-                    <span>Explore Track →</span>
-                    <span class="hack-prize-pill">₹7,50,000 Pool</span>
-                  </div>
-                </div>
-
-                <!-- Card 3: Smart India Hackathon -->
-                <div class="hack-opp-card sih-card" onclick="filterByHackTrack('Campus')">
-                  <div>
-                    <div class="hack-opp-badge">MoE &amp; AICTE</div>
-                    <div class="hack-opp-content">
-                      <h4>Smart India Hackathon 2026</h4>
-                      <p>National problem statements across smart automation, healthcare &amp; agriculture.</p>
-                    </div>
-                  </div>
-                  <div class="hack-opp-footer">
-                    <span>Explore Track →</span>
-                    <span class="hack-prize-pill">₹1,00,000 / Theme</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <!-- 3. Popular Sprint Domains Strip (Interactive Tracks) -->
-            <section class="hack-domains-section">
-              <div class="domains-section-header">
-                <div class="domains-title-wrap">
+            <!-- 2. Distinct Battleground Arenas Grid (4 High-Stakes Categories) -->
+            <section class="arena-battlegrounds-section">
+              <div class="battlegrounds-header">
+                <div class="battlegrounds-heading-wrap">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <h3>Trending Sprint Domains</h3>
+                  <h3>Active Tournament Battlegrounds</h3>
                 </div>
-                <button type="button" class="btn-view-all-domains" onclick="resetDomainFilter()">
-                  <span>Showing All Tracks</span> • <span>View All →</span>
+                <button type="button" class="btn-view-all-domains" onclick="resetBattlegroundFilter()">
+                  <span>All Tracks</span> • <span>Reset Filter →</span>
                 </button>
               </div>
 
-              <div class="popular-domains-grid">
-                <!-- 1. All -->
-                <button type="button" class="domain-tile-btn active" data-cat="all" onclick="selectDomainFilter('all', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <div class="battlegrounds-grid">
+                <!-- Arena 1: GenAI & Autonomous Agents -->
+                <div class="battleground-card" data-cat="AI/ML" onclick="selectBattlegroundFilter('AI/ML', this)">
+                  <div>
+                    <div class="battleground-card-top">
+                      <div class="battleground-icon-badge genai">🤖</div>
+                      <span class="battleground-tag-pill">3 Live Sprints</span>
+                    </div>
+                    <h4 class="battleground-title">GenAI &amp; Autonomous Agents</h4>
+                    <p class="battleground-desc">Multimodal tool use, reasoning copilots &amp; agent swarms with Gemini 1.5 and Claude.</p>
                   </div>
-                  <span class="domain-name">All Sprints</span>
-                </button>
+                  <div class="battleground-bounty-row">
+                    <span class="battleground-bounty-val">₹13,00,000 Pool</span>
+                    <span class="battleground-filter-hint">Filter Arena →</span>
+                  </div>
+                </div>
 
-                <!-- 2. GenAI -->
-                <button type="button" class="domain-tile-btn" data-cat="AI/ML" onclick="selectDomainFilter('AI/ML', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/></svg>
+                <!-- Arena 2: Web3 & Zero-Knowledge Rollups -->
+                <div class="battleground-card" data-cat="Web3" onclick="selectBattlegroundFilter('Web3', this)">
+                  <div>
+                    <div class="battleground-card-top">
+                      <div class="battleground-icon-badge web3">⚡</div>
+                      <span class="battleground-tag-pill">4d to Demo Day</span>
+                    </div>
+                    <h4 class="battleground-title">Web3 &amp; ZK Rollups</h4>
+                    <p class="battleground-desc">Zero-knowledge rollups, account abstraction &amp; cross-chain DeFi settlement on Polygon.</p>
                   </div>
-                  <span class="domain-name">GenAI &amp; Agents</span>
-                </button>
+                  <div class="battleground-bounty-row">
+                    <span class="battleground-bounty-val">₹7,50,000 Pool</span>
+                    <span class="battleground-filter-hint">Filter Arena →</span>
+                  </div>
+                </div>
 
-                <!-- 3. Web3 -->
-                <button type="button" class="domain-tile-btn" data-cat="Web3" onclick="selectDomainFilter('Web3', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <!-- Arena 3: CyberShield & Cloud Security -->
+                <div class="battleground-card" data-cat="Cybersecurity" onclick="selectBattlegroundFilter('Cybersecurity', this)">
+                  <div>
+                    <div class="battleground-card-top">
+                      <div class="battleground-icon-badge cyber">🛡️</div>
+                      <span class="battleground-tag-pill">Direct PPIs</span>
+                    </div>
+                    <h4 class="battleground-title">CyberShield &amp; Cloud Infra</h4>
+                    <p class="battleground-desc">Zero-trust architecture, threat intelligence &amp; resilient container orchestration on Azure.</p>
                   </div>
-                  <span class="domain-name">Web3 &amp; DeFi</span>
-                </button>
+                  <div class="battleground-bounty-row">
+                    <span class="battleground-bounty-val">₹6,00,000 Pool</span>
+                    <span class="battleground-filter-hint">Filter Arena →</span>
+                  </div>
+                </div>
 
-                <!-- 4. Fintech -->
-                <button type="button" class="domain-tile-btn" data-cat="Fintech" onclick="selectDomainFilter('Fintech', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <!-- Arena 4: Campus Smart India Hackathon -->
+                <div class="battleground-card" data-cat="Campus" onclick="selectBattlegroundFilter('Campus', this)">
+                  <div>
+                    <div class="battleground-card-top">
+                      <div class="battleground-icon-badge sih">🏛️</div>
+                      <span class="battleground-tag-pill">Univ Credits</span>
+                    </div>
+                    <h4 class="battleground-title">Campus Smart India Hackathon</h4>
+                    <p class="battleground-desc">Ministry problem statements across smart agriculture, healthcare &amp; citizen governance.</p>
                   </div>
-                  <span class="domain-name">Fintech &amp; Algo</span>
-                </button>
+                  <div class="battleground-bounty-row">
+                    <span class="battleground-bounty-val">₹5,00,000 Pool</span>
+                    <span class="battleground-filter-hint">Filter Arena →</span>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-                <!-- 5. Campus SIH -->
-                <button type="button" class="domain-tile-btn" data-cat="Campus" onclick="selectDomainFilter('Campus', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/></svg>
-                  </div>
-                  <span class="domain-name">Campus SIH</span>
-                </button>
+            <!-- 3. Tournament Lifecycle & Stages Strip -->
+            <section class="arena-tournament-roadmap">
+              <div class="roadmap-header-row">
+                <h4>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>Active Sprint Tournament Lifecycle</span>
+                </h4>
+                <span style="font-size: 0.70rem; color: #64748b; font-weight: 500;">Sprint Season 2026</span>
+              </div>
 
-                <!-- 6. Cybersecurity -->
-                <button type="button" class="domain-tile-btn" data-cat="Cybersecurity" onclick="selectDomainFilter('Cybersecurity', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div class="roadmap-steps-flex">
+                <div class="roadmap-step-pill active">
+                  <div class="roadmap-num">1</div>
+                  <div>
+                    <div class="roadmap-step-name">Squad Registration</div>
+                    <div class="roadmap-step-sub">Form 2-4 member roster &amp; connect GitHub repo</div>
                   </div>
-                  <span class="domain-name">Cybersecurity</span>
-                </button>
+                </div>
 
-                <!-- 7. Cloud -->
-                <button type="button" class="domain-tile-btn" data-cat="Cloud" onclick="selectDomainFilter('Cloud', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                <div class="roadmap-step-pill active">
+                  <div class="roadmap-num">2</div>
+                  <div>
+                    <div class="roadmap-step-name">48h Compute Sprint</div>
+                    <div class="roadmap-step-sub">Access free Vertex AI &amp; AWS cloud sandbox</div>
                   </div>
-                  <span class="domain-name">Cloud Systems</span>
-                </button>
+                </div>
 
-                <!-- 8. Open Source -->
-                <button type="button" class="domain-tile-btn" data-cat="Open Source" onclick="selectDomainFilter('Open Source', this)">
-                  <div class="domain-icon-frame">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <div class="roadmap-step-pill">
+                  <div class="roadmap-num">3</div>
+                  <div>
+                    <div class="roadmap-step-name">GitHub PR Submission</div>
+                    <div class="roadmap-step-sub">Automated linting &amp; problem verification</div>
                   </div>
-                  <span class="domain-name">Open Source</span>
-                </button>
+                </div>
+
+                <div class="roadmap-step-pill">
+                  <div class="roadmap-num">4</div>
+                  <div>
+                    <div class="roadmap-step-name">Live Jury Demo &amp; PPIs</div>
+                    <div class="roadmap-step-sub">Direct interviews with CTOs &amp; cash bounties</div>
+                  </div>
+                </div>
               </div>
             </section>
 
             <!-- 4. Supported Sponsors & Partners Strip -->
             <section class="hack-sponsors-strip">
-              <div class="hack-sponsors-caption">Backed by Premier Engineering Ecosystem Partners</div>
+              <div class="hack-sponsors-caption">Verified Ecosystem Jury &amp; Grant Partners</div>
               <div class="hack-sponsors-logos-row">
                 <span class="hack-sponsor-logo-item gcp">Google Cloud</span>
                 <span class="hack-sponsor-logo-item poly">Polygon Labs</span>
@@ -3092,147 +3088,7 @@
               </div>
             </section>
 
-            <!-- 5. Value Proposition ("Crazy prototypes take crazy execution") -->
-            <section class="hack-value-prop-section">
-              <div class="hack-value-prop-left">
-                <h2 class="hack-value-prop-heading">Crazy prototypes take crazy execution</h2>
-                <ul class="hack-value-prop-list">
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>100% verified problem statements</strong> — Direct enterprise engineering hurdles with live APIs</div>
-                  </li>
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>Fast-track PPI interviews</strong> — Finalist podium teams bypass online screenings at partner tech firms</div>
-                  </li>
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>Free cloud credits &amp; API quotas</strong> — Vertex AI, AWS vouchers, and QuickNode RPC endpoints</div>
-                  </li>
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>Direct venture angel checks</strong> — Top prototypes get fast-track accelerator pitch days</div>
-                  </li>
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>Inter-college squad matching</strong> — Form cross-functional teams with UI designers &amp; backend devs</div>
-                  </li>
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>Verifiable credentials</strong> — On-chain credential badges and corporate winner certificates</div>
-                  </li>
-                  <li>
-                    <span class="check-bullet" style="color: #ea580c;">✓</span>
-                    <div><strong>+200 TRP score bonus</strong> — LMS standing boost for every submitted and verified repository</div>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="hack-value-prop-right">
-                <div class="hack-value-cards-grid">
-                  <!-- 1. Problem Statements -->
-                  <div class="hack-vp-card">
-                    <div class="hack-vp-card-icon amber">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                    </div>
-                    <h4>Fortune 100 Challenges</h4>
-                    <p>Real production bugs and greenfield features.</p>
-                  </div>
-
-                  <!-- 2. Course Credits -->
-                  <div class="hack-vp-card">
-                    <div class="hack-vp-card-icon blue">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/></svg>
-                    </div>
-                    <h4>University Course Credits</h4>
-                    <p>National SIH &amp; GTU curriculum approved credit transfer.</p>
-                  </div>
-
-                  <!-- 3. Equity-Free Grants -->
-                  <div class="hack-vp-card">
-                    <div class="hack-vp-card-icon purple">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    </div>
-                    <h4>Equity-Free Grants</h4>
-                    <p>Direct cash prizes with zero equity dilution.</p>
-                  </div>
-
-                  <!-- 4. Direct PPIs -->
-                  <div class="hack-vp-card">
-                    <div class="hack-vp-card-icon rose">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    </div>
-                    <h4>Direct Recruiter PPIs</h4>
-                    <p>Skip preliminary screening rounds directly into tech rounds.</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <!-- 6. Live Hackathon Metrics Strip -->
-            <section class="hack-stats-grid">
-              <div class="stat-card-box">
-                <div class="stat-icon-wrap icon-amber">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                </div>
-                <div>
-                  <div class="stat-val-num">₹35 Lakhs</div>
-                  <div class="stat-label-text">Total Cash &amp; Grant Pool</div>
-                </div>
-              </div>
-
-              <div class="stat-card-box">
-                <div class="stat-icon-wrap icon-blue">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                </div>
-                <div>
-                  <div class="stat-val-num">8 Sprints</div>
-                  <div class="stat-label-text">Active National Hackathons</div>
-                </div>
-              </div>
-
-              <div class="stat-card-box">
-                <div class="stat-icon-wrap icon-green">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div>
-                  <div class="stat-val-num">4 Days Left</div>
-                  <div class="stat-label-text">Polygon BUIDL Demo Day</div>
-                </div>
-              </div>
-
-              <div class="stat-card-box">
-                <div class="stat-icon-wrap icon-purple">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <div>
-                  <div class="stat-val-num">+200 TRP</div>
-                  <div class="stat-label-text">LMS Boost per Merged Prototype</div>
-                </div>
-              </div>
-            </section>
-
-            <!-- 7. Compact Team / Squad Readiness Strip -->
-            <section class="hack-squad-strip">
-              <div class="squad-left-profile">
-                <div class="squad-avatar">TT</div>
-                <div>
-                  <div class="squad-title">Team "Torpedo Titans" • Captain: Vivek Yadav</div>
-                  <div class="squad-sub">GTU CSE · 3/4 Members · Polygon ZK Track</div>
-                </div>
-              </div>
-
-              <div class="squad-pills">
-                <span class="squad-tag orange">Active Squad</span>
-                <span class="squad-tag">Draft Ready (85%)</span>
-                <span class="squad-tag">4d to Demo Day</span>
-                <button type="button" class="btn-view-squad-sm" onclick="openMyTeamsModal()">
-                  <span>Manage Squad Workspace →</span>
-                </button>
-              </div>
-            </section>
-
-            <!-- 8. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns -->
+            <!-- 5. Toolbar: Search Bar, Category Filter Tabs & Compact Dropdowns -->
             <section class="jobs-toolbar-card" id="hack-openings-section">
               <div class="toolbar-search-row">
                 <div class="search-input-wrap">
@@ -3289,7 +3145,7 @@
               </div>
             </section>
 
-            <!-- 9. Hackathons Listings Grid (Paginated 4 initial) -->
+            <!-- 6. Hackathons Listings Grid (Paginated 4 initial) -->
             <section class="hack-listings-grid" id="hackathons-container">
               <!-- Injected dynamically from js/hackathons-data.js -->
             </section>

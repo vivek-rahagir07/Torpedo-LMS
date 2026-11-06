@@ -10493,101 +10493,101 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 }
 
 /* ==========================================================================
-   HACKATHONS & CODE SPRINTS PREMIUM SHOWCASE (National Innovation Arena)
+   HACKATHONS ARENA & CODE SPRINTS (Distinct Developer Tournament Theme)
    ========================================================================== */
 
-/* 1. Main Showcase Hero */
-.hack-showcase-hero {
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  border-radius: 16px;
-  padding: 30px 34px;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 30px;
-  align-items: center;
+/* 1. Arena Command Hero Deck */
+.arena-hero-deck {
+  background: #090d16;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(234, 88, 12, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.16) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin-bottom: 18px;
+  color: #ffffff;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(9, 13, 22, 0.25);
 }
 
-.hack-hero-left {
+.arena-ticker-strip {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  z-index: 2;
-}
-
-.hack-hero-badge {
-  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  color: #c2410c;
-  font-size: 0.74rem;
-  font-weight: 600;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   padding: 4px 12px;
-  border-radius: 999px;
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: #fdba74;
+  margin-bottom: 16px;
   width: fit-content;
+  flex-wrap: wrap;
 }
 
-.hack-live-dot {
+.arena-ticker-live-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #ea580c;
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+  box-shadow: 0 0 8px #ea580c;
   animation: pulseDot 1.4s infinite ease-in-out;
 }
 
-.hack-hero-heading {
+.arena-hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .arena-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.arena-hero-title {
   font-family: var(--font-display, 'Inter', sans-serif);
-  font-size: 2.1rem;
+  font-size: 1.85rem;
   font-weight: 700;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.025em;
-  color: #0f172a;
-  margin: 0;
+  color: #ffffff;
+  margin: 0 0 8px 0;
 }
 
-.highlight-orange {
+.arena-hero-title .highlight-fire {
   color: #ea580c;
-  position: relative;
-  display: inline-block;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.hack-hero-subheading {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #334155;
-  margin: 0;
-  line-height: 1.45;
+.arena-hero-desc {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  max-width: 580px;
 }
 
-.hack-hero-meta-counts {
-  font-size: 0.80rem;
-  color: #64748b;
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* Integrated Search & CTA Bar */
-.hack-search-cta-box {
+.arena-hero-search-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 5px 6px;
-  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
-  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 4px 6px;
+  backdrop-filter: blur(8px);
 }
 
-.hack-search-input-wrap {
+.arena-search-input-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -10595,351 +10595,436 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
   padding: 0 8px;
 }
 
-.hack-search-input-wrap svg {
+.arena-search-input-wrap svg {
   color: #94a3b8;
   flex-shrink: 0;
 }
 
-.hack-search-input-wrap input {
+.arena-search-input-wrap input {
   border: none;
   outline: none;
-  font-size: 0.82rem;
-  color: #0f172a;
-  width: 100%;
   background: transparent;
+  color: #ffffff;
+  font-size: 0.80rem;
   font-family: inherit;
+  width: 100%;
 }
 
-.btn-find-sprint {
+.arena-search-input-wrap input::placeholder {
+  color: #94a3b8;
+}
+
+.btn-arena-fire {
   background: #ea580c;
   color: #ffffff;
   border: none;
-  font-size: 0.78rem;
+  border-radius: 6px;
+  font-size: 0.76rem;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 7px;
+  padding: 7px 14px;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.15s ease;
-  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
 }
 
-.btn-find-sprint:hover {
+.btn-arena-fire:hover {
   background: #c2410c;
   transform: translateY(-1px);
 }
 
-.btn-explore-arena {
-  background: #f8fafc;
-  color: #334155;
-  border: 1px solid #e2e8f0;
-  font-size: 0.78rem;
+.btn-arena-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-size: 0.76rem;
   font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 7px;
+  padding: 7px 12px;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.15s ease;
 }
 
-.btn-explore-arena:hover {
-  background: #f1f5f9;
-  color: #0f172a;
-  border-color: #cbd5e1;
+.btn-arena-ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
 }
 
-.hack-hero-right {
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-/* 2. Grand Challenge Tracks Strip */
-.hack-opps-strip {
-  margin-bottom: 20px;
-}
-
-.hack-opps-header {
-  margin-bottom: 12px;
-}
-
-.hack-opps-header h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #0f172a;
-  letter-spacing: -0.015em;
-  margin: 0 0 3px 0;
-}
-
-.hack-opps-header p {
-  font-size: 0.78rem;
-  color: #64748b;
-  margin: 0;
-}
-
-.hack-opps-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.hack-opp-card {
+/* Right: Squad Terminal Widget */
+.arena-squad-terminal {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
-  padding: 16px 18px;
-  color: #ffffff;
+  padding: 14px 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.terminal-top-row {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 140px;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
-  position: relative;
-  overflow: hidden;
-}
-
-.hack-opp-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
-}
-
-.hack-opp-card.gcp-card {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 60%, #3b82f6 100%);
-}
-
-.hack-opp-card.poly-card {
-  background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 60%, #8b5cf6 100%);
-}
-
-.hack-opp-card.sih-card {
-  background: linear-gradient(135deg, #9a3412 0%, #c2410c 60%, #ea580c 100%);
-}
-
-.hack-opp-badge {
-  display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
-  color: #ffffff;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.terminal-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ef4444; }
+.terminal-dot.yellow { background: #f59e0b; }
+.terminal-dot.green { background: #10b981; }
+
+.terminal-title-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+}
+
+.terminal-squad-badge {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
   font-size: 0.65rem;
   font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
-  margin-bottom: 8px;
-}
-
-.hack-opp-content h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin: 0 0 4px 0;
-  line-height: 1.3;
-}
-
-.hack-opp-content p {
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.88);
-  margin: 0;
-  line-height: 1.4;
-}
-
-.hack-opp-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.hack-opp-pill {
-  background: rgba(255, 255, 255, 0.22);
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: 4px;
 }
 
-/* 3. Popular Domains Interactive Strip (Architectural Landmark Tiles) - Sleek De-Bulked */
-.hack-domains-section {
-  background: #0f172a;
-  background-image: radial-gradient(circle at 85% 20%, rgba(234, 88, 12, 0.16) 0%, transparent 60%);
-  border-radius: 14px;
-  padding: 14px 18px;
-  margin-bottom: 18px;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+.terminal-squad-info {
+  margin-bottom: 10px;
 }
 
-.domains-section-header,
-.domains-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.domains-title-wrap,
-.domains-heading-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.domains-title-wrap h3,
-.domains-heading {
+.terminal-squad-name {
   font-size: 0.95rem;
-  font-weight: 600;
-  margin: 0;
+  font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.01em;
-  font-family: var(--font-display, "Inter", sans-serif);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.btn-view-all-domains {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fdba74;
+.terminal-squad-sub {
   font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.terminal-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.terminal-checklist-item {
+  font-size: 0.70rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #cbd5e1;
+}
+
+.terminal-checklist-item.ready {
+  color: #86efac;
+}
+
+.terminal-checklist-item.warn {
+  color: #fde047;
+}
+
+.btn-terminal-action {
+  width: 100%;
+  background: rgba(234, 88, 12, 0.18);
+  border: 1px solid rgba(234, 88, 12, 0.4);
+  color: #fdba74;
+  font-size: 0.74rem;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.14s ease;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 6px;
 }
 
-.btn-view-all-domains:hover {
-  background: rgba(255, 255, 255, 0.2);
+.btn-terminal-action:hover {
+  background: #ea580c;
   color: #ffffff;
 }
 
-.popular-domains-grid,
-.domains-tiles-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
+/* 2. Distinct Battleground Arenas Grid (4 High-Stakes Categories) */
+.arena-battlegrounds-section {
+  margin-bottom: 18px;
+}
+
+.battlegrounds-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.battlegrounds-heading-wrap {
+  display: flex;
+  align-items: center;
   gap: 8px;
-  align-items: stretch;
 }
 
-@media (max-width: 1024px) {
-  .popular-domains-grid,
-  .domains-tiles-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.battlegrounds-heading-wrap h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  margin: 0;
 }
 
-@media (max-width: 600px) {
-  .popular-domains-grid,
-  .domains-tiles-grid {
+.battlegrounds-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .battlegrounds-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.domain-tile-btn {
+@media (max-width: 520px) {
+  .battlegrounds-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.battleground-card {
   background: #ffffff;
-  border: 1.5px solid #ffffff;
-  border-radius: 9px;
-  padding: 8px 4px 7px 4px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  text-align: center;
-  color: #0f172a;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  min-width: 0;
-  width: 100%;
+  justify-content: space-between;
+  min-height: 128px;
+  position: relative;
+  overflow: hidden;
 }
 
-.domain-tile-btn:hover {
+.battleground-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  border-color: #fdba74;
+  border-color: #ea580c;
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.12);
 }
 
-.domain-tile-btn.active {
+.battleground-card.active {
   border-color: #ea580c;
   background: #fff7ed;
-  box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.35);
+  box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.25);
 }
 
-.domain-icon-frame {
+.battleground-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.battleground-icon-badge {
   width: 32px;
   height: 32px;
-  border-radius: 7px;
-  background: #f8fafc;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.1rem;
+}
+
+.battleground-icon-badge.genai { background: #eff6ff; color: #2563eb; }
+.battleground-icon-badge.web3 { background: #faf5ff; color: #7c3aed; }
+.battleground-icon-badge.cyber { background: #fef2f2; color: #dc2626; }
+.battleground-icon-badge.sih { background: #fffbeb; color: #d97706; }
+
+.battleground-tag-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.battleground-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.battleground-desc {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 0 0 8px 0;
+  line-height: 1.35;
+}
+
+.battleground-bounty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.battleground-bounty-val {
+  font-weight: 700;
+  color: #c2410c;
+  font-family: var(--font-mono, monospace);
+}
+
+.battleground-filter-hint {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+/* 3. Tournament Lifecycle & Stages Strip */
+.arena-tournament-roadmap {
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  transition: transform 0.14s ease;
-  flex-shrink: 0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
 }
 
-.domain-tile-btn:hover .domain-icon-frame {
-  transform: scale(1.06);
+.roadmap-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
-.domain-tile-btn.active .domain-icon-frame {
-  background: #ffedd5;
+.roadmap-header-row h4 {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.roadmap-steps-flex {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 820px) {
+  .roadmap-steps-flex {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.roadmap-step-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.roadmap-step-pill.active {
+  background: #fff7ed;
   border-color: #fed7aa;
 }
 
-.domain-name {
-  font-size: 0.69rem;
-  font-weight: 600;
-  color: #1e293b;
-  line-height: 1.15;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  padding: 0 2px;
-}
-
-.domain-tile-btn.active .domain-name {
-  color: #c2410c;
+.roadmap-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 0.65rem;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
-/* 4. Trusted Sponsors Row */
+.roadmap-step-pill.active .roadmap-num {
+  background: #ea580c;
+  color: #ffffff;
+}
+
+.roadmap-step-name {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.roadmap-step-sub {
+  font-size: 0.67rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* 4. Supported Sponsors & Partners Strip */
 .hack-sponsors-strip {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
-  padding: 14px 20px;
+  padding: 12px 18px;
   text-align: center;
   margin-bottom: 18px;
 }
 
 .hack-sponsors-caption {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .hack-sponsors-logos-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
 .hack-sponsor-logo-item {
   font-family: var(--font-display, 'Inter', sans-serif);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #64748b;
   opacity: 0.85;
@@ -10960,191 +11045,12 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .hack-sponsor-logo-item.ms { color: #0078d4; }
 .hack-sponsor-logo-item.linux { color: #047857; }
 
-/* 5. Value Proposition ("Crazy prototypes take crazy execution") */
-.hack-value-prop-section {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 24px 28px;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 28px;
-  margin-bottom: 18px;
-}
-
-.hack-value-prop-left {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.hack-value-prop-heading {
-  font-family: var(--font-display, 'Inter', sans-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #0f172a;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.hack-value-prop-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.hack-value-prop-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 0.78rem;
-  color: #475569;
-  line-height: 1.45;
-}
-
-.hack-value-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.hack-vp-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.hack-vp-card-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2px;
-}
-
-.hack-vp-card-icon.amber { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
-.hack-vp-card-icon.blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-.hack-vp-card-icon.purple { background: #faf5ff; color: #9333ea; border: 1px solid #e9d5ff; }
-.hack-vp-card-icon.rose { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
-
-.hack-vp-card h4 {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #0f172a;
-  margin: 0;
-}
-
-.hack-vp-card p {
-  font-size: 0.72rem;
-  color: #64748b;
-  margin: 0;
-  line-height: 1.35;
-}
-
-/* 6. Compact Team / Squad Readiness Strip */
-.hack-squad-strip {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-
-.squad-left-profile {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.squad-avatar {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  background: #ea580c;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.68rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.squad-title {
-  font-weight: 600;
-  font-size: 0.78rem;
-  color: #0f172a;
-  line-height: 1.2;
-}
-
-.squad-sub {
-  font-size: 0.68rem;
-  color: #64748b;
-}
-
-.squad-pills {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.squad-tag {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: #334155;
-}
-
-.squad-tag.orange {
-  background: #fff7ed;
-  color: #c2410c;
-  border-color: #fed7aa;
-}
-
-.btn-view-squad-sm {
-  background: #ea580c;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 3.5px 9px;
-  font-size: 0.70rem;
-  font-weight: 500;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.14s ease;
-}
-
-.btn-view-squad-sm:hover {
-  background: #c2410c;
-}
-
-/* 7. De-bulked Hackathon Card */
+/* 5. Tournament Cards & Listings */
 .hack-card-item {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-card, #e2e8f0);
   border-radius: 8px;
   padding: 12px 14px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -703,6 +703,36 @@
       cursor: default;
     }
 
+    /* Load More Trigger */
+    .jobs-load-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 18px 0 32px 0;
+    }
+
+    .btn-load-more-jobs {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 7px 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #0f172a;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.14s ease;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    }
+
+    .btn-load-more-jobs:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #2563eb;
+      transform: translateY(-1px);
+    }
+
     /* 6. Native Accessible Modal Dialogs (<dialog>) */
     dialog:modal {
       border: 1px solid var(--border-card);
@@ -1545,6 +1575,14 @@
             <!-- Injected dynamically from js/jobs-data.js -->
           </section>
 
+          <!-- Load More Trigger (Show 4 initially, then more) -->
+          <div id="jobs-load-more-wrap" class="jobs-load-more-wrap" style="display: none;">
+            <button type="button" class="btn-load-more-jobs" onclick="loadMoreJobs()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+              <span id="load-more-btn-text">View More Openings ↓</span>
+            </button>
+          </div>
+
         </div>
       </main>
 
@@ -1717,6 +1755,8 @@
     let selectedTech = 'all';
     let selectedSort = 'match';
     let selectedJobForApply = null;
+    let currentFilteredJobs = [];
+    let visibleJobsLimit = 4;
 
     // Load saved applications & bookmarks from localStorage
     let appliedJobs = [];
@@ -1849,18 +1889,27 @@
         filtered.sort((a, b) => a.deadlineDays - b.deadlineDays);
       }
 
-      renderJobListings(filtered);
+      currentFilteredJobs = filtered;
+      visibleJobsLimit = 4;
+      renderJobListings();
     }
 
-    // Render Job Cards
-    function renderJobListings(jobs) {
+    // Render Job Cards (Paginated: 4 initial, then load more)
+    function renderJobListings() {
       const container = document.getElementById('jobs-container');
       const counterText = document.getElementById('jobs-counter-text');
+      const loadMoreWrap = document.getElementById('jobs-load-more-wrap');
+      const loadMoreText = document.getElementById('load-more-btn-text');
+
+      const total = currentFilteredJobs.length;
+      const visibleJobs = currentFilteredJobs.slice(0, visibleJobsLimit);
+
       if (counterText) {
-        counterText.textContent = `Showing ${jobs.length} of ${TORPEDO_JOBS_DATA.length} active openings`;
+        counterText.textContent = `Showing ${visibleJobs.length} of ${total} active openings`;
       }
 
-      if (jobs.length === 0) {
+      if (total === 0) {
+        if (loadMoreWrap) loadMoreWrap.style.display = 'none';
         container.innerHTML = `
           <div class="empty-state-card">
             <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
@@ -1872,7 +1921,7 @@
         return;
       }
 
-      container.innerHTML = jobs.map(job => {
+      container.innerHTML = visibleJobs.map(job => {
         const isApplied = appliedJobs.some(a => a.jobId === job.id);
         const isSaved = savedJobIds.has(job.id);
         const typeBadgeClass = job.type === 'Full-Time' ? 'badge-fulltime' : 'badge-internship';
@@ -1903,17 +1952,17 @@
               </div>
 
               <!-- Badges -->
-              <div class="job-card-badges-strip" style="margin-top: 10px;">
+              <div class="job-card-badges-strip" style="margin-top: 6px;">
                 <span class="badge-tag-type ${typeBadgeClass}">${job.type}</span>
                 <span class="badge-tag-type ${job.workMode === 'Remote' ? 'badge-remote' : ''}">${job.workMode}</span>
-                ${job.urgent ? '<span class="badge-tag-type badge-urgent">Urgent Drive</span>' : ''}
-                <span style="font-size: 0.70rem; color: #64748b; font-weight: 600;">${job.batch}</span>
+                ${job.urgent ? '<span class="badge-tag-type badge-urgent">Urgent</span>' : ''}
+                <span style="font-size: 0.65rem; color: #64748b; font-weight: 500;">${job.batch}</span>
               </div>
 
-              <p class="job-desc-snippet" style="margin-top: 8px;">${job.description}</p>
+              <p class="job-desc-snippet" style="margin-top: 6px;">${job.description}</p>
 
               <!-- Skills -->
-              <div class="job-skills-chips-row" style="margin-top: 8px;">
+              <div class="job-skills-chips-row" style="margin-top: 6px;">
                 ${job.tags.map(t => `<span class="skill-chip-pill" onclick="searchBySkill('${t}')">${t}</span>`).join('')}
               </div>
             </div>
@@ -1921,16 +1970,16 @@
             <!-- Bottom Action Row -->
             <div class="job-card-bottom-bar">
               <div class="job-match-indicator">
-                <span>${job.matchRate}% Match</span>
+                <span>● ${job.matchRate}% Match</span>
                 <div class="match-progress-bar">
                   <div class="match-progress-fill" style="width: ${job.matchRate}%;"></div>
                 </div>
-                <span style="color: #94a3b8; font-size: 0.70rem;">(${job.applicantsCount} applied)</span>
+                <span style="color: #94a3b8; font-size: 0.68rem;">(${job.applicantsCount} applied)</span>
               </div>
 
               <div class="job-actions-cluster">
                 <button type="button" class="btn-bookmark-job ${isSaved ? 'active' : ''}" onclick="toggleSaveJob('${job.id}')" title="Save this role">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
                 </button>
 
                 <button type="button" class="btn-details-ghost" onclick="openJobDetailsModal('${job.id}')">
@@ -1938,13 +1987,30 @@
                 </button>
 
                 <button type="button" class="btn-apply-fasttrack ${isApplied ? 'applied' : ''}" onclick="onQuickApplyClick('${job.id}')">
-                  ${isApplied ? '<span>✓ Applied</span>' : '<span>⚡ 1-Click Apply</span>'}
+                  ${isApplied ? '<span>✓ Applied</span>' : '<span>Apply</span>'}
                 </button>
               </div>
             </div>
           </article>
         `;
       }).join('');
+
+      if (loadMoreWrap) {
+        if (visibleJobsLimit < total) {
+          loadMoreWrap.style.display = 'flex';
+          const remaining = total - visibleJobsLimit;
+          if (loadMoreText) {
+            loadMoreText.textContent = `View More Openings (${remaining} remaining) ↓`;
+          }
+        } else {
+          loadMoreWrap.style.display = 'none';
+        }
+      }
+    }
+
+    function loadMoreJobs() {
+      visibleJobsLimit += 4;
+      renderJobListings();
     }
 
     function searchBySkill(skill) {

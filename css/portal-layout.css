@@ -9093,6 +9093,36 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
       cursor: default;
     }
 
+    /* Load More Trigger */
+    .jobs-load-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 18px 0 32px 0;
+    }
+
+    .btn-load-more-jobs {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 7px 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #0f172a;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.14s ease;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    }
+
+    .btn-load-more-jobs:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #2563eb;
+      transform: translateY(-1px);
+    }
+
     /* 6. Native Accessible Modal Dialogs (<dialog>) */
     dialog:modal,
     dialog[open] {

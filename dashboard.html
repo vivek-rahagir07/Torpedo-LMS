@@ -2852,6 +2852,14 @@
               <!-- Injected dynamically from js/jobs-data.js -->
             </section>
 
+            <!-- Load More Trigger (Show 4 initially, then more) -->
+            <div id="jobs-load-more-wrap" class="jobs-load-more-wrap" style="display: none;">
+              <button type="button" class="btn-load-more-jobs" onclick="loadMoreJobs()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+                <span id="load-more-btn-text">View More Openings ↓</span>
+              </button>
+            </div>
+
           </div>
         </div> <!-- end tab-view-jobs -->
 
@@ -6531,6 +6539,8 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     let jobsSelectedTech = 'all';
     let jobsSelectedSort = 'match';
     let jobsSelectedJobForApply = null;
+    let jobsCurrentFilteredJobs = [];
+    let jobsVisibleLimit = 4;
 
     let appliedJobs = [];
     let savedJobIds = new Set();
@@ -6647,18 +6657,27 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         filtered.sort((a, b) => a.deadlineDays - b.deadlineDays);
       }
 
-      renderJobsListings(filtered);
+      jobsCurrentFilteredJobs = filtered;
+      jobsVisibleLimit = 4;
+      renderJobsListings();
     }
 
-    function renderJobsListings(jobs) {
+    function renderJobsListings() {
       const container = document.getElementById('jobs-container');
       const counterText = document.getElementById('jobs-counter-text');
+      const loadMoreWrap = document.getElementById('jobs-load-more-wrap');
+      const loadMoreText = document.getElementById('load-more-btn-text');
+
+      const total = jobsCurrentFilteredJobs.length;
+      const visibleJobs = jobsCurrentFilteredJobs.slice(0, jobsVisibleLimit);
+
       if (counterText && typeof TORPEDO_JOBS_DATA !== 'undefined') {
-        counterText.textContent = `Showing ${jobs.length} of ${TORPEDO_JOBS_DATA.length} active openings`;
+        counterText.textContent = `Showing ${visibleJobs.length} of ${total} active openings`;
       }
       if (!container) return;
 
-      if (jobs.length === 0) {
+      if (total === 0) {
+        if (loadMoreWrap) loadMoreWrap.style.display = 'none';
         container.innerHTML = `
           <div class="empty-state-card">
             <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
@@ -6670,7 +6689,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         return;
       }
 
-      container.innerHTML = jobs.map(job => {
+      container.innerHTML = visibleJobs.map(job => {
         const isApplied = appliedJobs.some(a => a.jobId === job.id);
         const isSaved = savedJobIds.has(job.id);
         const typeBadgeClass = job.type === 'Full-Time' ? 'badge-fulltime' : 'badge-internship';
@@ -6701,17 +6720,17 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
               </div>
 
               <!-- Badges -->
-              <div class="job-card-badges-strip" style="margin-top: 10px;">
+              <div class="job-card-badges-strip" style="margin-top: 6px;">
                 <span class="badge-tag-type ${typeBadgeClass}">${job.type}</span>
                 <span class="badge-tag-type ${job.workMode === 'Remote' ? 'badge-remote' : ''}">${job.workMode}</span>
-                ${job.urgent ? '<span class="badge-tag-type badge-urgent">Urgent Drive</span>' : ''}
-                <span style="font-size: 0.70rem; color: #64748b; font-weight: 600;">${job.batch}</span>
+                ${job.urgent ? '<span class="badge-tag-type badge-urgent">Urgent</span>' : ''}
+                <span style="font-size: 0.65rem; color: #64748b; font-weight: 500;">${job.batch}</span>
               </div>
 
-              <p class="job-desc-snippet" style="margin-top: 8px;">${job.description}</p>
+              <p class="job-desc-snippet" style="margin-top: 6px;">${job.description}</p>
 
               <!-- Skills -->
-              <div class="job-skills-chips-row" style="margin-top: 8px;">
+              <div class="job-skills-chips-row" style="margin-top: 6px;">
                 ${job.tags.map(t => `<span class="skill-chip-pill" onclick="searchJobsBySkill('${t}')">${t}</span>`).join('')}
               </div>
             </div>
@@ -6719,16 +6738,16 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
             <!-- Bottom Action Row -->
             <div class="job-card-bottom-bar">
               <div class="job-match-indicator">
-                <span>${job.matchRate}% Match</span>
+                <span>● ${job.matchRate}% Match</span>
                 <div class="match-progress-bar">
                   <div class="match-progress-fill" style="width: ${job.matchRate}%;"></div>
                 </div>
-                <span style="color: #94a3b8; font-size: 0.70rem;">(${job.applicantsCount} applied)</span>
+                <span style="color: #94a3b8; font-size: 0.68rem;">(${job.applicantsCount} applied)</span>
               </div>
 
               <div class="job-actions-cluster">
                 <button type="button" class="btn-bookmark-job ${isSaved ? 'active' : ''}" onclick="toggleSaveJob('${job.id}')" title="Save this role">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
                 </button>
 
                 <button type="button" class="btn-details-ghost" onclick="openJobDetailsModal('${job.id}')">
@@ -6736,13 +6755,30 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
                 </button>
 
                 <button type="button" class="btn-apply-fasttrack ${isApplied ? 'applied' : ''}" onclick="onQuickApplyClick('${job.id}')">
-                  ${isApplied ? '<span>✓ Applied</span>' : '<span>⚡ 1-Click Apply</span>'}
+                  ${isApplied ? '<span>✓ Applied</span>' : '<span>Apply</span>'}
                 </button>
               </div>
             </div>
           </article>
         `;
       }).join('');
+
+      if (loadMoreWrap) {
+        if (jobsVisibleLimit < total) {
+          loadMoreWrap.style.display = 'flex';
+          const remaining = total - jobsVisibleLimit;
+          if (loadMoreText) {
+            loadMoreText.textContent = `View More Openings (${remaining} more) ↓`;
+          }
+        } else {
+          loadMoreWrap.style.display = 'none';
+        }
+      }
+    }
+
+    function loadMoreJobs() {
+      jobsVisibleLimit += 4;
+      renderJobsListings();
     }
 
     function scrollToJobOpenings() {

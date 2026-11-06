@@ -194,202 +194,55 @@
 
   <!-- Main Content View -->
   <main class="quizzes-page-wrapper">
-    <!-- 1. Hero Banner Frame with User Uploaded Illustration -->
-    <div class="quiz-hero-banner-frame">
-      <div class="quiz-hero-banner-overlay"></div>
-      <div class="quiz-hero-banner-content">
-        <div class="quiz-hero-pill">
-          <span>⚡ Real-Time Proctored Assessments</span>
+    <!-- 1. Consolidated Assessment Command Deck (De-Bulked) -->
+    <div class="quiz-command-deck">
+      <div class="quiz-deck-left">
+        <span class="quiz-deck-pill">⚡ REAL-TIME PROCTORED ASSESSMENTS</span>
+        <h1 class="quiz-deck-title">Mock Quizzes &amp; Assessments</h1>
+        <p class="quiz-deck-desc">Simulate university midterms, FAANG technical screenings, and algorithmic sprint tests with live countdown timers and diagnostic skill analytics.</p>
+        
+        <!-- Integrated Faculty Code Unlock Row -->
+        <div class="quiz-deck-faculty-row">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/></svg>
+          <input type="text" id="faculty-quick-code-input" class="quiz-faculty-input-inline" placeholder="Faculty Code (e.g. CSE-401)" maxlength="12" onkeyup="if(event.key==='Enter'){quickFillQuizCode(this.value);openJoinCourseQuizModal();}">
+          <button type="button" class="btn-deck-unlock" onclick="const v=document.getElementById('faculty-quick-code-input').value;if(v.trim()){quickFillQuizCode(v);openJoinCourseQuizModal();}else{openJoinCourseQuizModal();}">
+            Unlock Exam →
+          </button>
         </div>
-        <h1 class="quiz-hero-title">
-          Test Knowledge. <span class="quiz-hero-title-highlight">Master Speed.</span>
-        </h1>
-        <p class="quiz-hero-subtitle">
-          Simulate university finals, FAANG technical screenings, and algorithmic sprint exams with automated
-          proctoring, live countdown timers, and diagnostic skill analytics.
-        </p>
-        <div class="quiz-hero-actions">
-          <button type="button" class="quiz-hero-btn-code" onclick="openJoinCourseQuizModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-            <span>Join Quiz with Faculty Code</span>
-          </button>
-          <button type="button" class="quiz-hero-btn-primary" onclick="startQuizRunner('quiz-dsa-01')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            <span>Take Daily Assessment Sprint</span>
-          </button>
-          <button type="button" class="quiz-hero-btn-secondary"
-            onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-            <span>Browse All Quizzes (24+)</span>
-          </button>
+      </div>
+
+      <div class="quiz-deck-stats">
+        <div class="quiz-deck-stat-item">
+          <span class="quiz-deck-stat-label">Taken</span>
+          <span class="quiz-deck-stat-val">14 / 24</span>
+          <span class="quiz-deck-stat-sub">Avg 88.2%</span>
+        </div>
+        <div class="quiz-deck-stat-item">
+          <span class="quiz-deck-stat-label">Accuracy</span>
+          <span class="quiz-deck-stat-val">91.4%</span>
+          <span class="quiz-deck-stat-sub">212 Correct</span>
+        </div>
+        <div class="quiz-deck-stat-item">
+          <span class="quiz-deck-stat-label">Speed</span>
+          <span class="quiz-deck-stat-val">42s</span>
+          <span class="quiz-deck-stat-sub">Top 1.8%</span>
         </div>
       </div>
     </div>
 
-    <!-- Faculty Course Assessment Code Bar -->
-    <div class="faculty-course-quiz-banner">
-      <div class="faculty-banner-left">
-        <div class="faculty-banner-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
-        </div>
-        <div class="faculty-banner-text">
-          <h4>Course Midterm &amp; Faculty Quizzes</h4>
-          <p>Have an access code from your university professor or instructor? Enter it below to unlock your course
-            assessment.</p>
-        </div>
+    <!-- 2. Daily Assessment Spotlight Strip -->
+    <div class="quiz-daily-spotlight-strip">
+      <div class="quiz-spotlight-left">
+        <span class="quiz-spotlight-badge">Daily Sprint</span>
+        <span class="quiz-spotlight-title" onclick="startQuizRunner('quiz-dsa-01')">FAANG DSA Sprint: Binary Search &amp; Two Pointers</span>
+        <span class="quiz-diff-badge medium" style="font-size: 0.65rem; padding: 1px 6px;">Medium</span>
+        <span style="font-size: 0.70rem; color: #4338ca; font-weight: 600;">5 Qs • 20 Mins • ⏳ Resets in 04h 18m</span>
       </div>
-
-      <div class="faculty-banner-right">
-        <input type="text" id="faculty-quick-code-input" class="faculty-code-input-sm" placeholder="Faculty code (e.g. CSE-401)"
-          maxlength="12"
-          onkeyup="if(event.key==='Enter') { quickFillQuizCode(this.value); openJoinCourseQuizModal(); }">
-        <button type="button" class="btn-unlock-faculty-quiz"
-          onclick="const v = document.getElementById('faculty-quick-code-input').value; if(v.trim()) { quickFillQuizCode(v); openJoinCourseQuizModal(); } else { openJoinCourseQuizModal(); }">
-          <span>Unlock Exam</span>
-          <span>→</span>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.72rem; color: #4338ca; font-weight: 600;">+120 TRP • 1 Key 🔑</span>
+        <button type="button" class="btn-start-daily-sm" onclick="startQuizRunner('quiz-dsa-01')">
+          Start Assessment →
         </button>
-      </div>
-    </div>
-
-    <!-- 2. Key Metrics Row -->
-    <div class="quiz-stats-grid">
-      <div class="quiz-stat-tile indigo">
-        <div class="quiz-stat-icon-wrap indigo">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-        <div class="quiz-stat-info">
-          <span class="quiz-stat-label">Assessments Taken</span>
-          <span class="quiz-stat-val">14 / 24</span>
-          <span class="quiz-stat-sub">Avg Score: 88.2%</span>
-        </div>
-      </div>
-
-      <div class="quiz-stat-tile emerald">
-        <div class="quiz-stat-icon-wrap emerald">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        </div>
-        <div class="quiz-stat-info">
-          <span class="quiz-stat-label">Accuracy Rate</span>
-          <span class="quiz-stat-val">91.4%</span>
-          <span class="quiz-stat-sub">212 of 232 Correct</span>
-        </div>
-      </div>
-
-      <div class="quiz-stat-tile amber">
-        <div class="quiz-stat-icon-wrap amber">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="quiz-stat-info">
-          <span class="quiz-stat-label">Avg Speed / Q</span>
-          <span class="quiz-stat-val">42s</span>
-          <span class="quiz-stat-sub">Benchmark: 60s/Q</span>
-        </div>
-      </div>
-
-      <div class="quiz-stat-tile blue">
-        <div class="quiz-stat-icon-wrap blue">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-        </div>
-        <div class="quiz-stat-info">
-          <span class="quiz-stat-label">Global LMS Rank</span>
-          <span class="quiz-stat-val">#11</span>
-          <span class="quiz-stat-sub">Top 1.8% Student Bracket</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. Choice Grid: Daily Assessment Sprint + Fast Tracks -->
-    <div class="quiz-choice-grid">
-      <!-- Left: Featured Daily Sprint -->
-      <div class="quiz-daily-card">
-        <div>
-          <div class="quiz-daily-header">
-            <div class="quiz-daily-badge">
-              <span class="status-live-dot" style="width: 7px; height: 7px; background: #6366f1;"></span>
-              <span>Daily Assessment Challenge</span>
-            </div>
-            <div class="quiz-timer-pill">
-              <span>⏳ Resets in 04h 18m</span>
-            </div>
-          </div>
-
-          <h3 class="quiz-daily-title">FAANG DSA Sprint: Binary Search &amp; Two Pointers</h3>
-
-          <div class="quiz-daily-tags">
-            <span class="quiz-diff-badge medium">MEDIUM</span>
-            <span class="quiz-topic-pill">Binary Search</span>
-            <span class="quiz-topic-pill">Two Pointers</span>
-            <span class="quiz-topic-pill">Sliding Window</span>
-          </div>
-
-          <p class="quiz-daily-desc">
-            Sharpen your algorithmic intuition on answer-space boundaries, rotated array pivoting, and optimal sliding
-            window contraction under strict time constraints.
-          </p>
-        </div>
-
-        <div class="quiz-daily-footer">
-          <span style="font-size: 0.76rem; font-weight: 600; color: #4338ca;">🎁 +120 TRP Points • 1 Assessment Key
-            🔑</span>
-          <button type="button" class="btn-start-daily-quiz" onclick="startQuizRunner('quiz-dsa-01')">
-            <span>Start Assessment Sprint</span>
-            <span>→</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Right: Quick Sprint Tracks -->
-      <div class="quiz-tracks-card">
-        <div class="quiz-tracks-header">
-          <span class="quiz-tracks-header-title">🚀 Fast Sprint Tracks</span>
-          <span style="font-size: 0.72rem; color: #0284c7; font-weight: 700;">24+ Mock Tests</span>
-        </div>
-
-        <div class="quiz-track-items-grid">
-          <div class="quiz-track-chip" onclick="startQuizRunner('quiz-dsa-01')">
-            <div>
-              <div class="quiz-track-name">⚡ Binary Search</div>
-              <div class="quiz-track-sub">5 Qs • 20 Mins</div>
-            </div>
-            <span style="color: #94a3b8; font-size: 0.8rem;">→</span>
-          </div>
-
-          <div class="quiz-track-chip" onclick="startQuizRunner('quiz-web-01')">
-            <div>
-              <div class="quiz-track-name">🌐 React 19 &amp; CWV</div>
-              <div class="quiz-track-sub">5 Qs • 25 Mins</div>
-            </div>
-            <span style="color: #94a3b8; font-size: 0.8rem;">→</span>
-          </div>
-
-          <div class="quiz-track-chip" onclick="startQuizRunner('quiz-db-01')">
-            <div>
-              <div class="quiz-track-name">🗄️ PostgreSQL &amp; ACID</div>
-              <div class="quiz-track-sub">5 Qs • 18 Mins</div>
-            </div>
-            <span style="color: #94a3b8; font-size: 0.8rem;">→</span>
-          </div>
-
-          <div class="quiz-track-chip" onclick="startQuizRunner('quiz-os-01')">
-            <div>
-              <div class="quiz-track-name">⚙️ OS &amp; Concurrency</div>
-              <div class="quiz-track-sub">5 Qs • 22 Mins</div>
-            </div>
-            <span style="color: #94a3b8; font-size: 0.8rem;">→</span>
-          </div>
-        </div>
-
-        <div class="quiz-tracks-footer">
-          <button type="button" class="lc-btn-browse-lib" style="flex: 1;"
-            onclick="document.getElementById('quizzes-practice-section').scrollIntoView({ behavior: 'smooth' })">
-            <span>🔍 Explore Full Test Catalog</span>
-          </button>
-          <button type="button" class="lc-btn-shuffle-sm" onclick="startQuizRunner('quiz-apt-01')"
-            title="Launch Random Sprint">
-            <span class="lc-dice-icon">🎲</span>
-            <span>Surprise Quiz</span>
-          </button>
-        </div>
       </div>
     </div>
 

@@ -1487,143 +1487,60 @@
        ====================================================================== -->
   <div id="lifecode-hub-view" class="lifecode-hub-container">
     
-    <!-- Hero Banner with Daylight Developer Scene -->
-    <div class="lc-hub-banner-frame">
-      <div class="lc-hub-banner-overlay"></div>
-      <div class="lc-hub-banner-content">
-        <div class="lc-hub-pill">⚡ LIFECODE ARENA • 520+ CODING CHALLENGES</div>
-        <h1 class="lc-hub-title">Master Code. <span class="lc-hub-title-blue">Crack SDE.</span></h1>
-        <div class="lc-hub-accent-bar"></div>
-        <p class="lc-hub-desc">Accelerate your problem-solving intuition across Data Structures &amp; Algorithms with automated judge execution, multi-language support, and FAANG interview sprint tracks.</p>
-        <div class="lc-hub-actions-row">
+    <!-- 1. Consolidated Lifecode Command Deck (De-Bulked) -->
+    <div class="lc-command-deck" style="background: var(--bg-panel); border-color: var(--border-subtle); color: var(--text-main);">
+      <div class="lc-deck-left">
+        <span class="lc-deck-pill" style="background: rgba(37,99,235,0.15); border-color: rgba(37,99,235,0.3); color: #60a5fa;">⚡ 520+ CODING CHALLENGES</span>
+        <h1 class="lc-deck-title" style="color: #ffffff;">Lifecode Algorithm Arena</h1>
+        <p class="lc-deck-desc" style="color: var(--text-muted);">Curated Data Structures &amp; Algorithms with automated judge execution, multi-language compiler, and FAANG interview sprint tracks.</p>
+        
+        <div class="lc-deck-actions">
           <button type="button" class="lc-btn-hub-primary" onclick="openProblemInEditor(1552)">
-            <span>⚡ Solve Daily Problem</span>
-            <span style="background: rgba(255,255,255,0.22); font-size: 0.72rem; padding: 2px 7px; border-radius: 4px; font-weight: 750;">#1552</span>
-          </button>
-          <button type="button" class="lc-btn-hub-secondary" onclick="scrollToPracticeWrap()">
-            <span>📚 Practice Problems (520+)</span>
+            <span>⚡ Daily Problem (#1552)</span>
           </button>
           <button type="button" class="lc-btn-hub-random" onclick="pickRandomProblem()">
             <span>🔀 Pick Random Sprint</span>
           </button>
+          <button type="button" class="lc-btn-hub-secondary" onclick="scrollToPracticeWrap()">
+            <span>Practice Library ↓</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="lc-deck-stats" style="background: rgba(0,0,0,0.25); border-color: var(--border-subtle);">
+        <div class="lc-deck-stat-item">
+          <span class="lc-deck-stat-label" style="color: var(--text-dim);">Solved</span>
+          <span class="lc-deck-stat-val" style="color: #ffffff;" id="hub-solved-val">2 / 520</span>
+          <span class="lc-deck-stat-sub" style="color: #34d399;">Top 2.4%</span>
+        </div>
+        <div class="lc-deck-stat-item">
+          <span class="lc-deck-stat-label" style="color: var(--text-dim);">Streak</span>
+          <span class="lc-deck-stat-val" style="color: #ffffff;">4 Days</span>
+          <span class="lc-deck-stat-sub" style="color: #fb923c;">+120 TRP</span>
+        </div>
+        <div class="lc-deck-stat-item">
+          <span class="lc-deck-stat-label" style="color: var(--text-dim);">Accuracy</span>
+          <span class="lc-deck-stat-val" style="color: #ffffff;">100%</span>
+          <span class="lc-deck-stat-sub" style="color: #60a5fa;">4 Accepted</span>
         </div>
       </div>
     </div>
 
-    <!-- Quick Metrics Strip -->
-    <div class="lc-hub-stats-strip">
-      <div class="lc-stat-box">
-        <div class="lc-stat-box-icon lc-stat-box-amber">🔥</div>
-        <div>
-          <div class="lc-stat-box-label">Daily Streak</div>
-          <div class="lc-stat-box-val">4 Days</div>
-          <div class="lc-stat-box-sub">+120 TRP Sprint Bonus</div>
-        </div>
+    <!-- 2. Daily Problem Spotlight Strip -->
+    <div class="lc-daily-spotlight-strip" style="background: rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.25); color: #fed7aa;">
+      <div class="lc-spotlight-left">
+        <span class="lc-spotlight-badge" style="background: #ea580c;">Problem of the Day</span>
+        <span class="lc-spotlight-title" style="color: #fb923c;" onclick="openProblemInEditor(1552)">1552. Magnetic Force Between Two Balls</span>
+        <span class="lc-diff-badge Medium" style="font-size: 0.65rem; padding: 1px 6px;">Medium</span>
+        <span class="lc-tag-chip" style="font-size: 0.65rem; padding: 1px 6px; background: rgba(255,255,255,0.08); color: #cbd5e1;">Binary Search</span>
+        <span style="font-size: 0.70rem; color: #fb923c; font-weight: 600;">⏳ Resets in 05h 14m</span>
       </div>
-
-      <div class="lc-stat-box">
-        <div class="lc-stat-box-icon lc-stat-box-blue">🎯</div>
-        <div>
-          <div class="lc-stat-box-label">Problems Solved</div>
-          <div class="lc-stat-box-val" id="hub-solved-val">2 / 520</div>
-          <div class="lc-stat-box-sub">Easy: 2 • Med: 0 • Hard: 0</div>
-        </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.72rem; color: #fdba74; font-weight: 600;">+50 TRP • 1 Key 🔑</span>
+        <button type="button" class="lc-btn-solve-daily-sm" onclick="openProblemInEditor(1552)">
+          Solve Challenge →
+        </button>
       </div>
-
-      <div class="lc-stat-box">
-        <div class="lc-stat-box-icon lc-stat-box-green">⚡</div>
-        <div>
-          <div class="lc-stat-box-label">Judge Accuracy</div>
-          <div class="lc-stat-box-val">100%</div>
-          <div class="lc-stat-box-sub">4 Accepted Submissions</div>
-        </div>
-      </div>
-
-      <div class="lc-stat-box">
-        <div class="lc-stat-box-icon lc-stat-box-purple">🏆</div>
-        <div>
-          <div class="lc-stat-box-label">Global LMS Rank</div>
-          <div class="lc-stat-box-val">#14</div>
-          <div class="lc-stat-box-sub">Top 2.4% Student Bracket</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2 Choice Cards: Daily Problem vs Practice Tracks -->
-    <div class="lc-hub-choice-grid">
-      
-      <!-- Option A: Daily Problem Challenge Card -->
-      <div class="lc-hub-daily-card">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 6px; text-transform: uppercase;">🔥 Problem of the Day</span>
-            <span style="font-family: var(--font-code); font-size: 0.76rem; color: #fb923c; background: rgba(249, 115, 22, 0.1); padding: 3px 8px; border-radius: 6px; font-weight: 700;">⏳ Resets in 05h 14m</span>
-          </div>
-
-          <h3 style="font-size: 1.28rem; font-weight: 800; color: #ffffff; margin: 0 0 8px 0;">1552. Magnetic Force Between Two Balls</h3>
-
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
-            <span class="difficulty-badge medium">Medium</span>
-            <span class="meta-tag-pill">Binary Search</span>
-            <span class="meta-tag-pill">Greedy</span>
-            <span style="font-size: 0.74rem; color: #a1a1aa; margin-left: auto;">👍 1.8K Likes • 74.8% Acceptance</span>
-          </div>
-
-          <p style="font-size: 0.86rem; color: #d4d4d8; line-height: 1.55; margin: 0 0 16px 0;">
-            In the universe Earth C-137, Rick discovered a special form of magnetic force between balls in baskets. Given an integer array position and m balls, distribute them such that the minimum magnetic force between any two balls is maximized.
-          </p>
-        </div>
-
-        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px dashed rgba(249, 115, 22, 0.3); gap: 12px;">
-          <div style="font-size: 0.76rem; font-weight: 750; color: #fb923c; display: flex; align-items: center; gap: 6px;">
-            <span>🎁 +50 TRP Points</span>
-            <span>•</span>
-            <span>1 Daily Key 🔑</span>
-          </div>
-          <button type="button" class="lc-btn-hub-primary" onclick="openProblemInEditor(1552)" style="background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);">
-            <span>⚡ Solve Daily Problem →</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Option B: Practice Sprint Tracks Card -->
-      <div class="lc-hub-tracks-card">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 6px; text-transform: uppercase;">🚀 Practice Sprint Tracks</span>
-            <span style="font-size: 0.74rem; font-weight: 700; color: #38bdf8;">520+ Challenges</span>
-          </div>
-
-          <div class="lc-hub-tracks-grid">
-            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Binary Search')">
-              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">🔍 Binary Search</div>
-              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">Sorted bounds &amp; predicates</div>
-            </div>
-            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Dynamic Programming')">
-              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">💎 Dynamic Prog.</div>
-              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">1D/2D memo, knapsack, LCS</div>
-            </div>
-            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Tree')">
-              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">🌲 Trees &amp; BST</div>
-              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">Traversals, paths, recursion</div>
-            </div>
-            <div class="lc-hub-track-tile" onclick="filterStandaloneByCategory('Array')">
-              <div style="font-size: 0.82rem; font-weight: 750; color: #ffffff;">⚡ Arrays &amp; Pointers</div>
-              <div style="font-size: 0.70rem; color: #a1a1aa; margin-top: 2px;">Sliding window, two pointers</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
-          <button type="button" class="lc-btn-hub-secondary" onclick="scrollToPracticeWrap()" style="flex: 1; text-align: center; justify-content: center;">
-            <span>🔍 Practice Library (520+) ↓</span>
-          </button>
-          <button type="button" class="lc-btn-hub-random" onclick="pickRandomProblem()">
-            <span>🎲 Shuffle</span>
-          </button>
-        </div>
-      </div>
-
     </div>
 
     <!-- Practice Problems Library Section -->

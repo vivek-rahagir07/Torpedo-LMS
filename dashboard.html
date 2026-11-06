@@ -288,22 +288,48 @@
       <main class="dashboard-main-view">
 
         <!-- ================================================================
-             TAB 1: HOME DASHBOARD (Matching media_1792416346297.png)
+             TAB 1: HOME DASHBOARD (Vivek Yadav Executive Command Center)
              ================================================================ -->
         <div id="tab-view-home" class="portal-tab-content active">
-          <!-- Top Greeting Bar -->
-          <div class="welcome-greeting-row">
-            <div>
-              <h1 class="welcome-greeting-title" id="hero-greeting-text">Welcome back, Vivek</h1>
-              <p class="welcome-greeting-sub">Overview of your academic progress, micro-credentials, and active dev tracks.</p>
+          <!-- Executive Candidate Command Deck -->
+          <section class="student-readiness-strip home-candidate-deck" aria-label="Candidate Status Command Deck">
+            <div class="readiness-left-profile">
+              <div class="readiness-avatar">VY</div>
+              <div>
+                <div class="readiness-title" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span id="hero-greeting-text" style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">Vivek Yadav</span>
+                  <span class="readiness-tag gold" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 600; font-size: 0.68rem;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    Verified Candidate
+                  </span>
+                  <span class="readiness-tag" style="background: #fef3c7; color: #92400e; border-color: #fde68a; font-weight: 600; font-size: 0.68rem;">
+                    ★ Gold Tier Fast-Track
+                  </span>
+                </div>
+                <div class="readiness-sub" style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">
+                  GTU CSE · 2026 Batch · Top 2.4% LMS Cohort · CPI: 8.85 / 10 · Roll #22002170310065
+                </div>
+              </div>
             </div>
-            <div class="welcome-status-pill">
-              <span class="status-live-dot"></span>
-              <span>L2 Polygon Network Synced</span>
-            </div>
-          </div>
 
-          <!-- 2-Column Master Layout (Matching media_1792416346297.png) -->
+            <div class="readiness-pills">
+              <span class="readiness-tag" style="font-family: var(--font-code, monospace); background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; font-weight: 700; font-size: 0.72rem;">
+                ⚡ 640 TRP Points
+              </span>
+              <span class="readiness-tag" style="font-family: var(--font-code, monospace); background: #f0fdf4; color: #15803d; border-color: #bbf7d0; font-weight: 700; font-size: 0.72rem;">
+                ✓ 14/520 Solved DSA
+              </span>
+              <span class="readiness-tag" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem;">
+                <span class="status-live-dot"></span>
+                <span>Polygon L2 Synced</span>
+              </span>
+              <button type="button" class="btn-view-dossier-sm" onclick="openStudentDossierModal()" title="Preview Official Verified Placement Dossier">
+                <span>Preview Dossier Resume →</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- 2-Column Master Layout -->
           <div class="dash-master-layout">
 
           <!-- ================================================================
@@ -322,7 +348,10 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                   </div>
                 </div>
-                <div class="metric-number-bold">3</div>
+                <div class="metric-number-bold">3 <span class="metric-unit-tag">Tracks</span></div>
+                <div class="home-metric-meta-chip">
+                  <span>2 In Progress · 1 Completed (100%)</span>
+                </div>
                 <div class="metric-card-bottom-flex">
                   <span class="metric-view-link">View active tracks</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
@@ -337,7 +366,10 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
                   </div>
                 </div>
-                <div class="metric-number-bold" id="stat-completed-tracks">56</div>
+                <div class="metric-number-bold"><span id="stat-completed-tracks">56</span> <span class="metric-unit-tag">Modules</span></div>
+                <div class="home-metric-meta-chip">
+                  <span style="color: #059669; font-weight: 600;">+8 this week · 89% sprint pace</span>
+                </div>
                 <div class="metric-card-bottom-flex">
                   <span class="metric-view-link">Resume current lesson</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
@@ -352,7 +384,10 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
                   </div>
                 </div>
-                <div class="metric-number-bold">17</div>
+                <div class="metric-number-bold">17 <span class="metric-unit-tag">NFT Badges</span></div>
+                <div class="home-metric-meta-chip">
+                  <span style="color: #7c3aed; font-weight: 600;">Polygon L2 On-Chain</span>
+                </div>
                 <div class="metric-card-bottom-flex">
                   <span class="metric-view-link">Polygon L2 Verified</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
@@ -367,16 +402,19 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   </div>
                 </div>
-                <div class="metric-number-bold">450 <span class="metric-unit-tag">TRP</span></div>
+                <div class="metric-number-bold">640 <span class="metric-unit-tag">TRP</span></div>
+                <div class="home-metric-meta-chip">
+                  <span style="color: #2563eb; font-weight: 600;">Top 2.4% LMS Cohort</span>
+                </div>
                 <div class="metric-card-bottom-flex">
-                  <span class="metric-view-link">Top 5% Cohort</span>
+                  <span class="metric-view-link">Fast-Track Unlocked</span>
                   <span class="metric-arrow-glyph">&rarr;</span>
                 </div>
               </div>
 
             </div>
 
-            <!-- 2. CONTINUE LEARNING (Exact List Rows from media_1792416346297.png) -->
+            <!-- 2. CONTINUE LEARNING -->
             <div class="continue-learning-card">
               <div class="section-title-flex">
                 <h2 class="section-title-h2">Continue Learning</h2>
@@ -402,7 +440,7 @@
                     </div>
                     <div class="course-title-block">
                       <div class="course-name-bold">Cloud DevOps &amp; Microservices Architecture</div>
-                      <div class="course-meta-sub">Advanced • 5 hours</div>
+                      <div class="course-meta-sub">Advanced • 5 hours • Docker, Kubernetes &amp; CI/CD</div>
                     </div>
                   </div>
                   <div class="course-progress-track-col">
@@ -430,7 +468,7 @@
                     </div>
                     <div class="course-title-block">
                       <div class="course-name-bold">Autonomous AI Agent Architecture (LangGraph)</div>
-                      <div class="course-meta-sub">Intermediate • 6 hours</div>
+                      <div class="course-meta-sub">Intermediate • 6 hours • Multi-Agent Loops &amp; Tool Use</div>
                     </div>
                   </div>
                   <div class="course-progress-track-col">
@@ -458,7 +496,7 @@
                     </div>
                     <div class="course-title-block">
                       <div class="course-name-bold">Distributed Systems &amp; High-Throughput Architecture</div>
-                      <div class="course-meta-sub">Beginner • 7 hours</div>
+                      <div class="course-meta-sub">Beginner • 7 hours • Go, Raft &amp; Kafka Cluster</div>
                     </div>
                   </div>
                   <div class="course-progress-track-col">
@@ -491,7 +529,7 @@
               <div class="recommended-cards-3grid">
                 
                 <!-- Tile 1: Hackathon -->
-                <div class="recommended-tile-card" onclick="registerHackathon('Global Web-Dev Hackathon')">
+                <div class="recommended-tile-card" onclick="switchPortalTab('hackathons')">
                   <div class="tile-header-row">
                     <span class="tile-badge hackathon">HACKATHON • 48H</span>
                     <div class="tile-icon-micro">
@@ -499,17 +537,17 @@
                     </div>
                   </div>
                   <div class="tile-body-content">
-                    <h3 class="tile-title-text">Design Workshop Facilitation</h3>
-                    <p class="tile-sub-caption">Master design sprints, event-driven prototypes, and collaborative team velocity.</p>
+                    <h3 class="tile-title-text">Polygon BUIDL Demo Day (ZK Track)</h3>
+                    <p class="tile-sub-caption">Team Captain: Vivek Yadav • Zero-Knowledge proof verification and Web3 microservices.</p>
                     <div class="tile-action-link">
-                      <span>Register Track</span>
+                      <span>Enter Arena</span>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </div>
                   </div>
                 </div>
 
                 <!-- Tile 2: Internship -->
-                <div class="recommended-tile-card" onclick="openInternshipApplyModal('Razorpay', 'Cloud Infrastructure Intern', '₹45,000 / month', '94%')">
+                <div class="recommended-tile-card" onclick="openInternshipApplyModal('Razorpay', 'Backend SDE Intern (Payments Gateway)', '₹50,000 / month', '98%')">
                   <div class="tile-header-row">
                     <span class="tile-badge career">CAREER • RAZORPAY</span>
                     <div class="tile-icon-micro">
@@ -517,8 +555,8 @@
                     </div>
                   </div>
                   <div class="tile-body-content">
-                    <h3 class="tile-title-text">Cloud Infrastructure Intern</h3>
-                    <p class="tile-sub-caption">₹45,000 / month stipend • 94% profile match for distributed systems skills.</p>
+                    <h3 class="tile-title-text">Backend SDE Intern (Payments)</h3>
+                    <p class="tile-sub-caption">₹50,000 / month stipend • 98% profile match for Vivek Yadav's distributed systems skills.</p>
                     <div class="tile-action-link">
                       <span>Apply with Dossier</span>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -558,7 +596,7 @@
             <div class="side-clean-card">
               <div class="side-widget-header-flex">
                 <span class="side-widget-label">WEEKLY VELOCITY</span>
-                <span class="badge-micro-metric">TOP 5%</span>
+                <span class="badge-micro-metric">TOP 2.4%</span>
               </div>
               
               <div class="activity-stat-flex">
@@ -596,6 +634,10 @@
                   <div class="ref-bar-rect light-bar" style="height: 10px;"></div>
                   <span class="ref-day-label">Sat</span>
                 </div>
+              </div>
+
+              <div class="home-velocity-streak-badge">
+                <span>🔥 12-Day Daily Streak · 87.4% Consistency</span>
               </div>
             </div>
 
@@ -640,7 +682,7 @@
               </div>
 
               <div class="todo-input-wrap">
-                <input type="text" class="todo-text-input" placeholder="Add study or sprint task..." id="new-todo-input" onkeydown="if(event.key==='Enter') addNewTodoTask()">
+                <input type="text" class="todo-text-input" placeholder="Add sprint task..." id="new-todo-input" onkeydown="if(event.key==='Enter') addNewTodoTask()">
                 <button type="button" class="btn-add-todo-sm" onclick="addNewTodoTask()" title="Add Task">+</button>
               </div>
 
@@ -666,7 +708,7 @@
                 <div class="todo-task-item" id="todo-row-3">
                   <input type="checkbox" onchange="toggleTodoStatus(3, this)" class="todo-custom-check">
                   <div class="todo-item-info">
-                    <div class="task-title-text">Review Razorpay Cloud Intern ATS</div>
+                    <div class="task-title-text">Review Razorpay Backend SDE ATS</div>
                     <div class="task-time-meta">In 2 Days</div>
                   </div>
                   <button type="button" class="btn-delete-task" onclick="deleteTodoTask(3)">✕</button>
@@ -2979,11 +3021,11 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           <div>
             <div style="font-size: 0.68rem; font-weight: 600; color: #64748b; text-transform: uppercase;">Placement TRP Benchmark</div>
             <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: #2563eb; line-height: 1.1;">
-              <span id="stat-trp">450</span> <span style="font-size: 0.8rem; color: #64748b; font-weight: 700;">TRP (Prodigy Tier)</span>
+              <span id="stat-trp">640</span> <span style="font-size: 0.8rem; color: #64748b; font-weight: 700;">TRP (Gold Tier)</span>
             </div>
-            <div style="font-size: 0.72rem; color: #059669; font-weight: 600; margin-top: 2px;">Top 5% Cohort Benchmark • 1-Click Dispatch Ready</div>
+            <div style="font-size: 0.72rem; color: #059669; font-weight: 600; margin-top: 2px;">Top 2.4% LMS Cohort • Fast-Track Recruiter Routing</div>
           </div>
-          <button type="button" class="btn-go-sandbox" onclick="openInternshipApplyModal('Razorpay', 'Cloud Infrastructure Intern', '₹45,000 / month', '94%')">
+          <button type="button" class="btn-go-sandbox" onclick="openInternshipApplyModal('Razorpay', 'Backend SDE Intern (Payments Gateway)', '₹50,000 / month', '98%')">
             Apply with 1-Click Dossier &rarr;
           </button>
         </div>

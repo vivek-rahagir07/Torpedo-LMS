@@ -11780,3 +11780,51 @@ body.lifecode-fullscreen-mode #tab-view-lifecode {
 .cert-deck-stat-sub.green { color: #059669; }
 .cert-deck-stat-sub.amber { color: #d97706; }
 .cert-deck-stat-sub.purple { color: #7c3aed; }
+
+/* ==========================================================================
+   EXECUTIVE CANDIDATE HOME DASHBOARD STYLES (Vivek Yadav Portal)
+   ========================================================================== */
+.home-candidate-deck {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.home-candidate-deck .readiness-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 1px solid #334155;
+}
+
+.home-metric-meta-chip {
+  font-size: 0.67rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-velocity-streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.67rem;
+  font-weight: 600;
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+

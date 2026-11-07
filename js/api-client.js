@@ -206,6 +206,65 @@ const TorpedoAPI = (function() {
      */
     async getUserHackathons(email) {
       return await request(`hackathons/teams?email=${encodeURIComponent(email)}`, { method: 'GET' });
+    },
+
+    /**
+     * Get User Enrolled Courses
+     */
+    async getUserEnrollments(email) {
+      return await request(`courses/my?email=${encodeURIComponent(email)}`, { method: 'GET' });
+    },
+
+    /**
+     * Create New Course (Faculty / Admin)
+     */
+    async createCourse(data) {
+      return await request('courses/create', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+    },
+
+    /**
+     * Create / Post New Job (Recruiter)
+     */
+    async createJob(data) {
+      return await request('jobs/create', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+    },
+
+    /**
+     * Get All Job Applications (Recruiter ATS)
+     */
+    async getAllApplications(jobId = null) {
+      const q = jobId ? `?job_id=${encodeURIComponent(jobId)}` : '';
+      return await request(`jobs/all-applications${q}`, { method: 'GET' });
+    },
+
+    /**
+     * Update Application Status (Recruiter ATS)
+     */
+    async updateApplicationStatus(id, status) {
+      return await request('jobs/applications/status', {
+        method: 'POST',
+        body: JSON.stringify({ id, status })
+      });
+    },
+
+    /**
+     * Get Super Admin Platform Overview
+     */
+    async getAdminOverview() {
+      return await request('admin/overview', { method: 'GET' });
+    },
+
+    /**
+     * Get Super Admin People Directory
+     */
+    async getAdminPeople() {
+      return await request('admin/people', { method: 'GET' });
     }
   };
 })();

@@ -1211,7 +1211,7 @@
                     <span class="instructor-monogram blue">AS</span>
                     <span class="instructor-name-label">Ananya Sharma</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="showToast('Enrolled in React 19 Internals! Added to your dashboard.', 'success')">
+                  <button type="button" class="btn-card-launch-course" onclick="enrollDashboardCourse(this, 'React 19 Internals', 'c-react19')">
                     Enroll Now &rarr;
                   </button>
                 </div>
@@ -1234,7 +1234,7 @@
                     <span class="instructor-monogram orange">AR</span>
                     <span class="instructor-name-label">Prof. Arjun Rao</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="showToast('Enrolled in Rust Systems Programming! Added to your dashboard.', 'success')">
+                  <button type="button" class="btn-card-launch-course" onclick="enrollDashboardCourse(this, 'Rust Systems Programming', 'c-rust-sys')">
                     Enroll Now &rarr;
                   </button>
                 </div>
@@ -1257,7 +1257,7 @@
                     <span class="instructor-monogram emerald">SJ</span>
                     <span class="instructor-name-label">Sarah Jenkins</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="showToast('Enrolled in Zero-Trust Security! Added to your dashboard.', 'success')">
+                  <button type="button" class="btn-card-launch-course" onclick="enrollDashboardCourse(this, 'Zero-Trust Security', 'c-zero-trust')">
                     Enroll Now &rarr;
                   </button>
                 </div>
@@ -4775,6 +4775,21 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       }, 3500);
     }
 
+    window.enrollDashboardCourse = function(btn, courseName, courseId) {
+      if (btn) {
+        btn.textContent = 'Resume Lesson →';
+        btn.onclick = () => showToast(`Opening curriculum for ${courseName}...`, 'info');
+      }
+      const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+      const email = u.email || 'vivek.hr362007@gmail.com';
+      if (window.TorpedoAPI && window.TorpedoAPI.enrollCourse) {
+        window.TorpedoAPI.enrollCourse(email, courseId).then(() => {
+          if (typeof loadStudentSession === 'function') loadStudentSession();
+        }).catch(e => console.warn('Enrollment note:', e));
+      }
+      showToast(`Enrolled in ${courseName}! Added to your active tracks.`, 'success');
+    };
+
     /* ========================================================================
        STUDENT DATA INITIALIZATION & DYNAMIC BINDING
        ======================================================================== */
@@ -4871,6 +4886,20 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         if (profile.gradYear && document.getElementById('dossier-grad-year')) document.getElementById('dossier-grad-year').value = profile.gradYear;
         if (profile.cgpa && document.getElementById('dossier-cgpa')) document.getElementById('dossier-cgpa').value = profile.cgpa;
       } catch (e) {}
+
+      // Live Backend Stats Synchronization
+      if (window.TorpedoAPI && window.TorpedoAPI.getDashboardStats) {
+        window.TorpedoAPI.getDashboardStats('student', currentStudent.email).then(res => {
+          if (res && res.success && res.metrics) {
+            res.metrics.forEach(m => {
+              if (m.label === 'Partner Applications') {
+                const el = document.getElementById('nav-applied-count');
+                if (el) el.textContent = m.val.replace(/[^0-9]/g, '') || el.textContent;
+              }
+            });
+          }
+        }).catch(err => console.warn('Dashboard live stats sync:', err));
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {

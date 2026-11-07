@@ -24,6 +24,7 @@ require_once __DIR__ . '/controllers/SandboxController.php';
 require_once __DIR__ . '/controllers/ProblemsController.php';
 require_once __DIR__ . '/controllers/JobsController.php';
 require_once __DIR__ . '/controllers/HackathonsController.php';
+require_once __DIR__ . '/controllers/AdminController.php';
 
 // Ensure DB is initialized
 Database::getConnection();
@@ -166,6 +167,27 @@ try {
             }
             break;
 
+        case 'jobs/create':
+            if ($method === 'POST') {
+                $response = JobsController::createJob($requestData);
+            }
+            break;
+
+        case 'jobs/all-applications':
+            if ($method === 'GET') {
+                $jobId = $requestData['job_id'] ?? null;
+                $response = JobsController::getAllApplications($jobId);
+            }
+            break;
+
+        case 'jobs/applications/status':
+            if ($method === 'POST') {
+                $appId = (int)($requestData['id'] ?? 0);
+                $status = $requestData['status'] ?? 'Under review';
+                $response = JobsController::updateApplicationStatus($appId, $status);
+            }
+            break;
+
         // --- HACKATHONS ---
         case 'hackathons':
             if ($method === 'GET') {
@@ -193,9 +215,35 @@ try {
             }
             break;
 
+        case 'courses/my':
+            if ($method === 'GET') {
+                $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $response = CoursesController::getUserEnrollments($userEmail);
+            }
+            break;
+
+        case 'courses/create':
+            if ($method === 'POST') {
+                $response = CoursesController::createCourse($requestData);
+            }
+            break;
+
         case 'courses/enroll':
             if ($method === 'POST') {
                 $response = CoursesController::enroll($requestData);
+            }
+            break;
+
+        // --- SUPER ADMIN ---
+        case 'admin/overview':
+            if ($method === 'GET') {
+                $response = AdminController::getOverview();
+            }
+            break;
+
+        case 'admin/people':
+            if ($method === 'GET') {
+                $response = AdminController::getPeople();
             }
             break;
 

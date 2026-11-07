@@ -1,5 +1,15 @@
+# Operating System & Editors
 .DS_Store
 */.DS_Store
 *.swp
 *.tmp
+.vscode/
+.idea/
+
+# Runtime uploads (preserve directory structure via .gitkeep)
+storage/uploads/*/*.*
+!storage/uploads/*/.gitkeep
+
+# Error logs
+*.log
 

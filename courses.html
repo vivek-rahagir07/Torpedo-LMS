@@ -852,7 +852,8 @@
       if (countEl) countEl.textContent = `Showing ${visible} courses available`;
     }
 
-    function enrollCourseItem(btn, courseName) {
+    async function enrollCourseItem(btn, courseName, courseId = null) {
+      const cId = courseId || courseName.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 20);
       if (btn) {
         btn.textContent = 'Resume Lesson →';
         btn.onclick = () => openCoursePlayerModal(courseName);
@@ -861,8 +862,45 @@
       if (card) {
         card.setAttribute('data-enrolled', 'true');
       }
+
+      // Sync enrollment to backend SQLite
+      try {
+        const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const email = u.email || 'vivek.hr362007@gmail.com';
+        if (window.TorpedoAPI && window.TorpedoAPI.enrollCourse) {
+          await window.TorpedoAPI.enrollCourse(email, cId);
+        }
+      } catch (err) {
+        console.warn('Backend enrollment note:', err);
+      }
+
       showToast(`Enrolled in ${courseName}! Added to your My Learning tab.`, 'success');
     }
+
+    // Sync enrolled tracks from backend on load
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const email = u.email || 'vivek.hr362007@gmail.com';
+        if (window.TorpedoAPI && window.TorpedoAPI.getUserEnrollments) {
+          const res = await window.TorpedoAPI.getUserEnrollments(email);
+          if (res && res.success && Array.isArray(res.enrollments)) {
+            const enrolledIds = res.enrollments.map(e => e.course_id.toLowerCase());
+            document.querySelectorAll('.catalog-course-item-card').forEach(card => {
+              const title = card.querySelector('.course-card-title-h3')?.textContent || '';
+              const btn = card.querySelector('.btn-card-launch-course');
+              if (enrolledIds.some(id => title.toLowerCase().includes(id) || id.includes('c1') || card.getAttribute('data-enrolled') === 'true')) {
+                card.setAttribute('data-enrolled', 'true');
+                if (btn && btn.textContent.includes('Enroll')) {
+                  btn.textContent = 'Resume Lesson →';
+                  btn.onclick = () => openCoursePlayerModal(title);
+                }
+              }
+            });
+          }
+        }
+      } catch (e) {}
+    });
 
     function openCoursePlayerModal(title) {
       const modal = document.getElementById('course-player-modal');

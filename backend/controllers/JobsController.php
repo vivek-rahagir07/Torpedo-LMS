@@ -150,4 +150,60 @@ class JobsController {
             'applications' => $apps
         ];
     }
+
+    public static function getAllApplications(?string $jobId = null): array {
+        $pdo = Database::getConnection();
+        if (!empty($jobId)) {
+            $stmt = $pdo->prepare("SELECT a.*, j.title as job_title, j.company as job_company, p.grad_college, p.grad_degree, p.grad_year, p.grad_cgpa, p.skills as candidate_skills FROM job_applications a JOIN jobs j ON a.job_id = j.id LEFT JOIN candidate_profiles p ON a.user_email = p.email WHERE a.job_id = ? ORDER BY a.applied_at DESC");
+            $stmt->execute([$jobId]);
+        } else {
+            $stmt = $pdo->query("SELECT a.*, j.title as job_title, j.company as job_company, p.grad_college, p.grad_degree, p.grad_year, p.grad_cgpa FROM job_applications a JOIN jobs j ON a.job_id = j.id LEFT JOIN candidate_profiles p ON a.user_email = p.email ORDER BY a.applied_at DESC");
+        }
+        $apps = $stmt->fetchAll();
+
+        return [
+            'success' => true,
+            'count' => count($apps),
+            'applications' => $apps
+        ];
+    }
+
+    public static function updateApplicationStatus(int $id, string $status): array {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("UPDATE job_applications SET status = ? WHERE id = ?");
+        $stmt->execute([$status, $id]);
+
+        return [
+            'success' => true,
+            'message' => "Application status updated to '{$status}'."
+        ];
+    }
+
+    public static function createJob(array $data): array {
+        $pdo = Database::getConnection();
+        $id = trim($data['id'] ?? ('job-' . time()));
+        $title = trim($data['title'] ?? '');
+        $company = trim($data['company'] ?? 'Corporate Partner');
+        $location = trim($data['location'] ?? 'Remote');
+        $workMode = trim($data['work_mode'] ?? 'Remote');
+        $jobType = trim($data['job_type'] ?? 'Internship');
+        $stipend = trim($data['stipend'] ?? 'Competitive');
+        $batch = trim($data['batch'] ?? '2026 Batch');
+        $description = trim($data['description'] ?? '');
+        $skills = is_array($data['skills'] ?? null) ? json_encode($data['skills']) : (string)($data['skills'] ?? '[]');
+
+        if (empty($title)) {
+            http_response_code(422);
+            return ['success' => false, 'message' => 'Job title is required.'];
+        }
+
+        $stmt = $pdo->prepare("INSERT OR REPLACE INTO jobs (id, title, company, location, work_mode, job_type, stipend, batch, description, skills, match_score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 95)");
+        $stmt->execute([$id, $title, $company, $location, $workMode, $jobType, $stipend, $batch, $description, $skills]);
+
+        return [
+            'success' => true,
+            'message' => 'Job opening successfully published and live on careers portal!',
+            'job_id' => $id
+        ];
+    }
 }

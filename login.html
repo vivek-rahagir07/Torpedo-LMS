@@ -16,7 +16,9 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
-</head>
+  <link rel="stylesheet" href="css/torpedo-refresh.css">
+  <script defer src="js/torpedo-refresh.js"></script>
+<script src="js/platform-bridge.js"></script></head>
 <body class="login-page-body">
 
   <!-- Clean Top Navigation Bar -->
@@ -34,6 +36,12 @@
 
   <!-- Centered Login / Register Container -->
   <main class="login-page-main">
+    <aside class="tr-login-story" aria-label="Torpedo workspace">
+      <p class="tr-kicker">TORPEDO WORKSPACE</p>
+      <h2>Pick up where<br>you left off.</h2>
+      <p>One workspace for your courses, coding practice and career plans.</p>
+      <img src="assets/learning-orbit.svg" alt="" width="560" height="400">
+    </aside>
     
     <!-- 1. Dedicated Formalized Login Card -->
     <div class="compact-login-card" id="compact-login-card">
@@ -42,18 +50,14 @@
         <p style="font-size: 0.85rem; color: #64748b; margin: 0;">Sign in to your Torpedo Learning workspace</p>
       </div>
 
-      <!-- Segmented Role Selector: Student | Super Admin | Employer -->
-      <div class="login-role-tabs" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-bottom: 20px;">
-        <button type="button" class="login-role-tab active" data-role="student" onclick="switchLoginRole('student', this)">
-          <span>Student</span>
-        </button>
-        <button type="button" class="login-role-tab" data-role="admin" onclick="switchLoginRole('admin', this)">
-          <span>Super Admin</span>
-        </button>
-        <button type="button" class="login-role-tab" data-role="employer" onclick="switchLoginRole('employer', this)">
-          <span>Employer</span>
-        </button>
+      <!-- Segmented Role Selector: Student | Instructor | Employer -->
+      <div class="login-role-tabs shared-login-roles">
+        <button type="button" class="login-role-tab active" data-role="student" onclick="switchLoginRole('student', this)"><span>Student</span></button>
+        <button type="button" class="login-role-tab " data-role="instructor" onclick="switchLoginRole('instructor', this)"><span>Instructor</span></button>
+        <button type="button" class="login-role-tab " data-role="employer" onclick="switchLoginRole('employer', this)"><span>Recruiter</span></button>
+        <button type="button" class="login-role-tab " data-role="admin" onclick="switchLoginRole('admin', this)"><span>Super Admin</span></button>
       </div>
+      <p class="auth-role-note" id="login-role-note" role="status" hidden></p>
 
       <!-- Google Sign In Button -->
       <button type="button" class="google-login-btn" onclick="handleGoogleLogin()">
@@ -108,8 +112,8 @@
         <div class="login-quick-personas">
           <span class="quick-persona-label">Demo:</span>
           <button type="button" class="quick-persona-pill" onclick="quickFillLogin('student')">Student</button>
-          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('admin')">Super Admin</button>
-          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('employer')">Employer</button>
+          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('instructor')">Instructor</button>
+          <button type="button" class="quick-persona-pill" onclick="quickFillLogin('employer')">Recruiter</button>
           <button type="button" class="quick-persona-pill" onclick="startStudentOnboardingTest()">Test Onboarding</button>
         </div>
       </form>
@@ -119,7 +123,7 @@
         <span>Don't have an account? </span>
         <a href="#register-student" class="login-footer-link" onclick="showLoginPageCard('signup', event, 'student')">Sign up</a>
         <span class="login-footer-slash">•</span>
-        <a href="#register-company" class="login-footer-link" onclick="showLoginPageCard('signup', event, 'employer')">For Employers</a>
+        <a href="#register-company" class="login-footer-link" onclick="showLoginPageCard('signup', event, 'employer')">For Recruiters</a>
       </div>
     </div>
 
@@ -194,7 +198,7 @@
           </p>
         </div>
 
-        <!-- 3 Role Selector Tabs -->
+        <!-- Shared account roles -->
         <div class="role-selector-bar" id="role-selector-bar">
           <button type="button" class="role-pill-btn active" data-role="student" onclick="setAuthRole('student', this)">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
@@ -206,9 +210,11 @@
           </button>
           <button type="button" class="role-pill-btn" data-role="employer" onclick="setAuthRole('employer', this)">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            <span>Employer</span>
+            <span>Recruiter</span>
           </button>
+          <button type="button" class="role-pill-btn" data-role="admin" onclick="setAuthRole('admin', this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 3 7v6c0 5 9 9 9 9s9-4 9-9V7z"/><path d="m8 12 3 3 5-6"/></svg><span>Super Admin</span></button>
         </div>
+        <p class="auth-role-note" id="signup-role-note" role="status" hidden></p>
 
         <!-- Google Continue Button -->
         <button type="button" class="google-auth-btn" onclick="handleGoogleLogin()">

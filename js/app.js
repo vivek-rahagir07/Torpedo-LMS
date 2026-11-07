@@ -3,13 +3,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  try {
-    const savedUser = JSON.parse(localStorage.getItem('torpedo_user'));
-    if (savedUser && (savedUser.name === 'Harsh Vardhan' || (savedUser.email && savedUser.email.includes('harsh')))) {
-      localStorage.removeItem('torpedo_user');
-    }
-  } catch (e) {}
-
   initScrollEffects();
   initLifecodeSandbox();
 });
@@ -110,11 +103,12 @@ window.runSandboxCode = async function() {
 };
 
 /* Auth Modal & Role Switcher */
-let currentAuthRole = 'student'; // 'student' | 'employer'
+let currentAuthRole = 'student'; // 'student' | 'instructor' | 'employer' | 'admin'
 let currentAuthMode = 'login';   // 'login' | 'signup'
 
 window.switchLoginRole = function(role, btn) {
   currentAuthRole = role;
+  updateAdminRoleNote();
   document.querySelectorAll('.login-role-tab').forEach(b => b.classList.remove('active'));
   if (btn) {
     btn.classList.add('active');
@@ -131,6 +125,9 @@ window.quickFillLogin = function(role) {
   if (role === 'student') {
     if (emailInput) emailInput.value = 'vivek.hr362007@gmail.com';
     if (passInput) passInput.value = 'password123';
+  } else if (role === 'instructor' || role === 'faculty') {
+    if (emailInput) emailInput.value = 'faculty@torpedo.edu';
+    if (passInput) passInput.value = 'faculty123';
   } else if (role === 'admin') {
     if (emailInput) emailInput.value = 'admin@torpedo.edu';
     if (passInput) passInput.value = 'admin123';
@@ -157,6 +154,7 @@ window.openAuthModal = function(mode = 'login', role = 'student') {
   const splitCard = document.getElementById('main-auth-card');
 
   currentAuthMode = mode;
+  if (document.body.classList.contains('login-page-body')) document.body.classList.toggle('account-signup', mode === 'signup');
   currentAuthRole = role || 'student';
 
   if (mode === 'login') {
@@ -196,6 +194,7 @@ window.showLoginPageCard = function(mode = 'login', event = null, role = 'studen
   const splitCard = document.getElementById('main-auth-card');
 
   currentAuthMode = mode;
+  if (document.body.classList.contains('login-page-body')) document.body.classList.toggle('account-signup', mode === 'signup');
   currentAuthRole = role || 'student';
 
   if (mode === 'login') {
@@ -215,14 +214,17 @@ window.handleLoginFormSubmit = function(event) {
   const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : 'vivek.hr362007@gmail.com';
   
   let role = currentAuthRole || 'student';
-  if (email.includes('admin') || role === 'admin') role = 'admin';
-  else if (email.includes('recruiter') || email.includes('partner') || role === 'employer') role = 'employer';
-  else role = 'student';
+  if (role === 'admin') { handleAdminAccess({ email, password: document.getElementById('login-password')?.value || '', isSignUp: false }); return; }
+  if (role === 'instructor' || role === 'faculty') role = 'instructor';
+  else if (role !== 'employer') role = 'student';
 
   let name = 'Vivek Yadav';
   let avatar = 'assets/avatars/robot1.svg';
 
-  if (role === 'admin') {
+  if (role === 'instructor' || role === 'faculty') {
+    name = 'Faculty Instructor';
+    avatar = 'assets/avatars/robot1.svg';
+  } else if (role === 'admin') {
     name = 'Super Admin';
     avatar = 'assets/admin_avatar.jpg';
   } else if (role === 'employer') {
@@ -252,12 +254,13 @@ window.handleLoginFormSubmit = function(event) {
     bio: 'Aspiring DevOps & Cloud Engineer eager to build production-grade scalable systems.'
   };
   localStorage.setItem('torpedo_user', JSON.stringify(userData));
+  window.TorpedoPlatform?.recordProfile(userData);
 
   setTimeout(() => {
     showToast(`Welcome back, ${userData.name}! Successfully authenticated.`, 'success');
     if (typeof closeAuthModal === 'function') closeAuthModal();
     setTimeout(() => {
-      window.location.href = `dashboard.html?role=${encodeURIComponent(role)}`;
+      window.location.href = ['instructor','faculty'].includes(role) ? 'faculty.html' : role === 'employer' ? 'recruiter.html' : `dashboard.html?role=${encodeURIComponent(role)}`;
     }, 350);
   }, 500);
 };
@@ -292,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.setAuthRole = function(role, btn) {
   currentAuthRole = role;
+  updateAdminRoleNote();
   document.querySelectorAll('.role-pill-btn').forEach(b => b.classList.remove('active'));
   if (btn) {
     btn.classList.add('active');
@@ -309,9 +313,9 @@ window.toggleAuthMode = function(e) {
   if (e) e.preventDefault();
   const modal = document.getElementById('auth-modal');
   if (modal) {
-    openAuthModal('login');
+    openAuthModal('login', currentAuthRole);
   } else {
-    showLoginPageCard('login');
+    showLoginPageCard('login', null, currentAuthRole);
   }
 };
 
@@ -336,6 +340,7 @@ window.togglePasswordVisibility = function(inputId, btn) {
 };
 
 window.handleGoogleLogin = function() {
+  if (currentAuthRole === 'admin') { showToast('Use your approved Super Admin email and password. Google admin access is not configured.', 'info'); return; }
   const roleTitle = currentAuthRole ? currentAuthRole.toUpperCase() : 'STUDENT';
   showToast(`Authenticating via Google OAuth as ${roleTitle}...`, 'info');
   
@@ -355,7 +360,7 @@ window.handleGoogleLogin = function() {
     showToast(`Welcome back, ${defaultName}! Successfully authenticated.`, 'success');
     if (typeof closeAuthModal === 'function') closeAuthModal();
     setTimeout(() => {
-      window.location.href = 'dashboard.html';
+      window.location.href = ['instructor','faculty'].includes(currentAuthRole) ? 'faculty.html' : currentAuthRole === 'employer' ? 'recruiter.html' : 'dashboard.html';
     }, 400);
   }, 700);
 };
@@ -386,6 +391,7 @@ window.handleFormSubmit = async function(e) {
   const email = emailInput ? emailInput.value.trim() : '';
   const password = passInput ? passInput.value : '';
   const fullName = (fname || lname) ? `${fname} ${lname}`.trim() : 'John Doe';
+  if (currentAuthRole === 'admin') { await handleAdminAccess({ name: fullName, email, password, isSignUp: currentAuthMode === 'signup' }); return; }
 
   if (!email || !password) {
     showToast('Please provide your email address and password.', 'warning');
@@ -442,6 +448,9 @@ window.handleFormSubmit = async function(e) {
     role: finalRole
   }));
 
+  if (['instructor', 'faculty'].includes(finalRole)) { destUrl = isSignUp ? 'faculty.html?setup=1' : 'faculty.html'; }
+  if (finalRole === 'employer') { destUrl = isSignUp ? 'recruiter.html?setup=1' : 'recruiter.html'; }
+  if (finalRole === 'admin') { destUrl = 'super-admin.html'; }
   const actionText = isSignUp ? 'Account created' : 'Signed in';
   showToast(`${actionText} successfully! ${isSignUp ? 'Please complete your academic profile & document uploads...' : 'Redirecting to dashboard...'}`, 'success');
 
@@ -587,3 +596,42 @@ window.filterTestimonials = function(role, btn) {
   });
 };
 
+
+// Privileged role requests use the same forms; never mint local admin access.
+function updateAdminRoleNote() {
+  const admin = currentAuthRole === 'admin';
+  const signup = document.getElementById('signup-role-note');
+  const login = document.getElementById('login-role-note');
+  if (signup) { signup.hidden = !admin; signup.textContent = 'Super Admin registration requires platform-owner approval before access is enabled.'; }
+  if (login) { login.hidden = !admin; login.textContent = 'Sign in with your approved Super Admin account.'; }
+  const submit = document.getElementById('auth-action-submit-btn');
+  if (submit && currentAuthMode === 'signup') submit.textContent = admin ? 'REQUEST SUPER ADMIN ACCESS →' : 'CREATE ACCOUNT →';
+}
+async function handleAdminAccess({name, email, password, isSignUp}) {
+  if (!email || !password || (isSignUp && password.length < 8)) { showToast('Enter your email and a password of at least 8 characters.', 'warning'); return; }
+  const submit = document.getElementById(isSignUp ? 'auth-action-submit-btn' : 'login-submit-btn');
+  if (window.adminAuthBusy) return;
+  window.adminAuthBusy = true;
+  if (submit) submit.disabled = true;
+  try {
+    if (!window.TorpedoAPI) throw new Error('Connect the authentication service to use Super Admin accounts.');
+    const result = isSignUp
+      ? await TorpedoAPI.register({name, email, password, role:'admin'})
+      : await TorpedoAPI.login({email, password, role:'admin'});
+    if (!result?.success) throw new Error(result?.message || 'Super Admin access could not be verified.');
+    if (isSignUp) {
+      if (!result.access_pending) throw new Error('Super Admin registration must be approved by the platform owner.');
+      showToast(result.message || 'Super Admin access requested. Approval is pending.', 'info');
+      return;
+    }
+    if (result.user?.role !== 'admin') throw new Error('This account does not have Super Admin access.');
+    localStorage.setItem('torpedo_user', JSON.stringify(result.user));
+    showToast('Super Admin account verified.', 'success');
+    window.location.href = 'super-admin.html';
+  } catch (err) {
+    showToast(err.message || 'Super Admin access requires the authentication service.', 'warning');
+  } finally {
+    window.adminAuthBusy = false;
+    if (submit) submit.disabled = false;
+  }
+}

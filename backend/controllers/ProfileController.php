@@ -103,7 +103,7 @@ class ProfileController {
                 'email' => $email,
                 'college' => $data['institution'] ?? 'IIT Delhi',
                 'designation' => $data['designation'] ?? 'Professor & Chair',
-                'redirect_url' => 'dashboard.html?role=faculty'
+                'redirect_url' => 'faculty.html'
             ];
         }
 

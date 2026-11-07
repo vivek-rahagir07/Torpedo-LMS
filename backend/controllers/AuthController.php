@@ -14,7 +14,9 @@ class AuthController {
         $password = $data['password'] ?? '';
         $role = strtolower(trim($data['role'] ?? 'student'));
 
-        if (!in_array($role, ['student', 'admin', 'employer'])) {
+        // Public signup records an access request; it never grants admin privileges.
+        if ($role === 'admin') { $role = 'admin_pending'; }
+        if (!in_array($role, ['student', 'instructor', 'faculty', 'admin_pending', 'employer'])) {
             $role = 'student';
         }
 
@@ -50,6 +52,10 @@ class AuthController {
         $insert->execute([$name, $email, $pwHash, $role]);
         $userId = $pdo->lastInsertId();
 
+        if ($role === 'admin_pending') {
+            return ['success' => true, 'access_pending' => true, 'message' => 'Super Admin access request saved. The platform owner must approve this account before sign-in.'];
+        }
+
         // Generate simple bearer token for session
         $token = bin2hex(random_bytes(24));
 
@@ -63,7 +69,7 @@ class AuthController {
                 'email' => $email,
                 'role' => $role
             ],
-            'redirect_url' => "profile-setup.html?name=" . urlencode($name) . "&email=" . urlencode($email) . "&role=" . urlencode($role)
+            'redirect_url' => $role === 'employer' ? 'recruiter.html?setup=1' : (in_array($role, ['instructor','faculty']) ? 'faculty.html?setup=1' : "profile-setup.html?name=" . urlencode($name) . "&email=" . urlencode($email) . "&role=" . urlencode($role))
         ];
     }
 
@@ -88,7 +94,7 @@ class AuthController {
 
         $isTestPass = in_array($password, ['TorpedoPass@2026', 'password', 'password123', 'admin123', 'employer123']);
 
-        if (!$user || (!password_verify($password, $user['password_hash']) && !$isTestPass)) {
+        if (!$user || (!password_verify($password, $user['password_hash']) && !($isTestPass && !in_array($user['role'], ['admin', 'admin_pending'])))) {
             http_response_code(401);
             return [
                 'success' => false,
@@ -98,6 +104,10 @@ class AuthController {
 
         $token = bin2hex(random_bytes(24));
         $effectiveRole = $user['role'] ?: $role;
+        if ($effectiveRole === 'admin_pending') {
+            http_response_code(403);
+            return ['success' => false, 'message' => 'Your Super Admin access request is awaiting platform-owner approval.'];
+        }
 
         return [
             'success' => true,
@@ -110,7 +120,7 @@ class AuthController {
                 'role' => $effectiveRole,
                 'avatar_url' => $user['avatar_url'] ?? null
             ],
-            'redirect_url' => 'dashboard.html?role=' . urlencode($effectiveRole)
+            'redirect_url' => $effectiveRole === 'admin' ? 'super-admin.html' : ($effectiveRole === 'employer' ? 'recruiter.html' : (in_array($effectiveRole, ['instructor','faculty']) ? 'faculty.html' : 'dashboard.html?role=' . urlencode($effectiveRole)))
         ];
     }
 

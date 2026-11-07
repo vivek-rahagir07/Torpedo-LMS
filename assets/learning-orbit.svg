@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" fill="none">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#fff"/><stop offset="1" stop-color="#a5b4fc"/></linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#64ebdf"/><stop offset="1" stop-color="#5492ff"/></linearGradient>
+    <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" stroke="#9daaff" stroke-opacity=".19"/></pattern>
+  </defs>
+  <circle cx="300" cy="196" r="156" fill="url(#grid)"/>
+  <g stroke="#a5b4fc" stroke-opacity=".38"><circle cx="300" cy="196" r="138"/><circle cx="300" cy="196" r="172" stroke-dasharray="3 9"/><ellipse cx="300" cy="196" rx="231" ry="83" transform="rotate(-19 300 196)"/></g>
+  <path d="m152 241 153 75 145-74-145-71z" fill="#0b153b" opacity=".65"/>
+  <path d="m152 216 153 75 145-74v17l-145 76-153-77z" fill="#6175eb"/>
+  <path d="m152 216 153 75 145-74-145-70z" fill="#98a7ff"/>
+  <path d="M185 132q68-19 120 28 52-47 120-28v95q-66-17-120 29-54-46-120-29z" fill="url(#paper)"/>
+  <path d="M305 161v94M211 156q45-5 73 18m-73 4q45-5 73 18m-73 4q45-5 73 18m43-44q28-23 73-18m-73 40q28-23 73-18m-73 40q28-23 73-18" stroke="#5768c6" stroke-width="4" stroke-linecap="round"/>
+  <rect x="350" y="71" width="96" height="69" rx="17" fill="url(#tile)" transform="rotate(8 350 71)"/>
+  <path d="m382 99-13 9 11 11m36-16 10 11-13 9m-13-25-8 25" stroke="#142254" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="135" cy="146" r="20" fill="#a99aff"/><circle cx="469" cy="250" r="8" fill="#6ee9d8"/><circle cx="207" cy="67" r="6" fill="#ffcda3"/>
+  <path d="M115 270v28m-14-14h28m362-154v18m-9-9h18" stroke="#b6bcff" stroke-width="3" stroke-linecap="round"/>
+</svg>

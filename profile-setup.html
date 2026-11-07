@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script>(function(){var q=new URLSearchParams(location.search);var u={};try{u=JSON.parse(localStorage.getItem('torpedo_user')||'{}')}catch(e){}if((q.get('role')||u.role)==='employer'){location.replace('recruiter.html?setup=1');return}if(['instructor','faculty'].includes(q.get('role')||u.role)){location.replace('faculty.html?setup=1')}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Onboarding | Torpedo Learning</title>
@@ -553,7 +553,9 @@
       padding-left: 42px !important;
     }
   </style>
-</head>
+  <link rel="stylesheet" href="css/torpedo-refresh.css">
+  <script defer src="js/torpedo-refresh.js"></script>
+<script src="js/platform-bridge.js"></script></head>
 <body class="student-onboarding-body">
 
   <!-- Top Progress & Header Bar (Matching Image 1) -->
@@ -1186,6 +1188,7 @@
 
       // Save to localStorage
       localStorage.setItem('torpedo_user', JSON.stringify(studentData));
+      window.TorpedoPlatform?.recordProfile({...studentData,role:'Student'});
 
       // Try backend API persistence
       try {

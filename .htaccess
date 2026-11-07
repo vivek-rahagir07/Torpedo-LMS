@@ -1,0 +1,66 @@
+# ==============================================================================
+# Torpedo LMS - Hostinger Production Apache / LiteSpeed Configuration
+# ==============================================================================
+
+# 1. Basic Options
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 2. Security: Deny direct access to sensitive files
+    <FilesMatch "\.(sqlite|sqlite3|db|sql|log|env|git|md|sh|bak)$">
+        Require all denied
+    </FilesMatch>
+
+    # 3. Route all API requests (/api/*) to backend/api.php
+    RewriteRule ^api(?:/(.*))?$ backend/api.php?api_route=$1 [QSA,L]
+
+    # 4. Clean URL Rewrites for Core Pages
+    RewriteRule ^login/?$ index.html#login [NE,R=302,L]
+    RewriteRule ^dashboard/?$ dashboard.html [L]
+    RewriteRule ^jobs/?$ jobs.html [L]
+    RewriteRule ^hackathons/?$ hackathons.html [L]
+    RewriteRule ^courses/?$ courses.html [L]
+    RewriteRule ^lifecode/?$ lifecode.html [L]
+    RewriteRule ^certifications/?$ certifications.html [L]
+    RewriteRule ^recruiter/?$ recruiter.html [L]
+    RewriteRule ^super-admin/?$ super-admin.html [L]
+    RewriteRule ^faculty/?$ faculty.html [L]
+    RewriteRule ^profile-setup/?$ profile-setup.html [L]
+
+    # 5. Automatically resolve extension-less HTML files
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^([^/]+)/?$ $1.html [L]
+
+    # 6. Fallback for physical files and directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+</IfModule>
+
+# 7. Protect backend directories from direct indexing
+<IfModule mod_autoindex.c>
+    IndexIgnore *
+</IfModule>
+
+# 8. MIME Types for Modern Web Assets
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType image/svg+xml .svg .svgz
+    AddType font/woff2 .woff2
+    AddType application/json .json
+</IfModule>
+
+# 9. Gzip / Deflate Compression for Fast Page Loads on Hostinger
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# 10. Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

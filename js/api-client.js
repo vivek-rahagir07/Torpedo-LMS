@@ -5,7 +5,17 @@
  */
 
 const TorpedoAPI = (function() {
-  const BASE_URL = '/api';
+  // Auto-detect base API path (seamlessly supports root domain or any Hostinger subfolder)
+  const getBaseUrl = () => {
+    if (typeof window === 'undefined' || window.location.protocol === 'file:') return '/api';
+    const pathname = window.location.pathname || '';
+    const dir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+    if (dir && dir !== '/') {
+      return `${dir.replace(/\/+$/, '')}/api`;
+    }
+    return '/api';
+  };
+  const BASE_URL = getBaseUrl();
 
   // Helper for JSON requests
   async function request(endpoint, options = {}) {

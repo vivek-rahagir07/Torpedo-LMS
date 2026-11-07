@@ -12,9 +12,23 @@ class Database {
             $dbPath = $dbDir . '/torpedo.sqlite';
             $isNew = !file_exists($dbPath);
 
+            // Ensure directory & DB file have write permissions for SQLite locks on Hostinger
+            if (!is_writable($dbDir)) {
+                @chmod($dbDir, 0775);
+            }
+            if (file_exists($dbPath) && !is_writable($dbPath)) {
+                @chmod($dbPath, 0664);
+            }
+
             self::$instance = new PDO("sqlite:" . $dbPath);
             self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+            // Enable WAL mode & busy timeout for concurrent web requests
+            try {
+                self::$instance->exec("PRAGMA journal_mode = WAL;");
+                self::$instance->exec("PRAGMA busy_timeout = 5000;");
+            } catch (Throwable $e) {}
 
             if ($isNew) {
                 self::initializeSchema();

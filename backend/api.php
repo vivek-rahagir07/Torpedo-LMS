@@ -29,12 +29,16 @@ require_once __DIR__ . '/controllers/HackathonsController.php';
 Database::getConnection();
 
 // Parse URI
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
-// Normalize path: strip prefix if needed
-$path = preg_replace('#^/api/#', '', $uri);
-$path = trim($path, '/');
+// Normalize path: support direct rewrite, query param, or subfolder deployment
+if (!empty($_GET['api_route'])) {
+    $path = trim($_GET['api_route'], '/');
+} else {
+    $path = preg_replace('#^.*?api(?:\.php)?(?:/|$)#', '', $uri);
+    $path = trim($path, '/');
+}
 
 // Parse JSON request body if present
 $inputJson = json_decode(file_get_contents('php://input'), true) ?: [];

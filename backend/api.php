@@ -4,9 +4,11 @@
  */
 
 // Enable CORS
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+if (!headers_sent()) {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -38,7 +40,9 @@ $path = trim($path, '/');
 $inputJson = json_decode(file_get_contents('php://input'), true) ?: [];
 $requestData = array_merge($_GET, $_POST, $inputJson);
 
-header('Content-Type: application/json; charset=utf-8');
+if (!headers_sent()) {
+    header('Content-Type: application/json; charset=utf-8');
+}
 
 try {
     $response = null;
@@ -140,7 +144,7 @@ try {
 
         case 'jobs/get':
             if ($method === 'GET') {
-                $jobId = (int)($requestData['id'] ?? 1);
+                $jobId = trim($requestData['id'] ?? 'job-rzp-01');
                 $response = JobsController::getById($jobId);
             }
             break;

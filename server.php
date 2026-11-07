@@ -38,7 +38,7 @@ if (strpos($uri, '/storage/') === 0) {
 // 3. Pretty URLs
 $routes = [
     '/' => 'index.html',
-    '/login' => 'login.html',
+    '/login' => 'index.html',
     '/dashboard' => 'dashboard.html',
     '/profile-setup' => 'profile-setup.html',
     '/courses' => 'courses.html',

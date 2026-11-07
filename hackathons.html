@@ -643,6 +643,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="js/api-client.js"></script>
   <script src="js/hackathons-data.js"></script>
   <script>
     /* ========================================================================
@@ -681,9 +682,42 @@
     }
 
     // Initialize Page
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       applyFilters();
       updateTeamsCounter();
+
+      // Sync user hackathons from backend
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
+        if (window.TorpedoAPI && window.TorpedoAPI.getUserHackathons) {
+          const res = await window.TorpedoAPI.getUserHackathons(userEmail);
+          if (res && res.success && Array.isArray(res.teams) && res.teams.length > 0) {
+            res.teams.forEach(t => {
+              if (!registeredTeams.some(rt => rt.hackathonId === t.hackathon_id)) {
+                registeredTeams.push({
+                  id: `team-${t.id}`,
+                  hackathonId: t.hackathon_id,
+                  hackathonTitle: t.hackathon_title || 'National Code Sprint',
+                  teamName: t.team_name,
+                  track: 'General Track',
+                  status: t.status || 'Active Team',
+                  statusClass: 'status-active',
+                  repoUrl: 'https://github.com/torpedo-students/squad-repo',
+                  members: [{ name: t.lead_name || 'Vivek Yadav', role: 'Captain', roll: '22002170310065' }],
+                  submissionStatus: 'Registered (In Ideation)',
+                  submittedAt: t.registered_at || 'Recent'
+                });
+              }
+            });
+            saveTeamsToStorage();
+            updateTeamsCounter();
+            applyFilters();
+          }
+        }
+      } catch (err) {
+        console.warn('Backend hackathons sync:', err);
+      }
     });
 
     // Search & Filter Handlers
@@ -1138,6 +1172,24 @@
       updateTeamsCounter();
       closeHackRegisterModal();
       applyFilters();
+
+      // Dispatch team registration to Torpedo backend API
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
+        const userName = currentUser.name || 'Vivek Yadav';
+        if (window.TorpedoAPI && window.TorpedoAPI.registerHackathonTeam) {
+          window.TorpedoAPI.registerHackathonTeam({
+            hackathon_id: hack.id,
+            team_name: teamName,
+            lead_email: userEmail,
+            lead_name: userName,
+            project_title: 'Torpedo Scalable Systems Track',
+            members: newTeam.members
+          }).catch(err => console.warn('Backend hackathon sync:', err));
+        }
+      } catch (e) {}
+
       showToast(`Team '${teamName}' registered for ${hack.title}! Discord invite sent. 🚀`, 'success');
     }
 

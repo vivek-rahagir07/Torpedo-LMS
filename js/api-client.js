@@ -134,6 +134,68 @@ const TorpedoAPI = (function() {
         method: 'POST',
         body: JSON.stringify({ language, code })
       });
+    },
+
+    /**
+     * Get Jobs List with Filtering
+     */
+    async getJobs(filters = {}) {
+      const params = new URLSearchParams();
+      if (filters.search) params.append('search', filters.search);
+      if (filters.batch) params.append('batch', filters.batch);
+      if (filters.mode) params.append('mode', filters.mode);
+      if (filters.type) params.append('type', filters.type);
+      if (filters.email) params.append('email', filters.email);
+      const query = params.toString() ? `?${params.toString()}` : '';
+      return await request(`jobs${query}`, { method: 'GET' });
+    },
+
+    /**
+     * Get Job Details by ID
+     */
+    async getJob(id) {
+      return await request(`jobs/get?id=${encodeURIComponent(id)}`, { method: 'GET' });
+    },
+
+    /**
+     * Apply for a Job
+     */
+    async applyJob({ job_id, user_email, candidate_name }) {
+      return await request('jobs/apply', {
+        method: 'POST',
+        body: JSON.stringify({ job_id, user_email, candidate_name })
+      });
+    },
+
+    /**
+     * Get Candidate's Job Applications
+     */
+    async getJobApplications(email) {
+      return await request(`jobs/applications?email=${encodeURIComponent(email)}`, { method: 'GET' });
+    },
+
+    /**
+     * Get Hackathons Catalog
+     */
+    async getHackathons() {
+      return await request('hackathons', { method: 'GET' });
+    },
+
+    /**
+     * Register Team for Hackathon
+     */
+    async registerHackathonTeam({ hackathon_id, team_name, lead_email, lead_name, project_title, members = [] }) {
+      return await request('hackathons/register', {
+        method: 'POST',
+        body: JSON.stringify({ hackathon_id, team_name, lead_email, lead_name, project_title, members })
+      });
+    },
+
+    /**
+     * Get User's Hackathon Squads
+     */
+    async getUserHackathons(email) {
+      return await request(`hackathons/teams?email=${encodeURIComponent(email)}`, { method: 'GET' });
     }
   };
 })();

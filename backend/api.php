@@ -20,6 +20,8 @@ require_once __DIR__ . '/controllers/CoursesController.php';
 require_once __DIR__ . '/controllers/DashboardController.php';
 require_once __DIR__ . '/controllers/SandboxController.php';
 require_once __DIR__ . '/controllers/ProblemsController.php';
+require_once __DIR__ . '/controllers/JobsController.php';
+require_once __DIR__ . '/controllers/HackathonsController.php';
 
 // Ensure DB is initialized
 Database::getConnection();
@@ -109,7 +111,7 @@ try {
 
         case 'auth/me':
             if ($method === 'GET') {
-                $email = $requestData['email'] ?? 'alex.rivera@torpedo.edu';
+                $email = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
                 $response = AuthController::me($email);
             }
             break;
@@ -123,9 +125,56 @@ try {
 
         case 'profile':
             if ($method === 'GET') {
-                $email = $requestData['email'] ?? 'alex.rivera@torpedo.edu';
+                $email = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
                 $role = $requestData['role'] ?? 'student';
                 $response = ProfileController::getProfile($email, $role);
+            }
+            break;
+
+        // --- JOBS & PLACEMENTS ---
+        case 'jobs':
+            if ($method === 'GET') {
+                $response = JobsController::getAll($requestData);
+            }
+            break;
+
+        case 'jobs/get':
+            if ($method === 'GET') {
+                $jobId = (int)($requestData['id'] ?? 1);
+                $response = JobsController::getById($jobId);
+            }
+            break;
+
+        case 'jobs/apply':
+            if ($method === 'POST') {
+                $response = JobsController::apply($requestData);
+            }
+            break;
+
+        case 'jobs/applications':
+            if ($method === 'GET') {
+                $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $response = JobsController::getUserApplications($userEmail);
+            }
+            break;
+
+        // --- HACKATHONS ---
+        case 'hackathons':
+            if ($method === 'GET') {
+                $response = HackathonsController::getAll();
+            }
+            break;
+
+        case 'hackathons/register':
+            if ($method === 'POST') {
+                $response = HackathonsController::registerTeam($requestData);
+            }
+            break;
+
+        case 'hackathons/teams':
+            if ($method === 'GET') {
+                $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $response = HackathonsController::getUserTeams($userEmail);
             }
             break;
 

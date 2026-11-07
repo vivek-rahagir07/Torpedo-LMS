@@ -151,7 +151,7 @@ function calculateSkillMastery(student) {
 }
 
 const student = {
-  name: "Alex Rivera",
+  name: "Vivek Yadav",
   completedModules: 94,
   sandboxCommits: 88,
   mockScore: 92

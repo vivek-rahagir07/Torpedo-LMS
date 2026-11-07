@@ -43,7 +43,7 @@ class DashboardController {
                         'fullName' => "{$s['first_name']} {$s['last_name']}",
                         'email' => $s['email'],
                         'phone' => $s['phone'],
-                        'avatar' => $s['avatar_path'] ?: 'assets/tharindu_avatar.jpg',
+                        'avatar' => $s['avatar_path'] ?: 'assets/avatars/robot1.svg',
                         'college' => $s['grad_college'] ?: 'Faculty of Engineering, University of Ruhuna',
                         'degree' => $s['grad_degree'] ?: 'B.Sc. (Hons) Engineering',
                         'branch' => $s['grad_branch'] ?: 'Computer Engineering',
@@ -103,57 +103,75 @@ class DashboardController {
         }
 
         // ---------------------------------------------------------------------
-        // 3. STUDENT (Tharindu Damsara - Private Own-Profile Access Only)
+        // 3. STUDENT (Vivek Yadav - Real Database Metrics & Academic Dossier)
         // ---------------------------------------------------------------------
+        $studentEmail = $email ?: 'vivek.hr362007@gmail.com';
         $stmt = $pdo->prepare("SELECT * FROM candidate_profiles WHERE email = ?");
-        $stmt->execute([$email ?: 'eg22343@engug.ruh.ac.lk']);
+        $stmt->execute([$studentEmail]);
         $prof = $stmt->fetch();
+
+        // Real counts from database
+        $enrollStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM enrollments WHERE user_email = ?");
+        $enrollStmt->execute([$studentEmail]);
+        $enrolledCount = (int)($enrollStmt->fetch()['cnt'] ?? 3);
+
+        $solvedStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM user_solved_problems WHERE user_email = ?");
+        $solvedStmt->execute([$studentEmail]);
+        $solvedCount = (int)($solvedStmt->fetch()['cnt'] ?? 14);
+
+        $appStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM job_applications WHERE user_email = ?");
+        $appStmt->execute([$studentEmail]);
+        $appsCount = (int)($appStmt->fetch()['cnt'] ?? 1);
+
+        $teamStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM hackathon_teams WHERE lead_email = ?");
+        $teamStmt->execute([$studentEmail]);
+        $teamsCount = (int)($teamStmt->fetch()['cnt'] ?? 1);
 
         return [
             'success' => true,
             'role' => 'student',
-            'fullName' => $prof ? "{$prof['first_name']} {$prof['last_name']}" : 'Tharindu Damsara',
-            'email' => $prof['email'] ?? 'eg22343@engug.ruh.ac.lk',
-            'college' => $prof['grad_college'] ?? 'Faculty of Engineering, University of Ruhuna',
-            'degree' => $prof['grad_degree'] ?? 'B.Sc. (Hons) Engineering',
-            'branch' => $prof['grad_branch'] ?? 'Computer Engineering',
-            'cgpa' => $prof['grad_cgpa'] ?? '3.88 GPA (First Class Honours)',
+            'fullName' => $prof ? "{$prof['first_name']} {$prof['last_name']}" : 'Vivek Yadav',
+            'email' => $prof['email'] ?? $studentEmail,
+            'college' => $prof['grad_college'] ?? 'Gujarat Technological University (GTU), Ahmedabad',
+            'degree' => $prof['grad_degree'] ?? 'B.Tech in Computer Science & Engineering',
+            'branch' => $prof['grad_branch'] ?? 'Computer Science & Engineering',
+            'cgpa' => $prof['grad_cgpa'] ?? '8.85 CGPA',
             'track' => $prof['track'] ?? 'Full-Stack Distributed Systems & Microservices',
-            'avatarUrl' => 'assets/tharindu_avatar.jpg',
+            'avatarUrl' => $prof['avatar_path'] ?? 'assets/avatars/robot1.svg',
             'metrics' => [
-                ['label' => 'Enrolled Tracks', 'val' => '3', 'sub' => 'Active SDE'],
-                ['label' => 'Sandbox Labs Solved', 'val' => '18 / 24', 'sub' => 'Passed'],
-                ['label' => 'ATS Placement Score', 'val' => '94.8', 'sub' => 'Top 2%'],
-                ['label' => 'Partner Shortlists', 'val' => '3', 'sub' => 'Interviews']
+                ['label' => 'Enrolled Courses', 'val' => (string)$enrolledCount, 'sub' => 'Active Tracks'],
+                ['label' => 'Solved Algorithms', 'val' => "{$solvedCount} / 520", 'sub' => 'Lifecode Benchmark'],
+                ['label' => 'Torpedo Placement Score', 'val' => '640 TRP', 'sub' => 'Top 2.4% LMS Cohort'],
+                ['label' => 'Partner Applications', 'val' => "{$appsCount} Active", 'sub' => 'Fast-Track Routing']
             ],
             'verifiedDocuments' => [
                 [
-                    'title' => '10th Standard Secondary Marksheet / GCE O/L',
+                    'title' => '10th Standard Secondary Marksheet (CBSE)',
                     'filename' => $prof['tenth_cert_path'] ? basename($prof['tenth_cert_path']) : 'tenth_marksheet.pdf',
-                    'meta' => ($prof['tenth_percentage'] ?? '94.2%') . ' (' . ($prof['tenth_board'] ?? 'National O/L') . ')',
+                    'meta' => ($prof['tenth_percentage'] ?? '94.6%') . ' (' . ($prof['tenth_board'] ?? 'CBSE') . ')',
                     'badge' => '✓ VERIFIED',
-                    'url' => $prof['tenth_cert_path'] ?? null
+                    'url' => $prof['tenth_cert_path'] ?? 'storage/uploads/certificates/tenth_marksheet.pdf'
                 ],
                 [
-                    'title' => '12th Standard Higher Secondary / GCE A/L',
+                    'title' => '12th Standard Higher Secondary Marksheet (CBSE)',
                     'filename' => $prof['twelfth_cert_path'] ? basename($prof['twelfth_cert_path']) : '12th_marksheet.pdf',
-                    'meta' => ($prof['twelfth_percentage'] ?? '92.5%') . ' (' . ($prof['twelfth_stream'] ?? 'Physical Science & Math') . ')',
+                    'meta' => ($prof['twelfth_percentage'] ?? '92.8%') . ' (' . ($prof['twelfth_stream'] ?? 'Science PCM') . ')',
                     'badge' => '✓ VERIFIED',
-                    'url' => $prof['twelfth_cert_path'] ?? null
+                    'url' => $prof['twelfth_cert_path'] ?? 'storage/uploads/certificates/12th_marksheet.pdf'
                 ],
                 [
-                    'title' => 'Undergraduate Degree / Consolidated Marksheet',
+                    'title' => 'Graduation Degree / Transcript Record (GTU)',
                     'filename' => $prof['grad_cert_path'] ? basename($prof['grad_cert_path']) : 'degree_certificate.pdf',
-                    'meta' => ($prof['grad_cgpa'] ?? '3.88 GPA') . ' (' . ($prof['grad_college'] ?? 'Univ of Ruhuna') . ')',
+                    'meta' => ($prof['grad_cgpa'] ?? '8.85 CGPA') . ' (' . ($prof['grad_college'] ?? 'GTU Ahmedabad') . ')',
                     'badge' => '✓ VERIFIED',
-                    'url' => $prof['grad_cert_path'] ?? null
+                    'url' => $prof['grad_cert_path'] ?? 'storage/uploads/certificates/degree_certificate.pdf'
                 ],
                 [
-                    'title' => 'Candidate ATS Resume (PDF)',
-                    'filename' => $prof['resume_path'] ? basename($prof['resume_path']) : 'tharindu_damsara_resume.pdf',
-                    'meta' => 'Active Placement Document',
+                    'title' => 'Official Placement Dossier & Resume (PDF)',
+                    'filename' => $prof['resume_path'] ? basename($prof['resume_path']) : 'vivek_yadav_resume.pdf',
+                    'meta' => 'Active ATS Verified Document',
                     'badge' => 'ACTIVE ATS',
-                    'url' => $prof['resume_path'] ?? null
+                    'url' => $prof['resume_path'] ?? 'storage/uploads/resumes/vivek_yadav_resume.pdf'
                 ]
             ]
         ];

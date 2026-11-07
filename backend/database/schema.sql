@@ -170,3 +170,106 @@ CREATE TABLE IF NOT EXISTS enrollments (
     progress_percentage INTEGER DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS jobs (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    company TEXT NOT NULL,
+    company_logo TEXT,
+    location TEXT NOT NULL,
+    work_mode TEXT NOT NULL, -- 'Remote' | 'On-site' | 'Hybrid'
+    job_type TEXT NOT NULL,  -- 'Internship' | 'Full-Time'
+    stipend TEXT NOT NULL,
+    batch TEXT NOT NULL,
+    description TEXT NOT NULL,
+    skills TEXT NOT NULL,    -- JSON array
+    match_score INTEGER DEFAULT 95,
+    applicants_count INTEGER DEFAULT 0,
+    urgent INTEGER DEFAULT 0,
+    days_left INTEGER DEFAULT 7,
+    posted_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS job_applications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_id TEXT NOT NULL,
+    user_email TEXT NOT NULL,
+    candidate_name TEXT NOT NULL,
+    match_score INTEGER DEFAULT 95,
+    status TEXT DEFAULT 'Under Review', -- 'Applied' | 'Under Review' | 'Shortlisted' | 'Offered'
+    applied_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(job_id) REFERENCES jobs(id)
+);
+
+CREATE TABLE IF NOT EXISTS hackathons (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    organizer TEXT NOT NULL,
+    banner_img TEXT,
+    prize_pool TEXT NOT NULL,
+    format TEXT NOT NULL, -- 'Online' | 'Hybrid' | 'In-Person'
+    domain TEXT NOT NULL, -- 'Web3' | 'AI & LLM' | 'Fintech' | 'Cloud'
+    start_date TEXT NOT NULL,
+    duration TEXT NOT NULL,
+    participants_count INTEGER DEFAULT 0,
+    status TEXT DEFAULT 'Open', -- 'Open' | 'Ongoing' | 'Upcoming' | 'Closed'
+    description TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS hackathon_teams (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hackathon_id TEXT NOT NULL,
+    team_name TEXT NOT NULL,
+    lead_email TEXT NOT NULL,
+    lead_name TEXT NOT NULL,
+    members_json TEXT,
+    project_title TEXT,
+    status TEXT DEFAULT 'Registered',
+    registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(hackathon_id) REFERENCES hackathons(id)
+);
+
+CREATE TABLE IF NOT EXISTS problems (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    difficulty TEXT NOT NULL,
+    category TEXT NOT NULL,
+    tags TEXT NOT NULL,
+    acceptance_rate TEXT NOT NULL,
+    likes INTEGER DEFAULT 0,
+    dislikes INTEGER DEFAULT 0,
+    description TEXT NOT NULL,
+    constraints TEXT NOT NULL,
+    hints TEXT NOT NULL,
+    starter_codes TEXT NOT NULL,
+    testcases TEXT NOT NULL,
+    hidden_testcases TEXT NOT NULL,
+    editorial TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS problem_submissions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_email TEXT NOT NULL,
+    problem_id INTEGER NOT NULL,
+    language TEXT NOT NULL,
+    code TEXT NOT NULL,
+    status TEXT NOT NULL,
+    runtime_ms INTEGER DEFAULT 0,
+    memory_mb REAL DEFAULT 0.0,
+    tests_passed INTEGER DEFAULT 0,
+    total_tests INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_solved_problems (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_email TEXT NOT NULL,
+    problem_id INTEGER NOT NULL,
+    solved_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_email, problem_id)
+);
+
+

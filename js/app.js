@@ -208,64 +208,80 @@ window.showLoginPageCard = function(mode = 'login', event = null, role = 'studen
   }
 };
 
-window.handleLoginFormSubmit = function(event) {
+window.handleLoginFormSubmit = async function(event) {
   if (event) event.preventDefault();
   const emailInput = document.getElementById('login-email');
+  const passwordInput = document.getElementById('login-password');
   const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : 'vivek.hr362007@gmail.com';
+  const password = passwordInput && passwordInput.value ? passwordInput.value : 'TorpedoPass@2026';
   
   let role = currentAuthRole || 'student';
-  if (role === 'admin') { handleAdminAccess({ email, password: document.getElementById('login-password')?.value || '', isSignUp: false }); return; }
-  if (role === 'instructor' || role === 'faculty') role = 'instructor';
-  else if (role !== 'employer') role = 'student';
-
-  let name = 'Vivek Yadav';
-  let avatar = 'assets/avatars/robot1.svg';
-
-  if (role === 'instructor' || role === 'faculty') {
-    name = 'Faculty Instructor';
-    avatar = 'assets/avatars/robot1.svg';
-  } else if (role === 'admin') {
-    name = 'Super Admin';
-    avatar = 'assets/admin_avatar.jpg';
-  } else if (role === 'employer') {
-    name = 'Vivek (Corporate Partner)';
-    avatar = 'assets/employer_avatar.jpg';
-  } else {
-    name = 'Vivek Yadav';
-    avatar = 'assets/avatars/robot1.svg';
+  if (role === 'admin') { 
+    handleAdminAccess({ email, password, isSignUp: false }); 
+    return; 
   }
+  if (role === 'faculty') role = 'instructor';
 
-  showToast(`Authenticating as ${name} (${role.toUpperCase()})...`, 'info');
+  showToast(`Authenticating with Torpedo backend...`, 'info');
 
-  const userData = {
-    name: name,
-    firstName: name.split(' ')[0],
-    lastName: name.split(' ').slice(1).join(' ') || '',
-    email: email,
-    role: role,
-    avatar: avatar,
-    college: 'Gujarat Technological University (GTU), Ahmedabad',
-    degree: 'B.Tech / B.E (Bachelor of Technology / Engineering)',
-    branch: 'Computer Science & Engineering (CSE)',
-    semester: '3rd Year (Semester 6)',
-    gradYear: '2026',
-    cgpa: '8.85',
-    roll: 'GTU-2022-CS-0849',
-    bio: 'Aspiring DevOps & Cloud Engineer eager to build production-grade scalable systems.'
-  };
-  localStorage.setItem('torpedo_user', JSON.stringify(userData));
-  window.TorpedoPlatform?.recordProfile(userData);
+  try {
+    let result = null;
+    if (window.TorpedoAPI) {
+      result = await window.TorpedoAPI.login({ email, password, role });
+    }
 
-  setTimeout(() => {
-    showToast(`Welcome back, ${userData.name}! Successfully authenticated.`, 'success');
-    if (typeof closeAuthModal === 'function') closeAuthModal();
-    setTimeout(() => {
-      window.location.href = ['instructor','faculty'].includes(role) ? 'faculty.html' : role === 'employer' ? 'recruiter.html' : `dashboard.html?role=${encodeURIComponent(role)}`;
-    }, 350);
-  }, 500);
+    if (result && result.success) {
+      const user = result.user;
+      localStorage.setItem('torpedo_token', result.token);
+      
+      // Fetch dynamic profile to keep verified candidate metrics in sync
+      let fullProfile = null;
+      try {
+        const profRes = await window.TorpedoAPI.getProfile(user.email, user.role);
+        if (profRes && profRes.success && profRes.profile) {
+          fullProfile = profRes.profile;
+        }
+      } catch (err) {
+        console.warn('Profile fetch note:', err);
+      }
+
+      const isStudent = user.role === 'student';
+      const userData = {
+        name: user.name,
+        firstName: user.name.split(' ')[0],
+        lastName: user.name.split(' ').slice(1).join(' ') || '',
+        email: user.email,
+        role: user.role,
+        avatar: user.avatar_url || (user.role === 'employer' ? 'assets/employer_avatar.jpg' : 'assets/avatars/robot1.svg'),
+        college: fullProfile ? (fullProfile.grad_college || fullProfile.institution || 'Gujarat Technological University (GTU), Ahmedabad') : 'Gujarat Technological University (GTU), Ahmedabad',
+        degree: fullProfile ? (fullProfile.grad_degree || 'B.Tech in Computer Science & Engineering') : 'B.Tech in Computer Science & Engineering',
+        branch: fullProfile ? (fullProfile.grad_branch || 'Computer Science & Engineering') : 'Computer Science & Engineering',
+        semester: '3rd Year (Semester 6)',
+        gradYear: fullProfile ? (fullProfile.grad_year || '2026') : '2026',
+        cgpa: fullProfile ? (fullProfile.grad_cgpa || '8.85') : '8.85',
+        roll: 'GTU-2022-CS-0849',
+        track: fullProfile ? (fullProfile.track || 'Full-Stack Distributed Systems & Microservices') : 'Full-Stack Distributed Systems & Microservices'
+      };
+
+      localStorage.setItem('torpedo_user', JSON.stringify(userData));
+      if (window.TorpedoPlatform?.recordProfile) {
+        window.TorpedoPlatform.recordProfile(userData);
+      }
+
+      showToast(`Welcome back, ${userData.name}! Successfully authenticated.`, 'success');
+      if (typeof closeAuthModal === 'function') closeAuthModal();
+      setTimeout(() => {
+        window.location.href = result.redirect_url || (['instructor','faculty'].includes(user.role) ? 'faculty.html' : user.role === 'employer' ? 'recruiter.html' : `dashboard.html?role=${encodeURIComponent(user.role)}`);
+      }, 350);
+    } else {
+      showToast(result?.message || 'Authentication failed. Please verify credentials.', 'error');
+    }
+  } catch (err) {
+    showToast(err.message || 'Login failed. Please check your credentials.', 'error');
+  }
 };
 
-// Close on backdrop click
+// Close on backdrop click and check hash/query for modal open
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('auth-modal');
   if (modal) {
@@ -283,12 +299,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // URL query check on standalone login.html
-  if (window.location.pathname.includes('login.html') || document.querySelector('.login-page-body')) {
-    if (window.location.search.includes('mode=signup') || window.location.search.includes('mode=register')) {
-      showLoginPageCard('signup');
-    } else {
-      showLoginPageCard('login');
+  // Auto open modal when visiting #login or ?login=1 or #signup
+  const hash = window.location.hash;
+  const search = window.location.search;
+  if (hash === '#login' || search.includes('login=1') || search.includes('mode=login')) {
+    if (typeof openAuthModal === 'function') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const roleParam = urlParams.get('role') || 'student';
+      openAuthModal('login', roleParam);
+    }
+  } else if (hash === '#signup' || search.includes('signup=1') || search.includes('mode=signup')) {
+    if (typeof openAuthModal === 'function') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const roleParam = urlParams.get('role') || 'student';
+      openAuthModal('signup', roleParam);
     }
   }
 });

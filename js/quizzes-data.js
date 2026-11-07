@@ -1301,7 +1301,7 @@ const FACULTY_COURSE_QUIZZES = {
     aliases: ['ALGO-VIVA', 'DSA302'],
     courseName: 'Data Structures & Algorithms Mastery',
     courseId: 'c2',
-    faculty: 'Prof. Tharindu Senanayake (Principal DSA Lead)',
+    faculty: 'Prof. Dr. Vikram Malhotra (Principal DSA Lead)',
     facultyAvatar: 'assets/avatars/avatar2.svg',
     title: 'Advanced Algorithms & Graph Theory: Faculty Lab Quiz',
     category: 'dsa',

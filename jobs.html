@@ -1744,6 +1744,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="js/api-client.js"></script>
   <script src="js/jobs-data.js"></script>
   <script>
     /* ========================================================================
@@ -1795,10 +1796,37 @@
     }
 
     // Initialize Page
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       applyFilters();
       updateAppliedCounter();
       setupLightDismissFallbacks();
+
+      // Sync applications from backend if available
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
+        if (window.TorpedoAPI && window.TorpedoAPI.getJobApplications) {
+          const res = await window.TorpedoAPI.getJobApplications(userEmail);
+          if (res && res.success && Array.isArray(res.applications) && res.applications.length > 0) {
+            res.applications.forEach(app => {
+              if (!appliedJobs.some(a => a.jobId === app.job_id)) {
+                appliedJobs.push({
+                  jobId: app.job_id,
+                  appliedDate: app.applied_at || "Recent",
+                  status: app.status || "Applied",
+                  stageText: `Application Under Screening (${app.status || 'Applied'})`,
+                  statusBadgeClass: "status-applied"
+                });
+              }
+            });
+            saveStateToStorage();
+            updateAppliedCounter();
+            applyFilters();
+          }
+        }
+      } catch (err) {
+        console.warn('Backend sync note:', err);
+      }
 
       // Check if URL has ?view=applications
       const params = new URLSearchParams(window.location.search);
@@ -2271,6 +2299,20 @@
       closeApplyModal();
       updateAppliedCounter();
       applyFilters();
+
+      // Dispatch real application to Torpedo backend API
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
+        const userName = currentUser.name || 'Vivek Yadav';
+        if (window.TorpedoAPI && window.TorpedoAPI.applyJob) {
+          window.TorpedoAPI.applyJob({
+            job_id: job.id,
+            user_email: userEmail,
+            candidate_name: userName
+          }).catch(err => console.warn('Backend application sync:', err));
+        }
+      } catch (e) {}
 
       showToast(`Application successfully sent to ${job.company}! Recruiter notification dispatched. 🎉`, 'success');
     }

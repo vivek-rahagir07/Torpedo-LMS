@@ -156,8 +156,39 @@ class AuthController {
         ];
     }
 
+    private static function ensureOtpTable(PDO $pdo): void {
+        try {
+            $pdo->query("SELECT 1 FROM email_otps LIMIT 1");
+        } catch (Throwable $e) {
+            $driver = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+            if ($driver === 'mysql') {
+                $pdo->exec("CREATE TABLE IF NOT EXISTS email_otps (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    email VARCHAR(255) NOT NULL,
+                    otp_code VARCHAR(20) NOT NULL,
+                    purpose VARCHAR(255) NULL DEFAULT 'verification',
+                    expires_at DATETIME NOT NULL,
+                    verified INT NULL DEFAULT 0,
+                    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+                    KEY idx_otp_email (email, otp_code)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+            } else {
+                $pdo->exec("CREATE TABLE IF NOT EXISTS email_otps (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    email TEXT NOT NULL,
+                    otp_code TEXT NOT NULL,
+                    purpose TEXT DEFAULT 'verification',
+                    expires_at DATETIME NOT NULL,
+                    verified INTEGER DEFAULT 0,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                )");
+            }
+        }
+    }
+
     public static function sendOtp(array $data): array {
         $pdo = Database::getConnection();
+        self::ensureOtpTable($pdo);
         $email = strtolower(trim($data['email'] ?? ''));
         $purpose = strtolower(trim($data['purpose'] ?? 'verification'));
 
@@ -242,13 +273,14 @@ class AuthController {
 
     public static function verifyOtp(array $data): array {
         $pdo = Database::getConnection();
+        self::ensureOtpTable($pdo);
         $email = strtolower(trim($data['email'] ?? ''));
         $otp = trim($data['otp_code'] ?? '');
         $purpose = strtolower(trim($data['purpose'] ?? 'verification'));
 
-        if (empty($email) || empty($otp)) {
+        if (empty($email) || empty($otp) || strlen($otp) < 6) {
             http_response_code(422);
-            return ['success' => false, 'message' => 'Email and 6-digit OTP code are required.'];
+            return ['success' => false, 'message' => 'Valid email and complete 6-digit OTP code are required.'];
         }
 
         // Query without SQLite-specific datetime('now') so MySQL works seamlessly!
@@ -258,7 +290,7 @@ class AuthController {
 
         if (!$record || strtotime($record['expires_at']) < time()) {
             http_response_code(400);
-            return ['success' => false, 'message' => 'Invalid or expired OTP code. Please request a new code.'];
+            return ['success' => false, 'message' => 'Invalid or expired OTP code. Please enter the correct code sent to your email.'];
         }
 
         $pdo->prepare("UPDATE email_otps SET verified = 1 WHERE id = ?")->execute([$record['id']]);

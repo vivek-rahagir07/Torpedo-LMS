@@ -39,7 +39,7 @@ const TorpedoAPI = (function() {
     try {
       const response = await fetch(`${BASE_URL}/${endpoint}`, config);
       const data = await response.json();
-      if (!response.ok) {
+      if (!response.ok || (data && data.success === false)) {
         throw new Error(data.message || `HTTP error ${response.status}`);
       }
       return data;

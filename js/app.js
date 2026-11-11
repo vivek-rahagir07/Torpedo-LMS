@@ -341,8 +341,14 @@ window.handleVerifyOtpClick = async function() {
   try {
     let res = null;
     const purpose = currentAuthMode || 'login';
-    if (window.TorpedoAPI) {
+    if (window.TorpedoAPI && typeof window.TorpedoAPI.verifyOtp === 'function') {
       res = await window.TorpedoAPI.verifyOtp({ email, otp_code: otpCode, purpose });
+    } else {
+      throw new Error('Authentication service is initializing. Please reload and try again.');
+    }
+
+    if (!res || res.success !== true) {
+      throw new Error((res && res.message) ? res.message : 'Invalid or expired OTP code. Please enter the correct code.');
     }
 
     window.emailOtpVerified = true;
@@ -384,10 +390,17 @@ window.handleVerifyOtpClick = async function() {
     const passInput = document.getElementById('input-password');
     if (passInput) passInput.focus();
   } catch (err) {
+    window.emailOtpVerified = false;
     showToast(err.message || 'Invalid or expired OTP code. Please verify the code and try again.', 'error');
+    const statusEl = document.getElementById('otp-status-message');
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.innerHTML = `<span style="color:#ef4444; font-weight:700;">✗ ${err.message || 'Invalid or expired OTP code'}</span>`;
+    }
     if (verifyBtn) {
       verifyBtn.disabled = false;
       verifyBtn.textContent = 'Verify OTP';
+      verifyBtn.style.background = '';
     }
   }
 };

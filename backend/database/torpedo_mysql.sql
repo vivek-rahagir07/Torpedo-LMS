@@ -902,7 +902,7 @@ DROP TABLE IF EXISTS `email_otps`;
 CREATE TABLE `email_otps` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `email` VARCHAR(255) NOT NULL,
-  `otp_code` LONGTEXT NOT NULL,
+  `otp_code` VARCHAR(20) NOT NULL,
   `purpose` VARCHAR(255) NULL DEFAULT 'verification',
   `expires_at` DATETIME NOT NULL,
   `verified` INT NULL DEFAULT 0,

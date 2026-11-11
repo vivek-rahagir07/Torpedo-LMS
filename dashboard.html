@@ -4919,6 +4919,9 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
             if (mono) mono.textContent = (currentStudent.name || 'Student').split(/\s+/).filter(Boolean).slice(0, 2).map(n => n[0]).join('').toUpperCase();
             const dossierH = document.getElementById('dossier-header-name');
             if (dossierH) dossierH.textContent = currentStudent.name || 'Candidate';
+            if (typeof window.renderStudentExperience === 'function') {
+              window.renderStudentExperience();
+            }
           }
         }).catch(e => console.warn('Profile fetch note:', e));
       }
@@ -4998,6 +5001,10 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
             });
           }
         }).catch(err => console.warn('Dashboard live stats sync:', err));
+      }
+
+      if (typeof window.renderStudentExperience === 'function') {
+        window.renderStudentExperience();
       }
     }
 
@@ -5631,6 +5638,9 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (targetTab) {
         targetTab.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (tabName === 'home' && typeof window.renderStudentExperience === 'function') {
+          window.renderStudentExperience();
+        }
       }
 
       // Auto expand subnav for active playground

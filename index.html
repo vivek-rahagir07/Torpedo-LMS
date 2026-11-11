@@ -858,7 +858,7 @@
               <span id="otp-timer-badge" style="font-size: 11px; font-weight: 700; color: #64748b;">Code expires in 10:00</span>
             </div>
             <div class="auth-input-relative" style="display: flex; gap: 8px;">
-              <input type="text" id="input-otp-code" class="auth-card-input" placeholder="Enter 6-digit code" maxlength="6" style="letter-spacing: 4px; font-weight: 700; font-size: 1.1rem; text-align: center;">
+              <input type="text" id="input-otp-code" class="auth-card-input" placeholder="Enter 6-digit code" maxlength="6" style="letter-spacing: 4px; font-weight: 700; font-size: 1.1rem; text-align: center;" oninput="if(this.value.trim().length === 6) handleVerifyOtpClick()">
               <button type="button" id="btn-verify-otp" class="btn-verify-otp" onclick="handleVerifyOtpClick()">
                 Verify OTP
               </button>

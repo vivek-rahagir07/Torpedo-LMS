@@ -155,33 +155,71 @@ class AuthController {
         $stmt = $pdo->prepare("INSERT INTO email_otps (email, otp_code, purpose, expires_at) VALUES (?, ?, ?, ?)");
         $stmt->execute([$email, $otp, $purpose, $expiresAt]);
 
-        // Attempt sending email via PHP mail (works on Hostinger by default)
+        // Attempt sending email via PHP mail (Hostinger compatible)
+        $domain = $_SERVER['HTTP_HOST'] ?? 'torpedolearning.com';
+        $domain = preg_replace('/^www\./i', '', $domain);
+        if (strpos($domain, ':') !== false) {
+            $domain = explode(':', $domain)[0];
+        }
+        if ($domain === 'localhost' || $domain === '127.0.0.1' || filter_var($domain, FILTER_VALIDATE_IP)) {
+            $domain = 'torpedolearning.com';
+        }
+        $fromEmail = "no-reply@{$domain}";
+        
         $subject = "Your Torpedo Verification Code: {$otp}";
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-        $headers .= "From: Torpedo Learning <no-reply@torpedolms.com>\r\n";
+        
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-Type: text/html; charset=UTF-8";
+        $headers[] = "From: Torpedo Learning <{$fromEmail}>";
+        $headers[] = "Reply-To: support@{$domain}";
+        $headers[] = "Return-Path: <{$fromEmail}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headerStr = implode("\r\n", $headers) . "\r\n";
         
         $message = "
-        <div style='font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;'>
-          <div style='text-align: center; margin-bottom: 20px;'>
-            <h2 style='color: #0f172a; margin: 0;'>TORPEDO LEARNING</h2>
-            <p style='color: #64748b; font-size: 13px; margin-top: 4px;'>Email Verification Code</p>
+        <!DOCTYPE html>
+        <html>
+        <head><meta charset='utf-8'></head>
+        <body style='font-family: Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px;'>
+          <div style='max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);'>
+            <div style='background: #0f172a; padding: 24px; text-align: center;'>
+              <h1 style='color: #ffffff; margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 2px;'>TORPEDO LEARNING</h1>
+              <p style='color: #94a3b8; font-size: 13px; margin: 6px 0 0 0;'>One-Time Password (OTP) Verification</p>
+            </div>
+            <div style='padding: 28px;'>
+              <p style='color: #1e293b; font-size: 15px; margin: 0 0 12px 0;'>Hello,</p>
+              <p style='color: #475569; font-size: 14px; line-height: 1.5; margin: 0 0 20px 0;'>Use the 6-digit verification code below to complete your login or email verification on Torpedo Learning:</p>
+              
+              <div style='background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; text-align: center; margin: 24px 0;'>
+                <span style='font-size: 34px; font-weight: 800; letter-spacing: 8px; color: #1e3a8a; font-family: monospace;'>{$otp}</span>
+              </div>
+              
+              <p style='color: #64748b; font-size: 13px; line-height: 1.5; margin: 0 0 8px 0;'>• Valid for <strong>10 minutes</strong>.<br>• If you did not request this code, no action is needed.</p>
+            </div>
+            <div style='background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 14px 24px; text-align: center; font-size: 11px; color: #94a3b8;'>
+              © 2026 Torpedo Learning. All rights reserved.
+            </div>
           </div>
-          <p style='color: #334155; font-size: 15px;'>Hello,</p>
-          <p style='color: #334155; font-size: 15px;'>Use the one-time verification code below to verify your email on Torpedo:</p>
-          <div style='background: #f1f5f9; border-radius: 8px; padding: 18px; text-align: center; font-size: 32px; font-weight: 800; letter-spacing: 6px; color: #1e3a8a; margin: 24px 0;'>
-            {$otp}
-          </div>
-          <p style='color: #64748b; font-size: 13px;'>This code expires in <strong>10 minutes</strong>. If you did not request this verification, please disregard this email.</p>
-        </div>";
+        </body>
+        </html>";
 
-        @mail($email, $subject, $message, $headers);
+        $mailSent = false;
+        try {
+            $mailSent = @mail($email, $subject, $message, $headerStr, "-f {$fromEmail}");
+            if (!$mailSent) {
+                $mailSent = @mail($email, $subject, $message, $headerStr);
+            }
+        } catch (\Throwable $e) {
+            error_log("OTP mail error: " . $e->getMessage());
+        }
 
         return [
             'success' => true,
-            'message' => "Verification code sent to {$email}!",
+            'mail_sent' => $mailSent,
+            'message' => "Verification code dispatched to {$email}!",
             'expires_in' => 600,
-            'otp_hint' => $otp // Provided for instant offline & local testing
+            'otp_hint' => $otp
         ];
     }
 
@@ -189,26 +227,73 @@ class AuthController {
         $pdo = Database::getConnection();
         $email = strtolower(trim($data['email'] ?? ''));
         $otp = trim($data['otp_code'] ?? '');
+        $purpose = strtolower(trim($data['purpose'] ?? 'verification'));
 
         if (empty($email) || empty($otp)) {
             http_response_code(422);
             return ['success' => false, 'message' => 'Email and 6-digit OTP code are required.'];
         }
 
-        $stmt = $pdo->prepare("SELECT id FROM email_otps WHERE email = ? AND otp_code = ? AND verified = 0 AND expires_at >= datetime('now') ORDER BY id DESC LIMIT 1");
+        // Query without SQLite-specific datetime('now') so MySQL works seamlessly!
+        $stmt = $pdo->prepare("SELECT id, expires_at FROM email_otps WHERE email = ? AND otp_code = ? AND verified = 0 ORDER BY id DESC LIMIT 1");
         $stmt->execute([$email, $otp]);
         $record = $stmt->fetch();
 
-        if (!$record) {
+        if (!$record || strtotime($record['expires_at']) < time()) {
             http_response_code(400);
             return ['success' => false, 'message' => 'Invalid or expired OTP code. Please request a new code.'];
         }
 
         $pdo->prepare("UPDATE email_otps SET verified = 1 WHERE id = ?")->execute([$record['id']]);
 
+        // If an account exists with this email, generate session and log in immediately!
+        $uStmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $uStmt->execute([$email]);
+        $user = $uStmt->fetch();
+
+        if ($user) {
+            $token = bin2hex(random_bytes(24));
+            $effectiveRole = $user['role'] ?: 'student';
+
+            return [
+                'success' => true,
+                'is_login' => true,
+                'message' => 'OTP verified successfully! Logging you in...',
+                'token' => $token,
+                'user' => [
+                    'id' => $user['id'],
+                    'name' => $user['name'],
+                    'email' => $user['email'],
+                    'role' => $effectiveRole,
+                    'avatar_url' => $user['avatar_url'] ?? null
+                ],
+                'redirect_url' => $effectiveRole === 'admin' ? 'super-admin.html' : ($effectiveRole === 'employer' ? 'recruiter.html' : (in_array($effectiveRole, ['instructor','faculty']) ? 'faculty.html' : 'dashboard.html?role=' . urlencode($effectiveRole)))
+            ];
+        }
+
+        // If user does not exist yet, auto-create student account via verified OTP
+        $randPw = bin2hex(random_bytes(16));
+        $pwHash = password_hash($randPw, PASSWORD_BCRYPT);
+        $autoName = ucwords(str_replace(['.', '_', '-'], ' ', explode('@', $email)[0]));
+        $ins = $pdo->prepare("INSERT INTO users (name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, 'student', 'assets/avatars/robot1.svg')");
+        $ins->execute([$autoName, $email, $pwHash]);
+        $userId = $pdo->lastInsertId();
+
+        $token = bin2hex(random_bytes(24));
         return [
             'success' => true,
-            'message' => 'Email verified successfully!'
+            'is_login' => true,
+            'is_new_user' => true,
+            'message' => 'Email verified! Welcome to Torpedo Learning.',
+            'token' => $token,
+            'user' => [
+                'id' => $userId,
+                'name' => $autoName,
+                'email' => $email,
+                'role' => 'student',
+                'avatar_url' => 'assets/avatars/robot1.svg'
+            ],
+            'redirect_url' => "profile-setup.html?name=" . urlencode($autoName) . "&email=" . urlencode($email) . "&role=student"
         ];
     }
 

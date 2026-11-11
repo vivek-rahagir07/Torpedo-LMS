@@ -168,12 +168,15 @@ window.openAuthModal = function(mode = 'login', role = 'student') {
     if (nameRow) nameRow.style.display = 'none';
     if (termsRow) termsRow.style.display = 'none';
     if (forgotBtn) forgotBtn.style.display = 'inline';
-    if (passLabel) passLabel.textContent = 'PASSWORD';
+    if (passLabel) passLabel.textContent = 'PASSWORD (OR VERIFY WITH OTP)';
     if (submitBtn) submitBtn.innerHTML = '<span>LOG IN →</span>';
     if (togglePrompt) togglePrompt.textContent = "Don't have an account?";
     if (toggleLink) toggleLink.textContent = 'Sign Up';
     if (otpRow) otpRow.style.display = 'none';
-    if (sendOtpBtn) sendOtpBtn.style.display = 'none';
+    if (sendOtpBtn) {
+      sendOtpBtn.style.display = 'inline-block';
+      sendOtpBtn.textContent = 'Sign In with OTP';
+    }
   } else {
     if (headingEl) headingEl.textContent = 'Create Your Account';
     if (subEl) subEl.textContent = 'Join TORPEDO and unlock verified certificates, hands-on projects and fast-tracked opportunities.';
@@ -184,7 +187,10 @@ window.openAuthModal = function(mode = 'login', role = 'student') {
     if (submitBtn) submitBtn.innerHTML = '<span>CREATE ACCOUNT →</span>';
     if (togglePrompt) togglePrompt.textContent = 'Already have an account?';
     if (toggleLink) toggleLink.textContent = 'Log In';
-    if (sendOtpBtn) sendOtpBtn.style.display = 'inline-block';
+    if (sendOtpBtn) {
+      sendOtpBtn.style.display = 'inline-block';
+      sendOtpBtn.textContent = 'Send OTP Code';
+    }
   }
 
   setAuthRole(role || 'student');
@@ -253,8 +259,9 @@ window.handleSendOtpClick = async function() {
   try {
     showToast(`Sending 6-digit OTP code to ${email}...`, 'info');
     let res = null;
+    const purpose = currentAuthMode || 'login';
     if (window.TorpedoAPI) {
-      res = await window.TorpedoAPI.sendOtp({ email, purpose: 'signup' });
+      res = await window.TorpedoAPI.sendOtp({ email, purpose });
     }
 
     window.emailOtpSent = true;
@@ -265,6 +272,12 @@ window.handleSendOtpClick = async function() {
     if (otpInput) {
       otpInput.value = '';
       otpInput.focus();
+    }
+
+    // In login mode, password is not strictly required if logging in with OTP
+    const passInput = document.getElementById('input-password');
+    if (passInput && currentAuthMode === 'login') {
+      passInput.removeAttribute('required');
     }
 
     // Start 10-minute expiry timer
@@ -290,14 +303,14 @@ window.handleSendOtpClick = async function() {
     if (btn) {
       setTimeout(() => {
         btn.disabled = false;
-        btn.textContent = 'Resend OTP';
+        btn.textContent = currentAuthMode === 'login' ? 'Resend OTP' : 'Resend OTP';
       }, 15000);
     }
   } catch (err) {
     showToast(err.message || 'Failed to dispatch verification email. Please try again.', 'error');
     if (btn) {
       btn.disabled = false;
-      btn.textContent = 'Send OTP Code';
+      btn.textContent = currentAuthMode === 'login' ? 'Sign In with OTP' : 'Send OTP Code';
     }
   }
 };
@@ -310,6 +323,7 @@ window.handleVerifyOtpClick = async function() {
 
   if (!email) {
     showToast('Please enter your email address.', 'warning');
+    if (emailInput) emailInput.focus();
     return;
   }
   if (!otpCode || otpCode.length < 6) {
@@ -326,8 +340,9 @@ window.handleVerifyOtpClick = async function() {
 
   try {
     let res = null;
+    const purpose = currentAuthMode || 'login';
     if (window.TorpedoAPI) {
-      res = await window.TorpedoAPI.verifyOtp({ email, otp_code: otpCode, purpose: 'signup' });
+      res = await window.TorpedoAPI.verifyOtp({ email, otp_code: otpCode, purpose });
     }
 
     window.emailOtpVerified = true;
@@ -336,7 +351,7 @@ window.handleVerifyOtpClick = async function() {
     const statusEl = document.getElementById('otp-status-message');
     if (statusEl) {
       statusEl.style.display = 'block';
-      statusEl.innerHTML = '<span class="otp-verified-badge">✓ Email Verified Successfully</span>';
+      statusEl.innerHTML = '<span class="otp-verified-badge" style="color:#059669; font-weight:700;">✓ Email Verified Successfully</span>';
     }
 
     if (verifyBtn) {
@@ -344,7 +359,30 @@ window.handleVerifyOtpClick = async function() {
       verifyBtn.style.background = '#059669';
     }
 
-    showToast('Email verified successfully! You may now create your account.', 'success');
+    // Direct Login with verified OTP session
+    if (res && res.is_login && res.token && res.user) {
+      localStorage.setItem('torpedo_token', res.token);
+      localStorage.setItem('torpedo_user', JSON.stringify({
+        id: res.user.id,
+        name: res.user.name,
+        firstName: res.user.name.split(' ')[0],
+        lastName: res.user.name.split(' ').slice(1).join(' ') || '',
+        email: res.user.email,
+        role: res.user.role,
+        avatar: res.user.avatar_url || 'assets/avatars/robot1.svg'
+      }));
+
+      showToast(`Welcome back, ${res.user.name}! Verified. Logging you in...`, 'success');
+      if (typeof closeAuthModal === 'function') closeAuthModal();
+      setTimeout(() => {
+        window.location.href = res.redirect_url || (['instructor','faculty'].includes(res.user.role) ? 'faculty.html' : res.user.role === 'employer' ? 'recruiter.html' : 'dashboard.html');
+      }, 500);
+      return;
+    }
+
+    showToast('Email verified successfully! You may now complete registration.', 'success');
+    const passInput = document.getElementById('input-password');
+    if (passInput) passInput.focus();
   } catch (err) {
     showToast(err.message || 'Invalid or expired OTP code. Please verify the code and try again.', 'error');
     if (verifyBtn) {
@@ -797,8 +835,8 @@ window.handleFormSubmit = async function(e) {
   const fullName = (fname || lname) ? `${fname} ${lname}`.trim() : 'John Doe';
   if (currentAuthRole === 'admin') { await handleAdminAccess({ name: fullName, email, password, isSignUp: currentAuthMode === 'signup' }); return; }
 
-  if (!email || !password) {
-    showToast('Please provide your email address and password.', 'warning');
+  if (!email || (!password && !window.emailOtpVerified)) {
+    showToast('Please enter your email address and password (or sign in with OTP).', 'warning');
     return;
   }
 

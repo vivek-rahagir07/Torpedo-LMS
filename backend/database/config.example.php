@@ -17,3 +17,4 @@ define('DB_PORT', 3306);
 define('DB_NAME', 'u286523491_torpedo');
 define('DB_USER', 'u286523491_beenutaneja');
 define('DB_PASS', 'YOUR_DATABASE_PASSWORD'); // The password you created for u286523491_beenutaneja
+

@@ -17,9 +17,9 @@ class Database {
 
             if ($driver === 'mysql') {
                 $host = defined('DB_HOST') ? DB_HOST : (getenv('DB_HOST') ?: 'localhost');
-                $dbname = defined('DB_NAME') ? DB_NAME : (getenv('DB_NAME') ?: 'u286523491_torpedo');
-                $user = defined('DB_USER') ? DB_USER : (getenv('DB_USER') ?: 'u286523491_beenutaneja');
-                $pass = defined('DB_PASS') ? DB_PASS : (getenv('DB_PASS') ?: '');
+                $dbname = defined('DB_NAME') ? DB_NAME : (getenv('DB_NAME') ?: 'u286523491_torpedo_lms');
+                $user = defined('DB_USER') ? DB_USER : (getenv('DB_USER') ?: 'u286523491_torpedo_user');
+                $pass = defined('DB_PASS') ? DB_PASS : (getenv('DB_PASS') ?: 'Beenu@0123456789#');
                 $port = defined('DB_PORT') ? DB_PORT : 3306;
 
                 try {

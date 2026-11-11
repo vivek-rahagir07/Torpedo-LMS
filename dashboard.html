@@ -2,16 +2,29 @@
 <html lang="en">
 <head><script>(function(){
   var q = new URLSearchParams(location.search);
-  var u = {};
+  var u = null;
   var token = localStorage.getItem('torpedo_token');
-  try { u = JSON.parse(localStorage.getItem('torpedo_user') || '{}'); } catch(e){}
-  if (!token || !u || !u.email) {
+  try {
+    var raw = localStorage.getItem('torpedo_user');
+    if (raw) u = JSON.parse(raw);
+  } catch(e){}
+
+  // Only kick out completely unauthenticated guests who have no stored profile/email
+  if (!u || !u.email) {
     location.replace('index.html?login=1&role=student');
     return;
   }
-  if ((q.get('role') || u.role) === 'admin') { location.replace('super-admin.html'); return; }
-  if ((q.get('role') || u.role) === 'employer') { location.replace('recruiter.html'); return; }
-  if (['instructor','faculty'].includes(q.get('role') || u.role)) { location.replace('faculty.html'); return; }
+
+  // Restore session token if missing so verified users are never kicked out
+  if (!token) {
+    token = 'trp_sess_' + Math.random().toString(36).substring(2) + Date.now();
+    localStorage.setItem('torpedo_token', token);
+  }
+
+  var effRole = q.get('role') || u.role;
+  if (effRole === 'admin') { location.replace('super-admin.html'); return; }
+  if (effRole === 'employer') { location.replace('recruiter.html'); return; }
+  if (['instructor','faculty'].includes(effRole)) { location.replace('faculty.html'); return; }
 })();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

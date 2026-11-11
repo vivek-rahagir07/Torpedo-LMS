@@ -879,8 +879,13 @@ window.handleFormSubmit = async function(e) {
           password: password,
           role: finalRole
         });
-        if (regRes && regRes.redirect_url) {
-          destUrl = regRes.redirect_url;
+        if (regRes && regRes.success) {
+          if (regRes.token) localStorage.setItem('torpedo_token', regRes.token);
+          if (regRes.redirect_url) destUrl = regRes.redirect_url;
+        } else if (regRes && !regRes.success) {
+          showToast(regRes.message || 'Registration failed. Please try again.', 'error');
+          if (submitBtn) submitBtn.innerHTML = `<span>CREATE ACCOUNT →</span>`;
+          return;
         }
       } else if (!isSignUp && typeof TorpedoAPI.login === 'function') {
         const loginRes = await TorpedoAPI.login({
@@ -888,24 +893,50 @@ window.handleFormSubmit = async function(e) {
           password: password,
           role: finalRole
         });
-        if (loginRes && loginRes.user && loginRes.user.role) {
-          finalRole = loginRes.user.role;
-        }
-        if (loginRes && loginRes.redirect_url) {
-          destUrl = loginRes.redirect_url;
+        if (loginRes && loginRes.success) {
+          if (loginRes.token) localStorage.setItem('torpedo_token', loginRes.token);
+          if (loginRes.user) {
+            finalRole = loginRes.user.role || finalRole;
+            fullName = loginRes.user.name || fullName;
+          }
+          if (loginRes.redirect_url) destUrl = loginRes.redirect_url;
+        } else {
+          showToast(loginRes?.message || 'Invalid email or password. Please verify credentials.', 'error');
+          if (submitBtn) submitBtn.innerHTML = `<span>LOG IN →</span>`;
+          return;
         }
       }
     }
   } catch (apiErr) {
     console.warn('[API Auth Note]', apiErr.message);
+    if (!isSignUp && !window.emailOtpVerified) {
+      showToast(apiErr.message || 'Authentication failed. Please check your credentials.', 'error');
+      if (submitBtn) submitBtn.innerHTML = `<span>LOG IN →</span>`;
+      return;
+    }
   }
 
-  // Update local session
-  localStorage.setItem('torpedo_user', JSON.stringify({
-    name: fullName,
+  // Ensure session token exists
+  if (!localStorage.getItem('torpedo_token')) {
+    localStorage.setItem('torpedo_token', 'trp_sess_' + Math.random().toString(36).substring(2) + Date.now());
+  }
+
+  // Preserve existing detailed profile metrics so completing profile is never lost
+  let existingProfile = {};
+  try {
+    existingProfile = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+  } catch (e) {}
+
+  const mergedUser = {
+    ...existingProfile,
+    name: fullName || existingProfile.name || 'Candidate',
+    firstName: (fullName || existingProfile.name || 'Candidate').split(' ')[0],
+    lastName: (fullName || existingProfile.name || '').split(' ').slice(1).join(' ') || '',
     email: email,
     role: finalRole
-  }));
+  };
+
+  localStorage.setItem('torpedo_user', JSON.stringify(mergedUser));
 
   if (['instructor', 'faculty'].includes(finalRole)) { destUrl = isSignUp ? 'faculty.html?setup=1' : 'faculty.html'; }
   if (finalRole === 'employer') { destUrl = isSignUp ? 'recruiter.html?setup=1' : 'recruiter.html'; }

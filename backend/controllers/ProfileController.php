@@ -52,51 +52,81 @@ class ProfileController {
 
             $domains = isset($data['teaching_domains']) ? (is_array($data['teaching_domains']) ? json_encode($data['teaching_domains']) : $data['teaching_domains']) : json_encode(['Distributed Systems', 'Autonomous AI']);
 
-            $sql = "INSERT INTO faculty_profiles (
-                        salutation, first_name, last_name, email, phone, designation, institution, department,
-                        experience_years, scholar_url, linkedin_url, avatar_path, phd_specialization, phd_university,
-                        phd_cert_path, masters_degree, bachelors_degree, masters_cert_path, appointment_letter_path,
-                        faculty_cv_path, teaching_domains, engagement_type, sample_video_url, bio, verification_status
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'council_approved')
-                    ON CONFLICT(email) DO UPDATE SET
-                        first_name = excluded.first_name,
-                        last_name = excluded.last_name,
-                        designation = excluded.designation,
-                        institution = excluded.institution,
-                        department = excluded.department,
-                        avatar_path = COALESCE(excluded.avatar_path, faculty_profiles.avatar_path),
-                        phd_cert_path = COALESCE(excluded.phd_cert_path, faculty_profiles.phd_cert_path),
-                        appointment_letter_path = COALESCE(excluded.appointment_letter_path, faculty_profiles.appointment_letter_path),
-                        faculty_cv_path = COALESCE(excluded.faculty_cv_path, faculty_profiles.faculty_cv_path),
-                        updated_at = CURRENT_TIMESTAMP";
+            $chk = $pdo->prepare("SELECT id FROM faculty_profiles WHERE email = ?");
+            $chk->execute([$email]);
+            $existing = $chk->fetch();
 
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                $sal, $first, $last, $email,
-                $data['phone'] ?? '+91 9811223344',
-                $data['designation'] ?? 'Professor & Chair',
-                $data['institution'] ?? 'IIT Delhi',
-                $data['department'] ?? 'Department of CSE',
-                $data['experience_years'] ?? '10 - 15 Years',
-                $data['scholar_url'] ?? '',
-                $data['linkedin_url'] ?? '',
-                $avatarPath,
-                $data['phd_specialization'] ?? 'Distributed Systems & Consensus',
-                $data['phd_university'] ?? 'IIT Delhi',
-                $phdPath,
-                $data['masters_degree'] ?? 'M.Tech in CSE',
-                $data['bachelors_degree'] ?? 'B.Tech in CSE',
-                $mastersPath,
-                $apptPath,
-                $cvPath,
-                $domains,
-                $data['engagement_type'] ?? 'lead_instructor',
-                $data['sample_video_url'] ?? '',
-                $data['bio'] ?? ''
-            ]);
+            if ($existing) {
+                $sql = "UPDATE faculty_profiles SET
+                            salutation = ?, first_name = ?, last_name = ?, phone = ?, designation = ?,
+                            institution = ?, department = ?, experience_years = ?, scholar_url = ?, linkedin_url = ?,
+                            avatar_path = COALESCE(?, avatar_path), phd_specialization = ?, phd_university = ?,
+                            phd_cert_path = COALESCE(?, phd_cert_path), masters_degree = ?, bachelors_degree = ?,
+                            masters_cert_path = COALESCE(?, masters_cert_path), appointment_letter_path = COALESCE(?, appointment_letter_path),
+                            faculty_cv_path = COALESCE(?, faculty_cv_path), teaching_domains = ?, engagement_type = ?,
+                            sample_video_url = ?, bio = ?, verification_status = 'council_approved', updated_at = CURRENT_TIMESTAMP
+                        WHERE email = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    $sal, $first, $last, $data['phone'] ?? '+91 9811223344',
+                    $data['designation'] ?? 'Professor & Chair',
+                    $data['institution'] ?? 'IIT Delhi',
+                    $data['department'] ?? 'Department of CSE',
+                    $data['experience_years'] ?? '10 - 15 Years',
+                    $data['scholar_url'] ?? '',
+                    $data['linkedin_url'] ?? '',
+                    $avatarPath,
+                    $data['phd_specialization'] ?? 'Distributed Systems & Consensus',
+                    $data['phd_university'] ?? 'IIT Delhi',
+                    $phdPath,
+                    $data['masters_degree'] ?? 'M.Tech in CSE',
+                    $data['bachelors_degree'] ?? 'B.Tech in CSE',
+                    $mastersPath,
+                    $apptPath,
+                    $cvPath,
+                    $domains,
+                    $data['engagement_type'] ?? 'lead_instructor',
+                    $data['sample_video_url'] ?? '',
+                    $data['bio'] ?? '',
+                    $email
+                ]);
+            } else {
+                $sql = "INSERT INTO faculty_profiles (
+                            salutation, first_name, last_name, email, phone, designation, institution, department,
+                            experience_years, scholar_url, linkedin_url, avatar_path, phd_specialization, phd_university,
+                            phd_cert_path, masters_degree, bachelors_degree, masters_cert_path, appointment_letter_path,
+                            faculty_cv_path, teaching_domains, engagement_type, sample_video_url, bio, verification_status
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'council_approved')";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    $sal, $first, $last, $email,
+                    $data['phone'] ?? '+91 9811223344',
+                    $data['designation'] ?? 'Professor & Chair',
+                    $data['institution'] ?? 'IIT Delhi',
+                    $data['department'] ?? 'Department of CSE',
+                    $data['experience_years'] ?? '10 - 15 Years',
+                    $data['scholar_url'] ?? '',
+                    $data['linkedin_url'] ?? '',
+                    $avatarPath,
+                    $data['phd_specialization'] ?? 'Distributed Systems & Consensus',
+                    $data['phd_university'] ?? 'IIT Delhi',
+                    $phdPath,
+                    $data['masters_degree'] ?? 'M.Tech in CSE',
+                    $data['bachelors_degree'] ?? 'B.Tech in CSE',
+                    $mastersPath,
+                    $apptPath,
+                    $cvPath,
+                    $domains,
+                    $data['engagement_type'] ?? 'lead_instructor',
+                    $data['sample_video_url'] ?? '',
+                    $data['bio'] ?? ''
+                ]);
+            }
 
+            $token = bin2hex(random_bytes(24));
             return [
                 'success' => true,
+                'token' => $token,
                 'message' => 'Faculty profile, doctoral degree, and appointment credentials verified successfully! 🎉',
                 'role' => 'faculty',
                 'fullName' => "{$sal} {$first} {$last}",
@@ -120,44 +150,73 @@ class ProfileController {
 
             $hiringRoles = isset($data['hiring_roles']) ? (is_array($data['hiring_roles']) ? json_encode($data['hiring_roles']) : $data['hiring_roles']) : json_encode(['Backend SDE', 'Full-Stack Engineer']);
 
-            $sql = "INSERT INTO employer_profiles (
-                        company_name, company_website, recruiter_name, recruiter_designation, email, phone,
-                        hq_location, linkedin_url, logo_path, industry, company_size, cin_gst_number,
-                        incorporation_cert_path, hiring_roles, hiring_volume, ctc_bracket, required_tech_stack,
-                        partnership_mode, verification_status
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tier1_partner')
-                    ON CONFLICT(email) DO UPDATE SET
-                        company_name = excluded.company_name,
-                        recruiter_name = excluded.recruiter_name,
-                        recruiter_designation = excluded.recruiter_designation,
-                        logo_path = COALESCE(excluded.logo_path, employer_profiles.logo_path),
-                        incorporation_cert_path = COALESCE(excluded.incorporation_cert_path, employer_profiles.incorporation_cert_path),
-                        updated_at = CURRENT_TIMESTAMP";
+            $chk = $pdo->prepare("SELECT id FROM employer_profiles WHERE email = ?");
+            $chk->execute([$email]);
+            $existing = $chk->fetch();
 
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                $comp,
-                $data['company_website'] ?? 'https://stripe.com',
-                $rec,
-                $data['recruiter_designation'] ?? 'Head of Talent Acquisition',
-                $email,
-                $data['phone'] ?? '+91 9876543210',
-                $data['hq_location'] ?? 'Bengaluru, India',
-                $data['linkedin_url'] ?? '',
-                $logoPath,
-                $data['industry'] ?? 'FinTech',
-                $data['company_size'] ?? '1000+ Enterprise',
-                $data['cin_gst_number'] ?? 'U72200DL2024PTC123456',
-                $incorpPath,
-                $hiringRoles,
-                $data['hiring_volume'] ?? '10-30 hires',
-                $data['ctc_bracket'] ?? '₹18 - 30 LPA',
-                $data['required_tech_stack'] ?? 'Go, Python, React',
-                $data['partnership_mode'] ?? 'direct_ats'
-            ]);
+            if ($existing) {
+                $sql = "UPDATE employer_profiles SET
+                            company_name = ?, company_website = ?, recruiter_name = ?, recruiter_designation = ?, phone = ?,
+                            hq_location = ?, linkedin_url = ?, logo_path = COALESCE(?, logo_path), industry = ?, company_size = ?,
+                            cin_gst_number = ?, incorporation_cert_path = COALESCE(?, incorporation_cert_path), hiring_roles = ?,
+                            hiring_volume = ?, ctc_bracket = ?, required_tech_stack = ?, partnership_mode = ?,
+                            verification_status = 'tier1_partner', updated_at = CURRENT_TIMESTAMP
+                        WHERE email = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    $comp,
+                    $data['company_website'] ?? 'https://stripe.com',
+                    $rec,
+                    $data['recruiter_designation'] ?? 'Head of Talent Acquisition',
+                    $data['phone'] ?? '+91 9876543210',
+                    $data['hq_location'] ?? 'Bengaluru, India',
+                    $data['linkedin_url'] ?? '',
+                    $logoPath,
+                    $data['industry'] ?? 'FinTech',
+                    $data['company_size'] ?? '1000+ Enterprise',
+                    $data['cin_gst_number'] ?? 'U72200DL2024PTC123456',
+                    $incorpPath,
+                    $hiringRoles,
+                    $data['hiring_volume'] ?? '10-30 hires',
+                    $data['ctc_bracket'] ?? '₹18 - 30 LPA',
+                    $data['required_tech_stack'] ?? 'Go, Python, React',
+                    $data['partnership_mode'] ?? 'direct_ats',
+                    $email
+                ]);
+            } else {
+                $sql = "INSERT INTO employer_profiles (
+                            company_name, company_website, recruiter_name, recruiter_designation, email, phone,
+                            hq_location, linkedin_url, logo_path, industry, company_size, cin_gst_number,
+                            incorporation_cert_path, hiring_roles, hiring_volume, ctc_bracket, required_tech_stack,
+                            partnership_mode, verification_status
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'tier1_partner')";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    $comp,
+                    $data['company_website'] ?? 'https://stripe.com',
+                    $rec,
+                    $data['recruiter_designation'] ?? 'Head of Talent Acquisition',
+                    $email,
+                    $data['phone'] ?? '+91 9876543210',
+                    $data['hq_location'] ?? 'Bengaluru, India',
+                    $data['linkedin_url'] ?? '',
+                    $logoPath,
+                    $data['industry'] ?? 'FinTech',
+                    $data['company_size'] ?? '1000+ Enterprise',
+                    $data['cin_gst_number'] ?? 'U72200DL2024PTC123456',
+                    $incorpPath,
+                    $hiringRoles,
+                    $data['hiring_volume'] ?? '10-30 hires',
+                    $data['ctc_bracket'] ?? '₹18 - 30 LPA',
+                    $data['required_tech_stack'] ?? 'Go, Python, React',
+                    $data['partnership_mode'] ?? 'direct_ats'
+                ]);
+            }
 
+            $token = bin2hex(random_bytes(24));
             return [
                 'success' => true,
+                'token' => $token,
                 'message' => 'Corporate enterprise profile & incorporation credentials verified! Direct ATS access active.',
                 'role' => 'employer',
                 'fullName' => "{$rec} ({$comp})",
@@ -183,72 +242,134 @@ class ProfileController {
         $resumePath = self::saveUploadedFile($files['resume_pdf'] ?? null, 'resumes');
         $idPath = self::saveUploadedFile($files['id_proof_pdf'] ?? null, 'id_proofs');
 
-        $sql = "INSERT INTO candidate_profiles (
-                    first_name, last_name, email, phone, dob, gender, address, city, state, pincode,
-                    linkedin_url, github_url, avatar_path, tenth_school, tenth_board, tenth_year,
-                    tenth_percentage, tenth_cert_path, twelfth_college, twelfth_board, twelfth_stream,
-                    twelfth_year, twelfth_percentage, twelfth_cert_path, grad_degree, grad_college,
-                    grad_branch, grad_year, grad_cgpa, grad_cert_path, has_postgrad, postgrad_degree,
-                    postgrad_college, postgrad_branch, postgrad_year, postgrad_cgpa, postgrad_cert_path,
-                    resume_path, id_proof_path, track, target_role, verification_status
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'verified')
-                ON CONFLICT(email) DO UPDATE SET
-                    first_name = excluded.first_name,
-                    last_name = excluded.last_name,
-                    grad_college = excluded.grad_college,
-                    track = excluded.track,
-                    avatar_path = COALESCE(excluded.avatar_path, candidate_profiles.avatar_path),
-                    tenth_cert_path = COALESCE(excluded.tenth_cert_path, candidate_profiles.tenth_cert_path),
-                    twelfth_cert_path = COALESCE(excluded.twelfth_cert_path, candidate_profiles.twelfth_cert_path),
-                    grad_cert_path = COALESCE(excluded.grad_cert_path, candidate_profiles.grad_cert_path),
-                    resume_path = COALESCE(excluded.resume_path, candidate_profiles.resume_path),
-                    updated_at = CURRENT_TIMESTAMP";
+        $chk = $pdo->prepare("SELECT id FROM candidate_profiles WHERE email = ?");
+        $chk->execute([$email]);
+        $existing = $chk->fetch();
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            $first, $last, $email,
-            $data['phone'] ?? '9876543210',
-            $data['dob'] ?? '2003-05-14',
-            $data['gender'] ?? 'male',
-            $data['address'] ?? 'New Delhi',
-            $data['city'] ?? 'New Delhi',
-            $data['state'] ?? 'Delhi NCR',
-            $data['pincode'] ?? '110042',
-            $data['linkedin_url'] ?? '',
-            $data['github_url'] ?? '',
-            $avatarPath,
-            $data['tenth_school'] ?? 'St. Xavier School',
-            $data['tenth_board'] ?? 'CBSE',
-            (int)($data['tenth_year'] ?? 2019),
-            $data['tenth_percentage'] ?? '91.4%',
-            $tenthPath,
-            $data['twelfth_college'] ?? 'DPS R.K. Puram',
-            $data['twelfth_board'] ?? 'CBSE',
-            $data['twelfth_stream'] ?? 'Science (PCM)',
-            (int)($data['twelfth_year'] ?? 2021),
-            $data['twelfth_percentage'] ?? '89.2%',
-            $twelfthPath,
-            $data['grad_degree'] ?? 'B.Tech',
-            $data['grad_college'] ?? 'Delhi Technological University (DTU)',
-            $data['grad_branch'] ?? 'Computer Science & Engineering',
-            (int)($data['grad_year'] ?? 2025),
-            $data['grad_cgpa'] ?? '8.85 CGPA',
-            $gradPath,
-            isset($data['has_postgrad']) ? 1 : 0,
-            $data['postgrad_degree'] ?? '',
-            $data['postgrad_college'] ?? '',
-            $data['postgrad_branch'] ?? '',
-            (int)($data['postgrad_year'] ?? 0),
-            $data['postgrad_cgpa'] ?? '',
-            $postgradPath,
-            $resumePath,
-            $idPath,
-            $data['track'] ?? 'Full-Stack Distributed Systems & Microservices',
-            $data['target_role'] ?? 'Backend Systems Engineer'
-        ]);
+        if ($existing) {
+            $sql = "UPDATE candidate_profiles SET
+                        first_name = ?, last_name = ?, phone = ?, dob = ?, gender = ?, address = ?, city = ?,
+                        state = ?, pincode = ?, linkedin_url = ?, github_url = ?, avatar_path = COALESCE(?, avatar_path),
+                        tenth_school = ?, tenth_board = ?, tenth_year = ?, tenth_percentage = ?, tenth_cert_path = COALESCE(?, tenth_cert_path),
+                        twelfth_college = ?, twelfth_board = ?, twelfth_stream = ?, twelfth_year = ?, twelfth_percentage = ?, twelfth_cert_path = COALESCE(?, twelfth_cert_path),
+                        grad_degree = ?, grad_college = ?, grad_branch = ?, grad_year = ?, grad_cgpa = ?, grad_cert_path = COALESCE(?, grad_cert_path),
+                        has_postgrad = ?, postgrad_degree = ?, postgrad_college = ?, postgrad_branch = ?, postgrad_year = ?, postgrad_cgpa = ?, postgrad_cert_path = COALESCE(?, postgrad_cert_path),
+                        resume_path = COALESCE(?, resume_path), id_proof_path = COALESCE(?, id_proof_path), track = ?, target_role = ?,
+                        verification_status = 'verified', updated_at = CURRENT_TIMESTAMP
+                    WHERE email = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $first, $last, $data['phone'] ?? '9876543210',
+                $data['dob'] ?? '2003-05-14',
+                $data['gender'] ?? 'male',
+                $data['address'] ?? 'New Delhi',
+                $data['city'] ?? 'New Delhi',
+                $data['state'] ?? 'Delhi NCR',
+                $data['pincode'] ?? '110042',
+                $data['linkedin_url'] ?? '',
+                $data['github_url'] ?? '',
+                $avatarPath,
+                $data['tenth_school'] ?? 'St. Xavier School',
+                $data['tenth_board'] ?? 'CBSE',
+                (int)($data['tenth_year'] ?? 2019),
+                $data['tenth_percentage'] ?? '91.4%',
+                $tenthPath,
+                $data['twelfth_college'] ?? 'DPS R.K. Puram',
+                $data['twelfth_board'] ?? 'CBSE',
+                $data['twelfth_stream'] ?? 'Science (PCM)',
+                (int)($data['twelfth_year'] ?? 2021),
+                $data['twelfth_percentage'] ?? '89.2%',
+                $twelfthPath,
+                $data['grad_degree'] ?? 'B.Tech',
+                $data['grad_college'] ?? 'Delhi Technological University (DTU)',
+                $data['grad_branch'] ?? 'Computer Science & Engineering',
+                (int)($data['grad_year'] ?? 2025),
+                $data['grad_cgpa'] ?? '8.85 CGPA',
+                $gradPath,
+                isset($data['has_postgrad']) ? 1 : 0,
+                $data['postgrad_degree'] ?? '',
+                $data['postgrad_college'] ?? '',
+                $data['postgrad_branch'] ?? '',
+                (int)($data['postgrad_year'] ?? 0),
+                $data['postgrad_cgpa'] ?? '',
+                $postgradPath,
+                $resumePath,
+                $idPath,
+                $data['track'] ?? 'Full-Stack Distributed Systems & Microservices',
+                $data['target_role'] ?? 'Backend Systems Engineer',
+                $email
+            ]);
+        } else {
+            $sql = "INSERT INTO candidate_profiles (
+                        first_name, last_name, email, phone, dob, gender, address, city, state, pincode,
+                        linkedin_url, github_url, avatar_path, tenth_school, tenth_board, tenth_year,
+                        tenth_percentage, tenth_cert_path, twelfth_college, twelfth_board, twelfth_stream,
+                        twelfth_year, twelfth_percentage, twelfth_cert_path, grad_degree, grad_college,
+                        grad_branch, grad_year, grad_cgpa, grad_cert_path, has_postgrad, postgrad_degree,
+                        postgrad_college, postgrad_branch, postgrad_year, postgrad_cgpa, postgrad_cert_path,
+                        resume_path, id_proof_path, track, target_role, verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'verified')";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $first, $last, $email,
+                $data['phone'] ?? '9876543210',
+                $data['dob'] ?? '2003-05-14',
+                $data['gender'] ?? 'male',
+                $data['address'] ?? 'New Delhi',
+                $data['city'] ?? 'New Delhi',
+                $data['state'] ?? 'Delhi NCR',
+                $data['pincode'] ?? '110042',
+                $data['linkedin_url'] ?? '',
+                $data['github_url'] ?? '',
+                $avatarPath,
+                $data['tenth_school'] ?? 'St. Xavier School',
+                $data['tenth_board'] ?? 'CBSE',
+                (int)($data['tenth_year'] ?? 2019),
+                $data['tenth_percentage'] ?? '91.4%',
+                $tenthPath,
+                $data['twelfth_college'] ?? 'DPS R.K. Puram',
+                $data['twelfth_board'] ?? 'CBSE',
+                $data['twelfth_stream'] ?? 'Science (PCM)',
+                (int)($data['twelfth_year'] ?? 2021),
+                $data['twelfth_percentage'] ?? '89.2%',
+                $twelfthPath,
+                $data['grad_degree'] ?? 'B.Tech',
+                $data['grad_college'] ?? 'Delhi Technological University (DTU)',
+                $data['grad_branch'] ?? 'Computer Science & Engineering',
+                (int)($data['grad_year'] ?? 2025),
+                $data['grad_cgpa'] ?? '8.85 CGPA',
+                $gradPath,
+                isset($data['has_postgrad']) ? 1 : 0,
+                $data['postgrad_degree'] ?? '',
+                $data['postgrad_college'] ?? '',
+                $data['postgrad_branch'] ?? '',
+                (int)($data['postgrad_year'] ?? 0),
+                $data['postgrad_cgpa'] ?? '',
+                $postgradPath,
+                $resumePath,
+                $idPath,
+                $data['track'] ?? 'Full-Stack Distributed Systems & Microservices',
+                $data['target_role'] ?? 'Backend Systems Engineer'
+            ]);
+        }
 
+        // Also ensure user row exists and has user name
+        $uCheck = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+        $uCheck->execute([$email]);
+        $uRow = $uCheck->fetch();
+        if ($uRow) {
+            $pdo->prepare("UPDATE users SET name = ? WHERE id = ?")->execute(["{$first} {$last}", $uRow['id']]);
+        } else {
+            $randPw = bin2hex(random_bytes(16));
+            $pwHash = password_hash($randPw, PASSWORD_BCRYPT);
+            $pdo->prepare("INSERT INTO users (name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, 'student', ?)")
+                ->execute(["{$first} {$last}", $email, $pwHash, $avatarPath ?: 'assets/avatars/robot1.svg']);
+        }
+
+        $token = bin2hex(random_bytes(24));
         return [
             'success' => true,
+            'token' => $token,
             'message' => 'Candidate profile, marksheets, and ATS resume uploaded & verified successfully! 🚀',
             'role' => 'student',
             'fullName' => "{$first} {$last}",

@@ -229,7 +229,9 @@ class AuthController {
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
+        $isNew = false;
         if (!$user) {
+            $isNew = true;
             $randPw = bin2hex(random_bytes(16));
             $pwHash = password_hash($randPw, PASSWORD_BCRYPT);
             $ins = $pdo->prepare("INSERT INTO users (name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?)");
@@ -245,6 +247,17 @@ class AuthController {
 
         $token = bin2hex(random_bytes(24));
 
+        $redirectUrl = 'dashboard.html?role=' . urlencode($effectiveRole);
+        if ($effectiveRole === 'admin') {
+            $redirectUrl = 'super-admin.html';
+        } else if ($effectiveRole === 'employer') {
+            $redirectUrl = 'recruiter.html';
+        } else if (in_array($effectiveRole, ['instructor', 'faculty'])) {
+            $redirectUrl = 'faculty.html';
+        } else if ($isNew) {
+            $redirectUrl = "profile-setup.html?name=" . urlencode($name) . "&email=" . urlencode($email) . "&role=" . urlencode($effectiveRole);
+        }
+
         return [
             'success' => true,
             'message' => "Welcome, {$name}! Authenticated via Google Sign-In.",
@@ -256,7 +269,7 @@ class AuthController {
                 'role' => $effectiveRole,
                 'avatar_url' => $avatar
             ],
-            'redirect_url' => $effectiveRole === 'admin' ? 'super-admin.html' : ($effectiveRole === 'employer' ? 'recruiter.html' : (in_array($effectiveRole, ['instructor','faculty']) ? 'faculty.html' : 'dashboard.html?role=' . urlencode($effectiveRole)))
+            'redirect_url' => $redirectUrl
         ];
     }
 

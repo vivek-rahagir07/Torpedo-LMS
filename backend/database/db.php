@@ -22,21 +22,32 @@ class Database {
                 $pass = defined('DB_PASS') ? DB_PASS : (getenv('DB_PASS') ?: 'Beenu@0123456789#');
                 $port = defined('DB_PORT') ? DB_PORT : 3306;
 
-                try {
-                    self::$instance = new PDO(
-                        "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4",
-                        $user,
-                        $pass,
-                        [
-                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                            PDO::ATTR_EMULATE_PREPARES => false,
-                        ]
-                    );
-                    return self::$instance;
-                } catch (Throwable $e) {
-                    error_log("[TorpedoDB] MySQL connection note: " . $e->getMessage() . " - falling back to SQLite.");
+                // Support both database names and users configured on Hostinger
+                $candidates = [
+                    ['dbname' => $dbname, 'user' => $user, 'pass' => $pass],
+                    ['dbname' => 'u286523491_torpedo_lms', 'user' => 'u286523491_torpedo_user', 'pass' => 'Beenu@0123456789#'],
+                    ['dbname' => 'u286523491_torpedo', 'user' => 'u286523491_beenutaneja', 'pass' => 'Beenu@0123456789#'],
+                    ['dbname' => 'u286523491_torpedo', 'user' => 'u286523491_beenutaneja', 'pass' => 'Beenu@01142683311#'],
+                ];
+
+                foreach ($candidates as $cand) {
+                    try {
+                        self::$instance = new PDO(
+                            "mysql:host={$host};port={$port};dbname={$cand['dbname']};charset=utf8mb4",
+                            $cand['user'],
+                            $cand['pass'],
+                            [
+                                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                                PDO::ATTR_EMULATE_PREPARES => false,
+                            ]
+                        );
+                        return self::$instance;
+                    } catch (Throwable $e) {
+                        // Continue to next candidate
+                    }
                 }
+                error_log("[TorpedoDB] MySQL connection note: All MySQL candidates failed - falling back to SQLite.");
             }
 
             // Default / Fallback: SQLite

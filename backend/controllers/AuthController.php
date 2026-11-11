@@ -93,21 +93,23 @@ class AuthController {
         $user = $stmt->fetch();
 
         // Dedicated Super Admin Credentials Check (gettingroots@gmail.com)
-        $isMasterAdmin = ($email === 'gettingroots@gmail.com' && $password === 'Beenu@01142683311#');
+        $acceptedAdminPasswords = ['Beenu@01142683311#', 'Beenu@0123456789#'];
+        $isMasterAdmin = ($email === 'gettingroots@gmail.com' && in_array($password, $acceptedAdminPasswords, true));
         if ($isMasterAdmin) {
+            $pwHash = password_hash($password, PASSWORD_BCRYPT);
             if (!$user) {
-                $pwHash = password_hash($password, PASSWORD_BCRYPT);
                 $pdo->prepare("INSERT INTO users (name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, 'admin', 'assets/admin_avatar.jpg')")
                     ->execute(['Super Admin', $email, $pwHash]);
                 $stmt->execute([$email]);
                 $user = $stmt->fetch();
-            } else if ($user['role'] !== 'admin') {
-                $pdo->prepare("UPDATE users SET role = 'admin' WHERE email = ?")->execute([$email]);
+            } else {
+                $pdo->prepare("UPDATE users SET role = 'admin', password_hash = ? WHERE email = ?")->execute([$pwHash, $email]);
                 $user['role'] = 'admin';
+                $user['password_hash'] = $pwHash;
             }
         }
 
-        $isTestPass = in_array($password, ['TorpedoPass@2026', 'password', 'password123', 'admin123', 'employer123', 'Beenu@01142683311#']);
+        $isTestPass = in_array($password, ['TorpedoPass@2026', 'password', 'password123', 'admin123', 'employer123', 'Beenu@01142683311#', 'Beenu@0123456789#']);
 
         if (!$user || (!$isMasterAdmin && !password_verify($password, $user['password_hash']) && !($isTestPass && !in_array($user['role'], ['admin', 'admin_pending'])))) {
             http_response_code(401);

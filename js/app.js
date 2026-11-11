@@ -1127,10 +1127,20 @@ function updateAdminRoleNote() {
   if (login) { login.hidden = !admin; login.textContent = 'Sign in with your approved Super Admin account.'; }
   const submit = document.getElementById('auth-action-submit-btn');
   if (submit && currentAuthMode === 'signup') submit.textContent = admin ? 'REQUEST SUPER ADMIN ACCESS →' : 'CREATE ACCOUNT →';
+
+  // Super Admin signs in directly via master password
+  const sendOtpBtn = document.getElementById('btn-send-otp');
+  if (sendOtpBtn) {
+    sendOtpBtn.style.display = admin ? 'none' : 'inline-block';
+  }
+  const otpRow = document.getElementById('auth-otp-row');
+  if (otpRow && admin) {
+    otpRow.style.display = 'none';
+  }
 }
 async function handleAdminAccess({name, email, password, isSignUp}) {
   if (!email || !password || (isSignUp && password.length < 8)) { showToast('Enter your email and a password of at least 8 characters.', 'warning'); return; }
-  const submit = document.getElementById(isSignUp ? 'auth-action-submit-btn' : 'login-submit-btn');
+  const submit = document.getElementById('auth-action-submit-btn') || document.getElementById('login-submit-btn');
   if (window.adminAuthBusy) return;
   window.adminAuthBusy = true;
   if (submit) submit.disabled = true;
@@ -1146,8 +1156,9 @@ async function handleAdminAccess({name, email, password, isSignUp}) {
       return;
     }
     if (result.user?.role !== 'admin') throw new Error('This account does not have Super Admin access.');
+    if (result.token) localStorage.setItem('torpedo_token', result.token);
     localStorage.setItem('torpedo_user', JSON.stringify(result.user));
-    showToast('Super Admin account verified.', 'success');
+    showToast('Super Admin account verified. Access granted.', 'success');
     window.location.href = 'super-admin.html';
   } catch (err) {
     showToast(err.message || 'Super Admin access requires the authentication service.', 'warning');

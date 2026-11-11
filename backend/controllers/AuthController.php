@@ -124,16 +124,33 @@ class AuthController {
             return ['success' => false, 'message' => 'Your Super Admin access request is awaiting platform-owner approval.'];
         }
 
+        $userName = $user['name'];
+        $userAvatar = $user['avatar_url'] ?? null;
+        if ($effectiveRole === 'student') {
+            $cStmt = $pdo->prepare("SELECT first_name, last_name, avatar_path FROM candidate_profiles WHERE email = ?");
+            $cStmt->execute([$email]);
+            $cand = $cStmt->fetch();
+            if ($cand) {
+                $candName = trim("{$cand['first_name']} {$cand['last_name']}");
+                if (!empty($candName) && $candName !== 'John Doe') {
+                    $userName = $candName;
+                }
+                if (!empty($cand['avatar_path'])) {
+                    $userAvatar = $cand['avatar_path'];
+                }
+            }
+        }
+
         return [
             'success' => true,
             'message' => 'Authentication successful! Welcome to Torpedo Learning.',
             'token' => $token,
             'user' => [
                 'id' => $user['id'],
-                'name' => $user['name'],
+                'name' => $userName,
                 'email' => $user['email'],
                 'role' => $effectiveRole,
-                'avatar_url' => $user['avatar_url'] ?? null
+                'avatar_url' => $userAvatar
             ],
             'redirect_url' => $effectiveRole === 'admin' ? 'super-admin.html' : ($effectiveRole === 'employer' ? 'recruiter.html' : (in_array($effectiveRole, ['instructor','faculty']) ? 'faculty.html' : 'dashboard.html?role=' . urlencode($effectiveRole)))
         ];

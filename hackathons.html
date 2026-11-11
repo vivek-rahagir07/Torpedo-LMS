@@ -194,6 +194,12 @@
             <span class="user-meta-role">Placement Ready</span>
           </div>
         </div>
+
+        <!-- Logout Button -->
+        <button type="button" onclick="handleLogout()" class="header-action-btn" title="Sign Out / Log Out" style="background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; font-weight: 600; padding: 6px 13px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-left: 6px; transition: all 0.15s;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Log Out</span>
+        </button>
       </div>
     </header>
 
@@ -1261,6 +1267,13 @@
       const modal = document.getElementById('my-teams-dialog');
       if (modal && modal.open && typeof modal.close === 'function') modal.close();
     }
+
+    window.handleLogout = function() {
+      localStorage.removeItem('torpedo_token');
+      localStorage.removeItem('torpedo_user');
+      localStorage.removeItem('last_google_email');
+      window.location.replace('index.html');
+    };
 
     // Toast
     function showToast(msg, type = 'info') {

@@ -832,8 +832,8 @@ window.handleFormSubmit = async function(e) {
   const lname = lnameInput ? lnameInput.value.trim() : '';
   const email = emailInput ? emailInput.value.trim() : '';
   const password = passInput ? passInput.value : '';
-  const fullName = (fname || lname) ? `${fname} ${lname}`.trim() : 'John Doe';
-  if (currentAuthRole === 'admin') { await handleAdminAccess({ name: fullName, email, password, isSignUp: currentAuthMode === 'signup' }); return; }
+  let fullName = (fname || lname) ? `${fname} ${lname}`.trim() : '';
+  if (currentAuthRole === 'admin') { await handleAdminAccess({ name: fullName || 'Super Admin', email, password, isSignUp: currentAuthMode === 'signup' }); return; }
 
   if (!email || (!password && !window.emailOtpVerified)) {
     showToast('Please enter your email address and password (or sign in with OTP).', 'warning');
@@ -897,7 +897,9 @@ window.handleFormSubmit = async function(e) {
           if (loginRes.token) localStorage.setItem('torpedo_token', loginRes.token);
           if (loginRes.user) {
             finalRole = loginRes.user.role || finalRole;
-            fullName = loginRes.user.name || fullName;
+            if (loginRes.user.name && loginRes.user.name !== 'John Doe') {
+              fullName = loginRes.user.name;
+            }
           }
           if (loginRes.redirect_url) destUrl = loginRes.redirect_url;
         } else {
@@ -927,11 +929,27 @@ window.handleFormSubmit = async function(e) {
     existingProfile = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
   } catch (e) {}
 
+  // If fullName is still empty or 'John Doe', resolve from existingProfile or email
+  if ((!fullName || fullName === 'John Doe') && existingProfile.name && existingProfile.name !== 'John Doe') {
+    fullName = existingProfile.name;
+  }
+  if ((!fullName || fullName === 'John Doe') && email) {
+    const local = email.split('@')[0];
+    fullName = local.split(/[._-]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+  }
+  if (!fullName || fullName === 'John Doe') {
+    fullName = 'Student';
+  }
+
+  const parts = fullName.trim().split(' ');
+  const firstName = parts[0] || 'Student';
+  const lastName = parts.slice(1).join(' ') || '';
+
   const mergedUser = {
     ...existingProfile,
-    name: fullName || existingProfile.name || 'Candidate',
-    firstName: (fullName || existingProfile.name || 'Candidate').split(' ')[0],
-    lastName: (fullName || existingProfile.name || '').split(' ').slice(1).join(' ') || '',
+    name: fullName,
+    firstName: firstName,
+    lastName: lastName,
     email: email,
     role: finalRole
   };

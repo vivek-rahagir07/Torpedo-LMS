@@ -104,10 +104,11 @@
           <span class="rail-avatar-dot" style="bottom: 0px; right: 0px;"></span>
         </div>
 
-        <!-- Logout -->
-        <a href="javascript:void(0)" onclick="handleLogout()" class="header-icon-badge-btn" title="Sign Out">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        </a>
+        <!-- Logout Button (Prominent & Clear) -->
+        <button type="button" onclick="handleLogout()" class="header-action-btn" title="Sign Out / Log Out" style="background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; font-weight: 600; padding: 6px 13px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-left: 6px; transition: all 0.15s;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Log Out</span>
+        </button>
       </div>
     </header>
 
@@ -454,7 +455,9 @@
               <div class="profile-name" id="sidebar-student-name">Student</div>
               <div class="profile-role" id="sidebar-student-role">Student workspace</div>
             </div>
-            <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <button type="button" onclick="event.stopPropagation(); handleLogout();" class="sidebar-quick-logout-btn" title="Sign Out / Log Out" style="background: none; border: none; color: #94a3b8; cursor: pointer; padding: 4px; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: color 0.15s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#94a3b8'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
           </div>
         </div>
       </aside>
@@ -3430,11 +3433,19 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/></svg>
             <span>Purchase History</span>
           </button>
+
+          <!-- Explicit Modal Log Out Button -->
+          <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+            <button type="button" class="dossier-nav-btn" onclick="handleLogout()" style="color: #dc2626; font-weight: 700;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              <span>Log Out</span>
+            </button>
+          </div>
         </div>
 
         <!-- Sidebar Footer -->
-        <div class="dossier-sidebar-footer">
-          <span>Torpedo LMS v2.4</span>
+        <div class="dossier-sidebar-footer" style="display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" onclick="handleLogout()" style="background: none; border: none; color: #dc2626; font-weight: 700; font-size: 0.76rem; cursor: pointer; padding: 0;">Sign Out ↗</button>
           <button type="button" class="dossier-close-link" onclick="closeProfileDossierModal()">[→ Close</button>
         </div>
       </aside>
@@ -4656,11 +4667,17 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         </div>
       </div>
     </div>
-    <div class="dialog-footer">
-      <button type="button" class="btn-details-ghost" onclick="closeStudentDossierModal()">Close</button>
-      <button type="button" class="btn-apply-fasttrack" onclick="showToast('Verified Dossier PDF downloaded.', 'success')">
-        <span>Download Official PDF ↓</span>
+    <div class="dialog-footer" style="display: flex; justify-content: space-between; align-items: center;">
+      <button type="button" onclick="handleLogout()" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; padding: 7px 14px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Log Out</span>
       </button>
+      <div style="display: flex; gap: 8px;">
+        <button type="button" class="btn-details-ghost" onclick="closeStudentDossierModal()">Close</button>
+        <button type="button" class="btn-apply-fasttrack" onclick="showToast('Verified Dossier PDF downloaded.', 'success')">
+          <span>Download Official PDF ↓</span>
+        </button>
+      </div>
     </div>
   </dialog>
 
@@ -4852,19 +4869,58 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           const parsed = JSON.parse(stored);
           if (parsed && typeof parsed === 'object') {
             currentStudent = { ...currentStudent, ...parsed };
+            // Purge any legacy 'John Doe' artifact from localStorage
+            if (currentStudent.name === 'John Doe' || (currentStudent.firstName === 'John' && currentStudent.lastName === 'Doe')) {
+              currentStudent.name = '';
+              currentStudent.firstName = '';
+              currentStudent.lastName = '';
+            }
             if (currentStudent.name) {
               const parts = currentStudent.name.trim().split(' ');
               currentStudent.firstName = parts[0];
               currentStudent.lastName = parts.slice(1).join(' ') || '';
             } else if (currentStudent.email) {
               const local = currentStudent.email.split('@')[0];
-              currentStudent.name = local.split(/[._]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+              currentStudent.name = local.split(/[._-]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
               currentStudent.firstName = currentStudent.name.split(' ')[0];
+              currentStudent.lastName = currentStudent.name.split(' ').slice(1).join(' ') || '';
             }
+            localStorage.setItem('torpedo_user', JSON.stringify(currentStudent));
           }
         }
       } catch (err) {
         console.warn('Could not read student session from localStorage', err);
+      }
+
+      // Fetch official verified candidate profile from backend database
+      if (currentStudent.email && window.TorpedoAPI && window.TorpedoAPI.getProfile) {
+        window.TorpedoAPI.getProfile(currentStudent.email, 'student').then(res => {
+          if (res && res.success && res.profile) {
+            const p = res.profile;
+            const fetchedName = [p.first_name, p.last_name].filter(Boolean).join(' ').trim();
+            if (fetchedName && fetchedName !== 'John Doe') {
+              currentStudent.name = fetchedName;
+              currentStudent.firstName = p.first_name || fetchedName.split(' ')[0];
+              currentStudent.lastName = p.last_name || '';
+            }
+            if (p.grad_college) currentStudent.college = p.grad_college;
+            if (p.grad_degree) currentStudent.degree = p.grad_degree;
+            if (p.grad_branch) currentStudent.branch = p.grad_branch;
+            if (p.grad_cgpa) currentStudent.cgpa = p.grad_cgpa;
+            if (p.avatar_path) currentStudent.avatar = p.avatar_path;
+            localStorage.setItem('torpedo_user', JSON.stringify(currentStudent));
+
+            // Refresh UI bindings with verified backend profile
+            const heroGreeting = document.getElementById('hero-greeting-text');
+            if (heroGreeting) heroGreeting.textContent = `Welcome back, ${currentStudent.firstName || 'Student'}`;
+            const sbName = document.getElementById('sidebar-student-name');
+            if (sbName) sbName.textContent = currentStudent.name || 'Student';
+            const mono = document.getElementById('sidebar-student-monogram') || document.querySelector('.profile-monogram-box span');
+            if (mono) mono.textContent = (currentStudent.name || 'Student').split(/\s+/).filter(Boolean).slice(0, 2).map(n => n[0]).join('').toUpperCase();
+            const dossierH = document.getElementById('dossier-header-name');
+            if (dossierH) dossierH.textContent = currentStudent.name || 'Candidate';
+          }
+        }).catch(e => console.warn('Profile fetch note:', e));
       }
 
       const fName = currentStudent.firstName || 'Student';

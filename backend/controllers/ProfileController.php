@@ -12,17 +12,30 @@ class ProfileController {
             return null;
         }
 
-        $baseDir = __DIR__ . '/../../storage/uploads/' . trim($subfolder, '/');
+        $uploadRoot = __DIR__ . '/../../storage/uploads';
+        if (!is_dir($uploadRoot)) {
+            @mkdir($uploadRoot, 0775, true);
+        }
+        @chmod($uploadRoot, 0775);
+
+        $baseDir = $uploadRoot . '/' . trim($subfolder, '/');
         if (!is_dir($baseDir)) {
-            mkdir($baseDir, 0777, true);
+            @mkdir($baseDir, 0775, true);
+        }
+        @chmod($baseDir, 0775);
+
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        // Security: Disallow executable scripts
+        if (in_array($ext, ['php', 'phtml', 'php3', 'php4', 'php5', 'php7', 'php8', 'phps', 'cgi', 'pl', 'py', 'exe', 'sh', 'js', 'bat'])) {
+            return null;
         }
 
-        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
         $cleanName = preg_replace('/[^a-zA-Z0-9_-]/', '_', pathinfo($file['name'], PATHINFO_FILENAME));
         $filename = time() . '_' . $cleanName . '.' . $ext;
         $destPath = $baseDir . '/' . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $destPath)) {
+            @chmod($destPath, 0664);
             return 'storage/uploads/' . trim($subfolder, '/') . '/' . $filename;
         }
         return null;

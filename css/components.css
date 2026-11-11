@@ -1987,6 +1987,58 @@
   color: #334155;
 }
 
+.auth-otp-action-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+.auth-otp-action-btn:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+.auth-otp-action-btn:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+.btn-verify-otp {
+  height: 44px;
+  background: #0f172a;
+  color: #ffffff;
+  border: 1px solid #0f172a;
+  border-radius: 10px;
+  padding: 0 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.btn-verify-otp:hover {
+  background: #1e293b;
+}
+.btn-verify-otp:disabled {
+  background: #059669;
+  border-color: #059669;
+  cursor: default;
+}
+.otp-verified-badge {
+  color: #059669;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .auth-card-forgot {
   font-size: 0.76rem;
   font-weight: 700;

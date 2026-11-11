@@ -13,3 +13,7 @@ storage/uploads/*/*.*
 # Error logs
 *.log
 
+# Deployment Archives
+*.zip
+*.tar.gz
+

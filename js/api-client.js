@@ -83,6 +83,36 @@ const TorpedoAPI = (function() {
     },
 
     /**
+     * Send 6-Digit Email OTP Verification Code
+     */
+    async sendOtp({ email, purpose = 'verification' }) {
+      return await request('auth/send-otp', {
+        method: 'POST',
+        body: JSON.stringify({ email, purpose })
+      });
+    },
+
+    /**
+     * Verify 6-Digit Email OTP Code
+     */
+    async verifyOtp({ email, otp_code, purpose = 'verification' }) {
+      return await request('auth/verify-otp', {
+        method: 'POST',
+        body: JSON.stringify({ email, otp_code, purpose })
+      });
+    },
+
+    /**
+     * Google Sign-In Authentication Callback
+     */
+    async googleLogin({ email, name, avatar_url, role = 'student' }) {
+      return await request('auth/google', {
+        method: 'POST',
+        body: JSON.stringify({ email, name, avatar_url, role })
+      });
+    },
+
+    /**
      * Get Current Authenticated User
      */
     async getMe(email) {

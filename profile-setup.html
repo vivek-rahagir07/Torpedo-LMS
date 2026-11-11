@@ -578,10 +578,9 @@
       </div>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="dashboard.html" class="onboarding-skip-link">Skip for Now</a>
-        <a href="dashboard.html" class="btn btn-primary btn-pill-sm" style="font-size: 0.82rem; padding: 7px 16px; background: #0f172a; border-color: #0f172a;">
-          Go to Dashboard
-        </a>
+        <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-weight: 700; font-size: 0.8rem; padding: 6px 12px; border-radius: 99px; border: 1px solid #bfdbfe;">
+          🔒 Mandatory Profile Completion
+        </span>
       </div>
     </div>
   </header>
@@ -707,34 +706,34 @@
         <div class="onboarding-fields-grid">
           <!-- First Name -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-first-name">First Name *</label>
-            <input type="text" id="input-first-name" class="onboarding-input" placeholder="e.g. Vivek" value="Vivek" required>
+            <label class="onboarding-label" for="input-first-name">First Name <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-first-name" class="onboarding-input" placeholder="Enter your first name" required>
           </div>
 
           <!-- Last Name -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-last-name">Last Name *</label>
-            <input type="text" id="input-last-name" class="onboarding-input" placeholder="e.g. Yadav" value="Yadav" required>
+            <label class="onboarding-label" for="input-last-name">Last Name <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-last-name" class="onboarding-input" placeholder="Enter your last name" required>
           </div>
 
           <!-- Preferred Name / Alias -->
           <div class="onboarding-field">
             <label class="onboarding-label" for="input-alias">Preferred Name / Alias</label>
-            <input type="text" id="input-alias" class="onboarding-input" placeholder="e.g. Vivek" value="Vivek">
+            <input type="text" id="input-alias" class="onboarding-input" placeholder="Optional display name">
           </div>
 
           <!-- Email Address (Read-Only) -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-email">Email Address (Read-only)</label>
-            <input type="email" id="input-email" class="onboarding-input" value="vivek.hr362007@gmail.com" readonly>
+            <label class="onboarding-label" for="input-email">Email Address <span style="color:#ef4444">*</span></label>
+            <input type="email" id="input-email" class="onboarding-input" placeholder="name@example.com" required>
           </div>
 
           <!-- Mobile Phone -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-phone">Mobile Phone (WhatsApp Alerts)</label>
+            <label class="onboarding-label" for="input-phone">Mobile Phone (WhatsApp Alerts) <span style="color:#ef4444">*</span></label>
             <div style="display: grid; grid-template-columns: 80px 1fr; gap: 8px;">
               <input type="text" class="onboarding-input" value="+91" style="text-align: center; font-weight: 700;" readonly>
-              <input type="tel" id="input-phone" class="onboarding-input" placeholder="9876543210" value="9876543210" required>
+              <input type="tel" id="input-phone" class="onboarding-input" placeholder="10-digit mobile number" required>
             </div>
           </div>
 
@@ -751,28 +750,27 @@
 
           <!-- City -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-city">City</label>
-            <input type="text" id="input-city" class="onboarding-input" placeholder="e.g. Bangalore" value="Bangalore">
+            <label class="onboarding-label" for="input-city">City <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-city" class="onboarding-input" placeholder="e.g. Ahmedabad, Bengaluru" required>
           </div>
 
           <!-- State / Province -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-state">State / Province</label>
-            <input type="text" id="input-state" class="onboarding-input" placeholder="e.g. Karnataka" value="Karnataka">
+            <label class="onboarding-label" for="input-state">State / Province <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-state" class="onboarding-input" placeholder="e.g. Gujarat, Karnataka" required>
           </div>
 
           <!-- Short Bio / Headline -->
           <div class="onboarding-field col-span-2">
             <label class="onboarding-label" for="input-bio">Short Bio / Headline</label>
-            <textarea id="input-bio" class="onboarding-textarea" rows="2" placeholder="e.g. Aspiring DevOps & Cloud Engineer eager to build production-grade scalable systems.">Aspiring DevOps & Cloud Engineer eager to build production-grade scalable systems.</textarea>
+            <textarea id="input-bio" class="onboarding-textarea" rows="2" placeholder="Brief description of your skills, interests, and engineering career goals..."></textarea>
           </div>
         </div>
 
         <!-- Bottom Action Bar -->
         <div class="onboarding-bottom-bar">
-          <span class="onboarding-time-note">STUDENT setup takes less than 2 minutes</span>
+          <span class="onboarding-time-note">All fields marked with * are required to unlock your dashboard</span>
           <div style="display: flex; align-items: center; gap: 16px;">
-            <a href="dashboard.html" class="onboarding-skip-link">Skip Profile Setup</a>
             <button type="button" class="btn-onboarding-primary" onclick="goToStep(2)">
               <span>Save &amp; Continue</span> <span>➔</span>
             </button>
@@ -797,14 +795,14 @@
           
           <!-- College Name (Full Width) -->
           <div class="onboarding-field col-span-2">
-            <label class="onboarding-label" for="input-college">College / University Name *</label>
-            <input type="text" id="input-college" class="onboarding-input" placeholder="e.g. Gujarat Technological University (GTU), Ahmedabad" value="Gujarat Technological University (GTU), Ahmedabad" required>
+            <label class="onboarding-label" for="input-college">College / University Name <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-college" class="onboarding-input" placeholder="e.g. Gujarat Technological University / Delhi Technological University" required>
           </div>
 
           <!-- Degree Program -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="select-degree">Degree Program</label>
-            <select id="select-degree" class="onboarding-select">
+            <label class="onboarding-label" for="select-degree">Degree Program <span style="color:#ef4444">*</span></label>
+            <select id="select-degree" class="onboarding-select" required>
               <option value="B.Tech / B.E (Bachelor of Technology / Engineering)" selected>B.Tech / B.E (Bachelor of Technology / Engineering)</option>
               <option value="B.Sc (Computer Science / IT)">B.Sc (Computer Science / IT)</option>
               <option value="BCA (Bachelor of Computer Applications)">BCA (Bachelor of Computer Applications)</option>
@@ -815,8 +813,8 @@
 
           <!-- Academic Branch / Specialization -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="select-branch">Academic Branch / Specialization</label>
-            <select id="select-branch" class="onboarding-select">
+            <label class="onboarding-label" for="select-branch">Academic Branch / Specialization <span style="color:#ef4444">*</span></label>
+            <select id="select-branch" class="onboarding-select" required>
               <option value="Computer Science & Engineering (CSE)" selected>Computer Science &amp; Engineering (CSE)</option>
               <option value="Information Technology (IT)">Information Technology (IT)</option>
               <option value="Artificial Intelligence & Data Science">Artificial Intelligence &amp; Data Science</option>
@@ -827,26 +825,26 @@
 
           <!-- Current Semester / Year -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-semester">Current Semester / Year</label>
-            <input type="text" id="input-semester" class="onboarding-input" placeholder="e.g. 3rd Year (Semester 6)" value="3rd Year (Semester 6)">
+            <label class="onboarding-label" for="input-semester">Current Semester / Year <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-semester" class="onboarding-input" placeholder="e.g. 3rd Year (Semester 6)" required>
           </div>
 
           <!-- Expected Graduation Year -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-grad-year">Expected Graduation Year</label>
-            <input type="number" id="input-grad-year" class="onboarding-input" placeholder="e.g. 2026" value="2026">
+            <label class="onboarding-label" for="input-grad-year">Expected Graduation Year <span style="color:#ef4444">*</span></label>
+            <input type="number" id="input-grad-year" class="onboarding-input" placeholder="e.g. 2026" min="2020" max="2035" required>
           </div>
 
           <!-- Current CGPA / Percentage -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-cgpa">Current CGPA / Percentage</label>
-            <input type="text" id="input-cgpa" class="onboarding-input" placeholder="e.g. 8.85" value="8.85">
+            <label class="onboarding-label" for="input-cgpa">Current CGPA / Percentage <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-cgpa" class="onboarding-input" placeholder="e.g. 8.85 or 85%" required>
           </div>
 
           <!-- University Roll Number / Student ID -->
           <div class="onboarding-field">
-            <label class="onboarding-label" for="input-roll">University Roll Number / Student ID</label>
-            <input type="text" id="input-roll" class="onboarding-input" placeholder="e.g. GTU-2022-CS-0849" value="GTU-2022-CS-0849">
+            <label class="onboarding-label" for="input-roll">University Roll Number / Student ID <span style="color:#ef4444">*</span></label>
+            <input type="text" id="input-roll" class="onboarding-input" placeholder="e.g. 22002170310065" required>
           </div>
 
         </div>
@@ -857,7 +855,6 @@
             <span>← Previous Step</span>
           </button>
           <div style="display: flex; align-items: center; gap: 16px;">
-            <a href="dashboard.html" class="onboarding-skip-link">Skip Profile Setup</a>
             <button type="button" class="btn-onboarding-primary" onclick="goToStep(3)">
               <span>Save &amp; Continue</span> <span>➔</span>
             </button>
@@ -945,19 +942,19 @@
           <!-- GitHub -->
           <div class="social-input-wrap">
             <svg class="social-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            <input type="url" id="input-github" class="onboarding-input social-input-field" placeholder="https://github.com/your-username" value="https://github.com/kangaddin">
+            <input type="url" id="input-github" class="onboarding-input social-input-field" placeholder="https://github.com/your-username">
           </div>
 
           <!-- LinkedIn -->
           <div class="social-input-wrap">
             <svg class="social-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            <input type="url" id="input-linkedin" class="onboarding-input social-input-field" placeholder="https://linkedin.com/in/your-profile" value="https://linkedin.com/in/kang-addin">
+            <input type="url" id="input-linkedin" class="onboarding-input social-input-field" placeholder="https://linkedin.com/in/your-profile">
           </div>
 
           <!-- Portfolio Website -->
           <div class="social-input-wrap">
             <svg class="social-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            <input type="url" id="input-portfolio" class="onboarding-input social-input-field" placeholder="https://yourportfolio.dev" value="https://kangaddin.dev">
+            <input type="url" id="input-portfolio" class="onboarding-input social-input-field" placeholder="https://yourportfolio.dev">
           </div>
         </div>
 
@@ -967,9 +964,8 @@
             <span>← Previous Step</span>
           </button>
           <div style="display: flex; align-items: center; gap: 16px;">
-            <a href="dashboard.html" class="onboarding-skip-link">Skip Profile Setup</a>
             <button type="submit" class="btn-onboarding-primary" id="complete-onboarding-btn">
-              <span>Complete &amp; Verify</span> <span>➔</span>
+              <span>Complete &amp; Verify Profile</span> <span>➔</span>
             </button>
           </div>
         </div>
@@ -1019,10 +1015,96 @@
       }
     });
 
-    // Step Navigation Function
+    // Step Validation Functions - Cannot surpass without completing mandatory details
+    function validateStep1() {
+      const fName = document.getElementById('input-first-name');
+      const lName = document.getElementById('input-last-name');
+      const email = document.getElementById('input-email');
+      const phone = document.getElementById('input-phone');
+      const city = document.getElementById('input-city');
+      const state = document.getElementById('input-state');
+
+      let missing = [];
+      [fName, lName, email, phone, city, state].forEach(inp => {
+        if (inp) {
+          inp.style.borderColor = '';
+          inp.oninput = () => { inp.style.borderColor = ''; };
+        }
+      });
+
+      if (!fName || !fName.value.trim()) { missing.push('First Name'); if (fName) fName.style.borderColor = '#ef4444'; }
+      if (!lName || !lName.value.trim()) { missing.push('Last Name'); if (lName) lName.style.borderColor = '#ef4444'; }
+      if (!email || !email.value.trim() || !email.value.includes('@')) { missing.push('Valid Email'); if (email) email.style.borderColor = '#ef4444'; }
+      if (!phone || !phone.value.trim() || phone.value.replace(/\D/g, '').length < 10) { missing.push('10-Digit Mobile Phone'); if (phone) phone.style.borderColor = '#ef4444'; }
+      if (!city || !city.value.trim()) { missing.push('City'); if (city) city.style.borderColor = '#ef4444'; }
+      if (!state || !state.value.trim()) { missing.push('State'); if (state) state.style.borderColor = '#ef4444'; }
+
+      if (missing.length > 0) {
+        showToast(`Please fill all mandatory personal details: ${missing.slice(0, 3).join(', ')}${missing.length > 3 ? '...' : ''}`, 'warning');
+        const firstInvalid = [fName, lName, email, phone, city, state].find(inp => inp && inp.style.borderColor === '#ef4444' || inp.style.borderColor === 'rgb(239, 68, 68)');
+        if (firstInvalid) firstInvalid.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function validateStep2() {
+      const college = document.getElementById('input-college');
+      const semester = document.getElementById('input-semester');
+      const gradYear = document.getElementById('input-grad-year');
+      const cgpa = document.getElementById('input-cgpa');
+      const roll = document.getElementById('input-roll');
+
+      let missing = [];
+      [college, semester, gradYear, cgpa, roll].forEach(inp => {
+        if (inp) {
+          inp.style.borderColor = '';
+          inp.oninput = () => { inp.style.borderColor = ''; };
+        }
+      });
+
+      if (!college || !college.value.trim()) { missing.push('College Name'); if (college) college.style.borderColor = '#ef4444'; }
+      if (!semester || !semester.value.trim()) { missing.push('Current Semester'); if (semester) semester.style.borderColor = '#ef4444'; }
+      if (!gradYear || !gradYear.value.trim()) { missing.push('Graduation Year'); if (gradYear) gradYear.style.borderColor = '#ef4444'; }
+      if (!cgpa || !cgpa.value.trim()) { missing.push('CGPA / Percentage'); if (cgpa) cgpa.style.borderColor = '#ef4444'; }
+      if (!roll || !roll.value.trim()) { missing.push('Roll Number / Student ID'); if (roll) roll.style.borderColor = '#ef4444'; }
+
+      if (missing.length > 0) {
+        showToast(`Please complete all academic fields: ${missing.slice(0, 3).join(', ')}${missing.length > 3 ? '...' : ''}`, 'warning');
+        const firstInvalid = [college, semester, gradYear, cgpa, roll].find(inp => inp && inp.style.borderColor === '#ef4444' || inp.style.borderColor === 'rgb(239, 68, 68)');
+        if (firstInvalid) firstInvalid.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function validateStep3() {
+      const resumeFile = document.getElementById('resume-file-input');
+      const resumeText = document.getElementById('resume-filename-text')?.textContent || '';
+      const hasResume = (resumeFile && resumeFile.files && resumeFile.files.length > 0) || resumeText.includes('✓');
+      
+      if (!hasResume) {
+        showToast('Please upload your Resume (PDF format) before completing verification.', 'warning');
+        return false;
+      }
+      return true;
+    }
+
+    // Step Navigation Function with Strict Progression Enforcement
     function goToStep(step) {
       if (step < 1) step = 1;
       if (step > 3) step = 3;
+
+      // Strict check: Cannot surpass Step 1 without completing mandatory fields
+      if (step > 1 && !validateStep1()) {
+        return;
+      }
+
+      // Strict check: Cannot surpass Step 2 without completing academic details
+      if (step > 2 && !validateStep2()) {
+        return;
+      }
+
       currentStep = step;
 
       // Update Top Progress Bar
@@ -1139,22 +1221,27 @@
     async function handleOnboardingSubmit(e) {
       e.preventDefault();
 
+      // Ensure all steps are completed
+      if (!validateStep1()) { goToStep(1); return; }
+      if (!validateStep2()) { goToStep(2); return; }
+      if (!validateStep3()) { return; }
+
       const btn = document.getElementById('complete-onboarding-btn');
       btn.innerHTML = '<span>Saving &amp; Verifying Profile...</span>';
       btn.disabled = true;
 
-      const fName = document.getElementById('input-first-name').value.trim() || 'Vivek';
-      const lName = document.getElementById('input-last-name').value.trim() || 'Yadav';
-      const fullName = `${fName} ${lName}`;
-      const email = document.getElementById('input-email').value.trim() || 'vivek.hr362007@gmail.com';
-      const phone = document.getElementById('input-phone').value.trim() || '9876543210';
-      const college = document.getElementById('input-college').value.trim() || 'Gujarat Technological University (GTU), Ahmedabad';
+      const fName = document.getElementById('input-first-name').value.trim();
+      const lName = document.getElementById('input-last-name').value.trim();
+      const fullName = `${fName} ${lName}`.trim();
+      const email = document.getElementById('input-email').value.trim();
+      const phone = document.getElementById('input-phone').value.trim();
+      const college = document.getElementById('input-college').value.trim();
       const degree = document.getElementById('select-degree').value;
       const branch = document.getElementById('select-branch').value;
-      const semester = document.getElementById('input-semester').value.trim() || '3rd Year (Semester 6)';
-      const gradYear = document.getElementById('input-grad-year').value.trim() || '2026';
-      const cgpa = document.getElementById('input-cgpa').value.trim() || '8.85';
-      const roll = document.getElementById('input-roll').value.trim() || 'GTU-2022-CS-0849';
+      const semester = document.getElementById('input-semester').value.trim();
+      const gradYear = document.getElementById('input-grad-year').value.trim();
+      const cgpa = document.getElementById('input-cgpa').value.trim();
+      const roll = document.getElementById('input-roll').value.trim();
       const bio = document.getElementById('input-bio').value.trim();
       const city = document.getElementById('input-city').value.trim();
       const state = document.getElementById('input-state').value.trim();

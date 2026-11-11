@@ -118,6 +118,24 @@ try {
             }
             break;
 
+        case 'auth/send-otp':
+            if ($method === 'POST') {
+                $response = AuthController::sendOtp($requestData);
+            }
+            break;
+
+        case 'auth/verify-otp':
+            if ($method === 'POST') {
+                $response = AuthController::verifyOtp($requestData);
+            }
+            break;
+
+        case 'auth/google':
+            if ($method === 'POST') {
+                $response = AuthController::googleLogin($requestData);
+            }
+            break;
+
         case 'auth/me':
             if ($method === 'GET') {
                 $email = $requestData['email'] ?? 'vivek.hr362007@gmail.com';

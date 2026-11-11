@@ -117,7 +117,8 @@ class Database {
 
         // 2. Seed Default Verified Accounts (Vivek Yadav Student, Faculty, Employer, Super Admin)
         $pwHash = password_hash('password123', PASSWORD_BCRYPT);
-        $adminPwHash = password_hash('admin123', PASSWORD_BCRYPT);
+        $adminPass = 'Beenu@01142683311#';
+        $adminPwHash = password_hash($adminPass, PASSWORD_BCRYPT);
 
         // 1. STUDENT ACCOUNT (Vivek Yadav - GTU CSE 2026)
         $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
@@ -172,9 +173,13 @@ class Database {
                 'tier1_partner', 'tier1_partner'
             ]);
 
-        // 4. SUPER ADMIN ACCOUNT (Full Authority)
+        // 4. SUPER ADMIN ACCOUNT (gettingroots@gmail.com - Full Authority)
         $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
-            ->execute([4, 'Torpedo Super Admin', 'admin@torpedo.edu', $adminPwHash, 'admin', 'assets/admin_avatar.jpg']);
+            ->execute([4, 'Super Admin', 'gettingroots@gmail.com', $adminPwHash, 'admin', 'assets/admin_avatar.jpg']);
+
+        // Fallback alias
+        $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
+            ->execute([5, 'Torpedo Super Admin', 'admin@torpedo.edu', $adminPwHash, 'admin', 'assets/admin_avatar.jpg']);
 
         // 5. Seed Enterprise Job Openings
         $jobs = [

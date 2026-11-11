@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Courses Catalog &amp; Career Pathways | Torpedo Learning</title>
-  <meta name="description" content="Browse industry-accredited courses, in-browser Lifecode sandboxes, and recruiter-connected syllabus pathways at Torpedo Learning.">
+  <meta name="description"
+    content="Browse industry-accredited courses, in-browser Lifecode sandboxes, and recruiter-connected syllabus pathways at Torpedo Learning.">
   <link rel="icon" type="image/png" href="assets/LOGO.png">
 
   <!-- Inter Inter, Plus Jakarta Sans, Outfit & JetBrains Mono JetBrains Mono Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
   <!-- Master Portal Layout CSS -->
   <link rel="stylesheet" href="css/portal-layout.css?v=courses_v4">
@@ -94,8 +98,15 @@
     }
 
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.96) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .course-player-video-box {
@@ -111,7 +122,9 @@
   </style>
   <link rel="stylesheet" href="css/torpedo-refresh.css">
   <script defer src="js/torpedo-refresh.js"></script>
-<script src="js/platform-bridge.js"></script></head>
+  <script src="js/platform-bridge.js"></script>
+</head>
+
 <body>
 
   <!-- App Root Shell -->
@@ -121,11 +134,17 @@
          1. TOP GLOBAL HEADER (56px) - Matching Student Portal Dashboard
          ================================================================== -->
     <header class="global-top-header">
-      
+
       <!-- Brand Logo Left -->
       <div class="header-left-brand">
-        <button type="button" class="header-mobile-toggle" onclick="toggleMobileSidebar()" title="Toggle Navigation Menu" aria-label="Toggle Navigation Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <button type="button" class="header-mobile-toggle" onclick="toggleMobileSidebar()"
+          title="Toggle Navigation Menu" aria-label="Toggle Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round">
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
         </button>
         <a href="dashboard.html" class="brand-logo-wrap" title="Torpedo Student Portal">
           <img src="assets/LOGO.png" alt="Torpedo Learning Logo" class="brand-logo-img">
@@ -135,16 +154,27 @@
 
       <!-- Center Search Pill -->
       <div class="header-search-wrap">
-        <svg class="header-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" class="header-search-input" placeholder="Search courses, instructors, syllabus tracks..." id="portal-search-input" oninput="onHeaderSearch(this.value)">
+        <svg class="header-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="text" class="header-search-input" placeholder="Search courses, instructors, syllabus tracks..."
+          id="portal-search-input" oninput="onHeaderSearch(this.value)">
         <span class="header-kbd-hint">⌘K</span>
       </div>
 
       <!-- Right Header Actions -->
       <div class="header-right-actions">
         <!-- My Dossier Button -->
-        <button type="button" class="header-action-btn" onclick="openStudentDossierModal()" title="View Student Academic Records">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <button type="button" class="header-action-btn" onclick="openStudentDossierModal()"
+          title="View Student Academic Records">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
           <span>My Dossier</span>
         </button>
 
@@ -155,14 +185,22 @@
         </a>
 
         <!-- Notification Bell -->
-        <div class="header-icon-badge-btn" onclick="showToast('Notification: 2 New Course Video Lessons Available', 'info')" title="Notifications">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="header-icon-badge-btn"
+          onclick="showToast('Notification: 2 New Course Video Lessons Available', 'info')" title="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
           <span class="icon-badge-num">2</span>
         </div>
 
         <!-- Logout -->
         <a href="index.html" class="header-icon-badge-btn" title="Sign Out">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
         </a>
       </div>
     </header>
@@ -171,42 +209,52 @@
          2. APP BODY LAYOUT: LEFT SIDEBAR + COURSES WORKSPACE
          ================================================================== -->
     <div class="app-body-layout">
-      
+
       <!-- DUAL-PANE SIDEBAR ON LEFT-HAND SIDE (Exact Portal Structure) -->
       <aside class="single-main-sidebar has-rail" id="student-portal-sidebar">
         <!-- 1. Left Mini-Rail -->
         <div class="sidebar-icon-rail">
           <!-- Hamburger Button -->
-          <button type="button" class="rail-btn rail-hamburger" id="rail-toggle-btn" onclick="toggleSidebarMenuExpand()" title="Toggle Sidebar Menu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          <button type="button" class="rail-btn rail-hamburger" id="rail-toggle-btn" onclick="toggleSidebarMenuExpand()"
+            title="Toggle Sidebar Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round">
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
           </button>
 
           <div class="rail-divider"></div>
 
           <!-- Academic / Cap (Active) -->
           <a href="courses.html" class="rail-item active" title="Courses &amp; Academic Track">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
             </svg>
           </a>
 
           <!-- Community / Users -->
-          <button type="button" class="rail-item" title="Student Cohort &amp; Community" onclick="showToast('Student Cohort Chat: 14 Classmates Online', 'info')">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          <button type="button" class="rail-item" title="Student Cohort &amp; Community"
+            onclick="showToast('Student Cohort Chat: 14 Classmates Online', 'info')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
           </button>
 
           <!-- 3D Cube / Tools -->
           <a href="lifecode.html" class="rail-item" title="Lifecode Problem Arena (520+ Problems)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m21 16-9 5-9-5V8l9-5 9 5v8z"/>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m21 16-9 5-9-5V8l9-5 9 5v8z" />
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+              <line x1="12" y1="22.08" x2="12" y2="12" />
             </svg>
           </a>
         </div>
@@ -214,39 +262,43 @@
         <!-- 2. Main Navigation Panel -->
         <div class="sidebar-main-panel">
           <div class="sidebar-menu-scroll">
-            
+
             <!-- Home -->
             <a href="dashboard.html#home" class="sidebar-nav-link" id="nav-btn-home">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
               <span>Home</span>
             </a>
 
             <!-- Courses (ACTIVE Solid Blue Pill) -->
             <a href="courses.html" class="sidebar-nav-link active" id="nav-btn-courses">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
               </svg>
               <span>Courses</span>
             </a>
 
             <!-- Library Catalog -->
             <a href="dashboard.html#library" class="sidebar-nav-link" id="nav-btn-library">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/>
-                <polyline points="10 2 10 10 13 7 16 10 16 2"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z" />
+                <polyline points="10 2 10 10 13 7 16 10 16 2" />
               </svg>
               <span>Library Catalog</span>
             </a>
 
             <!-- Certifications -->
             <a href="dashboard.html#certifications" class="sidebar-nav-link" id="nav-btn-certifications">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="8" r="6"/>
-                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6" />
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
               </svg>
               <span>Certifications</span>
             </a>
@@ -258,15 +310,20 @@
             <div class="sidebar-nav-item-wrap" id="nav-group-lifecode">
               <div class="sidebar-nav-link-row">
                 <a href="dashboard.html#lifecode" class="sidebar-nav-link" id="nav-btn-lifecode">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m18 16 4-4-4-4"/>
-                    <path d="m6 8-4 4 4 4"/>
-                    <path d="m14.5 4-5 16"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 16 4-4-4-4" />
+                    <path d="m6 8-4 4 4 4" />
+                    <path d="m14.5 4-5 16" />
                   </svg>
                   <span>Lifecode</span>
                 </a>
-                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('lifecode', event)" title="Toggle Lifecode sub menu">
-                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('lifecode', event)"
+                  title="Toggle Lifecode sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
                 </button>
               </div>
               <div class="sidebar-subnav-menu" id="subnav-menu-lifecode">
@@ -283,18 +340,23 @@
             <div class="sidebar-nav-item-wrap" id="nav-group-quizzes">
               <div class="sidebar-nav-link-row">
                 <a href="dashboard.html#quizzes" class="sidebar-nav-link" id="nav-btn-quizzes">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
-                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                    <path d="M12 11h4"/>
-                    <path d="M12 16h4"/>
-                    <circle cx="9" cy="11" r="0.75" fill="currentColor"/>
-                    <circle cx="9" cy="16" r="0.75" fill="currentColor"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                    <path d="M12 11h4" />
+                    <path d="M12 16h4" />
+                    <circle cx="9" cy="11" r="0.75" fill="currentColor" />
+                    <circle cx="9" cy="16" r="0.75" fill="currentColor" />
                   </svg>
                   <span>Mock Quizzes</span>
                 </a>
-                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('quizzes', event)" title="Toggle Mock Quizzes sub menu">
-                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('quizzes', event)"
+                  title="Toggle Mock Quizzes sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
                 </button>
               </div>
               <div class="sidebar-subnav-menu" id="subnav-menu-quizzes">
@@ -314,14 +376,19 @@
             <div class="sidebar-nav-item-wrap" id="nav-group-jobs">
               <div class="sidebar-nav-link-row">
                 <a href="jobs.html" class="sidebar-nav-link" id="nav-btn-jobs">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="20" height="14" x="2" y="7" rx="2"/>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="7" rx="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                   </svg>
                   <span>Jobs &amp; Internships</span>
                 </a>
-                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('jobs', event)" title="Toggle Jobs sub menu">
-                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('jobs', event)"
+                  title="Toggle Jobs sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
                 </button>
               </div>
               <div class="sidebar-subnav-menu" id="subnav-menu-jobs">
@@ -338,18 +405,23 @@
             <div class="sidebar-nav-item-wrap" id="nav-group-hackathons">
               <div class="sidebar-nav-link-row">
                 <a href="dashboard.html#hackathons" class="sidebar-nav-link" id="nav-btn-hackathons">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                    <path d="M4 22h16"/>
-                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
                   </svg>
                   <span>Hackathons</span>
                 </a>
-                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('hackathons', event)" title="Toggle Hackathons sub menu">
-                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                <button type="button" class="sidebar-subnav-toggle" onclick="toggleSidebarSubnav('hackathons', event)"
+                  title="Toggle Hackathons sub menu">
+                  <svg class="subnav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
                 </button>
               </div>
               <div class="sidebar-subnav-menu" id="subnav-menu-hackathons">
@@ -374,7 +446,12 @@
               <div class="profile-name" id="sidebar-student-name">Vivek Yadav</div>
               <div class="profile-role" id="sidebar-student-role">GTU CSE • Batch '26</div>
             </div>
-            <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
           </div>
         </div>
       </aside>
@@ -390,15 +467,21 @@
             <div class="courses-deck-left">
               <span class="courses-deck-pill">⚡ ACCREDITED CURRICULUM • 60+ HOURS SPRINT</span>
               <h1 class="courses-deck-title">Courses &amp; Learning Pathways</h1>
-              <p class="courses-deck-desc">Curated syllabus pathways, Lifecode hands-on sandboxes, and recruiter-connected engineering tracks.</p>
-              
+              <p class="courses-deck-desc">Curated syllabus pathways, Lifecode hands-on sandboxes, and
+                recruiter-connected engineering tracks.</p>
+
               <div class="courses-deck-actions">
-                <button type="button" class="course-hero-pill-btn view-pill-btn active" id="btn-courses-explore-all" onclick="filterCoursesTab('all')">
+                <button type="button" class="course-hero-pill-btn view-pill-btn active" id="btn-courses-explore-all"
+                  onclick="filterCoursesTab('all')">
                   <span class="pill-live-dot"></span>
                   <span>Explore All Courses (6)</span>
                 </button>
-                <button type="button" class="course-hero-pill-btn view-pill-btn" id="btn-courses-my-learning" onclick="filterCoursesTab('enrolled')">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <button type="button" class="course-hero-pill-btn view-pill-btn" id="btn-courses-my-learning"
+                  onclick="filterCoursesTab('enrolled')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                  </svg>
                   <span>My Learning (3)</span>
                 </button>
               </div>
@@ -448,8 +531,12 @@
           <div class="filter-strip-card">
             <div class="filter-controls-group">
               <div class="filter-search-box">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="course-catalog-search" placeholder="Search title, instructor, skill..." oninput="handleCourseCatalogFilter()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="text" id="course-catalog-search" placeholder="Search title, instructor, skill..."
+                  oninput="handleCourseCatalogFilter()">
               </div>
               <select class="filter-select" id="course-category-select" onchange="onCategorySelectChange(this.value)">
                 <option value="all">All Categories</option>
@@ -474,24 +561,27 @@
                COURSES CATALOG GRID (Matching Reference)
                ============================================================== -->
           <div class="courses-catalog-grid" id="courses-catalog-grid-items">
-            
+
             <!-- Course 1 -->
             <div class="catalog-course-item-card" data-cat="cloud" data-diff="advanced" data-enrolled="true">
               <div class="course-card-top-banner">
-                <img src="assets/courses/devops.jpg" class="course-card-thumb-img" alt="Cloud DevOps &amp; Microservices Architecture">
+                <img src="assets/courses/devops.jpg" class="course-card-thumb-img"
+                  alt="Cloud DevOps &amp; Microservices Architecture">
                 <div class="course-card-banner-overlay"></div>
                 <span class="course-card-level-badge">Advanced • 5 Hours</span>
               </div>
               <div class="course-card-body-content">
                 <div class="course-card-cat-meta">Cloud &amp; DevOps Architecture</div>
                 <h3 class="course-card-title-h3">Cloud DevOps &amp; Microservices Architecture</h3>
-                <p class="course-card-desc-text">Production Kubernetes cluster orchestration, gRPC protocol buffers, Istio service meshes, and GitOps CI/CD pipelines.</p>
+                <p class="course-card-desc-text">Production Kubernetes cluster orchestration, gRPC protocol buffers,
+                  Istio service meshes, and GitOps CI/CD pipelines.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
                     <span class="instructor-monogram">VM</span>
                     <span class="instructor-name-label">Dr. Vikram Malhotra</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Cloud DevOps &amp; Microservices Architecture')">
+                  <button type="button" class="btn-card-launch-course"
+                    onclick="openCoursePlayerModal('Cloud DevOps &amp; Microservices Architecture')">
                     Resume Lesson &rarr;
                   </button>
                 </div>
@@ -501,20 +591,23 @@
             <!-- Course 2 -->
             <div class="catalog-course-item-card" data-cat="ai" data-diff="intermediate" data-enrolled="true">
               <div class="course-card-top-banner">
-                <img src="assets/courses/ai_agents.jpg" class="course-card-thumb-img" alt="Autonomous AI Agent Architecture">
+                <img src="assets/courses/ai_agents.jpg" class="course-card-thumb-img"
+                  alt="Autonomous AI Agent Architecture">
                 <div class="course-card-banner-overlay"></div>
                 <span class="course-card-level-badge">Intermediate • 6 Hours</span>
               </div>
               <div class="course-card-body-content">
                 <div class="course-card-cat-meta">Artificial Intelligence &amp; LLMs</div>
                 <h3 class="course-card-title-h3">Autonomous AI Agent Architecture (LangGraph)</h3>
-                <p class="course-card-desc-text">Multi-agent supervisory workflows, planning loops, recursive reflection, model context protocol (MCP) servers, and LangGraph.</p>
+                <p class="course-card-desc-text">Multi-agent supervisory workflows, planning loops, recursive
+                  reflection, model context protocol (MCP) servers, and LangGraph.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
                     <span class="instructor-monogram purple">RS</span>
                     <span class="instructor-name-label">Prof. R. Sengupta</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Autonomous AI Agent Architecture with LangGraph')">
+                  <button type="button" class="btn-card-launch-course"
+                    onclick="openCoursePlayerModal('Autonomous AI Agent Architecture with LangGraph')">
                     Resume Lesson &rarr;
                   </button>
                 </div>
@@ -524,20 +617,23 @@
             <!-- Course 3 -->
             <div class="catalog-course-item-card" data-cat="distributed" data-diff="beginner" data-enrolled="true">
               <div class="course-card-top-banner">
-                <img src="assets/courses/distributed_systems.jpg" class="course-card-thumb-img" alt="Distributed Systems Architecture">
+                <img src="assets/courses/distributed_systems.jpg" class="course-card-thumb-img"
+                  alt="Distributed Systems Architecture">
                 <div class="course-card-banner-overlay"></div>
                 <span class="course-card-level-badge">Beginner • 7 Hours</span>
               </div>
               <div class="course-card-body-content">
                 <div class="course-card-cat-meta">Backend Systems &amp; Go</div>
                 <h3 class="course-card-title-h3">Distributed Systems &amp; High-Throughput Architecture</h3>
-                <p class="course-card-desc-text">Event-driven Kafka message streaming, distributed consensus (Raft/Paxos), sharded storage, and concurrent Go routines.</p>
+                <p class="course-card-desc-text">Event-driven Kafka message streaming, distributed consensus
+                  (Raft/Paxos), sharded storage, and concurrent Go routines.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
                     <span class="instructor-monogram teal">VM</span>
                     <span class="instructor-name-label">Dr. Vikram Malhotra</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="openCoursePlayerModal('Full-Stack Distributed Systems (Go &amp; React)')">
+                  <button type="button" class="btn-card-launch-course"
+                    onclick="openCoursePlayerModal('Full-Stack Distributed Systems (Go &amp; React)')">
                     Review Material &rarr;
                   </button>
                 </div>
@@ -547,20 +643,23 @@
             <!-- Course 4 -->
             <div class="catalog-course-item-card" data-cat="frontend" data-diff="intermediate" data-enrolled="false">
               <div class="course-card-top-banner">
-                <img src="assets/courses/react_frontend.jpg" class="course-card-thumb-img" alt="Modern Frontend Architecture &amp; React 19">
+                <img src="assets/courses/react_frontend.jpg" class="course-card-thumb-img"
+                  alt="Modern Frontend Architecture &amp; React 19">
                 <div class="course-card-banner-overlay"></div>
                 <span class="course-card-level-badge">Intermediate • 12 Weeks</span>
               </div>
               <div class="course-card-body-content">
                 <div class="course-card-cat-meta">Frontend Engineering</div>
                 <h3 class="course-card-title-h3">Modern Frontend Architecture &amp; React 19 Internals</h3>
-                <p class="course-card-desc-text">React 19 Server Actions, Compiler &amp; Fiber reconciler, enterprise design system tokens, and Core Web Vitals optimization.</p>
+                <p class="course-card-desc-text">React 19 Server Actions, Compiler &amp; Fiber reconciler, enterprise
+                  design system tokens, and Core Web Vitals optimization.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
                     <span class="instructor-monogram blue">AS</span>
                     <span class="instructor-name-label">Ananya Sharma</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="enrollCourseItem(this, 'React 19 Internals')">
+                  <button type="button" class="btn-card-launch-course"
+                    onclick="enrollCourseItem(this, 'React 19 Internals')">
                     Enroll Now &rarr;
                   </button>
                 </div>
@@ -570,20 +669,23 @@
             <!-- Course 5 -->
             <div class="catalog-course-item-card" data-cat="distributed" data-diff="advanced" data-enrolled="false">
               <div class="course-card-top-banner">
-                <img src="assets/courses/rust_concurrency.jpg" class="course-card-thumb-img" alt="Rust Systems Concurrency">
+                <img src="assets/courses/rust_concurrency.jpg" class="course-card-thumb-img"
+                  alt="Rust Systems Concurrency">
                 <div class="course-card-banner-overlay"></div>
                 <span class="course-card-level-badge">Advanced • 16 Weeks</span>
               </div>
               <div class="course-card-body-content">
                 <div class="course-card-cat-meta">Systems Programming</div>
                 <h3 class="course-card-title-h3">Low-Level Concurrency &amp; Memory Models in Rust</h3>
-                <p class="course-card-desc-text">Zero-cost abstractions, borrow checker memory guarantees, async Tokio runtimes, and lock-free ring buffers.</p>
+                <p class="course-card-desc-text">Zero-cost abstractions, borrow checker memory guarantees, async Tokio
+                  runtimes, and lock-free ring buffers.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
                     <span class="instructor-monogram orange">AR</span>
                     <span class="instructor-name-label">Prof. Arjun Rao</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="enrollCourseItem(this, 'Rust Systems Concurrency')">
+                  <button type="button" class="btn-card-launch-course"
+                    onclick="enrollCourseItem(this, 'Rust Systems Concurrency')">
                     Enroll Now &rarr;
                   </button>
                 </div>
@@ -593,20 +695,23 @@
             <!-- Course 6 -->
             <div class="catalog-course-item-card" data-cat="cloud" data-diff="intermediate" data-enrolled="false">
               <div class="course-card-top-banner">
-                <img src="assets/courses/zero_trust.jpg" class="course-card-thumb-img" alt="Enterprise Security &amp; Zero-Trust">
+                <img src="assets/courses/zero_trust.jpg" class="course-card-thumb-img"
+                  alt="Enterprise Security &amp; Zero-Trust">
                 <div class="course-card-banner-overlay"></div>
                 <span class="course-card-level-badge">Intermediate • 8 Weeks</span>
               </div>
               <div class="course-card-body-content">
                 <div class="course-card-cat-meta">Security &amp; Cloud Infra</div>
                 <h3 class="course-card-title-h3">Enterprise Security &amp; Zero-Trust Architecture</h3>
-                <p class="course-card-desc-text">IAM policies, OIDC OAuth2 tokens, KMS key management, and cryptographic transport layers across hybrid clouds.</p>
+                <p class="course-card-desc-text">IAM policies, OIDC OAuth2 tokens, KMS key management, and cryptographic
+                  transport layers across hybrid clouds.</p>
                 <div class="course-card-instructor-meta">
                   <div class="instructor-left-block">
                     <span class="instructor-monogram emerald">SJ</span>
                     <span class="instructor-name-label">Sarah Jenkins</span>
                   </div>
-                  <button type="button" class="btn-card-launch-course" onclick="enrollCourseItem(this, 'Zero-Trust Architecture')">
+                  <button type="button" class="btn-card-launch-course"
+                    onclick="enrollCourseItem(this, 'Zero-Trust Architecture')">
                     Enroll Now &rarr;
                   </button>
                 </div>
@@ -624,19 +729,28 @@
   <!-- ====================================================================
        INTERACTIVE COURSE PLAYER MODAL (Video & Syllabus Tracking)
        ==================================================================== -->
-  <div class="course-modal-backdrop" id="course-player-modal" onclick="if(event.target===this) closeCoursePlayerModal()">
+  <div class="course-modal-backdrop" id="course-player-modal"
+    onclick="if(event.target===this) closeCoursePlayerModal()">
     <div class="course-modal-card">
       <div class="course-player-video-box">
         <div style="text-align: center; padding: 20px;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 8px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <div style="font-size: 1.15rem; font-weight: 600;" id="player-modal-title">Cloud DevOps &amp; Microservices Architecture</div>
-          <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Module 3: High-Throughput gRPC Protocols &amp; Streaming Handlers</div>
-          <div style="margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 999px; font-size: 0.78rem;">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="margin-bottom: 8px;">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <div style="font-size: 1.15rem; font-weight: 600;" id="player-modal-title">Cloud DevOps &amp; Microservices
+            Architecture</div>
+          <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">Module 3: High-Throughput gRPC Protocols
+            &amp; Streaming Handlers</div>
+          <div
+            style="margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 999px; font-size: 0.78rem;">
+            <span
+              style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
             <span>HD 1080p • 60 FPS • Torpedo Interactive Video Lab</span>
           </div>
         </div>
-        <button type="button" onclick="closeCoursePlayerModal()" style="position: absolute; top: 12px; right: 14px; background: rgba(0,0,0,0.4); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;">✕</button>
+        <button type="button" onclick="closeCoursePlayerModal()"
+          style="position: absolute; top: 12px; right: 14px; background: rgba(0,0,0,0.4); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;">✕</button>
       </div>
 
       <div style="padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px;">
@@ -645,37 +759,46 @@
             <div style="font-size: 1rem; font-weight: 600; color: #0f172a;">Syllabus Lesson Modules</div>
             <div style="font-size: 0.80rem; color: #64748b;">Complete modules to advance your Torpedo TRP score</div>
           </div>
-          <button type="button" class="btn-card-launch-course" style="background: #10b981;" onclick="completeCurrentLesson()">
+          <button type="button" class="btn-card-launch-course" style="background: #10b981;"
+            onclick="completeCurrentLesson()">
             ✔ Complete Lesson (+25 TRP)
           </button>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span style="color: #10b981; font-weight: 600;">✓</span>
-              <span style="font-size: 0.88rem; font-weight: 550; color: #0f172a;">1. Production Kubernetes Cluster Architecture</span>
+              <span style="font-size: 0.88rem; font-weight: 550; color: #0f172a;">1. Production Kubernetes Cluster
+                Architecture</span>
             </div>
             <span style="font-size: 0.76rem; color: #64748b; font-weight: 500;">Completed</span>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;">
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span style="color: #2563eb; font-weight: 600;">▶</span>
-              <span style="font-size: 0.88rem; font-weight: 600; color: #1e40af;">2. gRPC Protocol Buffers &amp; Concurrent Stream Handlers</span>
+              <span style="font-size: 0.88rem; font-weight: 600; color: #1e40af;">2. gRPC Protocol Buffers &amp;
+                Concurrent Stream Handlers</span>
             </div>
             <span style="font-size: 0.76rem; color: #2563eb; font-weight: 600;">Playing Now</span>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span style="color: #94a3b8; font-weight: 600;">○</span>
-              <span style="font-size: 0.88rem; font-weight: 500; color: #475569;">3. Istio Service Mesh, Circuit Breaking &amp; Rate Limiting</span>
+              <span style="font-size: 0.88rem; font-weight: 500; color: #475569;">3. Istio Service Mesh, Circuit
+                Breaking &amp; Rate Limiting</span>
             </div>
             <span style="font-size: 0.76rem; color: #94a3b8;">Locked</span>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span style="color: #94a3b8; font-weight: 600;">○</span>
-              <span style="font-size: 0.88rem; font-weight: 500; color: #475569;">4. GitOps CI/CD Pipelines with ArgoCD &amp; Helm Charts</span>
+              <span style="font-size: 0.88rem; font-weight: 500; color: #475569;">4. GitOps CI/CD Pipelines with ArgoCD
+                &amp; Helm Charts</span>
             </div>
             <span style="font-size: 0.76rem; color: #94a3b8;">Locked</span>
           </div>
@@ -687,60 +810,81 @@
   <!-- ====================================================================
        STUDENT ACADEMIC DOSSIER MODAL
        ==================================================================== -->
-  <dialog id="dossier-preview-dialog" class="jobs-dialog-frame" style="max-width: 680px; padding: 0; border: none; border-radius: 16px; background: #ffffff; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);" onclick="if(event.target===this && this.open) closeStudentDossierModal()">
-    <div style="padding: 24px 28px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+  <dialog id="dossier-preview-dialog" class="jobs-dialog-frame"
+    style="max-width: 680px; padding: 0; border: none; border-radius: 16px; background: #ffffff; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);"
+    onclick="if(event.target===this && this.open) closeStudentDossierModal()">
+    <div
+      style="padding: 24px 28px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
       <div style="display: flex; align-items: center; gap: 14px;">
-        <div style="width: 48px; height: 48px; border-radius: 12px; background: #2563eb; color: #fff; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; justify-content: center;">
+        <div
+          style="width: 48px; height: 48px; border-radius: 12px; background: #2563eb; color: #fff; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; justify-content: center;">
           VY
         </div>
         <div>
           <div style="font-size: 1.15rem; font-weight: 600; color: #0f172a;">Vivek Yadav</div>
-          <div style="font-size: 0.82rem; color: #64748b; font-weight: 500;">GTU CSE • Batch of 2026 • Verified Dossier</div>
+          <div style="font-size: 0.82rem; color: #64748b; font-weight: 500;">GTU CSE • Batch of 2026 • Verified Dossier
+          </div>
         </div>
       </div>
-      <button type="button" onclick="closeStudentDossierModal()" style="background: none; border: none; font-size: 1.3rem; color: #94a3b8; cursor: pointer;">✕</button>
+      <button type="button" onclick="closeStudentDossierModal()"
+        style="background: none; border: none; font-size: 1.3rem; color: #94a3b8; cursor: pointer;">✕</button>
     </div>
     <div style="padding: 24px 28px; display: flex; flex-direction: column; gap: 18px;">
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
-          <div style="font-size: 0.72rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;">Cumulative GPA</div>
+        <div
+          style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
+          <div
+            style="font-size: 0.72rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;">
+            Cumulative GPA</div>
           <div style="font-size: 1.3rem; font-weight: 600; color: #0f172a; margin-top: 4px;">8.85</div>
         </div>
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
-          <div style="font-size: 0.72rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;">Torpedo TRP</div>
+        <div
+          style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
+          <div
+            style="font-size: 0.72rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;">
+            Torpedo TRP</div>
           <div style="font-size: 1.3rem; font-weight: 600; color: #2563eb; margin-top: 4px;">542</div>
         </div>
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
-          <div style="font-size: 0.72rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;">Active Courses</div>
+        <div
+          style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; text-align: center;">
+          <div
+            style="font-size: 0.72rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;">
+            Active Courses</div>
           <div style="font-size: 1.3rem; font-weight: 600; color: #10b981; margin-top: 4px;">3</div>
         </div>
       </div>
 
       <div>
-        <div style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-bottom: 8px;">Enrolled Curriculums:</div>
+        <div style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-bottom: 8px;">Enrolled Curriculums:
+        </div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
             <span>Cloud DevOps &amp; Microservices Architecture</span>
             <span style="color: #2563eb; font-weight: 600;">68% Completed</span>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
             <span>Autonomous AI Agent Architecture (LangGraph)</span>
             <span style="color: #2563eb; font-weight: 600;">45% Completed</span>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.82rem;">
             <span>Distributed Systems &amp; High-Throughput Architecture</span>
             <span style="color: #2563eb; font-weight: 600;">90% Completed</span>
           </div>
         </div>
       </div>
     </div>
-    <div style="padding: 16px 28px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
+    <div
+      style="padding: 16px 28px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
       <button type="button" class="btn-card-launch-course" onclick="closeStudentDossierModal()">Close Dossier</button>
     </div>
   </dialog>
 
   <!-- Interactive Toast Notification System -->
-  <div id="courses-toast" style="position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.88rem; font-weight: 600; display: none; align-items: center; gap: 10px; z-index: 9999999; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); transition: all 0.2s ease;">
+  <div id="courses-toast"
+    style="position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.88rem; font-weight: 600; display: none; align-items: center; gap: 10px; z-index: 9999999; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); transition: all 0.2s ease;">
     <span id="courses-toast-text">Toast message</span>
   </div>
 
@@ -803,11 +947,11 @@
       const pillButtons = document.querySelectorAll('#courses-category-pills .course-cat-pill-btn');
       pillButtons.forEach(b => {
         const text = b.textContent.toLowerCase();
-        if ((cat === 'all' && text.includes('all')) || 
-            (cat === 'cloud' && text.includes('cloud')) ||
-            (cat === 'ai' && text.includes('ai')) ||
-            (cat === 'distributed' && text.includes('distributed')) ||
-            (cat === 'frontend' && text.includes('frontend'))) {
+        if ((cat === 'all' && text.includes('all')) ||
+          (cat === 'cloud' && text.includes('cloud')) ||
+          (cat === 'ai' && text.includes('ai')) ||
+          (cat === 'distributed' && text.includes('distributed')) ||
+          (cat === 'frontend' && text.includes('frontend'))) {
           pillButtons.forEach(el => el.classList.remove('active'));
           b.classList.add('active');
         }
@@ -899,7 +1043,7 @@
             });
           }
         }
-      } catch (e) {}
+      } catch (e) { }
     });
 
     function openCoursePlayerModal(title) {
@@ -967,4 +1111,5 @@
     });
   </script>
 </body>
+
 </html>

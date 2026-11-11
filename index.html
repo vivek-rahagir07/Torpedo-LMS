@@ -721,81 +721,7 @@
   <!-- Authentication Modal -->
   <div id="auth-modal" class="auth-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="auth-panel-heading">
     
-    <!-- 1. Dedicated Compact Login Card (Matching User Reference Image Exactly) -->
-    <div class="compact-login-card" id="compact-login-card" style="display: none;">
-      <!-- Close Button -->
-      <button type="button" class="compact-login-close" onclick="closeAuthModal()" aria-label="Close dialog">✕</button>
-
-      <!-- Tabs: Student | Employer & Staff -->
-      <div class="login-role-tabs shared-login-roles">
-        <button type="button" class="login-role-tab active" data-role="student" onclick="switchLoginRole('student', this)"><span>Student</span></button>
-        <button type="button" class="login-role-tab " data-role="instructor" onclick="switchLoginRole('instructor', this)"><span>Instructor</span></button>
-        <button type="button" class="login-role-tab " data-role="employer" onclick="switchLoginRole('employer', this)"><span>Recruiter</span></button>
-        <button type="button" class="login-role-tab " data-role="admin" onclick="switchLoginRole('admin', this)"><span>Super Admin</span></button>
-      </div>
-      <p class="auth-role-note" id="login-role-note" role="status" hidden></p>
-
-      <!-- Google Login Button -->
-      <button type="button" class="google-login-btn" onclick="handleGoogleLogin()">
-        <svg class="google-icon-svg" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-        </svg>
-        <span>Login with Google</span>
-      </button>
-
-      <!-- OR Divider -->
-      <div class="login-divider">
-        <span>OR</span>
-      </div>
-
-      <!-- Login Form -->
-      <form id="compact-login-form" onsubmit="handleLoginFormSubmit(event)">
-        <!-- Email Field -->
-        <div class="login-field-group">
-          <label class="login-field-label" for="login-email">Email Address <span class="req-star">*</span></label>
-          <input type="email" id="login-email" class="login-field-input" placeholder="john@example.com" required>
-        </div>
-
-        <!-- Password Field -->
-        <div class="login-field-group">
-          <div class="login-pass-header-row">
-            <label class="login-field-label" for="login-password">Password <span class="req-star">*</span></label>
-            <a href="#forgot" class="login-forgot-link" onclick="handleForgotPassword(event)">Forgot Password?</a>
-          </div>
-          <div class="login-input-wrap">
-            <input type="password" id="login-password" class="login-field-input" placeholder="Must be at least 6 characters" minlength="6" required>
-            <button type="button" class="login-eye-toggle" onclick="togglePasswordVisibility('login-password', this)" aria-label="Toggle password visibility">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Remember Me Checkbox -->
-        <div class="login-remember-row">
-          <input type="checkbox" id="login-remember-check" class="login-check-input" checked>
-          <label for="login-remember-check" class="login-remember-label">Remember Me</label>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="login-primary-btn" id="login-submit-btn">
-          LOGIN
-        </button>
-      </form>
-
-      <!-- Register Switcher Footer -->
-      <div class="login-register-footer">
-        <span>New to Torpedo? Register ( </span>
-        <a href="#register-student" class="login-footer-link" onclick="openGetStarted('student', event)">Student</a>
-        <span class="login-footer-slash">/</span>
-        <a href="#register-company" class="login-footer-link" onclick="openGetStarted('employer', event)">Company</a>
-        <span> )</span>
-      </div>
-    </div>
-
-    <!-- 2. Get Started Split Card (Finalized Layout) -->
+    <!-- Unified Authentication Card (Login & Registration with Email OTP Verification) -->
     <div class="auth-split-card" id="main-auth-card" style="position: relative;">
       <!-- Close Button -->
       <button class="auth-modal-close-trigger" onclick="closeAuthModal()" aria-label="Close dialog">×</button>
@@ -918,8 +844,26 @@
 
           <!-- Email Address -->
           <div class="auth-field">
-            <label class="auth-field-label" for="input-email">EMAIL ADDRESS</label>
-            <input type="email" id="input-email" class="auth-card-input" placeholder="john@example.com" required>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="auth-field-label" for="input-email" style="margin-bottom: 0;">EMAIL ADDRESS</label>
+              <button type="button" id="btn-send-otp" class="auth-otp-action-btn" onclick="handleSendOtpClick()">Send OTP Code</button>
+            </div>
+            <input type="email" id="input-email" class="auth-card-input" placeholder="john@example.com" required oninput="onAuthEmailChanged()">
+          </div>
+
+          <!-- OTP Verification Row (shown for signup / email verification) -->
+          <div class="auth-field" id="auth-otp-row" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="auth-field-label" for="input-otp-code" style="margin-bottom: 0;">6-DIGIT EMAIL OTP <span style="color:#ef4444">*</span></label>
+              <span id="otp-timer-badge" style="font-size: 11px; font-weight: 700; color: #64748b;">Code expires in 10:00</span>
+            </div>
+            <div class="auth-input-relative" style="display: flex; gap: 8px;">
+              <input type="text" id="input-otp-code" class="auth-card-input" placeholder="Enter 6-digit code" maxlength="6" style="letter-spacing: 4px; font-weight: 700; font-size: 1.1rem; text-align: center;">
+              <button type="button" id="btn-verify-otp" class="btn-verify-otp" onclick="handleVerifyOtpClick()">
+                Verify OTP
+              </button>
+            </div>
+            <div id="otp-status-message" style="margin-top: 5px; font-size: 12px; font-weight: 600; display: none;"></div>
           </div>
 
           <!-- Password Field -->
@@ -929,7 +873,7 @@
               <a href="#forgot" id="auth-forgot-btn" class="auth-card-forgot" style="display: none;" onclick="handleForgotPassword(event)">Forgot?</a>
             </div>
             <div class="auth-input-relative">
-              <input type="password" id="input-password" class="auth-card-input" placeholder="Must be at least 8 characters" minlength="6" required>
+              <input type="password" id="input-password" class="auth-card-input" placeholder="Must be at least 6 characters" minlength="6" required>
               <button type="button" class="auth-eye-btn" onclick="togglePasswordVisibility('input-password', this)" aria-label="Toggle password visibility">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
@@ -940,7 +884,7 @@
           <div class="auth-terms-row" id="auth-terms-row">
             <input type="checkbox" id="terms-checkbox" class="auth-terms-check" checked required>
             <label for="terms-checkbox" class="auth-terms-label">
-              I agree to the <a href="index.html" target="_blank">Terms of Service</a> & <a href="index.html" target="_blank">Privacy Policy</a>
+              I agree to the <a href="index.html" target="_blank">Terms of Service</a> &amp; <a href="index.html" target="_blank">Privacy Policy</a>
             </label>
           </div>
 

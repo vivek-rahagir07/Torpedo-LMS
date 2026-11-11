@@ -140,42 +140,64 @@ window.quickFillLogin = function(role) {
 
 window.openGetStarted = function(role = 'student', event = null) {
   if (event) event.preventDefault();
-  const modal = document.getElementById('auth-modal');
-  if (modal) {
-    openAuthModal('signup', role);
-  } else {
-    showLoginPageCard('signup', null, role);
-  }
+  openAuthModal('signup', role);
 };
 
 window.openAuthModal = function(mode = 'login', role = 'student') {
   const modal = document.getElementById('auth-modal');
-  const compactCard = document.getElementById('compact-login-card');
   const splitCard = document.getElementById('main-auth-card');
 
   currentAuthMode = mode;
-  if (document.body.classList.contains('login-page-body')) document.body.classList.toggle('account-signup', mode === 'signup');
   currentAuthRole = role || 'student';
 
+  const headingEl = document.getElementById('auth-panel-heading');
+  const subEl = document.getElementById('auth-panel-sub');
+  const nameRow = document.getElementById('auth-name-row');
+  const termsRow = document.getElementById('auth-terms-row');
+  const forgotBtn = document.getElementById('auth-forgot-btn');
+  const passLabel = document.getElementById('auth-pass-label');
+  const submitBtn = document.getElementById('auth-action-submit-btn');
+  const togglePrompt = document.getElementById('auth-toggle-prompt');
+  const toggleLink = document.getElementById('auth-toggle-link');
+  const otpRow = document.getElementById('auth-otp-row');
+  const sendOtpBtn = document.getElementById('btn-send-otp');
+
   if (mode === 'login') {
-    if (compactCard) compactCard.style.display = 'block';
-    if (splitCard) splitCard.style.display = 'none';
-    switchLoginRole(role || 'student');
+    if (headingEl) headingEl.textContent = 'Welcome Back';
+    if (subEl) subEl.textContent = 'Sign in to your Torpedo Learning workspace to resume courses & projects.';
+    if (nameRow) nameRow.style.display = 'none';
+    if (termsRow) termsRow.style.display = 'none';
+    if (forgotBtn) forgotBtn.style.display = 'inline';
+    if (passLabel) passLabel.textContent = 'PASSWORD';
+    if (submitBtn) submitBtn.innerHTML = '<span>LOG IN →</span>';
+    if (togglePrompt) togglePrompt.textContent = "Don't have an account?";
+    if (toggleLink) toggleLink.textContent = 'Sign Up';
+    if (otpRow) otpRow.style.display = 'none';
+    if (sendOtpBtn) sendOtpBtn.style.display = 'none';
   } else {
-    if (compactCard) compactCard.style.display = 'none';
-    if (splitCard) splitCard.style.display = 'grid';
-    setAuthRole(role || 'student');
+    if (headingEl) headingEl.textContent = 'Create Your Account';
+    if (subEl) subEl.textContent = 'Join TORPEDO and unlock verified certificates, hands-on projects and fast-tracked opportunities.';
+    if (nameRow) nameRow.style.display = 'grid';
+    if (termsRow) termsRow.style.display = 'flex';
+    if (forgotBtn) forgotBtn.style.display = 'none';
+    if (passLabel) passLabel.textContent = 'CREATE PASSWORD';
+    if (submitBtn) submitBtn.innerHTML = '<span>CREATE ACCOUNT →</span>';
+    if (togglePrompt) togglePrompt.textContent = 'Already have an account?';
+    if (toggleLink) toggleLink.textContent = 'Log In';
+    if (sendOtpBtn) sendOtpBtn.style.display = 'inline-block';
   }
+
+  setAuthRole(role || 'student');
+
+  if (splitCard) splitCard.style.display = 'grid';
 
   if (modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Focus input
     setTimeout(() => {
-      const activeCard = mode === 'login' ? compactCard : splitCard;
-      const firstInput = activeCard ? activeCard.querySelector('input:not([type="hidden"])') : null;
-      if (firstInput) firstInput.focus();
+      const emailInput = document.getElementById('input-email');
+      if (emailInput) emailInput.focus();
     }, 100);
   }
 };
@@ -187,24 +209,148 @@ window.closeAuthModal = function() {
   document.body.style.overflow = '';
 };
 
-// Standalone login.html card switcher
+// Standalone card switcher
 window.showLoginPageCard = function(mode = 'login', event = null, role = 'student') {
   if (event) event.preventDefault();
-  const compactCard = document.getElementById('compact-login-card');
-  const splitCard = document.getElementById('main-auth-card');
+  openAuthModal(mode, role);
+};
 
-  currentAuthMode = mode;
-  if (document.body.classList.contains('login-page-body')) document.body.classList.toggle('account-signup', mode === 'signup');
-  currentAuthRole = role || 'student';
+// OTP Verification Logic
+window.emailOtpVerified = false;
+window.emailOtpSent = false;
+let otpCountdownTimer = null;
 
-  if (mode === 'login') {
-    if (compactCard) compactCard.style.display = 'block';
-    if (splitCard) splitCard.style.display = 'none';
-    switchLoginRole(role || 'student');
-  } else {
-    if (compactCard) compactCard.style.display = 'none';
-    if (splitCard) splitCard.style.display = 'grid';
-    setAuthRole(role || 'student');
+window.onAuthEmailChanged = function() {
+  window.emailOtpVerified = false;
+  const statusEl = document.getElementById('otp-status-message');
+  if (statusEl) {
+    statusEl.style.display = 'none';
+    statusEl.innerHTML = '';
+  }
+  const verifyBtn = document.getElementById('btn-verify-otp');
+  if (verifyBtn) {
+    verifyBtn.disabled = false;
+    verifyBtn.textContent = 'Verify OTP';
+  }
+};
+
+window.handleSendOtpClick = async function() {
+  const emailInput = document.getElementById('input-email');
+  const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    showToast('Please enter a valid email address to receive your OTP code.', 'warning');
+    if (emailInput) emailInput.focus();
+    return;
+  }
+
+  const btn = document.getElementById('btn-send-otp');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+  }
+
+  try {
+    showToast(`Sending 6-digit OTP code to ${email}...`, 'info');
+    let res = null;
+    if (window.TorpedoAPI) {
+      res = await window.TorpedoAPI.sendOtp({ email, purpose: 'signup' });
+    }
+
+    window.emailOtpSent = true;
+    const otpRow = document.getElementById('auth-otp-row');
+    if (otpRow) otpRow.style.display = 'block';
+
+    const otpInput = document.getElementById('input-otp-code');
+    if (otpInput) {
+      otpInput.value = '';
+      otpInput.focus();
+    }
+
+    // Start 10-minute expiry timer
+    let secondsLeft = 600;
+    const timerBadge = document.getElementById('otp-timer-badge');
+    if (otpCountdownTimer) clearInterval(otpCountdownTimer);
+    otpCountdownTimer = setInterval(() => {
+      secondsLeft--;
+      if (secondsLeft <= 0) {
+        clearInterval(otpCountdownTimer);
+        if (timerBadge) timerBadge.textContent = 'Code expired';
+        if (btn) { btn.disabled = false; btn.textContent = 'Resend Code'; }
+      } else {
+        const m = Math.floor(secondsLeft / 60);
+        const s = String(secondsLeft % 60).padStart(2, '0');
+        if (timerBadge) timerBadge.textContent = `Expires in ${m}:${s}`;
+      }
+    }, 1000);
+
+    const hintMsg = res && res.otp_hint ? ` (Code: ${res.otp_hint})` : '';
+    showToast(`Verification OTP dispatched to ${email}!${hintMsg}`, 'success');
+
+    if (btn) {
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Resend OTP';
+      }, 15000);
+    }
+  } catch (err) {
+    showToast(err.message || 'Failed to dispatch verification email. Please try again.', 'error');
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Send OTP Code';
+    }
+  }
+};
+
+window.handleVerifyOtpClick = async function() {
+  const emailInput = document.getElementById('input-email');
+  const otpInput = document.getElementById('input-otp-code');
+  const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+  const otpCode = otpInput ? otpInput.value.trim() : '';
+
+  if (!email) {
+    showToast('Please enter your email address.', 'warning');
+    return;
+  }
+  if (!otpCode || otpCode.length < 6) {
+    showToast('Please enter the complete 6-digit verification code.', 'warning');
+    if (otpInput) otpInput.focus();
+    return;
+  }
+
+  const verifyBtn = document.getElementById('btn-verify-otp');
+  if (verifyBtn) {
+    verifyBtn.disabled = true;
+    verifyBtn.textContent = 'Verifying...';
+  }
+
+  try {
+    let res = null;
+    if (window.TorpedoAPI) {
+      res = await window.TorpedoAPI.verifyOtp({ email, otp_code: otpCode, purpose: 'signup' });
+    }
+
+    window.emailOtpVerified = true;
+    if (otpCountdownTimer) clearInterval(otpCountdownTimer);
+
+    const statusEl = document.getElementById('otp-status-message');
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.innerHTML = '<span class="otp-verified-badge">✓ Email Verified Successfully</span>';
+    }
+
+    if (verifyBtn) {
+      verifyBtn.textContent = '✓ Verified';
+      verifyBtn.style.background = '#059669';
+    }
+
+    showToast('Email verified successfully! You may now create your account.', 'success');
+  } catch (err) {
+    showToast(err.message || 'Invalid or expired OTP code. Please verify the code and try again.', 'error');
+    if (verifyBtn) {
+      verifyBtn.disabled = false;
+      verifyBtn.textContent = 'Verify OTP';
+    }
   }
 };
 
@@ -364,30 +510,78 @@ window.togglePasswordVisibility = function(inputId, btn) {
 };
 
 window.handleGoogleLogin = function() {
-  if (currentAuthRole === 'admin') { showToast('Use your approved Super Admin email and password. Google admin access is not configured.', 'info'); return; }
-  const roleTitle = currentAuthRole ? currentAuthRole.toUpperCase() : 'STUDENT';
-  showToast(`Authenticating via Google OAuth as ${roleTitle}...`, 'info');
+  if (currentAuthRole === 'admin') { 
+    showToast('Super Admin access must sign in using your official credentials.', 'info'); 
+    return; 
+  }
   
-  const defaultName = currentAuthRole === 'employer' ? 'Enterprise Partner' : 'Vivek Yadav';
-  const defaultEmail = currentAuthRole === 'employer' ? 'partner@torpedo.io' : 'vivek.hr362007@gmail.com';
+  const currentOrigin = (window.location.origin && window.location.origin.startsWith('http')) 
+    ? window.location.origin 
+    : 'https://torpedolms.com';
+  const currentPath = window.location.pathname || '/';
+  const redirectUri = `${currentOrigin}${currentPath}`;
+  const role = currentAuthRole || 'student';
 
-  localStorage.setItem('torpedo_user', JSON.stringify({
-    name: defaultName,
-    firstName: 'Vivek',
-    lastName: 'Yadav',
-    email: defaultEmail,
-    avatar: 'assets/avatars/robot1.svg',
-    role: currentAuthRole || 'student'
-  }));
+  const stateParam = encodeURIComponent(JSON.stringify({ role, ts: Date.now() }));
+  // Official Google OAuth 2.0 Accounts portal endpoint
+  const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=1084295482319-gldb47egeu034tqf8h4k0o9b3j7v1v4.apps.googleusercontent.com&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token%20id_token&scope=openid%20profile%20email&prompt=select_account&state=${stateParam}&nonce=${Date.now()}`;
 
+  showToast('Redirecting to Google Accounts Sign-In portal...', 'info');
   setTimeout(() => {
-    showToast(`Welcome back, ${defaultName}! Successfully authenticated.`, 'success');
-    if (typeof closeAuthModal === 'function') closeAuthModal();
-    setTimeout(() => {
-      window.location.href = ['instructor','faculty'].includes(currentAuthRole) ? 'faculty.html' : currentAuthRole === 'employer' ? 'recruiter.html' : 'dashboard.html';
-    }, 400);
-  }, 700);
+    window.location.href = googleOAuthUrl;
+  }, 400);
 };
+
+// Check Google OAuth callback on load
+document.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+  if (!hash || (!hash.includes('access_token=') && !hash.includes('id_token='))) return;
+  
+  try {
+    const params = new URLSearchParams(hash.substring(1));
+    const token = params.get('access_token') || params.get('id_token');
+    const stateStr = params.get('state');
+    let role = 'student';
+    if (stateStr) {
+      try {
+        const stateObj = JSON.parse(decodeURIComponent(stateStr));
+        if (stateObj.role) role = stateObj.role;
+      } catch (e) {}
+    }
+    
+    history.replaceState(null, null, window.location.pathname + window.location.search);
+    
+    if (token) {
+      showToast('Authenticating with Google Account...', 'info');
+      fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`)
+        .then(r => r.json())
+        .then(async gUser => {
+          if (gUser && gUser.email) {
+            let res = null;
+            if (window.TorpedoAPI) {
+              res = await window.TorpedoAPI.googleLogin({
+                email: gUser.email,
+                name: gUser.name || 'Google User',
+                avatar_url: gUser.picture || 'assets/avatars/robot1.svg',
+                role: role
+              });
+            }
+            if (res && res.success) {
+              localStorage.setItem('torpedo_token', res.token);
+              localStorage.setItem('torpedo_user', JSON.stringify(res.user));
+              showToast(`Welcome, ${res.user.name}! Authenticated via Google.`, 'success');
+              setTimeout(() => { window.location.href = res.redirect_url; }, 500);
+            }
+          }
+        })
+        .catch(err => {
+          console.warn('Google account info note:', err);
+        });
+    }
+  } catch (err) {
+    console.error('Google callback error:', err);
+  }
+});
 
 window.handleForgotPassword = function(e) {
   if (e) e.preventDefault();
@@ -422,8 +616,25 @@ window.handleFormSubmit = async function(e) {
     return;
   }
 
-  const submitBtn = document.getElementById('auth-action-submit-btn');
   const isSignUp = currentAuthMode === 'signup';
+
+  // Enforce OTP verification on signup
+  if (isSignUp && currentAuthRole !== 'admin') {
+    if (!window.emailOtpVerified) {
+      showToast('Please verify your email address with the 6-digit OTP code before creating your account.', 'warning');
+      const otpRow = document.getElementById('auth-otp-row');
+      if (otpRow) otpRow.style.display = 'block';
+      if (!window.emailOtpSent) {
+        handleSendOtpClick();
+      } else {
+        const otpInp = document.getElementById('input-otp-code');
+        if (otpInp) otpInp.focus();
+      }
+      return;
+    }
+  }
+
+  const submitBtn = document.getElementById('auth-action-submit-btn');
 
   if (submitBtn) {
     submitBtn.innerHTML = `<span>${isSignUp ? 'CREATING ACCOUNT...' : 'AUTHENTICATING...'}</span>`;

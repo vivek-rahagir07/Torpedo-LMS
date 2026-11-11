@@ -272,4 +272,15 @@ CREATE TABLE IF NOT EXISTS user_solved_problems (
     UNIQUE(user_email, problem_id)
 );
 
+CREATE TABLE IF NOT EXISTS email_otps (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL,
+    otp_code TEXT NOT NULL,
+    purpose TEXT DEFAULT 'verification', -- 'signup' | 'login' | 'reset'
+    expires_at DATETIME NOT NULL,
+    verified INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
 

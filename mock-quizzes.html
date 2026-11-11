@@ -185,11 +185,14 @@
         </div>
       </nav>
 
-      <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
         <a href="dashboard.html#quizzes" class="btn-portal-return">
           <span>Student Portal</span>
           <span>→</span>
         </a>
+        <button type="button" onclick="localStorage.removeItem('torpedo_user'); localStorage.removeItem('torpedo_token'); localStorage.removeItem('torpedoSession'); window.location.href='index.html';" class="btn-portal-return" title="Sign Out" style="background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;">
+          <span>Log Out</span>
+        </button>
       </div>
     </div>
   </header>

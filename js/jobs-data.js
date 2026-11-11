@@ -706,23 +706,8 @@ const TORPEDO_JOBS_DATA = [
   }
 ];
 
-// Initial mock applied jobs for Student Vivek Yadav
-const INITIAL_APPLIED_JOBS = [
-  {
-    jobId: "job-google-swe-intern",
-    appliedDate: "Yesterday, 04:30 PM",
-    status: "Shortlisted",
-    stageText: "Technical Interview Scheduled for Nov 4",
-    statusBadgeClass: "status-shortlisted"
-  },
-  {
-    jobId: "job-razorpay-backend-intern",
-    appliedDate: "3 days ago",
-    status: "Applied",
-    stageText: "Application Under Recruiter Review",
-    statusBadgeClass: "status-applied"
-  }
-];
+// Initial applied jobs (starts empty for new candidates)
+const INITIAL_APPLIED_JOBS = [];
 
 if (typeof window !== 'undefined') {
   window.TORPEDO_JOBS_DATA = TORPEDO_JOBS_DATA;

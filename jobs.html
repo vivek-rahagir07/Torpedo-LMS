@@ -1126,10 +1126,10 @@
           <!-- Student Profile Card Bottom -->
           <div class="sidebar-bottom-profile" onclick="openStudentDossierModal()" title="View Student Academic Dossier">
             <div class="profile-monogram-box">
-              <div class="profile-avatar-circle">VY</div>
+              <div class="profile-avatar-circle">ST</div>
               <div class="profile-text-group">
-                <div class="profile-name-text">Vivek Yadav</div>
-                <div class="profile-role-sub">GTU CSE · 8.85</div>
+                <div class="profile-name-text">Student</div>
+                <div class="profile-role-sub">Placement Ready</div>
               </div>
             </div>
             <div class="profile-gear-icon">
@@ -1494,10 +1494,10 @@
           <!-- 7. Compact Student Placement Readiness Strip -->
           <section class="student-readiness-strip">
             <div class="readiness-left-profile">
-              <div class="readiness-avatar">VY</div>
+              <div class="readiness-avatar">ST</div>
               <div>
-                <div class="readiness-title">Vivek Yadav • Verified Candidate</div>
-                <div class="readiness-sub">GTU CSE · 2026 Batch · Top 2.4% LMS Bracket</div>
+                <div class="readiness-title">Verified Placement Candidate</div>
+                <div class="readiness-sub">Career Track · Top LMS Bracket</div>
               </div>
             </div>
 
@@ -1626,8 +1626,8 @@
       <div style="margin-bottom:14px;">
         <label style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Applicant Profile</label>
         <div style="background:#ffffff; border:1px solid var(--border-card); border-radius:8px; padding:10px 14px; font-size:0.84rem;">
-          <div><strong>Vivek Yadav</strong> (GTU CSE, 2026 Batch)</div>
-          <div style="color:#64748b; font-size:0.78rem; margin-top:2px;">vivek.hr362007@gmail.com • +91 98765 43210</div>
+          <div><strong id="job-apply-student-name">Student Candidate</strong> (2026 Batch)</div>
+          <div style="color:#64748b; font-size:0.78rem; margin-top:2px;" id="job-apply-student-meta">Verified Torpedo Placement Candidate</div>
         </div>
       </div>
 
@@ -1690,9 +1690,9 @@
     <div class="dialog-body">
       <div style="border-bottom:1px solid var(--border-card); padding-bottom:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-start;">
         <div>
-          <h2 style="font-family:var(--font-display, 'Inter', sans-serif); font-size:1.35rem; color:#0f172a;">Vivek Yadav</h2>
-          <div style="color:#64748b; font-size:0.84rem; margin-top:2px;">B.Tech Computer Science &amp; Engineering • Gujarat Technological University</div>
-          <div style="font-family:var(--font-mono, monospace); color:#0f2ac7; font-size:0.76rem; margin-top:4px;">Roll: 22002170310065 • CPI: 8.85 / 10</div>
+          <h2 style="font-family:var(--font-display, 'Inter', sans-serif); font-size:1.35rem; color:#0f172a;">Student Candidate</h2>
+          <div style="color:#64748b; font-size:0.84rem; margin-top:2px;">B.Tech Computer Science &amp; Engineering</div>
+          <div style="font-family:var(--font-mono, monospace); color:#0f2ac7; font-size:0.76rem; margin-top:4px;">Verified Academic Dossier</div>
         </div>
         <div style="text-align:right;">
           <span style="background:#eff6ff; color:#1d4ed8; font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:6px; border:1px solid #bfdbfe;">VERIFIED CANDIDATE</span>
@@ -1804,8 +1804,8 @@
       // Sync applications from backend if available
       try {
         const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
-        if (window.TorpedoAPI && window.TorpedoAPI.getJobApplications) {
+        const userEmail = currentUser.email || '';
+        if (userEmail && window.TorpedoAPI && window.TorpedoAPI.getJobApplications) {
           const res = await window.TorpedoAPI.getJobApplications(userEmail);
           if (res && res.success && Array.isArray(res.applications) && res.applications.length > 0) {
             res.applications.forEach(app => {
@@ -2303,8 +2303,8 @@
       // Dispatch real application to Torpedo backend API
       try {
         const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
-        const userName = currentUser.name || 'Vivek Yadav';
+        const userEmail = currentUser.email || '';
+        const userName = currentUser.name || 'Candidate';
         if (window.TorpedoAPI && window.TorpedoAPI.applyJob) {
           window.TorpedoAPI.applyJob({
             job_id: job.id,

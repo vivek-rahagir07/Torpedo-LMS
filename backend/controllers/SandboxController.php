@@ -37,7 +37,7 @@ class SandboxController {
                       "> Compiling test suites for Raft consensus heartbeat...\n" .
                       "Analyzing Torpedo Student Portfolio...\n" .
                       "{\n" .
-                      "  student: 'Vivek Yadav',\n" .
+                      "  student: 'Candidate Student',\n" .
                       "  track: 'Full-Stack Distributed Systems',\n" .
                       "  score: 98.4,\n" .
                       "  status: 'Verified Placement Ready 🚀',\n" .

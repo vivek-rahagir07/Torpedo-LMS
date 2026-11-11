@@ -439,12 +439,12 @@
           <!-- Student Profile Card Bottom -->
           <div class="sidebar-bottom-profile" onclick="openStudentDossierModal()" title="View Student Academic Dossier">
             <div class="profile-monogram-box">
-              <span>VY</span>
+              <span id="sidebar-student-avatar">ST</span>
               <span class="avatar-live-indicator" title="Connected"></span>
             </div>
             <div class="profile-info-wrap">
-              <div class="profile-name" id="sidebar-student-name">Vivek Yadav</div>
-              <div class="profile-role" id="sidebar-student-role">GTU CSE • Batch '26</div>
+              <div class="profile-name" id="sidebar-student-name">Student Workspace</div>
+              <div class="profile-role" id="sidebar-student-role">Engineering Learner</div>
             </div>
             <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2">
@@ -817,13 +817,13 @@
       style="padding: 24px 28px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
       <div style="display: flex; align-items: center; gap: 14px;">
         <div
+          id="dossier-modal-avatar"
           style="width: 48px; height: 48px; border-radius: 12px; background: #2563eb; color: #fff; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; justify-content: center;">
-          VY
+          ST
         </div>
         <div>
-          <div style="font-size: 1.15rem; font-weight: 600; color: #0f172a;">Vivek Yadav</div>
-          <div style="font-size: 0.82rem; color: #64748b; font-weight: 500;">GTU CSE • Batch of 2026 • Verified Dossier
-          </div>
+          <div style="font-size: 1.15rem; font-weight: 600; color: #0f172a;" id="dossier-modal-name">Student Learner</div>
+          <div style="font-size: 0.82rem; color: #64748b; font-weight: 500;" id="dossier-modal-role">Engineering Track • Verified Dossier</div>
         </div>
       </div>
       <button type="button" onclick="closeStudentDossierModal()"
@@ -1010,8 +1010,8 @@
       // Sync enrollment to backend SQLite
       try {
         const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-        const email = u.email || 'vivek.hr362007@gmail.com';
-        if (window.TorpedoAPI && window.TorpedoAPI.enrollCourse) {
+        const email = u.email || '';
+        if (email && window.TorpedoAPI && window.TorpedoAPI.enrollCourse) {
           await window.TorpedoAPI.enrollCourse(email, cId);
         }
       } catch (err) {
@@ -1025,8 +1025,8 @@
     document.addEventListener('DOMContentLoaded', async () => {
       try {
         const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-        const email = u.email || 'vivek.hr362007@gmail.com';
-        if (window.TorpedoAPI && window.TorpedoAPI.getUserEnrollments) {
+        const email = u.email || '';
+        if (email && window.TorpedoAPI && window.TorpedoAPI.getUserEnrollments) {
           const res = await window.TorpedoAPI.getUserEnrollments(email);
           if (res && res.success && Array.isArray(res.enrollments)) {
             const enrolledIds = res.enrollments.map(e => e.course_id.toLowerCase());
@@ -1061,7 +1061,9 @@
     }
 
     function completeCurrentLesson() {
-      showToast('Lesson marked complete! +25 TRP awarded to Vivek Yadav.', 'success');
+      const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+      const studentName = u.name || 'Candidate';
+      showToast(`Lesson marked complete! +25 TRP awarded to ${studentName}.`, 'success');
       setTimeout(closeCoursePlayerModal, 600);
     }
 

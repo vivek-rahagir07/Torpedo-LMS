@@ -100,13 +100,13 @@ class JobsController {
         $pdo = Database::getConnection();
 
         $jobId = trim($data['job_id'] ?? '');
-        $userEmail = strtolower(trim($data['email'] ?? 'vivek.hr362007@gmail.com'));
-        $candidateName = trim($data['candidate_name'] ?? 'Vivek Yadav');
-        $matchScore = (int)($data['match_score'] ?? 98);
+        $userEmail = strtolower(trim($data['email'] ?? ($data['user_email'] ?? '')));
+        $candidateName = trim($data['candidate_name'] ?? 'Candidate');
+        $matchScore = (int)($data['match_score'] ?? 95);
 
-        if (empty($jobId)) {
+        if (empty($jobId) || empty($userEmail)) {
             http_response_code(422);
-            return ['success' => false, 'message' => 'Job ID is required to submit application.'];
+            return ['success' => false, 'message' => 'Job ID and email are required to submit application.'];
         }
 
         // Check if already applied
@@ -138,7 +138,10 @@ class JobsController {
 
     public static function getUserApplications(string $userEmail): array {
         $pdo = Database::getConnection();
-        $email = strtolower(trim($userEmail ?: 'vivek.hr362007@gmail.com'));
+        $email = strtolower(trim($userEmail ?: ''));
+        if (empty($email)) {
+            return ['success' => true, 'count' => 0, 'applications' => []];
+        }
 
         $stmt = $pdo->prepare("SELECT a.*, j.title, j.company, j.location, j.stipend, j.job_type FROM job_applications a JOIN jobs j ON a.job_id = j.id WHERE a.user_email = ? ORDER BY a.applied_at DESC");
         $stmt->execute([$email]);

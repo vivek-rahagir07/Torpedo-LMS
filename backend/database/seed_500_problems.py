@@ -958,10 +958,6 @@ def seed_database():
             p['editorial']
         ))
 
-    # Seed initial student solved records for Vivek Yadav
-    cursor.execute("INSERT OR IGNORE INTO user_solved_problems (user_email, problem_id) VALUES ('vivek.hr362007@gmail.com', 1)")
-    cursor.execute("INSERT OR IGNORE INTO user_solved_problems (user_email, problem_id) VALUES ('vivek.hr362007@gmail.com', 1552)")
-
     conn.commit()
     count = cursor.execute("SELECT COUNT(*) FROM problems").fetchone()[0]
     easy_count = cursor.execute("SELECT COUNT(*) FROM problems WHERE difficulty='Easy'").fetchone()[0]

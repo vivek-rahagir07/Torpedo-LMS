@@ -25,8 +25,8 @@ class HackathonsController {
 
         $hackId = trim($data['hackathon_id'] ?? '');
         $teamName = trim($data['team_name'] ?? '');
-        $leadEmail = strtolower(trim($data['lead_email'] ?? 'vivek.hr362007@gmail.com'));
-        $leadName = trim($data['lead_name'] ?? 'Vivek Yadav');
+        $leadEmail = strtolower(trim($data['lead_email'] ?? ''));
+        $leadName = trim($data['lead_name'] ?? 'Candidate Lead');
         $projectTitle = trim($data['project_title'] ?? 'High-Throughput Web3 Architecture');
         $members = $data['members'] ?? [];
 
@@ -66,7 +66,10 @@ class HackathonsController {
 
     public static function getUserTeams(string $userEmail): array {
         $pdo = Database::getConnection();
-        $email = strtolower(trim($userEmail ?: 'vivek.hr362007@gmail.com'));
+        $email = strtolower(trim($userEmail ?: ''));
+        if (empty($email)) {
+            return ['success' => true, 'count' => 0, 'teams' => []];
+        }
 
         $stmt = $pdo->prepare("SELECT t.*, h.title as hackathon_title, h.prize_pool, h.format, h.start_date FROM hackathon_teams t JOIN hackathons h ON t.hackathon_id = h.id WHERE t.lead_email = ? ORDER BY t.registered_at DESC");
         $stmt->execute([$email]);

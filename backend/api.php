@@ -55,7 +55,7 @@ try {
     // Handle dynamic /api/problems/{id}
     if (preg_match('#^problems/([0-9]+)$#', $path, $matches)) {
         if ($method === 'GET') {
-            $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+            $userEmail = $requestData['email'] ?? '';
             $response = ProblemsController::getById((int)$matches[1], $userEmail);
         }
     } else {
@@ -65,7 +65,7 @@ try {
                 if ($method === 'GET') {
                     if (isset($requestData['id']) || isset($requestData['slug'])) {
                         $idOrSlug = $requestData['id'] ?? $requestData['slug'];
-                        $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                        $userEmail = $requestData['email'] ?? '';
                         $response = ProblemsController::getById($idOrSlug, $userEmail);
                     } else {
                         $response = ProblemsController::getAll($requestData);
@@ -76,7 +76,7 @@ try {
             case 'problems/get':
                 if ($method === 'GET') {
                     $idOrSlug = $requestData['id'] ?? $requestData['slug'] ?? 1552;
-                    $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                    $userEmail = $requestData['email'] ?? '';
                     $response = ProblemsController::getById($idOrSlug, $userEmail);
                 }
                 break;
@@ -89,7 +89,7 @@ try {
 
             case 'problems/stats':
                 if ($method === 'GET') {
-                    $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                    $userEmail = $requestData['email'] ?? '';
                     $response = ProblemsController::getStats($userEmail);
                 }
                 break;
@@ -138,7 +138,7 @@ try {
 
         case 'auth/me':
             if ($method === 'GET') {
-                $email = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $email = $requestData['email'] ?? '';
                 $response = AuthController::me($email);
             }
             break;
@@ -152,7 +152,7 @@ try {
 
         case 'profile':
             if ($method === 'GET') {
-                $email = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $email = $requestData['email'] ?? '';
                 $role = $requestData['role'] ?? 'student';
                 $response = ProfileController::getProfile($email, $role);
             }
@@ -180,7 +180,7 @@ try {
 
         case 'jobs/applications':
             if ($method === 'GET') {
-                $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $userEmail = $requestData['email'] ?? '';
                 $response = JobsController::getUserApplications($userEmail);
             }
             break;
@@ -221,7 +221,7 @@ try {
 
         case 'hackathons/teams':
             if ($method === 'GET') {
-                $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $userEmail = $requestData['email'] ?? '';
                 $response = HackathonsController::getUserTeams($userEmail);
             }
             break;
@@ -235,7 +235,7 @@ try {
 
         case 'courses/my':
             if ($method === 'GET') {
-                $userEmail = $requestData['email'] ?? 'vivek.hr362007@gmail.com';
+                $userEmail = $requestData['email'] ?? '';
                 $response = CoursesController::getUserEnrollments($userEmail);
             }
             break;

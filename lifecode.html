@@ -2251,11 +2251,12 @@
       document.getElementById('result-cases-diff-container').innerHTML = '';
 
       try {
+        const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
         const payload = {
           problem_id: currentProblemId,
           language: currentSelectedLanguage,
           code: code,
-          user_email: 'vivek.hr362007@gmail.com'
+          user_email: u.email || ''
         };
 
         const resp = await fetch('/api/problems/submit', {
@@ -2363,7 +2364,7 @@
           <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
             <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:8px; padding:12px;">
               <strong style="color:#ffffff;">1. Clean Python 3 Solution with Binary Search (98% Beats)</strong>
-              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:4px;">By Vivek Yadav • Verified Placement Candidate</div>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:4px;">By Verified Placement Candidate • All Tests Passed</div>
             </div>
             <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:8px; padding:12px;">
               <strong style="color:#ffffff;">2. High-Throughput C++ Greedy Approach (Zero Memory Overhead)</strong>
@@ -2379,7 +2380,8 @@
       content.innerHTML = '<h2 class="problem-title-headline">Your Submissions</h2><p style="color:#a1a1aa;">Loading history from database...</p>';
 
       try {
-        const resp = await fetch('/api/problems/stats?email=vivek.hr362007@gmail.com');
+        const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const resp = await fetch('/api/problems/stats?email=' + encodeURIComponent(u.email || ''));
         const data = await resp.json();
         if (data.success && data.recent_submissions) {
           let html = '<h2 class="problem-title-headline">Your Submissions</h2><div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">';
@@ -2440,7 +2442,8 @@
       tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color:#a1a1aa;">Fetching problems from backend database...</td></tr>';
 
       try {
-        const url = `/api/problems?page=${page}&limit=50&search=${encodeURIComponent(search)}&difficulty=${diff}&category=${encodeURIComponent(cat)}&email=vivek.hr362007@gmail.com`;
+        const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const url = `/api/problems?page=${page}&limit=50&search=${encodeURIComponent(search)}&difficulty=${diff}&category=${encodeURIComponent(cat)}&email=${encodeURIComponent(u.email || '')}`;
         const resp = await fetch(url);
         const data = await resp.json();
 
@@ -2787,7 +2790,8 @@
     // 12. Student Stats
     async function loadStudentStats() {
       try {
-        const resp = await fetch('/api/problems/stats?email=vivek.hr362007@gmail.com');
+        const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+        const resp = await fetch('/api/problems/stats?email=' + encodeURIComponent(u.email || ''));
         const data = await resp.json();
         if (data.success) {
           const solvedNum = document.getElementById('solved-count-num');

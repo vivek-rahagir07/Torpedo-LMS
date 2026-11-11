@@ -151,7 +151,7 @@ function calculateSkillMastery(student) {
 }
 
 const student = {
-  name: "Vivek Yadav",
+  name: "Candidate",
   completedModules: 94,
   sandboxCommits: 88,
   mockScore: 92

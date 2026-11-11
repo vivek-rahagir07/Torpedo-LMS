@@ -123,7 +123,7 @@ window.quickFillLogin = function(role) {
   const emailInput = document.getElementById('login-email');
   const passInput = document.getElementById('login-password');
   if (role === 'student') {
-    if (emailInput) emailInput.value = 'vivek.hr362007@gmail.com';
+    if (emailInput) emailInput.value = 'student@torpedo.edu';
     if (passInput) passInput.value = 'password123';
   } else if (role === 'instructor' || role === 'faculty') {
     if (emailInput) emailInput.value = 'faculty@torpedo.edu';
@@ -358,8 +358,13 @@ window.handleLoginFormSubmit = async function(event) {
   if (event) event.preventDefault();
   const emailInput = document.getElementById('login-email');
   const passwordInput = document.getElementById('login-password');
-  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : 'vivek.hr362007@gmail.com';
-  const password = passwordInput && passwordInput.value ? passwordInput.value : 'TorpedoPass@2026';
+  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim().toLowerCase() : '';
+  const password = passwordInput && passwordInput.value ? passwordInput.value : '';
+
+  if (!email || !password) {
+    showToast('Please enter your email address and password.', 'warning');
+    return;
+  }
   
   let role = currentAuthRole || 'student';
   if (role === 'admin') { 
@@ -549,22 +554,16 @@ window.openTorpedoGoogleModal = function() {
   const emailInput = document.getElementById('input-email') || document.getElementById('auth-email-input');
   const typedEmail = emailInput ? emailInput.value.trim() : '';
   const storedEmail = localStorage.getItem('last_google_email') || '';
+  const defaultEmail = typedEmail || storedEmail || '';
   
-  // Prefer typed or stored email, fallback to verified Google user
-  const defaultEmail = typedEmail || storedEmail || 'vivek.yadav.25cse@bmu.edu.in';
-  
-  // Derive a friendly display name from the email
-  let defaultName = 'Vivek Yadav';
-  if (typedEmail && typedEmail.includes('@')) {
-    const localPart = typedEmail.split('@')[0];
-    defaultName = localPart.split(/[._]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
-  } else if (storedEmail) {
-    const localPart = storedEmail.split('@')[0];
+  let defaultName = '';
+  if (defaultEmail && defaultEmail.includes('@')) {
+    const localPart = defaultEmail.split('@')[0];
     defaultName = localPart.split(/[._]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
   }
 
   const roleLabel = currentAuthRole === 'employer' ? 'Recruiter' : (['instructor','faculty'].includes(currentAuthRole) ? 'Faculty' : 'Student');
-  const initialLetter = (defaultName.charAt(0) || 'G').toUpperCase();
+  const initialLetter = defaultName ? defaultName.charAt(0).toUpperCase() : 'G';
 
   const modalHtml = `
     <div id="torpedo-google-modal" style="position:fixed; inset:0; z-index:99999; background:rgba(15,23,42,0.68); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:16px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
@@ -586,42 +585,36 @@ window.openTorpedoGoogleModal = function() {
 
         <!-- Heading -->
         <div style="margin-bottom:18px;">
-          <h3 style="margin:0; font-size:20px; font-weight:500; color:#202124; line-height:1.25;">Choose an account</h3>
+          <h3 style="margin:0; font-size:20px; font-weight:500; color:#202124; line-height:1.25;">Sign in with your Google Account</h3>
           <p style="margin:4px 0 0; font-size:13px; color:#5f6368;">to continue to <strong style="color:#1a73e8;">Torpedo LMS</strong> (${roleLabel})</p>
         </div>
 
-        <!-- 1-Click Account Card -->
-        <div id="tp-g-quick-account" onclick="executeGoogleSignIn('${defaultEmail}', '${defaultName}')" style="display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid #dadce0; border-radius:14px; cursor:pointer; background:#ffffff; transition:all 0.2s cubic-bezier(0.16,1,0.3,1); box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+        ${defaultEmail ? `
+        <!-- 1-Click Saved Account Card -->
+        <div id="tp-g-quick-account" onclick="executeGoogleSignIn('${defaultEmail}', '${defaultName}')" style="display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid #dadce0; border-radius:14px; cursor:pointer; background:#ffffff; transition:all 0.2s cubic-bezier(0.16,1,0.3,1); box-shadow:0 1px 3px rgba(0,0,0,0.04); margin-bottom:14px;">
           <div style="width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg, #4285F4, #34A853); color:#ffffff; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:17px; flex-shrink:0;">
             ${initialLetter}
           </div>
           <div style="flex:1; min-width:0;">
-            <div style="font-size:14px; font-weight:600; color:#202124; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${defaultName}</div>
+            <div style="font-size:14px; font-weight:600; color:#202124; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${defaultName || 'Google Account'}</div>
             <div style="font-size:12px; color:#5f6368; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${defaultEmail}</div>
           </div>
           <span style="font-size:12px; font-weight:600; color:#1a73e8; background:#e8f0fe; padding:4px 10px; border-radius:20px;">Continue</span>
         </div>
+        ` : ''}
 
-        <!-- Use another Google account toggle -->
-        <div style="margin-top:14px; text-align:center;">
-          <button type="button" onclick="toggleTorpedoGoogleCustom()" style="background:none; border:none; color:#1a73e8; font-size:13px; font-weight:500; cursor:pointer; padding:6px 12px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            <span>Use another Google account</span>
-          </button>
-        </div>
-
-        <!-- Custom Account Form (Hidden by default) -->
-        <div id="tp-g-custom-section" style="display:none; margin-top:14px; padding-top:14px; border-top:1px solid #f1f3f4;">
+        <!-- Custom Account Form -->
+        <div id="tp-g-custom-section" style="margin-top:10px;">
           <div style="margin-bottom:10px;">
-            <label style="display:block; font-size:12px; font-weight:600; color:#3c4043; margin-bottom:4px;">Google Account Email</label>
-            <input type="email" id="tp-g-custom-email" placeholder="name@gmail.com or @college.edu" value="${defaultEmail}" style="width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #dadce0; border-radius:8px; font-size:13px; outline:none;" />
+            <label style="display:block; font-size:12px; font-weight:600; color:#3c4043; margin-bottom:4px;">Enter Google Account Email</label>
+            <input type="email" id="tp-g-custom-email" placeholder="you@gmail.com or @university.edu" value="${defaultEmail ? '' : ''}" style="width:100%; box-sizing:border-box; padding:11px 12px; border:1px solid #dadce0; border-radius:8px; font-size:13.5px; outline:none;" />
           </div>
-          <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:12px; font-weight:600; color:#3c4043; margin-bottom:4px;">Account Name</label>
-            <input type="text" id="tp-g-custom-name" placeholder="Full Name" value="${defaultName}" style="width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #dadce0; border-radius:8px; font-size:13px; outline:none;" />
+          <div style="margin-bottom:14px;">
+            <label style="display:block; font-size:12px; font-weight:600; color:#3c4043; margin-bottom:4px;">Your Full Name</label>
+            <input type="text" id="tp-g-custom-name" placeholder="Your Full Name" value="" style="width:100%; box-sizing:border-box; padding:11px 12px; border:1px solid #dadce0; border-radius:8px; font-size:13.5px; outline:none;" />
           </div>
-          <button type="button" id="tp-g-custom-submit" onclick="submitTorpedoGoogleCustom()" style="width:100%; background:#1a73e8; color:#ffffff; border:none; padding:11px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-            <span>Sign in as this Account</span>
+          <button type="button" id="tp-g-custom-submit" onclick="submitTorpedoGoogleCustom()" style="width:100%; background:#1a73e8; color:#ffffff; border:none; padding:11px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+            <span>Continue with Google</span>
           </button>
         </div>
 

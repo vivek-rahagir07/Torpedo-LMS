@@ -259,23 +259,5 @@ const TORPEDO_HACKATHONS_DATA = [
   }
 ];
 
-const INITIAL_REGISTERED_TEAMS = [
-  {
-    id: "team-001",
-    hackathonId: "hack-poly-01",
-    hackathonTitle: "Polygon BUIDL India Sprint 2026",
-    teamName: "Torpedo Titans",
-    track: "Cross-chain identity verification with ZK-proofs",
-    status: "Active Team",
-    statusClass: "status-active",
-    repoUrl: "https://github.com/vivek-yadav/polygon-zk-student-id",
-    members: [
-      { name: "Vivek Yadav (Lead)", role: "Smart Contract Architect", roll: "22002170310065" },
-      { name: "Harshil Patel", role: "Frontend & Web3.js", roll: "22002170310042" },
-      { name: "Ananya Sharma", role: "ZK Circuit Engineer", roll: "22002170310018" }
-    ],
-    submissionStatus: "Draft Ready (85% Built)",
-    submittedAt: "Nov 1, 2026"
-  }
-];
+const INITIAL_REGISTERED_TEAMS = [];
 

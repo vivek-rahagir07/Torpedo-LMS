@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script>(function(){var q=new URLSearchParams(location.search);var u={};try{u=JSON.parse(localStorage.getItem('torpedo_user')||'{}')}catch(e){}if((q.get('role')||u.role)==='admin'){location.replace('super-admin.html');return}if((q.get('role')||u.role)==='employer'){location.replace('recruiter.html');return}if(['instructor','faculty'].includes(q.get('role')||u.role)){location.replace('faculty.html')}})();</script>
+<head><script>(function(){
+  var q = new URLSearchParams(location.search);
+  var u = {};
+  var token = localStorage.getItem('torpedo_token');
+  try { u = JSON.parse(localStorage.getItem('torpedo_user') || '{}'); } catch(e){}
+  if (!token || !u || !u.email) {
+    location.replace('index.html?login=1&role=student');
+    return;
+  }
+  if ((q.get('role') || u.role) === 'admin') { location.replace('super-admin.html'); return; }
+  if ((q.get('role') || u.role) === 'employer') { location.replace('recruiter.html'); return; }
+  if (['instructor','faculty'].includes(q.get('role') || u.role)) { location.replace('faculty.html'); return; }
+})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Portal - Torpedo Learning</title>
@@ -72,15 +84,15 @@
         </div>
 
         <!-- Student Profile Avatar with Online Dot -->
-        <div class="rail-avatar-wrap" onclick="openProfileDossierModal()" title="Vivek Yadav (Online)" style="margin-left: 4px; width: 28px; height: 28px;">
+        <div class="rail-avatar-wrap" onclick="openProfileDossierModal()" title="Student Profile (Online)" style="margin-left: 4px; width: 28px; height: 28px;">
           <div class="rail-avatar-circle" style="width: 26px; height: 26px;">
-            <img src="assets/vivek_avatar.png" alt="Vivek" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.outerHTML='<span class=\'rail-avatar-initials\'>VY</span>'">
+            <img id="top-header-avatar" src="assets/avatars/robot1.svg" alt="Student" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.outerHTML='<span class=\'rail-avatar-initials\'>ST</span>'">
           </div>
           <span class="rail-avatar-dot" style="bottom: 0px; right: 0px;"></span>
         </div>
 
         <!-- Logout -->
-        <a href="index.html" class="header-icon-badge-btn" title="Sign Out">
+        <a href="javascript:void(0)" onclick="handleLogout()" class="header-icon-badge-btn" title="Sign Out">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         </a>
       </div>
@@ -144,7 +156,7 @@
           <!-- Student Avatar at rail bottom -->
           <div class="rail-avatar-wrap" id="rail-btn-avatar" title="View Profile Dossier" onclick="openProfileDossierModal()">
             <div class="rail-avatar-circle">
-              <img src="assets/vivek_avatar.png" alt="Vivek" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.outerHTML='<span class=\'rail-avatar-initials\'>VY</span>'">
+              <img id="rail-bottom-avatar" src="assets/avatars/robot1.svg" alt="Student" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.outerHTML='<span class=\'rail-avatar-initials\'>ST</span>'">
             </div>
             <span class="rail-avatar-dot" title="Connected"></span>
           </div>
@@ -422,12 +434,12 @@
           <!-- Student Profile Card Bottom -->
           <div class="sidebar-bottom-profile" onclick="openProfileDossierModal()" title="View Student Academic Dossier">
             <div class="profile-monogram-box">
-              <span>VY</span>
+              <span id="sidebar-student-monogram">ST</span>
               <span class="avatar-live-indicator" title="Connected"></span>
             </div>
             <div class="profile-info-wrap">
-              <div class="profile-name" id="sidebar-student-name">Vivek Yadav</div>
-              <div class="profile-role" id="sidebar-student-role">GTU CSE • Batch '26</div>
+              <div class="profile-name" id="sidebar-student-name">Student</div>
+              <div class="profile-role" id="sidebar-student-role">Student workspace</div>
             </div>
             <svg class="profile-gear-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           </div>
@@ -438,7 +450,7 @@
       <main class="dashboard-main-view">
 
         <!-- ================================================================
-             TAB 1: HOME DASHBOARD (Vivek Yadav Executive Command Center)
+             TAB 1: HOME DASHBOARD (Student Command Center)
              ================================================================ -->
 <div id="tab-view-home" class="portal-tab-content active"><div id="student-home"></div></div>
 <div id="tab-view-planner" class="portal-tab-content"><div id="student-planner"></div></div>
@@ -647,12 +659,12 @@
               <p class="st-muted" style="margin: 0;">Friends who register with your code instantly get ₹500 tuition discount on their first cohort track.</p>
               
               <div class="referral-code-display">
-                <span>TORPEDO-VIVEK-99</span>
+                <span id="st-referral-code-badge">TORPEDO-STUDENT-01</span>
                 <button type="button" class="st-btn" style="padding: 6px 12px; font-size: 11px;" onclick="copyReferralCode()">Copy Code</button>
               </div>
 
               <div style="display: flex; gap: 8px;">
-                <input type="text" class="st-input" readonly value="https://torpedo.learning/join?ref=TORPEDO-VIVEK-99" style="font-size: 12px;">
+                <input type="text" class="st-input" id="st-referral-link-input" readonly value="" placeholder="Generating your unique invite link..." style="font-size: 12px;">
                 <button type="button" class="st-btn" onclick="copyReferralLink()">Copy</button>
               </div>
             </div>
@@ -2857,10 +2869,10 @@
             <!-- 7. Compact Student Placement Readiness Strip -->
             <section class="student-readiness-strip">
               <div class="readiness-left-profile">
-                <div class="readiness-avatar">VY</div>
+                <div class="readiness-avatar" id="readiness-avatar-box">ST</div>
                 <div>
-                  <div class="readiness-title">Vivek Yadav • Verified Candidate</div>
-                  <div class="readiness-sub">GTU CSE · 2026 Batch · Top 2.4% LMS Bracket</div>
+                  <div class="readiness-title" id="readiness-student-title">Verified Placement Candidate</div>
+                  <div class="readiness-sub" id="readiness-student-sub">Placement Ready · Career Track</div>
                 </div>
               </div>
 
@@ -3012,13 +3024,13 @@
                       <span>🚀 Team "Torpedo Titans"</span>
                     </div>
                     <div class="terminal-squad-sub">
-                      Target: Polygon BUIDL Demo Day (ZK Track) · Captain: Vivek Yadav
+                      Target: Polygon BUIDL Demo Day (ZK Track) · Captain: Squad Lead
                     </div>
                   </div>
 
                   <div class="terminal-checklist">
                     <div class="terminal-checklist-item ready">
-                      <span>✓ Lead Full-Stack (Vivek Yadav · GTU CSE)</span>
+                      <span>✓ Lead Full-Stack (Squad Captain)</span>
                     </div>
                     <div class="terminal-checklist-item ready">
                       <span>✓ Smart Contracts &amp; ZK Primitives (Joined)</span>
@@ -3343,11 +3355,11 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           <!-- Student Avatar Box -->
           <div class="dossier-user-box">
             <div class="dossier-user-avatar-wrap">
-              <img src="assets/vivek_avatar.png" alt="Vivek Yadav" class="dossier-user-avatar-img" onerror="this.src='assets/avatars/boy1.svg'">
+              <img id="modal-dossier-avatar-img" src="assets/avatars/robot1.svg" alt="Student" class="dossier-user-avatar-img" onerror="this.src='assets/avatars/boy1.svg'">
               <span class="dossier-user-dot" title="Online"></span>
             </div>
             <div>
-              <h4 class="dossier-user-name" id="modal-dossier-sidebar-name">Vivek Yadav</h4>
+              <h4 class="dossier-user-name" id="modal-dossier-sidebar-name">Student</h4>
               <span class="dossier-user-role-pill">LEARNER / STUDENT</span>
             </div>
           </div>
@@ -3694,12 +3706,12 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           <div class="dossier-account-hero">
             <div style="display: flex; align-items: center; gap: 16px;">
               <div style="position: relative;">
-                <img src="assets/vivek_avatar.png" alt="Vivek Yadav" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid #2563eb;" onerror="this.src='assets/avatars/boy1.svg'">
+                <img id="dossier-hero-avatar-img" src="assets/avatars/robot1.svg" alt="Student" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid #2563eb;" onerror="this.src='assets/avatars/boy1.svg'">
                 <span style="position: absolute; bottom: 1px; right: 1px; width: 12px; height: 12px; background: #10b981; border: 2px solid #ffffff; border-radius: 50%;"></span>
               </div>
               <div>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <h3 style="margin: 0; font-size: 17px; font-weight: 800; color: #0f172a;">Vivek Yadav</h3>
+                  <h3 id="dossier-hero-student-name" style="margin: 0; font-size: 17px; font-weight: 800; color: #0f172a;">Student</h3>
                   <span style="color: #2563eb; font-size: 16px;" title="Verified Profile">✓</span>
                 </div>
                 <span style="font-family: var(--font-mono, monospace); font-size: 11.5px; color: #64748b; font-weight: 700;">Student ID: #TL-00009</span>
@@ -3716,7 +3728,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
             <div class="dossier-account-row">
               <div>
                 <span style="font-size: 10.5px; font-weight: 800; color: #64748b; letter-spacing: 0.06em; text-transform: uppercase;">DISPLAY NAME</span>
-                <div style="font-size: 14.5px; font-weight: 700; color: #0f172a; margin-top: 3px;" id="account-display-name-val">Vivek Yadav</div>
+                <div style="font-size: 14.5px; font-weight: 700; color: #0f172a; margin-top: 3px;" id="account-display-name-val">Student</div>
               </div>
               <button type="button" class="st-link" onclick="editDisplayName()" style="font-size: 12px;">Edit</button>
             </div>
@@ -3933,7 +3945,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 1.2rem;">📄</span>
             <div>
-              <strong style="font-size: 0.8rem; color: #0f172a;">Vivek_Yadav_DevOps_Resume.pdf</strong>
+              <strong style="font-size: 0.8rem; color: #0f172a;">Candidate_DevOps_Resume.pdf</strong>
               <div style="font-size: 0.68rem; color: #059669;">Verified in Onboarding • PDF Attached</div>
             </div>
           </div>
@@ -4145,7 +4157,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px;">
           <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px;">
             <div style="font-size: 0.62rem; font-weight: 600; color: #64748b; text-transform: uppercase;">ISSUED TO</div>
-            <strong style="font-size: 0.78rem; color: #0f172a;">Vivek Yadav (GTU-CSE)</strong>
+            <strong style="font-size: 0.78rem; color: #0f172a;">Candidate Dossier</strong>
           </div>
           <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px;">
             <div style="font-size: 0.62rem; font-weight: 600; color: #64748b; text-transform: uppercase;">UNLOCK DATE</div>
@@ -4187,7 +4199,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 16px;">
           <label style="display: block; font-size: 0.66rem; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">YOUR PUBLIC PORTFOLIO URL</label>
           <div style="display: flex; gap: 8px;">
-            <input type="text" id="portfolio-share-url-input" readonly value="https://torpedo.learn/portfolio/vivek-yadav-cs849" style="flex: 1; padding: 9px 12px; font-size: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: var(--font-code); background: #ffffff; color: #1e293b;">
+            <input type="text" id="portfolio-share-url-input" readonly value="" style="flex: 1; padding: 9px 12px; font-size: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: var(--font-code); background: #ffffff; color: #1e293b;">
             <button type="button" class="btn-go-sandbox" onclick="copyPortfolioLink()" style="padding: 0 14px; font-size: 0.76rem; border-radius: 6px;">
               Copy Link
             </button>
@@ -4196,7 +4208,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
         <div style="display: flex; align-items: center; justify-content: space-around; padding: 12px; border: 1px dashed #cbd5e1; border-radius: 10px; margin-bottom: 16px;">
           <div style="text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #2563eb;">2</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: #2563eb;" id="modal-share-diploma-count">0</div>
             <div style="font-size: 0.68rem; color: #64748b; font-weight: 600;">Platform Diplomas</div>
           </div>
           <div style="width: 1px; height: 28px; background: #e2e8f0;"></div>
@@ -4206,17 +4218,17 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
           </div>
           <div style="width: 1px; height: 28px; background: #e2e8f0;"></div>
           <div style="text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #9333ea;">4</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: #9333ea;" id="modal-share-badges-count">0</div>
             <div style="font-size: 0.68rem; color: #64748b; font-weight: 600;">Skill Badges</div>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-          <button type="button" class="btn-share-linkedin" style="padding: 9px;" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=https://torpedo.learn/portfolio/vivek-yadav-cs849', '_blank')">
+          <button type="button" class="btn-share-linkedin" style="padding: 9px;" onclick="sharePortfolioToSocial('linkedin')">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             <span>Share to LinkedIn</span>
           </button>
-          <button type="button" class="btn-download-cert-pdf" style="padding: 9px;" onclick="window.open('https://twitter.com/intent/tweet?text=Check+out+my+verified+engineering+e-Portfolio+on+Torpedo+Learning%3A+https%3A%2F%2Ftorpedo.learn%2Fportfolio%2Fvivek-yadav-cs849', '_blank')">
+          <button type="button" class="btn-download-cert-pdf" style="padding: 9px;" onclick="sharePortfolioToSocial('twitter')">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             <span>Share to X / Twitter</span>
           </button>
@@ -4523,8 +4535,8 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       <div style="margin-bottom:14px;">
         <label style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Applicant Profile</label>
         <div style="background:#ffffff; border:1px solid var(--border-card); border-radius:8px; padding:10px 14px; font-size:0.84rem;">
-          <div><strong>Vivek Yadav</strong> (GTU CSE, 2026 Batch)</div>
-          <div style="color:#64748b; font-size:0.78rem; margin-top:2px;">vivek.hr362007@gmail.com • +91 98765 43210</div>
+          <div><strong id="dossier-preview-name">Student Candidate</strong></div>
+          <div style="color:#64748b; font-size:0.78rem; margin-top:2px;" id="dossier-preview-email">Verified Torpedo Placement Candidate</div>
         </div>
       </div>
 
@@ -4591,7 +4603,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     <div class="dialog-body">
       <div style="border-bottom:1px solid var(--border-card); padding-bottom:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-start;">
         <div>
-          <h2 style="font-family:var(--font-display, 'Inter', sans-serif); font-size:1.35rem; color:#0f172a;">Vivek Yadav</h2>
+          <h2 id="dossier-header-name" style="font-family:var(--font-display, 'Inter', sans-serif); font-size:1.35rem; color:#0f172a;">Student Candidate</h2>
           <div style="color:#64748b; font-size:0.84rem; margin-top:2px;">B.Tech Computer Science &amp; Engineering • Gujarat Technological University</div>
           <div style="font-family:var(--font-mono, monospace); color:#0f2ac7; font-size:0.76rem; margin-top:4px;">Roll: 22002170310065 • CPI: 8.85 / 10</div>
         </div>
@@ -4690,7 +4702,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       <div style="margin-bottom:14px;">
         <label for="reg-teammates-input" style="display:block; font-size:0.78rem; font-weight:750; color:#0f172a; margin-bottom:6px;">Invite Classmates (Roll Numbers or Email IDs)</label>
         <input type="text" id="reg-teammates-input" class="job-search-input" placeholder="e.g. 22002170310042, 22002170310018" style="padding-left:14px;">
-        <span style="font-size:0.72rem; color:#64748b; margin-top:4px; display:block;">Your profile (Vivek Yadav - Lead) will be automatically added as Team Captain.</span>
+        <span style="font-size:0.72rem; color:#64748b; margin-top:4px; display:block;">Your profile will be automatically added as Team Captain.</span>
       </div>
 
       <div style="margin-bottom:14px;">
@@ -4781,7 +4793,11 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         btn.onclick = () => showToast(`Opening curriculum for ${courseName}...`, 'info');
       }
       const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-      const email = u.email || 'vivek.hr362007@gmail.com';
+      const email = u.email || '';
+      if (!email) {
+        showToast('Please log in to enroll in courses.', 'warning');
+        return;
+      }
       if (window.TorpedoAPI && window.TorpedoAPI.enrollCourse) {
         window.TorpedoAPI.enrollCourse(email, courseId).then(() => {
           if (typeof loadStudentSession === 'function') loadStudentSession();
@@ -4794,19 +4810,26 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
        STUDENT DATA INITIALIZATION & DYNAMIC BINDING
        ======================================================================== */
     let currentStudent = {
-      name: 'Vivek Yadav',
-      firstName: 'Vivek',
-      lastName: 'Yadav',
-      email: 'vivek.hr362007@gmail.com',
-      avatar: 'assets/vivek_avatar.png',
-      college: 'Gujarat Technological University (GTU), Ahmedabad',
-      degree: 'B.Tech / B.E (CSE)',
-      branch: 'Computer Science & Engineering',
+      name: 'Student',
+      firstName: 'Student',
+      lastName: '',
+      email: '',
+      avatar: 'assets/avatars/robot1.svg',
+      college: '',
+      degree: 'B.Tech / B.E',
+      branch: 'Computer Science',
       gradYear: '2026',
-      cgpa: '8.85',
-      roll: 'GTU-2022-CS-0849',
-      bio: 'Aspiring DevOps & Cloud Engineer eager to build production-grade scalable systems.',
+      cgpa: '',
+      roll: '',
+      bio: 'Enthusiastic developer learning on Torpedo LMS.',
       role: 'student'
+    };
+
+    window.handleLogout = function() {
+      localStorage.removeItem('torpedo_token');
+      localStorage.removeItem('torpedo_user');
+      localStorage.removeItem('last_google_email');
+      window.location.replace('index.html');
     };
 
     function loadStudentSession() {
@@ -4820,6 +4843,10 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
               const parts = currentStudent.name.trim().split(' ');
               currentStudent.firstName = parts[0];
               currentStudent.lastName = parts.slice(1).join(' ') || '';
+            } else if (currentStudent.email) {
+              const local = currentStudent.email.split('@')[0];
+              currentStudent.name = local.split(/[._]/).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+              currentStudent.firstName = currentStudent.name.split(' ')[0];
             }
           }
         }
@@ -4827,39 +4854,41 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         console.warn('Could not read student session from localStorage', err);
       }
 
-      const fName = currentStudent.firstName || 'Vivek';
+      const fName = currentStudent.firstName || 'Student';
       
       const greetingEl = document.getElementById('hero-greeting-text');
       if (greetingEl) greetingEl.textContent = `Welcome back, ${fName}`;
 
       const sidebarName = document.getElementById('sidebar-student-name');
-      if (sidebarName) sidebarName.textContent = currentStudent.name || 'Vivek Yadav';
+      if (sidebarName) sidebarName.textContent = currentStudent.name || 'Student';
 
       const sidebarRole = document.getElementById('sidebar-student-role');
       if (sidebarRole) sidebarRole.textContent = currentStudent.degree || 'Student workspace';
 
-      const monogram = document.querySelector('.profile-monogram-box span');
+      const monogram = document.getElementById('sidebar-student-monogram') || document.querySelector('.profile-monogram-box span');
       if (monogram) monogram.textContent = (currentStudent.name || 'Student').split(/\s+/).filter(Boolean).slice(0, 2).map(n => n[0]).join('').toUpperCase();
 
-      const avatarSrc = currentStudent.avatar || 'assets/avatars/robot1.svg';
-      const railAvatar = document.getElementById('rail-avatar-img');
+      const avatarSrc = currentStudent.avatar_url || currentStudent.avatar || 'assets/avatars/robot1.svg';
+      const railAvatar = document.getElementById('rail-avatar-img') || document.getElementById('rail-bottom-avatar');
       if (railAvatar) railAvatar.src = avatarSrc;
+      const topAvatar = document.getElementById('top-header-avatar');
+      if (topAvatar) topAvatar.src = avatarSrc;
 
       // Modal elements
       const mName = document.getElementById('modal-dossier-name');
-      if (mName) mName.textContent = currentStudent.name || 'Vivek Yadav';
+      if (mName) mName.textContent = currentStudent.name || 'Student';
 
       const mEmail = document.getElementById('modal-dossier-email');
-      if (mEmail) mEmail.textContent = currentStudent.email || 'vivek.hr362007@gmail.com';
+      if (mEmail) mEmail.textContent = currentStudent.email || '';
 
       const mAvatar = document.getElementById('modal-dossier-avatar');
       if (mAvatar) mAvatar.src = avatarSrc;
 
       const mBio = document.getElementById('modal-dossier-bio');
-      if (mBio && currentStudent.bio) mBio.textContent = currentStudent.bio;
+      if (mBio) mBio.textContent = currentStudent.bio || 'Building skills on Torpedo LMS.';
 
       const mCollege = document.getElementById('modal-dossier-college');
-      if (mCollege && currentStudent.college) mCollege.textContent = currentStudent.college;
+      if (mCollege) mCollege.textContent = currentStudent.college || 'Engineering Institute';
 
       const mDegree = document.getElementById('modal-dossier-degree');
       if (mDegree) mDegree.textContent = `${currentStudent.degree || 'B.Tech'} - ${currentStudent.branch || 'CSE'}`;
@@ -4868,6 +4897,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (mCgpa && currentStudent.cgpa) mCgpa.textContent = `${currentStudent.cgpa} CGPA`;
 
       const mRoll = document.getElementById('modal-dossier-roll');
+      if (mRoll && currentStudent.roll) mRoll.textContent = currentStudent.roll;
       if (mRoll && currentStudent.roll) mRoll.textContent = currentStudent.roll;
 
       try {
@@ -5211,16 +5241,17 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       if (!el || !btn) return;
       isEmailRevealed = !isEmailRevealed;
       if (isEmailRevealed) {
-        el.textContent = 'vivek.hr362007@gmail.com';
+        el.textContent = currentStudent.email || 'No email registered';
         btn.textContent = 'Hide Email';
       } else {
-        el.textContent = 'vi***@gmail.com';
+        const em = currentStudent.email || '';
+        el.textContent = em ? (em.slice(0, 2) + '***@' + (em.split('@')[1] || 'domain.com')) : 'Hidden';
         btn.textContent = 'Reveal Email';
       }
     }
 
     function editDisplayName() {
-      const current = document.getElementById('account-display-name-val')?.textContent || 'Vivek Yadav';
+      const current = document.getElementById('account-display-name-val')?.textContent || 'Student';
       const next = prompt('Enter your display name:', current);
       if (next && next.trim()) {
         const clean = next.trim();
@@ -5275,7 +5306,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
       const msg = document.createElement('div');
       msg.style.cssText = 'background: #eff6ff; padding: 8px 10px; border-radius: 6px; border: 1px solid #bfdbfe; margin-top: 4px;';
       msg.innerHTML = `
-        <strong style="color: #2563eb; font-size: 0.74rem;">Vivek Yadav (You)</strong>
+        <strong style="color: #2563eb; font-size: 0.74rem;">You</strong>
         <p style="margin: 2px 0 0 0; font-size: 0.78rem; color: #1e293b;">${text}</p>
       `;
       msg.querySelector('strong').textContent = (currentStudent.name || 'You') + ' (You)';
@@ -5286,12 +5317,12 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     }
 
     function openCertificatesModal() {
-      showToast('Verified Credentials: 17 Blockchain Diplomas & Badges issued to Vivek Yadav.', 'info');
+      showToast('Verified Credentials: 17 Blockchain Diplomas & Badges issued.', 'info');
       openProfileDossierModal();
     }
 
     function openNotificationsModal() {
-      showToast('Notifications: 2 Unread (Razorpay viewed your dossier • Global Hackathon opens tomorrow)', 'info');
+      showToast('Notifications: 2 Unread (Hiring partner viewed your dossier • Global Hackathon opens tomorrow)', 'info');
     }
 
     function registerHackathon(name) {
@@ -5324,7 +5355,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function confirmSubmitApplication() {
       closeInternshipModal();
-      showToast('Application sent to recruiter with your verified Vivek Yadav dossier!', 'success');
+      showToast('Application sent to recruiter with your verified candidate dossier!', 'success');
     }
 
     /* ========================================================================
@@ -6432,8 +6463,16 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     }
 
     /* Share Portfolio Modal */
+    function getStudentPortfolioUrl() {
+      const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+      const slug = (u.name || 'candidate').toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + (u.roll || u.id || 'id');
+      return window.location.origin + '/portfolio/' + slug;
+    }
+
     function shareStudentPortfolio() {
       const modal = document.getElementById('share-portfolio-modal');
+      const input = document.getElementById('portfolio-share-url-input');
+      if (input) input.value = getStudentPortfolioUrl();
       if (modal) modal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -6446,12 +6485,21 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
     function copyPortfolioLink() {
       const input = document.getElementById('portfolio-share-url-input');
-      const val = input ? input.value : 'https://torpedo.learn/portfolio/vivek-yadav-cs849';
+      const val = (input && input.value) ? input.value : getStudentPortfolioUrl();
       navigator.clipboard.writeText(val).then(() => {
         showToast('Public e-Portfolio URL copied to clipboard!', 'success');
       }).catch(() => {
         showToast('Copied: ' + val, 'info');
       });
+    }
+
+    function sharePortfolioToSocial(platform) {
+      const url = getStudentPortfolioUrl();
+      if (platform === 'linkedin') {
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank');
+      } else if (platform === 'twitter') {
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('Check out my verified engineering e-Portfolio on Torpedo Learning: ' + url), '_blank');
+      }
     }
 
     function exportCertToLinkedIn(certTitle) {
@@ -8513,7 +8561,8 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
 
       const teamName = teamNameInput && teamNameInput.value.trim() ? teamNameInput.value.trim() : 'Torpedo Team ' + Math.floor(100 + Math.random() * 900);
       const track = trackSelect ? trackSelect.value : hack.problemStatements[0];
-      const repo = repoInput && repoInput.value.trim() ? repoInput.value.trim() : 'https://github.com/vivek-yadav/' + hack.id;
+      const defaultOwner = (currentStudent.name ? currentStudent.name.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'candidate');
+      const repo = repoInput && repoInput.value.trim() ? repoInput.value.trim() : `https://github.com/${defaultOwner}/${hack.id}`;
 
       const newTeam = {
         id: 'team-' + Date.now(),
@@ -8525,7 +8574,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         statusClass: "status-active",
         repoUrl: repo,
         members: [
-          { name: "Vivek Yadav (Lead)", role: "Team Captain / Full-Stack", roll: "22002170310065" }
+          { name: (currentStudent.name || 'Candidate') + ' (Lead)', role: "Team Captain", roll: currentStudent.roll || '' }
         ],
         submissionStatus: "In Progress (Draft)",
         submittedAt: "Just now"
@@ -8706,7 +8755,7 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
         <div style="font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #1d4ed8; margin-bottom: 12px;">TORPEDO LEARNING ACADEMIC ACCREDITATION</div>
         <h1 style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 0 0 10px 0;">Certificate of Excellence</h1>
         <p style="font-size: 13px; color: #64748b; margin: 0 0 20px 0;">This officially certifies that</p>
-        <h2 style="font-size: 26px; font-weight: 800; color: #1d4ed8; margin: 0 0 10px 0; letter-spacing: -0.5px;">Vivek Yadav</h2>
+        <h2 style="font-size: 26px; font-weight: 800; color: #1d4ed8; margin: 0 0 10px 0; letter-spacing: -0.5px;">${currentStudent.name || 'Verified Graduate'}</h2>
         <p style="font-size: 13.5px; color: #334155; max-width: 500px; margin: 0 auto 20px; line-height: 1.6;">
           has demonstrated technical proficiency in <b>Full-Stack Software Engineering &amp; Distributed Systems</b>, meeting all faculty-assessed performance standards.
         </p>

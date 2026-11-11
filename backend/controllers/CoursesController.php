@@ -24,7 +24,7 @@ class CoursesController {
 
     public static function enroll(array $data): array {
         $pdo = Database::getConnection();
-        $email = strtolower(trim($data['email'] ?? 'vivek.hr362007@gmail.com'));
+        $email = strtolower(trim($data['email'] ?? ''));
         $courseId = trim($data['course_id'] ?? '');
 
         if (empty($email) || empty($courseId)) {
@@ -59,7 +59,10 @@ class CoursesController {
 
     public static function getUserEnrollments(string $email): array {
         $pdo = Database::getConnection();
-        $userEmail = strtolower(trim($email ?: 'vivek.hr362007@gmail.com'));
+        $userEmail = strtolower(trim($email ?: ''));
+        if (empty($userEmail)) {
+            return ['success' => true, 'count' => 0, 'enrollments' => []];
+        }
 
         $stmt = $pdo->prepare("SELECT e.*, c.title, c.category, c.instructor, c.badge, c.badge_class, c.duration, c.price FROM enrollments e LEFT JOIN courses c ON e.course_id = c.id WHERE e.user_email = ? ORDER BY e.created_at DESC");
         $stmt->execute([$userEmail]);

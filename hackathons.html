@@ -188,10 +188,10 @@
 
         <!-- Candidate Profile Pill -->
         <div class="header-user-badge">
-          <div class="user-avatar-circle" style="background: #ea580c;">VY</div>
+          <div class="user-avatar-circle" id="hack-avatar-circle" style="background: #ea580c;">ST</div>
           <div class="user-meta-block">
-            <span class="user-meta-name">Vivek Yadav</span>
-            <span class="user-meta-role">GTU CSE · Top 2%</span>
+            <span class="user-meta-name" id="hack-user-name">Developer</span>
+            <span class="user-meta-role">Placement Ready</span>
           </div>
         </div>
       </div>
@@ -315,13 +315,13 @@
                       <span>🚀 Team "Torpedo Titans"</span>
                     </div>
                     <div class="terminal-squad-sub">
-                      Target: Polygon BUIDL Demo Day (ZK Track) · Captain: Vivek Yadav
+                      Target: Polygon BUIDL Demo Day (ZK Track) · Captain: Squad Lead
                     </div>
                   </div>
 
                   <div class="terminal-checklist">
                     <div class="terminal-checklist-item ready">
-                      <span>✓ Lead Full-Stack (Vivek Yadav · GTU CSE)</span>
+                      <span>✓ Lead Full-Stack (Squad Captain)</span>
                     </div>
                     <div class="terminal-checklist-item ready">
                       <span>✓ Smart Contracts &amp; ZK Primitives (Joined)</span>
@@ -602,7 +602,7 @@
       <div style="margin-bottom:12px;">
         <label for="reg-teammates-input" style="display:block; font-size:0.76rem; font-weight:600; color:#0f172a; margin-bottom:4px;">Invite Classmates (Roll Numbers or Emails)</label>
         <input type="text" id="reg-teammates-input" class="job-search-input" placeholder="e.g. 22002170310042, 22002170310018" style="padding-left:12px;">
-        <span style="font-size:0.70rem; color:#64748b; margin-top:3px; display:block;">Your profile (Vivek Yadav - Lead) will be automatically set as Squad Captain.</span>
+        <span style="font-size:0.70rem; color:#64748b; margin-top:3px; display:block;">Your profile will be automatically set as Squad Captain.</span>
       </div>
 
       <div style="margin-bottom:12px;">
@@ -689,7 +689,7 @@
       // Sync user hackathons from backend
       try {
         const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
+        const userEmail = currentUser.email || '';
         if (window.TorpedoAPI && window.TorpedoAPI.getUserHackathons) {
           const res = await window.TorpedoAPI.getUserHackathons(userEmail);
           if (res && res.success && Array.isArray(res.teams) && res.teams.length > 0) {
@@ -704,7 +704,7 @@
                   status: t.status || 'Active Team',
                   statusClass: 'status-active',
                   repoUrl: 'https://github.com/torpedo-students/squad-repo',
-                  members: [{ name: t.lead_name || 'Vivek Yadav', role: 'Captain', roll: '22002170310065' }],
+                  members: [{ name: t.lead_name || 'Captain', role: 'Captain', roll: '' }],
                   submissionStatus: 'Registered (In Ideation)',
                   submittedAt: t.registered_at || 'Recent'
                 });
@@ -1150,7 +1150,7 @@
         statusClass: 'status-active',
         repoUrl: (repoInput && repoInput.value.trim()) ? repoInput.value.trim() : 'https://github.com/torpedo-students/hackathon-draft',
         members: [
-          { name: 'Vivek Yadav (Lead)', role: 'Squad Captain', roll: '22002170310065' }
+          { name: 'Squad Captain', role: 'Squad Captain', roll: '' }
         ],
         submissionStatus: 'Registered (In Ideation)',
         submittedAt: 'Just now'
@@ -1176,8 +1176,8 @@
       // Dispatch team registration to Torpedo backend API
       try {
         const currentUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
-        const userEmail = currentUser.email || 'vivek.hr362007@gmail.com';
-        const userName = currentUser.name || 'Vivek Yadav';
+        const userEmail = currentUser.email || '';
+        const userName = currentUser.name || 'Team Captain';
         if (window.TorpedoAPI && window.TorpedoAPI.registerHackathonTeam) {
           window.TorpedoAPI.registerHackathonTeam({
             hackathon_id: hack.id,

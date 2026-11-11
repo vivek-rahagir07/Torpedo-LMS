@@ -25,7 +25,7 @@ function weekMarkup(){const today=new Date(),start=new Date(today);start.setDate
 function thisWeekCount(){const start=new Date();start.setHours(0,0,0,0);start.setDate(start.getDate()-((start.getDay()+6)%7));return state.activity.filter(x=>x.kind==='lesson'&&new Date(x.date)>=start).length;}
 function render(){
   const u=read('torpedo_user',{});
-  const name=u.name||'Vivek Yadav';
+  const name=u.name||(u.email ? u.email.split('@')[0] : 'Student');
   const first=name.split(' ')[0];
   const total=state.completed.length;
   const weekly=thisWeekCount();
@@ -34,6 +34,11 @@ function render(){
   let bookedCalls=[];
   try{bookedCalls=JSON.parse(localStorage.getItem('torpedo_mentorship_bookings')||'[]');}catch(e){}
   const nextCall=bookedCalls[0];
+
+  // Get real enrolled tracks for this student
+  let enrolledIds=[];
+  try{enrolledIds=JSON.parse(localStorage.getItem('torpedo_enrolled_courses')||'[]');}catch(e){}
+  const userTracks=tracks.filter((t,idx)=>enrolledIds.includes(t.title)||enrolledIds.includes(String(idx))||enrolledIds.includes(t.id));
 
   $('#student-home').innerHTML=`
     <div class="st-page">
@@ -52,14 +57,20 @@ function render(){
       <!-- Compact Executive Hero Strip -->
       <section class="st-exec-hero">
         <div class="st-exec-hero-copy">
-          <span class="st-exec-hero-kicker">ACTIVE LEARNING TRACK • SELF-PACED</span>
-          <h2 class="st-exec-hero-heading">${tracks[activeCourse||0].title}</h2>
-          <p class="st-exec-hero-desc">${completed(activeCourse||0) === 4 ? "All 4 lessons completed. Revisit any lesson to review." : `Lesson ${completed(activeCourse||0)+1} of 4: ${tracks[activeCourse||0].lessons[completed(activeCourse||0)][0]}`}</p>
+          <span class="st-exec-hero-kicker">${userTracks.length ? 'ACTIVE LEARNING TRACK • SELF-PACED' : 'YOUR LEARNING PATHWAY'}</span>
+          <h2 class="st-exec-hero-heading">${userTracks.length ? userTracks[0].title : 'Welcome to your Learning Space'}</h2>
+          <p class="st-exec-hero-desc">${userTracks.length ? (completed(0) === 4 ? "All 4 lessons completed. Revisit any lesson to review." : `Lesson ${completed(0)+1} of 4: ${userTracks[0].lessons[completed(0)][0]}`) : 'Explore the course catalog to enroll in tracks or begin coding practice on Lifecode.'}</p>
         </div>
         <div class="st-exec-hero-actions">
-          <button type="button" class="st-btn" data-course="${activeCourse||0}" style="padding: 10px 18px; font-weight: 700;">
-            <span>${completed(activeCourse||0) === 4 ? "Review lessons" : "Resume lesson"} ↗</span>
+          ${userTracks.length ? `
+          <button type="button" class="st-btn" data-course="0" style="padding: 10px 18px; font-weight: 700;">
+            <span>${completed(0) === 4 ? "Review lessons" : "Resume lesson"} ↗</span>
           </button>
+          ` : `
+          <button type="button" class="st-btn" onclick="switchPortalTab('courses')" style="padding: 10px 18px; font-weight: 700;">
+            <span>Browse Courses ↗</span>
+          </button>
+          `}
           <button type="button" class="st-btn secondary" onclick="switchPortalTab('lifecode')" style="padding: 10px 14px;">
             <span>Coding practice</span>
           </button>
@@ -74,12 +85,12 @@ function render(){
             <div class="stat-icon-wrap wifi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
           </div>
           <div class="stat-main-row">
-            <span class="stat-value">02</span>
+            <span class="stat-value">${userTracks.length}</span>
             <span class="stat-value-sub">Enrolled</span>
           </div>
-          <span class="stat-subtext">${total} of 8 reading lessons completed</span>
+          <span class="stat-subtext">${userTracks.length ? `${total} of ${userTracks.length * 4} lessons completed` : 'No enrolled courses yet'}</span>
           <div class="stat-footer-row">
-            <span class="stat-badge green">✓ ${Math.round((total/8)*100)}% Overall Progress</span>
+            <span class="stat-badge green">${userTracks.length ? `✓ ${Math.round((total/(userTracks.length*4))*100)}% Overall Progress` : '0% Progress'}</span>
           </div>
         </div>
 
@@ -143,7 +154,16 @@ function render(){
             </div>
             
             <div style="display: flex; flex-direction: column; gap: 12px;">
-              ${tracks.map((c,i)=>`
+              ${userTracks.length === 0 ? `
+                <div style="text-align: center; padding: 36px 16px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 14px;">
+                  <div style="font-size: 28px; margin-bottom: 8px;">📚</div>
+                  <h4 style="margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: #1e293b;">No Enrolled Courses Yet</h4>
+                  <p style="margin: 0 0 14px 0; font-size: 12px; color: #64748b;">Visit the course catalog to enroll in tracks and track your structured lessons.</p>
+                  <button type="button" class="st-btn" onclick="switchPortalTab('courses')" style="padding: 8px 16px; font-size: 12px; font-weight: 600;">
+                    Explore Courses Catalog ↗
+                  </button>
+                </div>
+              ` : userTracks.map((c,i)=>`
                 <div class="st-compact-course-card">
                   <div class="st-course-badge-accent">${c.tag}</div>
                   <div style="flex: 1; min-width: 0;">

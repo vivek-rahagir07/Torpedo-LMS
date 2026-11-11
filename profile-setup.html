@@ -991,23 +991,23 @@
 
       const savedUser = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
 
-      const finalEmail = emailParam || savedUser.email || 'vivek.hr362007@gmail.com';
+      const finalEmail = emailParam || savedUser.email || '';
       const emailField = document.getElementById('input-email');
-      if (emailField) emailField.value = finalEmail;
+      if (emailField && finalEmail) emailField.value = finalEmail;
 
       if (nameParam || savedUser.name) {
         const full = (nameParam || savedUser.name).trim();
         const parts = full.split(' ');
-        const f = parts[0] || 'Vivek';
-        const l = parts.slice(1).join(' ') || 'Yadav';
+        const f = parts[0] || '';
+        const l = parts.slice(1).join(' ') || '';
 
         const fField = document.getElementById('input-first-name');
         const lField = document.getElementById('input-last-name');
         const aliasField = document.getElementById('input-alias');
 
-        if (fField) fField.value = f;
-        if (lField) lField.value = l;
-        if (aliasField) aliasField.value = f;
+        if (fField && f) fField.value = f;
+        if (lField && l) lField.value = l;
+        if (aliasField && f) aliasField.value = f;
       }
 
       if (savedUser.avatar) {

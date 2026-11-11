@@ -395,8 +395,18 @@
   /* ==========================================================================
      2. REFERRALS HUB
      ========================================================================== */
+  function getStudentReferralCode() {
+    const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+    const namePart = (u.name ? u.name.split(' ')[0] : 'STUDENT').toUpperCase().replace(/[^A-Z]/g, '') || 'STUDENT';
+    return `TORPEDO-${namePart}-${u.id || '99'}`;
+  }
+
+  function getStudentReferralLink() {
+    return `${window.location.origin}/join?ref=${getStudentReferralCode()}`;
+  }
+
   window.copyReferralLink = () => {
-    const link = 'https://torpedo.learning/join?ref=TORPEDO-VIVEK-99';
+    const link = getStudentReferralLink();
     navigator.clipboard?.writeText(link).then(() => {
       if (window.showToast) window.showToast('Referral link copied to clipboard!', 'success');
     }).catch(() => {
@@ -405,7 +415,7 @@
   };
 
   window.copyReferralCode = () => {
-    const code = 'TORPEDO-VIVEK-99';
+    const code = getStudentReferralCode();
     navigator.clipboard?.writeText(code).then(() => {
       if (window.showToast) window.showToast('Referral code copied to clipboard!', 'success');
     }).catch(() => {
@@ -414,12 +424,12 @@
   };
 
   window.shareReferralWhatsApp = () => {
-    const text = encodeURIComponent('Join me on Torpedo Learning to prepare for top engineering roles! Use my invite link to get ₹500 credits: https://torpedo.learning/join?ref=TORPEDO-VIVEK-99');
+    const text = encodeURIComponent(`Join me on Torpedo Learning to prepare for top engineering roles! Use my invite link to get ₹500 credits: ${getStudentReferralLink()}`);
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
   };
 
   window.shareReferralLinkedIn = () => {
-    const url = encodeURIComponent('https://torpedo.learning/join?ref=TORPEDO-VIVEK-99');
+    const url = encodeURIComponent(getStudentReferralLink());
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
   };
 
@@ -429,7 +439,7 @@
     if (!input || !input.value) return;
     const email = input.value.trim();
     const subject = encodeURIComponent('Join me on Torpedo Learning');
-    const body = encodeURIComponent('Here is my Torpedo Learning invite link: https://torpedo.learning/join?ref=TORPEDO-VIVEK-99');
+    const body = encodeURIComponent(`Here is my Torpedo Learning invite link: ${getStudentReferralLink()}`);
     window.location.href = `mailto:${encodeURIComponent(email)}?subject=${subject}&body=${body}`;
   };
 
@@ -663,7 +673,7 @@
       readTime: '6 MIN READ',
       title: 'Understanding JavaScript Event Loop, Microtasks & Web Workers Deeply',
       summary: 'Demystifying the call stack, task queues, and render steps to guarantee zero jank and fluid 60fps animations.',
-      author: 'Vivek Yadav',
+      author: 'Aditya Roy',
       authorRole: 'Student Lead & Contributor',
       date: 'Oct 29, 2026',
       content: `
@@ -1244,10 +1254,13 @@
     const text = input ? input.value.trim() : '';
     if (!text) return;
 
+    const u = JSON.parse(localStorage.getItem('torpedo_user') || '{}');
+    const authorName = (u.name || 'Student') + ' (You)';
+
     const msgs = getCohortMessages();
     msgs.unshift({
       id: 'cm-' + Date.now(),
-      author: 'Vivek Yadav (You)',
+      author: authorName,
       time: 'Just now',
       text: text
     });

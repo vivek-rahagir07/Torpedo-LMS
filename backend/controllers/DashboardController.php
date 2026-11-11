@@ -65,7 +65,7 @@ class DashboardController {
         }
 
         // ---------------------------------------------------------------------
-        // 2. EMPLOYER / RECRUITER (Vivek - Corporate Partner)
+        // 2. EMPLOYER / RECRUITER (Corporate Partner)
         // ---------------------------------------------------------------------
         if ($role === 'employer') {
             $stmt = $pdo->prepare("SELECT * FROM employer_profiles WHERE email = ?");
@@ -75,7 +75,7 @@ class DashboardController {
             return [
                 'success' => true,
                 'role' => 'employer',
-                'fullName' => 'Vivek',
+                'fullName' => 'Talent Partner',
                 'company' => $prof['company_name'] ?? 'Corporate Partner',
                 'designation' => $prof['recruiter_designation'] ?? 'Corporate Partner Talent Lead',
                 'industry' => $prof['industry'] ?? 'Technology & Services',
@@ -103,77 +103,90 @@ class DashboardController {
         }
 
         // ---------------------------------------------------------------------
-        // 3. STUDENT (Vivek Yadav - Real Database Metrics & Academic Dossier)
+        // 3. STUDENT (Real Database Metrics & Academic Dossier)
         // ---------------------------------------------------------------------
-        $studentEmail = $email ?: 'vivek.hr362007@gmail.com';
+        $studentEmail = strtolower(trim($email ?: ''));
+        if (empty($studentEmail)) {
+            return [
+                'success' => false,
+                'message' => 'Student email is required.'
+            ];
+        }
+
         $stmt = $pdo->prepare("SELECT * FROM candidate_profiles WHERE email = ?");
         $stmt->execute([$studentEmail]);
         $prof = $stmt->fetch();
 
+        $uStmt = $pdo->prepare("SELECT name, email, avatar_url FROM users WHERE email = ?");
+        $uStmt->execute([$studentEmail]);
+        $usr = $uStmt->fetch();
+
+        $fullName = $prof ? trim("{$prof['first_name']} {$prof['last_name']}") : ($usr['name'] ?? 'Student');
+
         // Real counts from database
         $enrollStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM enrollments WHERE user_email = ?");
         $enrollStmt->execute([$studentEmail]);
-        $enrolledCount = (int)($enrollStmt->fetch()['cnt'] ?? 3);
+        $enrolledCount = (int)($enrollStmt->fetch()['cnt'] ?? 0);
 
         $solvedStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM user_solved_problems WHERE user_email = ?");
         $solvedStmt->execute([$studentEmail]);
-        $solvedCount = (int)($solvedStmt->fetch()['cnt'] ?? 14);
+        $solvedCount = (int)($solvedStmt->fetch()['cnt'] ?? 0);
 
         $appStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM job_applications WHERE user_email = ?");
         $appStmt->execute([$studentEmail]);
-        $appsCount = (int)($appStmt->fetch()['cnt'] ?? 1);
+        $appsCount = (int)($appStmt->fetch()['cnt'] ?? 0);
 
         $teamStmt = $pdo->prepare("SELECT COUNT(*) as cnt FROM hackathon_teams WHERE lead_email = ?");
         $teamStmt->execute([$studentEmail]);
-        $teamsCount = (int)($teamStmt->fetch()['cnt'] ?? 1);
+        $teamsCount = (int)($teamStmt->fetch()['cnt'] ?? 0);
 
         return [
             'success' => true,
             'role' => 'student',
-            'fullName' => $prof ? "{$prof['first_name']} {$prof['last_name']}" : 'Vivek Yadav',
+            'fullName' => $fullName,
             'email' => $prof['email'] ?? $studentEmail,
-            'college' => $prof['grad_college'] ?? 'Gujarat Technological University (GTU), Ahmedabad',
-            'degree' => $prof['grad_degree'] ?? 'B.Tech in Computer Science & Engineering',
-            'branch' => $prof['grad_branch'] ?? 'Computer Science & Engineering',
-            'cgpa' => $prof['grad_cgpa'] ?? '8.85 CGPA',
-            'track' => $prof['track'] ?? 'Full-Stack Distributed Systems & Microservices',
-            'avatarUrl' => $prof['avatar_path'] ?? 'assets/avatars/robot1.svg',
+            'college' => $prof['grad_college'] ?? '',
+            'degree' => $prof['grad_degree'] ?? 'Student',
+            'branch' => $prof['grad_branch'] ?? '',
+            'cgpa' => $prof['grad_cgpa'] ?? '',
+            'track' => $prof['track'] ?? 'General Engineering',
+            'avatarUrl' => $prof['avatar_path'] ?? ($usr['avatar_url'] ?? 'assets/avatars/robot1.svg'),
             'metrics' => [
                 ['label' => 'Enrolled Courses', 'val' => (string)$enrolledCount, 'sub' => 'Active Tracks'],
                 ['label' => 'Solved Algorithms', 'val' => "{$solvedCount} / 520", 'sub' => 'Lifecode Benchmark'],
-                ['label' => 'Torpedo Placement Score', 'val' => '640 TRP', 'sub' => 'Top 2.4% LMS Cohort'],
+                ['label' => 'Torpedo Placement Score', 'val' => $solvedCount > 0 ? (string)($solvedCount * 25 + 100) . ' TRP' : 'Unrated', 'sub' => 'LMS Performance'],
                 ['label' => 'Partner Applications', 'val' => "{$appsCount} Active", 'sub' => 'Fast-Track Routing']
             ],
-            'verifiedDocuments' => [
+            'verifiedDocuments' => ($prof && !empty($prof['tenth_cert_path'])) ? [
                 [
-                    'title' => '10th Standard Secondary Marksheet (CBSE)',
+                    'title' => '10th Standard Secondary Marksheet',
                     'filename' => $prof['tenth_cert_path'] ? basename($prof['tenth_cert_path']) : 'tenth_marksheet.pdf',
-                    'meta' => ($prof['tenth_percentage'] ?? '94.6%') . ' (' . ($prof['tenth_board'] ?? 'CBSE') . ')',
+                    'meta' => ($prof['tenth_percentage'] ?? '') . ' (' . ($prof['tenth_board'] ?? '') . ')',
                     'badge' => '✓ VERIFIED',
-                    'url' => $prof['tenth_cert_path'] ?? 'storage/uploads/certificates/tenth_marksheet.pdf'
+                    'url' => $prof['tenth_cert_path']
                 ],
                 [
-                    'title' => '12th Standard Higher Secondary Marksheet (CBSE)',
+                    'title' => '12th Standard Higher Secondary Marksheet',
                     'filename' => $prof['twelfth_cert_path'] ? basename($prof['twelfth_cert_path']) : '12th_marksheet.pdf',
-                    'meta' => ($prof['twelfth_percentage'] ?? '92.8%') . ' (' . ($prof['twelfth_stream'] ?? 'Science PCM') . ')',
+                    'meta' => ($prof['twelfth_percentage'] ?? '') . ' (' . ($prof['twelfth_stream'] ?? '') . ')',
                     'badge' => '✓ VERIFIED',
-                    'url' => $prof['twelfth_cert_path'] ?? 'storage/uploads/certificates/12th_marksheet.pdf'
+                    'url' => $prof['twelfth_cert_path']
                 ],
                 [
-                    'title' => 'Graduation Degree / Transcript Record (GTU)',
+                    'title' => 'Graduation Degree / Transcript Record',
                     'filename' => $prof['grad_cert_path'] ? basename($prof['grad_cert_path']) : 'degree_certificate.pdf',
-                    'meta' => ($prof['grad_cgpa'] ?? '8.85 CGPA') . ' (' . ($prof['grad_college'] ?? 'GTU Ahmedabad') . ')',
+                    'meta' => ($prof['grad_cgpa'] ?? '') . ' (' . ($prof['grad_college'] ?? '') . ')',
                     'badge' => '✓ VERIFIED',
-                    'url' => $prof['grad_cert_path'] ?? 'storage/uploads/certificates/degree_certificate.pdf'
+                    'url' => $prof['grad_cert_path']
                 ],
                 [
                     'title' => 'Official Placement Dossier & Resume (PDF)',
-                    'filename' => $prof['resume_path'] ? basename($prof['resume_path']) : 'vivek_yadav_resume.pdf',
+                    'filename' => $prof['resume_path'] ? basename($prof['resume_path']) : 'resume.pdf',
                     'meta' => 'Active ATS Verified Document',
                     'badge' => 'ACTIVE ATS',
-                    'url' => $prof['resume_path'] ?? 'storage/uploads/resumes/vivek_yadav_resume.pdf'
+                    'url' => $prof['resume_path']
                 ]
-            ]
+            ] : []
         ];
     }
 }

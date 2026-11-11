@@ -22,7 +22,7 @@ class ProblemsController {
         $difficulty = trim($params['difficulty'] ?? 'all');
         $category = trim($params['category'] ?? 'all');
         $status = trim($params['status'] ?? 'all');
-        $userEmail = trim($params['email'] ?? 'vivek.hr362007@gmail.com');
+        $userEmail = trim($params['email'] ?? '');
 
         $where = ["1=1"];
         $bindings = [];
@@ -271,7 +271,7 @@ class ProblemsController {
         $problemId = (int)($data['problem_id'] ?? 1);
         $lang = strtolower(trim($data['language'] ?? 'python3'));
         $code = trim($data['code'] ?? '');
-        $userEmail = trim($data['user_email'] ?? 'vivek.hr362007@gmail.com');
+        $userEmail = trim($data['user_email'] ?? '');
 
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("SELECT testcases, hidden_testcases, title, difficulty FROM problems WHERE id = ?");

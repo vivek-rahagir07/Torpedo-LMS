@@ -158,36 +158,12 @@ class Database {
             ]);
         }
 
-        // 2. Seed Default Verified Accounts (Vivek Yadav Student, Faculty, Employer, Super Admin)
+        // 2. Seed Default Verified Accounts (Faculty, Employer, Super Admin)
         $pwHash = password_hash('password123', PASSWORD_BCRYPT);
         $adminPass = 'Beenu@01142683311#';
         $adminPwHash = password_hash($adminPass, PASSWORD_BCRYPT);
 
-        // 1. STUDENT ACCOUNT (Vivek Yadav - GTU CSE 2026)
-        $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
-            ->execute([1, 'Vivek Yadav', 'vivek.hr362007@gmail.com', $pwHash, 'student', 'assets/avatars/robot1.svg']);
-        
-        $pdo->prepare("INSERT OR REPLACE INTO candidate_profiles (id, user_id, first_name, last_name, email, phone, dob, gender, address, city, state, pincode, avatar_path, tenth_school, tenth_board, tenth_year, tenth_percentage, tenth_cert_path, twelfth_college, twelfth_board, twelfth_stream, twelfth_year, twelfth_percentage, twelfth_cert_path, grad_degree, grad_college, grad_branch, grad_year, grad_cgpa, grad_cert_path, resume_path, id_proof_path, track, target_role, verification_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-            ->execute([
-                1, 1, 'Vivek', 'Yadav', 'vivek.hr362007@gmail.com', '+91 9876543210', '2004-03-15', 'male',
-                'Chandkheda Campus Corridor', 'Ahmedabad', 'Gujarat', '382424',
-                'assets/avatars/robot1.svg',
-                'Delhi Public School (DPS)', 'CBSE', 2020, '94.6%', 'storage/uploads/certificates/tenth_marksheet.pdf',
-                'Kendriya Vidyalaya', 'CBSE', 'Science (PCM & Computer Science)', 2022, '92.8%', 'storage/uploads/certificates/12th_marksheet.pdf',
-                'B.Tech in Computer Science & Engineering', 'Gujarat Technological University (GTU), Ahmedabad', 'Computer Science & Engineering', 2026, '8.85 CGPA', 'storage/uploads/certificates/degree_certificate.pdf',
-                'storage/uploads/resumes/vivek_yadav_resume.pdf', 'storage/uploads/id_proofs/gtu_student_id.pdf',
-                'Full-Stack Distributed Systems & Microservices', 'Backend Distributed Systems Engineer', 'verified'
-            ]);
-
-        // Student Course Enrollments (Vivek Yadav)
-        $pdo->prepare("INSERT OR REPLACE INTO enrollments (id, user_email, course_id, progress_percentage) VALUES (?, ?, ?, ?)")
-            ->execute([1, 'vivek.hr362007@gmail.com', 'c1', 30]);
-        $pdo->prepare("INSERT OR REPLACE INTO enrollments (id, user_email, course_id, progress_percentage) VALUES (?, ?, ?, ?)")
-            ->execute([2, 'vivek.hr362007@gmail.com', 'c2', 70]);
-        $pdo->prepare("INSERT OR REPLACE INTO enrollments (id, user_email, course_id, progress_percentage) VALUES (?, ?, ?, ?)")
-            ->execute([3, 'vivek.hr362007@gmail.com', 'c3', 100]);
-
-        // 2. FACULTY ACCOUNT (Prof. Dr. Vikram Malhotra)
+        // 1. FACULTY ACCOUNT (Prof. Dr. Vikram Malhotra)
         $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
             ->execute([2, 'Prof. Dr. Vikram Malhotra', 'faculty@torpedo.edu', $pwHash, 'instructor', 'assets/avatars/robot1.svg']);
 
@@ -200,13 +176,13 @@ class Database {
                 'lead_instructor', 'council_approved'
             ]);
 
-        // 3. EMPLOYER ACCOUNT (Vivek - Razorpay Talent Acquisition)
+        // 2. EMPLOYER ACCOUNT (Razorpay Talent Acquisition)
         $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
-            ->execute([3, 'Vivek (Razorpay)', 'recruiter@torpedo.com', $pwHash, 'employer', 'assets/employer_avatar.jpg']);
+            ->execute([3, 'Razorpay Talent Partner', 'recruiter@torpedo.com', $pwHash, 'employer', 'assets/employer_avatar.jpg']);
 
         $pdo->prepare("INSERT OR REPLACE INTO employer_profiles (id, user_id, company_name, company_website, recruiter_name, recruiter_designation, email, phone, hq_location, industry, company_size, cin_gst_number, incorporation_cert_path, hiring_roles, hiring_volume, ctc_bracket, required_tech_stack, partnership_mode, verification_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
             ->execute([
-                1, 3, 'Razorpay Software Private Limited', 'https://razorpay.com', 'Vivek', 'Head of Campus & Engineering Talent',
+                1, 3, 'Razorpay Software Private Limited', 'https://razorpay.com', 'Talent Team', 'Head of Campus & Engineering Talent',
                 'recruiter@torpedo.com', '+91 9876543210', 'Bengaluru, Karnataka',
                 'Fintech & Enterprise Payment Infrastructure', '2,500+ Employees', 'U72200KA2013PTC097389',
                 'storage/uploads/employers/company_incorporation_cert.pdf',
@@ -216,7 +192,7 @@ class Database {
                 'tier1_partner', 'tier1_partner'
             ]);
 
-        // 4. SUPER ADMIN ACCOUNT (gettingroots@gmail.com - Full Authority)
+        // 3. SUPER ADMIN ACCOUNT (gettingroots@gmail.com - Full Authority)
         $pdo->prepare("INSERT OR REPLACE INTO users (id, name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, ?, ?, ?)")
             ->execute([4, 'Super Admin', 'gettingroots@gmail.com', $adminPwHash, 'admin', 'assets/admin_avatar.jpg']);
 
@@ -340,11 +316,7 @@ class Database {
             ]);
         }
 
-        // 6. Seed Application for Vivek Yadav (Razorpay - Applied)
-        $pdo->prepare("INSERT OR REPLACE INTO job_applications (id, job_id, user_email, candidate_name, match_score, status) VALUES (?, ?, ?, ?, ?, ?)")
-            ->execute([1, 'job-rzp-01', 'vivek.hr362007@gmail.com', 'Vivek Yadav', 98, 'Applied']);
-
-        // 7. Seed Verified Hackathons
+        // 6. Seed Verified Hackathons
         $hacks = [
             [
                 'id' => 'hack-polygon-01',
@@ -412,18 +384,5 @@ class Database {
                 $h['duration'], $h['participants_count'], $h['status'], $h['description']
             ]);
         }
-
-        // 8. Seed Team Registration for Vivek Yadav
-        $pdo->prepare("INSERT OR REPLACE INTO hackathon_teams (id, hackathon_id, team_name, lead_email, lead_name, members_json, project_title, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
-            ->execute([
-                1, 'hack-polygon-01', 'ZK-Rollup Architects', 'vivek.hr362007@gmail.com', 'Vivek Yadav',
-                json_encode([
-                    ['name' => 'Vivek Yadav (Lead)', 'role' => 'Smart Contract & Systems Architect', 'roll' => '22002170310065'],
-                    ['name' => 'Aryan Patel', 'role' => 'Zero-Knowledge Proof Engineer', 'roll' => '22002170310082'],
-                    ['name' => 'Diya Shah', 'role' => 'Full-Stack Frontend & Web3.js', 'roll' => '22002170310041']
-                ]),
-                'ZK-Shield: Privacy-Preserving Micropayments Protocol',
-                'Confirmed'
-            ]);
     }
 }

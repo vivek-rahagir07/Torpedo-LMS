@@ -365,8 +365,8 @@ window.handleVerifyOtpClick = async function() {
       verifyBtn.style.background = '#059669';
     }
 
-    // Direct Login with verified OTP session
-    if (res && res.is_login && res.token && res.user) {
+    // Direct Login with verified OTP session (ONLY in login mode!)
+    if (currentAuthMode !== 'signup' && res && res.is_login && res.token && res.user) {
       localStorage.setItem('torpedo_token', res.token);
       localStorage.setItem('torpedo_user', JSON.stringify({
         id: res.user.id,
@@ -386,7 +386,7 @@ window.handleVerifyOtpClick = async function() {
       return;
     }
 
-    showToast('Email verified successfully! You may now complete registration.', 'success');
+    showToast('Email verified successfully! You may now create your password to complete registration.', 'success');
     const passInput = document.getElementById('input-password');
     if (passInput) passInput.focus();
   } catch (err) {
@@ -1136,6 +1136,15 @@ function updateAdminRoleNote() {
   const otpRow = document.getElementById('auth-otp-row');
   if (otpRow && admin) {
     otpRow.style.display = 'none';
+  }
+  const otpMsg = document.getElementById('otp-status-message');
+  if (otpMsg && admin) {
+    otpMsg.style.display = 'none';
+    otpMsg.innerHTML = '';
+  }
+  const otpInp = document.getElementById('input-otp-code');
+  if (otpInp && admin) {
+    otpInp.value = '';
   }
 }
 async function handleAdminAccess({name, email, password, isSignUp}) {

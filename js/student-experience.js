@@ -23,43 +23,52 @@ function completed(i){
   return tracks[i].lessons.filter((_,n)=>state.completed.includes(`${i}:${n}`)).length;
 }
 function go(tab){if(tab==='settings'||tab==='profile'){if(typeof openProfileDossierModal==='function'){openProfileDossierModal();}return;}if(typeof switchPortalTab==='function')switchPortalTab(tab);document.title=({planner:'Study planner'}[tab]||document.title.replace(' · Torpedo',''))+' · Torpedo';if(tab==='planner')renderPlanner();}
-function tasksMarkup(limit=99){const rows=state.tasks.slice().sort((a,b)=>Number(a.done)-Number(b.done)).slice(0,limit);return rows.length?rows.map(t=>`<div class="st-task ${t.done?'done':''}"><input type="checkbox" aria-label="Complete ${esc(t.text)}" data-check="${esc(t.id)}" ${t.done?'checked':''}><div><div class="st-task-title">${esc(t.text)}</div><small>${t.date?esc(new Date(t.date+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})):'No due date'}</small></div><button class="st-link" data-delete="${esc(t.id)}" aria-label="Delete task">×</button></div>`).join(''):'<div class="st-empty">A little room to breathe.<br>Add your next learning task.</div>';}
+function tasksMarkup(limit=99){
+  const rows=(state.tasks||[]).filter(Boolean).slice().sort((a,b)=>Number(Boolean(a?.done))-Number(Boolean(b?.done))).slice(0,limit);
+  return rows.length?rows.map(t=>`<div class="st-task ${t.done?'done':''}"><input type="checkbox" aria-label="Complete ${esc(t.text||'task')}" data-check="${esc(t.id)}" ${t.done?'checked':''}><div><div class="st-task-title">${esc(t.text||'Task')}</div><small>${t.date?esc(new Date(t.date+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})):'No due date'}</small></div><button class="st-link" data-delete="${esc(t.id)}" aria-label="Delete task">×</button></div>`).join(''):'<div class="st-empty">A little room to breathe.<br>Add your next learning task.</div>';
+}
 function weekMarkup(){const today=new Date(),start=new Date(today);start.setDate(today.getDate()-((today.getDay()+6)%7));return Array.from({length:7},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);return `<div class="st-day ${d.toDateString()===today.toDateString()?'today':''}">${['M','T','W','T','F','S','S'][i]}<strong>${d.getDate()}</strong></div>`;}).join('');}
-function thisWeekCount(){const start=new Date();start.setHours(0,0,0,0);start.setDate(start.getDate()-((start.getDay()+6)%7));return state.activity.filter(x=>x.kind==='lesson'&&new Date(x.date)>=start).length;}
+function thisWeekCount(){
+  const start=new Date();
+  start.setHours(0,0,0,0);
+  start.setDate(start.getDate()-((start.getDay()+6)%7));
+  return (state.activity||[]).filter(x=>x && x.kind==='lesson' && x.date && new Date(x.date)>=start).length;
+}
 function render(){
-  const container = $('#student-home');
-  if (!container) return;
+  try {
+    const container = $('#student-home');
+    if (!container) return;
 
-  const u=read('torpedo_user',{});
-  const name=u.name||(u.email ? u.email.split('@')[0] : 'Vivek');
-  const first=name.split(' ')[0] || 'Vivek';
-  const total=state.completed.length;
-  const weekly=thisWeekCount();
-  const goalPct=Math.min(100,Math.round((weekly/state.goal)*100));
+    const u=read('torpedo_user',{});
+    const name=u.name||(u.email ? u.email.split('@')[0] : 'Vivek');
+    const first=name.split(' ')[0] || 'Vivek';
+    const total=(state.completed||[]).length;
+    const weekly=thisWeekCount();
+    const goalPct=Math.min(100,Math.round((weekly/state.goal)*100));
 
-  let bookedCalls=[];
-  try{bookedCalls=JSON.parse(localStorage.getItem('torpedo_mentorship_bookings')||'[]');}catch(e){}
-  const nextCall=bookedCalls[0];
+    let bookedCalls=[];
+    try{bookedCalls=JSON.parse(localStorage.getItem('torpedo_mentorship_bookings')||'[]');}catch(e){}
+    const nextCall=bookedCalls && bookedCalls[0] ? bookedCalls[0] : null;
 
-  // Get real enrolled tracks for this student
-  let enrolledIds=[];
-  try{enrolledIds=JSON.parse(localStorage.getItem('torpedo_enrolled_courses')||'[]');}catch(e){}
-  let userTracks=tracks.filter((t,idx)=>enrolledIds.includes(t.title)||enrolledIds.includes(String(idx))||enrolledIds.includes(t.id));
-  // Default to standard core curriculum tracks for immediate out-of-the-box learning experience
-  if (!userTracks.length) {
-    userTracks = tracks;
-  }
+    // Get real enrolled tracks for this student
+    let enrolledIds=[];
+    try{enrolledIds=JSON.parse(localStorage.getItem('torpedo_enrolled_courses')||'[]');}catch(e){}
+    let userTracks=tracks.filter((t,idx)=>enrolledIds.includes(t.title)||enrolledIds.includes(String(idx))||enrolledIds.includes(t.id));
+    // Default to standard core curriculum tracks for immediate out-of-the-box learning experience
+    if (!userTracks.length) {
+      userTracks = tracks;
+    }
 
-  const primaryTrack = userTracks[0] || tracks[0];
-  const compCount = completed(0);
-  const totalLessons = primaryTrack.lessons.length;
-  const currentLessonIdx = Math.min(compCount, totalLessons - 1);
-  const currentLessonName = primaryTrack.lessons[currentLessonIdx]?.[0] || 'Think in components';
-  const heroDesc = compCount === totalLessons
-    ? "All 4 lessons completed. Revisit any lesson to review."
-    : `Lesson ${compCount + 1} of ${totalLessons}: ${currentLessonName}`;
+    const primaryTrack = userTracks[0] || tracks[0];
+    const compCount = completed(0);
+    const totalLessons = primaryTrack?.lessons?.length || 4;
+    const currentLessonIdx = Math.min(compCount, totalLessons - 1);
+    const currentLessonName = primaryTrack?.lessons?.[currentLessonIdx]?.[0] || 'Think in components';
+    const heroDesc = compCount === totalLessons
+      ? "All 4 lessons completed. Revisit any lesson to review."
+      : `Lesson ${compCount + 1} of ${totalLessons}: ${currentLessonName}`;
 
-  container.innerHTML=`
+    container.innerHTML=`
     <div class="st-page">
       <!-- Topline: Executive Greeting & Live Badges -->
       <div class="st-exec-topline">
@@ -323,8 +332,29 @@ function render(){
       </div>
     </div>
   `;
-  const badge = $('#notif-count-badge');
-  if (badge) badge.textContent=state.seen?'0':String(state.activity.length);
+    const badge = $('#notif-count-badge');
+    if (badge) badge.textContent=state.seen?'0':String(state.activity.length);
+  } catch (err) {
+    console.error('[Student Experience Render Exception]', err);
+    const container = $('#student-home');
+    if (container && !container.innerHTML.trim()) {
+      container.innerHTML = `
+        <div class="st-page" style="padding: 24px;">
+          <div class="st-exec-topline" style="margin-bottom: 20px;">
+            <div>
+              <div class="st-eyebrow">YOUR STUDENT WORKSPACE</div>
+              <h1 class="st-exec-title">Welcome to Torpedo Learning</h1>
+              <p class="st-muted">Your personal developer workspace and coursework center.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 12px; margin-top: 16px;">
+            <button type="button" class="st-btn" onclick="switchPortalTab('courses')">Explore Courses →</button>
+            <button type="button" class="st-btn secondary" onclick="switchPortalTab('lifecode')">Open Lifecode IDE &lt;/&gt;</button>
+          </div>
+        </div>
+      `;
+    }
+  }
 }
 
 let plannerView='today';
@@ -421,13 +451,15 @@ function initExperience() {
    });
  } catch(e){}
 
- render();
- renderPlanner();
- renderSettings();
+ try { render(); } catch(e) { console.warn('Render error:', e); }
+ try { renderPlanner(); } catch(e) { console.warn('Planner error:', e); }
+ try { renderSettings(); } catch(e) { console.warn('Settings error:', e); }
 
- const hash=location.hash.slice(1).split(/[?&/]/)[0];
- if(!hash)go('home');
- else if(['planner','settings'].includes(hash))go(hash);
+ try {
+   const hash=location.hash.slice(1).split(/[?&/]/)[0];
+   if(!hash)go('home');
+   else if(['planner','settings'].includes(hash))go(hash);
+ } catch(e) {}
 
  window.addEventListener('hashchange',()=>{
    const h=location.hash.slice(1);

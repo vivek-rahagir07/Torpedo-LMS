@@ -5009,17 +5009,17 @@ console.log("Values:", [2, 7, 11, 15][result[0]], "+", [2, 7, 11, 15][result[1]]
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadStudentSession();
-      renderPersonalBookshelf();
-      if (typeof initQuizzesPortal === 'function') {
-        initQuizzesPortal();
-      }
-      if (typeof initJobsPortal === 'function') {
-        initJobsPortal();
-      }
-      if (typeof initHackathonsPortal === 'function') {
-        initHackathonsPortal();
-      }
+      try { loadStudentSession(); } catch(e) { console.warn('Student session init note:', e); }
+      try { renderPersonalBookshelf(); } catch(e) { console.warn('Bookshelf init note:', e); }
+      try {
+        if (typeof initQuizzesPortal === 'function') initQuizzesPortal();
+      } catch(e) { console.warn('Quizzes portal init note:', e); }
+      try {
+        if (typeof initJobsPortal === 'function') initJobsPortal();
+      } catch(e) { console.warn('Jobs portal init note:', e); }
+      try {
+        if (typeof initHackathonsPortal === 'function') initHackathonsPortal();
+      } catch(e) { console.warn('Hackathons portal init note:', e); }
 
       // Direct hash tab routing (#home, #courses, #library, #certifications, #lifecode, #quizzes, #jobs, #hackathons)
       const parseHash = () => (window.location.hash || '').replace(/^#/, '').split(/[?&/]/)[0].toLowerCase();

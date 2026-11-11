@@ -366,15 +366,19 @@ class ProfileController {
             ]);
         }
 
-        // Also ensure user row exists and has user name
+        // Also ensure user row exists and has user name and latest password
         $uCheck = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $uCheck->execute([$email]);
         $uRow = $uCheck->fetch();
         if ($uRow) {
             $pdo->prepare("UPDATE users SET name = ? WHERE id = ?")->execute(["{$first} {$last}", $uRow['id']]);
+            if (!empty($data['password'])) {
+                $pwHash = password_hash($data['password'], PASSWORD_BCRYPT);
+                $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?")->execute([$pwHash, $uRow['id']]);
+            }
         } else {
-            $randPw = bin2hex(random_bytes(16));
-            $pwHash = password_hash($randPw, PASSWORD_BCRYPT);
+            $rawPw = !empty($data['password']) ? $data['password'] : bin2hex(random_bytes(16));
+            $pwHash = password_hash($rawPw, PASSWORD_BCRYPT);
             $pdo->prepare("INSERT INTO users (name, email, password_hash, role, avatar_url) VALUES (?, ?, ?, 'student', ?)")
                 ->execute(["{$first} {$last}", $email, $pwHash, $avatarPath ?: 'assets/avatars/robot1.svg']);
         }

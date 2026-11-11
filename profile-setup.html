@@ -1304,6 +1304,11 @@
             fd.append('resume_pdf', resumeInput.files[0]);
           }
 
+          const regPw = sessionStorage.getItem('torpedo_reg_pw');
+          if (regPw) {
+            fd.append('password', regPw);
+          }
+
           const setupRes = await TorpedoAPI.setupProfile(fd);
           if (setupRes && setupRes.token) {
             localStorage.setItem('torpedo_token', setupRes.token);

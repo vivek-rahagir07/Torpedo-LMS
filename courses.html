@@ -194,6 +194,14 @@
           <span class="icon-badge-num">2</span>
         </div>
 
+        <!-- Student Profile Avatar with Online Dot -->
+        <div class="rail-avatar-wrap" onclick="openStudentDossierModal()" title="Student Profile (Online)" style="margin-left: 4px; width: 28px; height: 28px; cursor: pointer;">
+          <div class="rail-avatar-circle" style="width: 26px; height: 26px;">
+            <img id="top-header-avatar" src="assets/avatars/robot1.svg" alt="Student" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.outerHTML='<span class=\'rail-avatar-initials\'>ST</span>'">
+          </div>
+          <span class="rail-avatar-dot" style="bottom: 0px; right: 0px;"></span>
+        </div>
+
         <!-- Logout Button -->
         <button type="button" onclick="handleLogout()" class="header-action-btn" title="Sign Out / Log Out" style="background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; font-weight: 600; padding: 6px 13px; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; margin-left: 6px; transition: all 0.15s;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>

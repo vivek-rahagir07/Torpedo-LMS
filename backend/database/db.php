@@ -8,6 +8,38 @@ class Database {
 
     public static function getConnection(): PDO {
         if (self::$instance === null) {
+            $configFile = __DIR__ . '/config.php';
+            if (file_exists($configFile)) {
+                require_once $configFile;
+            }
+
+            $driver = defined('DB_DRIVER') ? strtolower(DB_DRIVER) : (getenv('DB_DRIVER') ?: 'sqlite');
+
+            if ($driver === 'mysql') {
+                $host = defined('DB_HOST') ? DB_HOST : (getenv('DB_HOST') ?: 'localhost');
+                $dbname = defined('DB_NAME') ? DB_NAME : (getenv('DB_NAME') ?: 'u286523491_torpedo');
+                $user = defined('DB_USER') ? DB_USER : (getenv('DB_USER') ?: 'u286523491_beenutaneja');
+                $pass = defined('DB_PASS') ? DB_PASS : (getenv('DB_PASS') ?: '');
+                $port = defined('DB_PORT') ? DB_PORT : 3306;
+
+                try {
+                    self::$instance = new PDO(
+                        "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4",
+                        $user,
+                        $pass,
+                        [
+                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                            PDO::ATTR_EMULATE_PREPARES => false,
+                        ]
+                    );
+                    return self::$instance;
+                } catch (Throwable $e) {
+                    error_log("[TorpedoDB] MySQL connection note: " . $e->getMessage() . " - falling back to SQLite.");
+                }
+            }
+
+            // Default / Fallback: SQLite
             $dbDir = __DIR__;
             $dbPath = $dbDir . '/torpedo.sqlite';
             $isNew = !file_exists($dbPath);

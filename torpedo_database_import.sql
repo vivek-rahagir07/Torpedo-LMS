@@ -1,7 +1,7 @@
 -- ============================================================
 -- Torpedo LMS - Production MySQL Database Export for Hostinger
+-- Hostinger Database: u286523491_torpedo_lms
 -- Compatible with MySQL 5.7+ / MySQL 8.0+ / MariaDB
--- Database: u286523491_torpedo
 -- ============================================================
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -12,15 +12,16 @@ SET NAMES utf8mb4;
 -- Table structure and data for `users`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255) NOT NULL UNIQUE,
+  `email` VARCHAR(255) NOT NULL,
   `password_hash` VARCHAR(255) NOT NULL,
-  `role` VARCHAR(50) NOT NULL DEFAULT 'student',
-  `avatar_url` VARCHAR(255) DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `role` VARCHAR(255) NOT NULL DEFAULT 'student',
+  `avatar_url` VARCHAR(255) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY `uniq_users_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `role`, `avatar_url`, `created_at`, `updated_at`) VALUES
@@ -34,57 +35,57 @@ INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `role`, `avatar_url
 -- Table structure and data for `candidate_profiles`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `candidate_profiles`;
-CREATE TABLE IF NOT EXISTS `candidate_profiles` (
+CREATE TABLE `candidate_profiles` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `user_id` INT DEFAULT NULL,
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(255) NOT NULL UNIQUE,
-  `phone_country_code` VARCHAR(10) DEFAULT '+91',
-  `phone` VARCHAR(30) NOT NULL,
-  `dob` VARCHAR(50) DEFAULT NULL,
-  `gender` VARCHAR(30) DEFAULT NULL,
-  `address` TEXT DEFAULT NULL,
-  `city` VARCHAR(100) DEFAULT NULL,
-  `state` VARCHAR(100) DEFAULT NULL,
-  `pincode` VARCHAR(20) DEFAULT NULL,
-  `linkedin_url` VARCHAR(255) DEFAULT NULL,
-  `github_url` VARCHAR(255) DEFAULT NULL,
-  `avatar_path` VARCHAR(255) DEFAULT NULL,
-  `tenth_school` VARCHAR(255) DEFAULT NULL,
-  `tenth_board` VARCHAR(100) DEFAULT NULL,
-  `tenth_year` INT DEFAULT NULL,
-  `tenth_percentage` VARCHAR(20) DEFAULT NULL,
-  `tenth_cert_path` VARCHAR(255) DEFAULT NULL,
-  `twelfth_college` VARCHAR(255) DEFAULT NULL,
-  `twelfth_board` VARCHAR(100) DEFAULT NULL,
-  `twelfth_stream` VARCHAR(100) DEFAULT NULL,
-  `twelfth_year` INT DEFAULT NULL,
-  `twelfth_percentage` VARCHAR(20) DEFAULT NULL,
-  `twelfth_cert_path` VARCHAR(255) DEFAULT NULL,
-  `grad_degree` VARCHAR(150) DEFAULT NULL,
-  `grad_college` VARCHAR(255) DEFAULT NULL,
-  `grad_branch` VARCHAR(150) DEFAULT NULL,
-  `grad_year` INT DEFAULT NULL,
-  `grad_cgpa` VARCHAR(20) DEFAULT NULL,
-  `grad_cert_path` VARCHAR(255) DEFAULT NULL,
-  `has_postgrad` TINYINT DEFAULT 0,
-  `postgrad_degree` VARCHAR(150) DEFAULT NULL,
-  `postgrad_college` VARCHAR(255) DEFAULT NULL,
-  `postgrad_branch` VARCHAR(150) DEFAULT NULL,
-  `postgrad_year` INT DEFAULT NULL,
-  `postgrad_cgpa` VARCHAR(20) DEFAULT NULL,
-  `postgrad_cert_path` VARCHAR(255) DEFAULT NULL,
-  `resume_path` VARCHAR(255) DEFAULT NULL,
-  `id_proof_path` VARCHAR(255) DEFAULT NULL,
-  `track` VARCHAR(255) DEFAULT NULL,
-  `target_role` VARCHAR(150) DEFAULT NULL,
-  `immediate_availability` VARCHAR(50) DEFAULT 'immediate',
-  `verification_status` VARCHAR(50) DEFAULT 'verified',
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX `idx_cand_user` (`user_id`),
-  INDEX `idx_cand_email` (`email`)
+  `user_id` INT NULL DEFAULT NULL,
+  `first_name` VARCHAR(255) NOT NULL,
+  `last_name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `phone_country_code` LONGTEXT NULL DEFAULT '+91',
+  `phone` VARCHAR(255) NOT NULL,
+  `dob` VARCHAR(255) NULL DEFAULT NULL,
+  `gender` VARCHAR(255) NULL DEFAULT NULL,
+  `address` LONGTEXT NULL DEFAULT NULL,
+  `city` VARCHAR(255) NULL DEFAULT NULL,
+  `state` VARCHAR(255) NULL DEFAULT NULL,
+  `pincode` LONGTEXT NULL DEFAULT NULL,
+  `linkedin_url` VARCHAR(255) NULL DEFAULT NULL,
+  `github_url` VARCHAR(255) NULL DEFAULT NULL,
+  `avatar_path` VARCHAR(255) NULL DEFAULT NULL,
+  `tenth_school` VARCHAR(255) NULL DEFAULT NULL,
+  `tenth_board` VARCHAR(255) NULL DEFAULT NULL,
+  `tenth_year` INT NULL DEFAULT NULL,
+  `tenth_percentage` VARCHAR(255) NULL DEFAULT NULL,
+  `tenth_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `twelfth_college` VARCHAR(255) NULL DEFAULT NULL,
+  `twelfth_board` VARCHAR(255) NULL DEFAULT NULL,
+  `twelfth_stream` VARCHAR(255) NULL DEFAULT NULL,
+  `twelfth_year` INT NULL DEFAULT NULL,
+  `twelfth_percentage` VARCHAR(255) NULL DEFAULT NULL,
+  `twelfth_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `grad_degree` VARCHAR(255) NULL DEFAULT NULL,
+  `grad_college` VARCHAR(255) NULL DEFAULT NULL,
+  `grad_branch` VARCHAR(255) NULL DEFAULT NULL,
+  `grad_year` INT NULL DEFAULT NULL,
+  `grad_cgpa` VARCHAR(255) NULL DEFAULT NULL,
+  `grad_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `has_postgrad` INT NULL DEFAULT 0,
+  `postgrad_degree` VARCHAR(255) NULL DEFAULT NULL,
+  `postgrad_college` VARCHAR(255) NULL DEFAULT NULL,
+  `postgrad_branch` VARCHAR(255) NULL DEFAULT NULL,
+  `postgrad_year` INT NULL DEFAULT NULL,
+  `postgrad_cgpa` VARCHAR(255) NULL DEFAULT NULL,
+  `postgrad_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `resume_path` VARCHAR(255) NULL DEFAULT NULL,
+  `id_proof_path` VARCHAR(255) NULL DEFAULT NULL,
+  `track` VARCHAR(255) NULL DEFAULT NULL,
+  `target_role` VARCHAR(255) NULL DEFAULT NULL,
+  `immediate_availability` VARCHAR(255) NULL DEFAULT 'immediate',
+  `verification_status` VARCHAR(255) NULL DEFAULT 'verified',
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `idx_cand_user` (`user_id`),
+  KEY `idx_cand_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `candidate_profiles` (`id`, `user_id`, `first_name`, `last_name`, `email`, `phone_country_code`, `phone`, `dob`, `gender`, `address`, `city`, `state`, `pincode`, `linkedin_url`, `github_url`, `avatar_path`, `tenth_school`, `tenth_board`, `tenth_year`, `tenth_percentage`, `tenth_cert_path`, `twelfth_college`, `twelfth_board`, `twelfth_stream`, `twelfth_year`, `twelfth_percentage`, `twelfth_cert_path`, `grad_degree`, `grad_college`, `grad_branch`, `grad_year`, `grad_cgpa`, `grad_cert_path`, `has_postgrad`, `postgrad_degree`, `postgrad_college`, `postgrad_branch`, `postgrad_year`, `postgrad_cgpa`, `postgrad_cert_path`, `resume_path`, `id_proof_path`, `track`, `target_role`, `immediate_availability`, `verification_status`, `created_at`, `updated_at`) VALUES
@@ -94,35 +95,38 @@ INSERT INTO `candidate_profiles` (`id`, `user_id`, `first_name`, `last_name`, `e
 -- Table structure and data for `faculty_profiles`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `faculty_profiles`;
-CREATE TABLE IF NOT EXISTS `faculty_profiles` (
+CREATE TABLE `faculty_profiles` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `user_id` INT DEFAULT NULL,
-  `salutation` VARCHAR(50) DEFAULT 'Prof. Dr.',
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(255) NOT NULL UNIQUE,
-  `phone` VARCHAR(30) NOT NULL,
-  `designation` VARCHAR(150) NOT NULL,
+  `user_id` INT NULL DEFAULT NULL,
+  `salutation` VARCHAR(255) NULL DEFAULT 'Prof. Dr.',
+  `first_name` VARCHAR(255) NOT NULL,
+  `last_name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(255) NOT NULL,
+  `designation` VARCHAR(255) NOT NULL,
   `institution` VARCHAR(255) NOT NULL,
-  `department` VARCHAR(150) NOT NULL,
-  `experience_years` VARCHAR(50) NOT NULL,
-  `scholar_url` VARCHAR(255) DEFAULT NULL,
-  `linkedin_url` VARCHAR(255) DEFAULT NULL,
-  `avatar_path` VARCHAR(255) DEFAULT NULL,
+  `department` VARCHAR(255) NOT NULL,
+  `experience_years` VARCHAR(255) NOT NULL,
+  `scholar_url` VARCHAR(255) NULL DEFAULT NULL,
+  `linkedin_url` VARCHAR(255) NULL DEFAULT NULL,
+  `avatar_path` VARCHAR(255) NULL DEFAULT NULL,
   `phd_specialization` VARCHAR(255) NOT NULL,
   `phd_university` VARCHAR(255) NOT NULL,
-  `phd_cert_path` VARCHAR(255) DEFAULT NULL,
-  `masters_degree` VARCHAR(150) DEFAULT NULL,
-  `masters_university` VARCHAR(255) DEFAULT NULL,
-  `masters_cert_path` VARCHAR(255) DEFAULT NULL,
-  `govt_id_type` VARCHAR(50) DEFAULT 'Aadhaar Card',
-  `govt_id_number` VARCHAR(100) DEFAULT NULL,
-  `govt_id_cert_path` VARCHAR(255) DEFAULT NULL,
-  `verification_status` VARCHAR(50) DEFAULT 'verified',
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX `idx_fac_user` (`user_id`),
-  INDEX `idx_fac_email` (`email`)
+  `phd_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `masters_degree` VARCHAR(255) NULL DEFAULT NULL,
+  `bachelors_degree` VARCHAR(255) NULL DEFAULT NULL,
+  `masters_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `appointment_letter_path` VARCHAR(255) NULL DEFAULT NULL,
+  `faculty_cv_path` VARCHAR(255) NULL DEFAULT NULL,
+  `teaching_domains` LONGTEXT NULL DEFAULT NULL,
+  `engagement_type` VARCHAR(255) NULL DEFAULT 'lead_instructor',
+  `sample_video_url` VARCHAR(255) NULL DEFAULT NULL,
+  `bio` LONGTEXT NULL DEFAULT NULL,
+  `verification_status` VARCHAR(255) NULL DEFAULT 'council_approved',
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `idx_fac_user` (`user_id`),
+  KEY `idx_fac_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `faculty_profiles` (`id`, `user_id`, `salutation`, `first_name`, `last_name`, `email`, `phone`, `designation`, `institution`, `department`, `experience_years`, `scholar_url`, `linkedin_url`, `avatar_path`, `phd_specialization`, `phd_university`, `phd_cert_path`, `masters_degree`, `bachelors_degree`, `masters_cert_path`, `appointment_letter_path`, `faculty_cv_path`, `teaching_domains`, `engagement_type`, `sample_video_url`, `bio`, `verification_status`, `created_at`, `updated_at`) VALUES
@@ -132,29 +136,32 @@ INSERT INTO `faculty_profiles` (`id`, `user_id`, `salutation`, `first_name`, `la
 -- Table structure and data for `employer_profiles`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `employer_profiles`;
-CREATE TABLE IF NOT EXISTS `employer_profiles` (
+CREATE TABLE `employer_profiles` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `user_id` INT DEFAULT NULL,
+  `user_id` INT NULL DEFAULT NULL,
   `company_name` VARCHAR(255) NOT NULL,
-  `official_email` VARCHAR(255) NOT NULL UNIQUE,
-  `contact_person_name` VARCHAR(150) NOT NULL,
-  `contact_phone` VARCHAR(30) NOT NULL,
-  `designation` VARCHAR(150) NOT NULL,
-  `headquarters` VARCHAR(150) NOT NULL,
-  `industry_domain` VARCHAR(150) NOT NULL,
-  `company_size` VARCHAR(50) NOT NULL,
-  `website_url` VARCHAR(255) DEFAULT NULL,
-  `avatar_path` VARCHAR(255) DEFAULT NULL,
-  `corporate_cin` VARCHAR(100) NOT NULL,
-  `cin_cert_path` VARCHAR(255) DEFAULT NULL,
-  `gstin` VARCHAR(50) DEFAULT NULL,
-  `hiring_roles` TEXT DEFAULT NULL,
-  `target_batch` VARCHAR(100) DEFAULT '2026 Batch',
-  `verification_status` VARCHAR(50) DEFAULT 'verified',
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX `idx_emp_user` (`user_id`),
-  INDEX `idx_emp_email` (`official_email`)
+  `company_website` VARCHAR(255) NOT NULL,
+  `recruiter_name` VARCHAR(255) NOT NULL,
+  `recruiter_designation` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(255) NOT NULL,
+  `hq_location` VARCHAR(255) NOT NULL,
+  `linkedin_url` VARCHAR(255) NULL DEFAULT NULL,
+  `logo_path` VARCHAR(255) NULL DEFAULT NULL,
+  `industry` VARCHAR(255) NOT NULL,
+  `company_size` VARCHAR(255) NOT NULL,
+  `cin_gst_number` VARCHAR(255) NOT NULL,
+  `incorporation_cert_path` VARCHAR(255) NULL DEFAULT NULL,
+  `hiring_roles` LONGTEXT NULL DEFAULT NULL,
+  `hiring_volume` VARCHAR(255) NULL DEFAULT NULL,
+  `ctc_bracket` VARCHAR(255) NULL DEFAULT NULL,
+  `required_tech_stack` LONGTEXT NULL DEFAULT NULL,
+  `partnership_mode` VARCHAR(255) NULL DEFAULT 'direct_ats',
+  `verification_status` VARCHAR(255) NULL DEFAULT 'tier1_partner',
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `idx_emp_user` (`user_id`),
+  KEY `idx_emp_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `employer_profiles` (`id`, `user_id`, `company_name`, `company_website`, `recruiter_name`, `recruiter_designation`, `email`, `phone`, `hq_location`, `linkedin_url`, `logo_path`, `industry`, `company_size`, `cin_gst_number`, `incorporation_cert_path`, `hiring_roles`, `hiring_volume`, `ctc_bracket`, `required_tech_stack`, `partnership_mode`, `verification_status`, `created_at`, `updated_at`) VALUES
@@ -164,20 +171,20 @@ INSERT INTO `employer_profiles` (`id`, `user_id`, `company_name`, `company_websi
 -- Table structure and data for `courses`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `courses`;
-CREATE TABLE IF NOT EXISTS `courses` (
-  `id` VARCHAR(50) PRIMARY KEY,
-  `category` VARCHAR(100) NOT NULL,
+CREATE TABLE `courses` (
+  `id` VARCHAR(100) PRIMARY KEY,
+  `category` VARCHAR(255) NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `instructor` VARCHAR(255) NOT NULL,
-  `rating` DECIMAL(3,2) DEFAULT 4.90,
-  `reviews` INT DEFAULT 0,
-  `students` VARCHAR(50) DEFAULT '0',
-  `duration` VARCHAR(50) DEFAULT '12 Weeks',
-  `badge` VARCHAR(100) DEFAULT NULL,
-  `badge_class` VARCHAR(100) DEFAULT NULL,
-  `price` VARCHAR(50) DEFAULT 'Free',
-  `syllabus` LONGTEXT DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+  `rating` DECIMAL(10,2) NULL DEFAULT 4.9,
+  `reviews` INT NULL DEFAULT 1200,
+  `students` VARCHAR(255) NULL DEFAULT '12,000+',
+  `duration` VARCHAR(255) NULL DEFAULT '14 Weeks',
+  `badge` VARCHAR(255) NULL DEFAULT 'Hot Track',
+  `badge_class` VARCHAR(255) NULL DEFAULT 'badge-hot',
+  `price` VARCHAR(255) NULL DEFAULT '₹14,999',
+  `syllabus` LONGTEXT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `courses` (`id`, `category`, `title`, `instructor`, `rating`, `reviews`, `students`, `duration`, `badge`, `badge_class`, `price`, `syllabus`, `created_at`) VALUES
@@ -189,16 +196,12 @@ INSERT INTO `courses` (`id`, `category`, `title`, `instructor`, `rating`, `revie
 -- Table structure and data for `enrollments`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `enrollments`;
-CREATE TABLE IF NOT EXISTS `enrollments` (
+CREATE TABLE `enrollments` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `user_id` INT DEFAULT NULL,
   `user_email` VARCHAR(255) NOT NULL,
-  `course_id` VARCHAR(50) NOT NULL,
-  `progress_percent` INT DEFAULT 0,
-  `status` VARCHAR(50) DEFAULT 'in_progress',
-  `enrolled_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_enr_user` (`user_email`),
-  INDEX `idx_enr_course` (`course_id`)
+  `course_id` VARCHAR(255) NOT NULL,
+  `progress_percentage` INT NULL DEFAULT 0,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `enrollments` (`id`, `user_email`, `course_id`, `progress_percentage`, `created_at`) VALUES
@@ -210,22 +213,23 @@ INSERT INTO `enrollments` (`id`, `user_email`, `course_id`, `progress_percentage
 -- Table structure and data for `jobs`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `jobs`;
-CREATE TABLE IF NOT EXISTS `jobs` (
-  `id` VARCHAR(50) PRIMARY KEY,
-  `company` VARCHAR(255) NOT NULL,
-  `logo` VARCHAR(255) DEFAULT NULL,
+CREATE TABLE `jobs` (
+  `id` VARCHAR(100) PRIMARY KEY,
   `title` VARCHAR(255) NOT NULL,
-  `batch` VARCHAR(100) DEFAULT '2026 Batch',
-  `compensation` VARCHAR(100) NOT NULL,
-  `location` VARCHAR(150) NOT NULL,
-  `type` VARCHAR(100) NOT NULL,
-  `work_mode` VARCHAR(100) NOT NULL,
-  `min_score` INT DEFAULT 0,
-  `tags` TEXT DEFAULT NULL,
-  `description` LONGTEXT DEFAULT NULL,
-  `requirements` LONGTEXT DEFAULT NULL,
-  `deadline` VARCHAR(100) DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+  `company` VARCHAR(255) NOT NULL,
+  `company_logo` VARCHAR(255) NULL DEFAULT NULL,
+  `location` VARCHAR(255) NOT NULL,
+  `work_mode` VARCHAR(255) NOT NULL,
+  `job_type` VARCHAR(255) NOT NULL,
+  `stipend` VARCHAR(255) NOT NULL,
+  `batch` VARCHAR(255) NOT NULL,
+  `description` LONGTEXT NOT NULL,
+  `skills` VARCHAR(255) NOT NULL,
+  `match_score` INT NULL DEFAULT 95,
+  `applicants_count` INT NULL DEFAULT 0,
+  `urgent` INT NULL DEFAULT 0,
+  `days_left` INT NULL DEFAULT 7,
+  `posted_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `jobs` (`id`, `title`, `company`, `company_logo`, `location`, `work_mode`, `job_type`, `stipend`, `batch`, `description`, `skills`, `match_score`, `applicants_count`, `urgent`, `days_left`, `posted_at`) VALUES
@@ -240,16 +244,14 @@ INSERT INTO `jobs` (`id`, `title`, `company`, `company_logo`, `location`, `work_
 -- Table structure and data for `job_applications`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `job_applications`;
-CREATE TABLE IF NOT EXISTS `job_applications` (
+CREATE TABLE `job_applications` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `job_id` VARCHAR(50) NOT NULL,
-  `candidate_email` VARCHAR(255) NOT NULL,
-  `candidate_name` VARCHAR(150) NOT NULL,
-  `status` VARCHAR(50) DEFAULT 'Shortlisted for Online Assessment',
-  `score` INT DEFAULT 640,
-  `applied_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_app_job` (`job_id`),
-  INDEX `idx_app_cand` (`candidate_email`)
+  `job_id` VARCHAR(255) NOT NULL,
+  `user_email` VARCHAR(255) NOT NULL,
+  `candidate_name` VARCHAR(255) NOT NULL,
+  `match_score` INT NULL DEFAULT 95,
+  `status` VARCHAR(255) NULL DEFAULT 'Under Review',
+  `applied_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `job_applications` (`id`, `job_id`, `user_email`, `candidate_name`, `match_score`, `status`, `applied_at`) VALUES
@@ -260,18 +262,20 @@ INSERT INTO `job_applications` (`id`, `job_id`, `user_email`, `candidate_name`, 
 -- Table structure and data for `hackathons`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `hackathons`;
-CREATE TABLE IF NOT EXISTS `hackathons` (
-  `id` VARCHAR(50) PRIMARY KEY,
+CREATE TABLE `hackathons` (
+  `id` VARCHAR(100) PRIMARY KEY,
   `title` VARCHAR(255) NOT NULL,
   `organizer` VARCHAR(255) NOT NULL,
-  `prize_pool` VARCHAR(100) NOT NULL,
-  `dates` VARCHAR(150) NOT NULL,
-  `mode` VARCHAR(100) NOT NULL,
-  `status` VARCHAR(50) NOT NULL,
-  `participants_count` INT DEFAULT 0,
-  `tags` TEXT DEFAULT NULL,
-  `description` LONGTEXT DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+  `banner_img` VARCHAR(255) NULL DEFAULT NULL,
+  `prize_pool` VARCHAR(255) NOT NULL,
+  `format` VARCHAR(255) NOT NULL,
+  `domain` VARCHAR(255) NOT NULL,
+  `start_date` VARCHAR(255) NOT NULL,
+  `duration` VARCHAR(255) NOT NULL,
+  `participants_count` INT NULL DEFAULT 0,
+  `status` VARCHAR(255) NULL DEFAULT 'Open',
+  `description` LONGTEXT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `hackathons` (`id`, `title`, `organizer`, `banner_img`, `prize_pool`, `format`, `domain`, `start_date`, `duration`, `participants_count`, `status`, `description`, `created_at`) VALUES
@@ -284,15 +288,16 @@ INSERT INTO `hackathons` (`id`, `title`, `organizer`, `banner_img`, `prize_pool`
 -- Table structure and data for `hackathon_teams`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_teams`;
-CREATE TABLE IF NOT EXISTS `hackathon_teams` (
+CREATE TABLE `hackathon_teams` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `hackathon_id` VARCHAR(50) NOT NULL,
+  `hackathon_id` VARCHAR(255) NOT NULL,
   `team_name` VARCHAR(255) NOT NULL,
-  `leader_email` VARCHAR(255) NOT NULL,
-  `members` LONGTEXT DEFAULT NULL,
-  `submission_url` VARCHAR(255) DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_team_hack` (`hackathon_id`)
+  `lead_email` VARCHAR(255) NOT NULL,
+  `lead_name` VARCHAR(255) NOT NULL,
+  `members_json` LONGTEXT NULL DEFAULT NULL,
+  `project_title` VARCHAR(255) NULL DEFAULT NULL,
+  `status` VARCHAR(255) NULL DEFAULT 'Registered',
+  `registered_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `hackathon_teams` (`id`, `hackathon_id`, `team_name`, `lead_email`, `lead_name`, `members_json`, `project_title`, `status`, `registered_at`) VALUES
@@ -302,20 +307,26 @@ INSERT INTO `hackathon_teams` (`id`, `hackathon_id`, `team_name`, `lead_email`, 
 -- Table structure and data for `problems`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `problems`;
-CREATE TABLE IF NOT EXISTS `problems` (
-  `id` INT PRIMARY KEY,
+CREATE TABLE `problems` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
   `title` VARCHAR(255) NOT NULL,
   `slug` VARCHAR(255) NOT NULL,
-  `difficulty` VARCHAR(50) NOT NULL,
-  `category` VARCHAR(100) NOT NULL,
-  `acceptance` VARCHAR(20) DEFAULT '65%',
+  `difficulty` VARCHAR(255) NOT NULL,
+  `category` VARCHAR(255) NOT NULL,
+  `tags` VARCHAR(255) NOT NULL,
+  `acceptance_rate` VARCHAR(255) NOT NULL,
+  `likes` INT NULL DEFAULT 0,
+  `dislikes` INT NULL DEFAULT 0,
   `description` LONGTEXT NOT NULL,
-  `starter_code` LONGTEXT DEFAULT NULL,
-  `test_cases` LONGTEXT DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_prob_slug` (`slug`),
-  INDEX `idx_prob_diff` (`difficulty`),
-  INDEX `idx_prob_cat` (`category`)
+  `constraints` LONGTEXT NOT NULL,
+  `hints` LONGTEXT NOT NULL,
+  `starter_codes` LONGTEXT NOT NULL,
+  `testcases` LONGTEXT NOT NULL,
+  `hidden_testcases` LONGTEXT NOT NULL,
+  `editorial` LONGTEXT NOT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `idx_prob_diff` (`difficulty`),
+  KEY `idx_prob_cat` (`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `problems` (`id`, `title`, `slug`, `difficulty`, `category`, `tags`, `acceptance_rate`, `likes`, `dislikes`, `description`, `constraints`, `hints`, `starter_codes`, `testcases`, `hidden_testcases`, `editorial`, `created_at`) VALUES
@@ -854,31 +865,30 @@ INSERT INTO `problems` (`id`, `title`, `slug`, `difficulty`, `category`, `tags`,
 -- Table structure and data for `problem_submissions`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `problem_submissions`;
-CREATE TABLE IF NOT EXISTS `problem_submissions` (
+CREATE TABLE `problem_submissions` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `user_id` INT DEFAULT NULL,
   `user_email` VARCHAR(255) NOT NULL,
   `problem_id` INT NOT NULL,
-  `language` VARCHAR(50) NOT NULL,
+  `language` VARCHAR(255) NOT NULL,
   `code` LONGTEXT NOT NULL,
-  `status` VARCHAR(50) NOT NULL,
-  `runtime_ms` INT DEFAULT 0,
-  `memory_kb` INT DEFAULT 0,
-  `submitted_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_sub_user` (`user_email`),
-  INDEX `idx_sub_prob` (`problem_id`)
+  `status` VARCHAR(255) NOT NULL,
+  `runtime_ms` INT NULL DEFAULT 0,
+  `memory_mb` DECIMAL(10,2) NULL DEFAULT 0.0,
+  `tests_passed` INT NULL DEFAULT 0,
+  `total_tests` INT NULL DEFAULT 0,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ------------------------------------------------------------
 -- Table structure and data for `user_solved_problems`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `user_solved_problems`;
-CREATE TABLE IF NOT EXISTS `user_solved_problems` (
+CREATE TABLE `user_solved_problems` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `user_email` VARCHAR(255) NOT NULL,
   `problem_id` INT NOT NULL,
-  `solved_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `uniq_user_problem` (`user_email`, `problem_id`)
+  `solved_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY `uniq_user_prob` (`user_email`, `problem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `user_solved_problems` (`id`, `user_email`, `problem_id`, `solved_at`) VALUES
@@ -889,15 +899,15 @@ INSERT INTO `user_solved_problems` (`id`, `user_email`, `problem_id`, `solved_at
 -- Table structure and data for `email_otps`
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `email_otps`;
-CREATE TABLE IF NOT EXISTS `email_otps` (
+CREATE TABLE `email_otps` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `email` VARCHAR(255) NOT NULL,
-  `otp_code` VARCHAR(10) NOT NULL,
-  `purpose` VARCHAR(50) DEFAULT 'verification',
+  `otp_code` LONGTEXT NOT NULL,
+  `purpose` VARCHAR(255) NULL DEFAULT 'verification',
   `expires_at` DATETIME NOT NULL,
-  `verified` TINYINT DEFAULT 0,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX `idx_otp_email` (`email`, `otp_code`)
+  `verified` INT NULL DEFAULT 0,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `idx_otp_email` (`email`, `otp_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `email_otps` (`id`, `email`, `otp_code`, `purpose`, `expires_at`, `verified`, `created_at`) VALUES
